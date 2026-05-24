@@ -1,0 +1,214 @@
+/* ─── Step 0: Hero 全屏大字卡 ─── */
+.co-hero {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+.co-hero__title {
+  font-family: var(--font-display-cn);
+  font-size: clamp(72px, 7vw, 120px);
+  font-weight: 900;
+  color: var(--text);
+  line-height: 1.15;
+  text-align: center;
+  letter-spacing: -0.02em;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity var(--dur-slow) var(--ease-expo),
+              transform var(--dur-slow) var(--ease-expo);
+}
+.co-hero__title.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+.co-hero__sub {
+  font-family: var(--font-display-cn);
+  font-size: clamp(36px, 3.5vw, 56px);
+  font-weight: 500;
+  color: var(--text-2);
+  line-height: 1.3;
+  text-align: center;
+  letter-spacing: -0.01em;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity var(--dur-base) var(--ease-quart) 200ms,
+              transform var(--dur-base) var(--ease-quart) 200ms;
+}
+.co-hero__sub.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+.co-hero__glow {
+  position: absolute;
+  bottom: 8%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(600px, 50vw);
+  height: 180px;
+  background: radial-gradient(ellipse, var(--accent-glow) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity var(--dur-cinematic) var(--ease-soft) 400ms;
+  pointer-events: none;
+}
+.co-hero__glow.in { opacity: 1; }
+
+/* ─── Step 1: 问题清单 ─── */
+.co-problems {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 36px;
+}
+.co-problem {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-family: var(--font-body);
+  font-size: clamp(28px, 2.8vw, 44px);
+  color: var(--text);
+  letter-spacing: -0.01em;
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity var(--dur-base) var(--ease-quart),
+              transform var(--dur-base) var(--ease-quart);
+}
+.co-problem.in {
+  opacity: 1;
+  transform: translateX(0);
+}
+.co-problem__mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(196, 90, 59, 0.12);
+  color: #c45a3b;
+  font-size: 20px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* ─── Step 2: 品牌名登场 ─── */
+.co-brand {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
+.co-brand__name {
+  font-family: var(--font-display-en);
+  font-size: clamp(64px, 7vw, 110px);
+  font-weight: 900;
+  color: var(--accent);
+  letter-spacing: -0.03em;
+  text-transform: lowercase;
+  opacity: 0;
+  transform: scale(0.85);
+  transition: opacity var(--dur-slow) var(--ease-overshoot),
+              transform var(--dur-slow) var(--ease-overshoot);
+}
+.co-brand__name.in {
+  opacity: 1;
+  transform: scale(1);
+}
+.co-brand__desc {
+  font-family: var(--font-body);
+  font-size: clamp(18px, 1.6vw, 26px);
+  color: var(--text-mute);
+  letter-spacing: 0.02em;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity var(--dur-base) var(--ease-quart) 300ms,
+              transform var(--dur-base) var(--ease-quart) 300ms;
+}
+.co-brand__desc.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── Step 3: 根因诊断卡片 ─── */
+.co-diagnosis {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+.co-diagnosis__card {
+  max-width: 860px;
+  padding: 56px 64px;
+  background: var(--surface-2);
+  border-radius: var(--r-card);
+  border: 1px solid var(--rule);
+  box-shadow: var(--card-shadow);
+  opacity: 0;
+  transform: translateY(30px) scale(0.96);
+  transition: opacity var(--dur-slow) var(--ease-expo),
+              transform var(--dur-slow) var(--ease-expo);
+}
+.co-diagnosis__card.in {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+.co-diagnosis__text {
+  font-family: var(--font-body);
+  font-size: clamp(24px, 2.2vw, 36px);
+  color: var(--text);
+  line-height: 1.55;
+  letter-spacing: -0.01em;
+  text-align: center;
+}
+.co-diagnosis__hl {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* ─── Step 4: 过渡钩子 ─── */
+.co-hook {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+}
+.co-hook__q {
+  font-family: var(--font-display-cn);
+  font-size: clamp(48px, 4.5vw, 76px);
+  font-weight: 900;
+  color: var(--text);
+  text-align: center;
+  letter-spacing: -0.02em;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity var(--dur-base) var(--ease-quart),
+              transform var(--dur-base) var(--ease-quart);
+}
+.co-hook__q.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+.co-hook__arrow {
+  font-family: var(--font-display-en);
+  font-size: clamp(32px, 3vw, 48px);
+  color: var(--accent);
+  opacity: 0;
+  animation: co-arrow-bounce 1.6s var(--ease-soft) infinite;
+}
+.co-hook__arrow.in { opacity: 1; }
+@keyframes co-arrow-bounce {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(10px); }
+}

@@ -1,0 +1,403 @@
+/* ─── Step 5: 章节标题 + 机制卡片 ─── */
+.ar-chapter {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+}
+.ar-chapter__title {
+  font-family: var(--font-display-cn);
+  font-size: clamp(42px, 4vw, 68px);
+  font-weight: 900;
+  color: var(--text);
+  letter-spacing: -0.02em;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity var(--dur-base) var(--ease-quart),
+              transform var(--dur-base) var(--ease-quart);
+}
+.ar-chapter__title.in { opacity: 1; transform: translateY(0); }
+.ar-mech-card {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  padding: 36px 52px;
+  background: var(--surface-2);
+  border-radius: var(--r-card);
+  border: 1px solid var(--rule);
+  box-shadow: var(--card-shadow);
+  opacity: 0;
+  transform: translateY(24px) scale(0.97);
+  transition: opacity var(--dur-slow) var(--ease-expo),
+              transform var(--dur-slow) var(--ease-expo);
+}
+.ar-mech-card.in { opacity: 1; transform: translateY(0) scale(1); }
+.ar-mech-card__icon {
+  width: 56px;
+  height: 56px;
+  display: grid;
+  place-items: center;
+  background: var(--accent-soft);
+  border-radius: var(--r-sm);
+  color: var(--accent);
+  font-size: 26px;
+  font-weight: 700;
+  font-family: var(--font-display-en);
+  flex-shrink: 0;
+}
+.ar-mech-card__label {
+  font-family: var(--font-display-cn);
+  font-size: clamp(24px, 2.2vw, 38px);
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+
+/* ─── Step 6: 步骤隔离图解 ─── */
+.ar-isolation {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+}
+.ar-iso-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 280px;
+  min-height: 180px;
+  padding: 32px 24px;
+  background: var(--surface-2);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-card);
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: opacity var(--dur-base) var(--ease-quart),
+              transform var(--dur-base) var(--ease-quart);
+}
+.ar-iso-box.in { opacity: 1; transform: translateX(0); }
+.ar-iso-box--right {
+  transform: translateX(30px);
+}
+.ar-iso-box--right.in { transform: translateX(0); }
+.ar-iso-box__tag {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-mute);
+  margin-bottom: 12px;
+}
+.ar-iso-box__name {
+  font-family: var(--font-display-en);
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--text);
+  letter-spacing: -0.02em;
+}
+.ar-iso-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  position: relative;
+  opacity: 0;
+  transition: opacity var(--dur-base) var(--ease-quart) 200ms;
+}
+.ar-iso-arrow.in { opacity: 1; }
+.ar-iso-arrow__line {
+  width: 60px;
+  height: 3px;
+  background: var(--rule);
+  position: relative;
+}
+.ar-iso-arrow__line::after {
+  content: "";
+  position: absolute;
+  right: -2px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 7px solid transparent;
+  border-left-color: var(--rule);
+}
+.ar-iso-gate {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 16px;
+  background: rgba(196, 90, 59, 0.1);
+  border: 1px solid rgba(196, 90, 59, 0.35);
+  border-radius: var(--r-pill);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  color: #c45a3b;
+  white-space: nowrap;
+}
+.ar-iso-gate__bar {
+  display: inline-block;
+  width: 18px;
+  height: 3px;
+  background: #c45a3b;
+  transform: rotate(-45deg);
+}
+
+/* ─── Step 7: 信息瓶颈双数字对比 ─── */
+.ar-bottleneck {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 48px;
+}
+.ar-bn-num {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  opacity: 0;
+  transform: scale(0.85);
+  transition: opacity var(--dur-slow) var(--ease-overshoot),
+              transform var(--dur-slow) var(--ease-overshoot);
+}
+.ar-bn-num.in { opacity: 1; transform: scale(1); }
+.ar-bn-num__val {
+  font-family: var(--hero-num-font);
+  font-weight: var(--hero-num-weight);
+  font-style: var(--hero-num-style);
+  font-size: clamp(64px, 6.5vw, 110px);
+  line-height: 0.95;
+  color: var(--accent);
+  letter-spacing: var(--hero-num-track);
+}
+.ar-bn-num__label {
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--text-mute);
+  letter-spacing: 0.04em;
+}
+.ar-bn-funnel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  opacity: 0;
+  transition: opacity var(--dur-base) var(--ease-quart) 300ms;
+}
+.ar-bn-funnel.in { opacity: 1; }
+.ar-bn-funnel__top {
+  width: 44px;
+  height: 18px;
+  background: var(--rule);
+  clip-path: polygon(15% 0%, 85% 0%, 100% 100%, 0% 100%);
+}
+.ar-bn-funnel__mid {
+  width: 30px;
+  height: 22px;
+  background: var(--accent-soft);
+  clip-path: polygon(10% 0%, 90% 0%, 100% 100%, 0% 100%);
+}
+.ar-bn-funnel__bot {
+  width: 16px;
+  height: 18px;
+  background: var(--accent-glow);
+  clip-path: polygon(15% 0%, 85% 0%, 100% 100%, 0% 100%);
+}
+.ar-bn-funnel__arrow {
+  font-family: var(--font-display-en);
+  font-size: 20px;
+  color: var(--text-faint);
+}
+
+/* ─── Step 8: 三列 Agent 架构图 ─── */
+.ar-agents {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 36px;
+}
+.ar-agents__header {
+  font-family: var(--font-display-cn);
+  font-size: clamp(24px, 2.2vw, 36px);
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.01em;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity var(--dur-base) var(--ease-quart),
+              transform var(--dur-base) var(--ease-quart);
+}
+.ar-agents__header.in { opacity: 1; transform: translateY(0); }
+.ar-agents__row {
+  display: flex;
+  gap: 32px;
+}
+.ar-agent-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 300px;
+  padding: 36px 28px;
+  background: var(--surface-2);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-card);
+  box-shadow: var(--card-shadow);
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity var(--dur-base) var(--ease-quart),
+              transform var(--dur-base) var(--ease-quart);
+}
+.ar-agent-col.in { opacity: 1; transform: translateY(0); }
+.ar-agent-col__dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.ar-agent-col__dot--red { background: #c45a3b; box-shadow: 0 0 12px rgba(196, 90, 59, 0.45); }
+.ar-agent-col__dot--yellow { background: #d4943a; box-shadow: 0 0 12px rgba(212, 148, 58, 0.45); }
+.ar-agent-col__dot--green { background: #3a9a6c; box-shadow: 0 0 12px rgba(58, 154, 108, 0.45); }
+.ar-agent-col__name {
+  font-family: var(--font-display-en);
+  font-size: 20px;
+  font-weight: 900;
+  color: var(--text);
+  letter-spacing: -0.02em;
+  text-align: center;
+}
+.ar-agent-col__role {
+  font-family: var(--font-body);
+  font-size: 17px;
+  color: var(--text-mute);
+  text-align: center;
+}
+
+/* ─── Step 9: 铁面编排器 ─── */
+.ar-orchestrator {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+}
+.ar-orch-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 48px 72px;
+  background: var(--surface-2);
+  border: 2px solid var(--accent);
+  border-radius: var(--r-card);
+  box-shadow:
+    0 24px 60px rgba(67, 48, 43, 0.15),
+    0 0 40px var(--accent-soft);
+  opacity: 0;
+  transform: scale(0.92);
+  transition: opacity var(--dur-slow) var(--ease-overshoot),
+              transform var(--dur-slow) var(--ease-overshoot);
+}
+.ar-orch-card.in { opacity: 1; transform: scale(1); }
+.ar-orch-card__icon {
+  font-size: 36px;
+}
+.ar-orch-card__name {
+  font-family: var(--font-display-en);
+  font-size: clamp(28px, 2.8vw, 44px);
+  font-weight: 900;
+  color: var(--accent);
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+.ar-orch-card__sub {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--text-mute);
+  letter-spacing: 0.08em;
+}
+.ar-orch-gates {
+  display: flex;
+  gap: 56px;
+  align-items: center;
+  opacity: 0;
+  transition: opacity var(--dur-base) var(--ease-quart) 250ms;
+}
+.ar-orch-gates.in { opacity: 1; }
+.ar-orch-gate {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.ar-orch-gate__light {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid var(--rule);
+}
+.ar-orch-gate__light--block { background: #c45a3b; box-shadow: 0 0 16px rgba(196, 90, 59, 0.5); }
+.ar-orch-gate__light--pass { background: #3a9a6c; box-shadow: 0 0 16px rgba(58, 154, 108, 0.5); }
+.ar-orch-gate__label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-mute);
+  letter-spacing: 0.06em;
+}
+.ar-orch-rule {
+  font-family: var(--font-display-cn);
+  font-size: clamp(20px, 1.8vw, 30px);
+  font-weight: 700;
+  color: var(--text-2);
+  letter-spacing: -0.01em;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity var(--dur-base) var(--ease-quart) 400ms,
+              transform var(--dur-base) var(--ease-quart) 400ms;
+}
+.ar-orch-rule.in { opacity: 1; transform: translateY(0); }
+
+/* ─── Step 10: 过渡钩子 ─── */
+.ar-hook {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+.ar-hook__line {
+  font-family: var(--font-body);
+  font-size: clamp(26px, 2.4vw, 40px);
+  color: var(--text);
+  letter-spacing: -0.01em;
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity var(--dur-base) var(--ease-quart),
+              transform var(--dur-base) var(--ease-quart);
+}
+.ar-hook__line.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+.ar-hook__line--hl {
+  color: var(--accent);
+  font-weight: 700;
+}

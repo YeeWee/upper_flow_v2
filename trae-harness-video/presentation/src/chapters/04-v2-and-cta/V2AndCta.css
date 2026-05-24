@@ -1,0 +1,232 @@
+/* ─── Chapter 4: V2 & CTA — feature reveal + brand finale ─── */
+
+.vc-root {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vc-scene {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  padding: 0 120px;
+}
+
+/* ══════════════════════════════════════
+   Step 19 — v2.0 features grid
+   ══════════════════════════════════════ */
+.vc-version {
+  font-family: var(--font-display-en);
+  font-weight: 900;
+  font-size: clamp(72px, 7vw, 120px);
+  color: var(--accent);
+  line-height: 1;
+  margin: 0 0 48px;
+  letter-spacing: -0.02em;
+  animation: vc-rise 0.55s var(--ease-quart) both;
+}
+.vc-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  max-width: 1000px;
+  width: 100%;
+}
+.vc-feature {
+  background: var(--surface-2);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-card);
+  padding: 32px 36px;
+  opacity: 0;
+  animation: vc-rise 0.5s var(--ease-quart) forwards;
+  animation-delay: var(--vc-d, 0ms);
+  transition: transform 0.25s var(--ease-soft), border-color 0.25s;
+}
+.vc-feature:hover {
+  transform: translateY(-3px);
+  border-color: var(--text-faint);
+}
+.vc-feature--engine {
+  grid-column: span 2;
+  background: linear-gradient(135deg, var(--surface-2), var(--surface-3));
+  border-color: var(--accent);
+  border-width: 1.5px;
+}
+.vc-feature-title {
+  display: block;
+  font-family: var(--font-display-cn);
+  font-size: clamp(20px, 1.8vw, 28px);
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 10px;
+  letter-spacing: 0.03em;
+}
+.vc-feature--engine .vc-feature-title {
+  color: var(--accent);
+}
+.vc-feature-desc {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--text-mute);
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+}
+
+/* ══════════════════════════════════════
+   Step 20 — Slogan lines + GitHub links
+   ══════════════════════════════════════ */
+.vc-slogan-block {
+  text-align: center;
+  margin-bottom: 24px;
+}
+.vc-slogan-line {
+  font-family: var(--font-display-cn);
+  font-size: clamp(32px, 3.2vw, 56px);
+  font-weight: 900;
+  color: var(--text);
+  line-height: 1.45;
+  margin: 0 0 16px;
+  letter-spacing: 0.05em;
+  opacity: 0;
+  animation: vc-fade-up 0.65s var(--ease-expo) forwards;
+  animation-delay: calc(var(--vc-i, 0) * 280ms + 100ms);
+}
+@keyframes vc-fade-up {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.vc-links {
+  display: flex;
+  gap: 24px;
+  margin-top: 16px;
+  opacity: 0;
+  animation: vc-rise 0.5s var(--ease-quart) 1s forwards;
+}
+.vc-link-card {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--surface-2);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-card);
+  padding: 18px 28px;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--text-2);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: border-color 0.25s var(--ease-soft), color 0.25s var(--ease-soft),
+              box-shadow 0.25s var(--ease-soft), transform 0.25s var(--ease-soft);
+}
+.vc-link-card:hover {
+  border-color: var(--accent);
+  color: var(--text);
+  box-shadow: 0 8px 30px rgba(20, 184, 166, 0.15);
+  transform: translateY(-2px);
+}
+.vc-link-card strong {
+  color: var(--accent);
+  font-weight: 700;
+}
+.vc-link-icon {
+  font-size: 18px;
+  line-height: 1;
+}
+
+/* ══════════════════════════════════════
+   Step 21 — Final CTA screen
+   ══════════════════════════════════════ */
+.vc-scene--21 {
+  position: relative;
+  overflow: hidden;
+}
+.vc-glow-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, var(--accent-glow) 0%, transparent 65%);
+  opacity: 0.12;
+  pointer-events: none;
+  z-index: 0;
+  animation: vc-pulse-glow 5s ease-in-out infinite alternate;
+}
+@keyframes vc-pulse-glow {
+  from { opacity: 0.08; transform: translate(-50%, -50%) scale(0.95); }
+  to   { opacity: 0.16; transform: translate(-50%, -50%) scale(1.08); }
+}
+.vc-brand {
+  font-family: var(--font-display-en);
+  font-weight: 900;
+  font-size: clamp(80px, 9vw, 160px);
+  color: var(--accent);
+  line-height: 1;
+  margin: 0 0 48px;
+  letter-spacing: -0.03em;
+  position: relative;
+  z-index: 1;
+  animation: vc-brand-in 0.85s var(--ease-expo) both;
+}
+@keyframes vc-brand-in {
+  from { opacity: 0; transform: translateY(24px) scale(0.96); filter: blur(4px); }
+  to   { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+}
+.vc-cta-row {
+  position: relative;
+  z-index: 1;
+  opacity: 0;
+  animation: vc-rise 0.5s var(--ease-quart) 0.35s both;
+}
+.vc-star-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--accent);
+  color: var(--shell);
+  font-family: var(--font-display-en);
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 18px 44px;
+  border-radius: var(--r-pill);
+  transition: transform 0.25s var(--ease-overshoot), box-shadow 0.25s var(--ease-soft);
+}
+.vc-star-btn:hover {
+  transform: scale(1.06);
+  box-shadow: 0 8px 36px var(--accent-glow);
+}
+.vc-star-svg {
+  flex-shrink: 0;
+}
+.vc-end-mark {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  margin-top: 56px;
+  opacity: 0;
+  animation: vc-rise 0.5s var(--ease-quart) 0.65s both;
+}
+
+/* ══════════════════════════════════════
+   Shared utilities
+   ══════════════════════════════════════ */
+@keyframes vc-rise {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

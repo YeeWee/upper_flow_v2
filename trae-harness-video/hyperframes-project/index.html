@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920, height=1080">
+<title>trae-harness - HyperFrames Composition</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Noto+Sans+SC:wght@400;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+<style>
+:root {
+  --shell: #f5efe1;
+  --surface: #fdfbf7;
+  --surface-2: #ffffff;
+  --surface-3: #f0e9d8;
+  --text: #43302b;
+  --text-2: #5b443d;
+  --text-mute: #8a7969;
+  --text-faint: #b8a994;
+  --rule: #e6dcc4;
+  --accent: #14b8a6;
+  --accent-soft: rgba(20,184,166,0.10);
+  --accent-glow: rgba(20,184,166,0.45);
+  --red-warm: #c45a3b;
+  --yellow-warm: #d4943a;
+  --green-warm: #3a9a6c;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: var(--shell);
+  font-family: 'Inter', 'Noto Sans SC', sans-serif;
+  color: var(--text);
+  overflow: hidden;
+}
+#root {
+  position: relative;
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+  background: var(--shell);
+  background-image: linear-gradient(rgba(190,175,150,0.18) 1px, transparent 1px), linear-gradient(90deg, rgba(190,175,150,0.18) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+.clip {
+  position: absolute;
+  inset: 0;
+  display: none;
+  opacity: 0;
+}
+audio { display: none; }
+
+/* ===== Utility Classes ===== */
+.fw-black { font-family: 'Inter', sans-serif; font-weight: 900; }
+.fw-sc { font-family: 'Noto Sans SC', sans-serif; font-weight: 700; }
+.fw-mono { font-family: 'JetBrains Mono', monospace; }
+.accent { color: var(--accent); }
+.text-2 { color: var(--text-2); }
+.text-mute { color: var(--text-mute); }
+.flex-center { display: flex; align-items: center; justify-content: center; }
+.flex-col { display: flex; flex-direction: column; }
+.card {
+  background: var(--surface-2);
+  border-radius: 28px;
+  border: 1px solid var(--rule);
+  padding: 40px 48px;
+  box-shadow: 0 1px 2px rgba(67,48,43,0.04), 0 24px 60px rgba(67,48,43,0.10);
+}
+.card-accent-left {
+  border-left: 4px solid var(--accent);
+}
+
+/* ===== Subtitle Bar ===== */
+.subtitle-bar {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(253,251,247,0.92);
+  backdrop-filter: blur(16px);
+  border-top: 1px solid #e6dcc4;
+  padding: 14px 48px;
+  border-radius: 24px 24px 0 0;
+  font-family: 'Inter', 'Noto Sans SC', sans-serif;
+  font-size: 20px;
+  color: #43302b;
+  text-align: center;
+  max-width: 1200px;
+  z-index: 100;
+}
+
+/* ===== Step 0: Hero ===== */
+#clip-0 { background: var(--shell); }
+#clip-0 .hero-glow {
+  position: absolute;
+  bottom: -200px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1200px;
+  height: 400px;
+  background: radial-gradient(ellipse, var(--accent-glow) 0%, transparent 70%);
+  pointer-events: none;
+}
+#clip-0 .hero-title {
+  font-family: 'Inter', sans-serif;
+  font-weight: 900;
+  font-size: 96px;
+  color: var(--text);
+  text-align: center;
+  letter-spacing: 2px;
+}
+#clip-0 .hero-sub {
+  font-size: 48px;
+  color: var(--text-2);
+  text-align: center;
+  margin-top: 24px;
+}
+
+/* ===== Step 1: 三问题 ===== */
+#clip-1 { background: var(--shell); }
+.problem-row {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  font-size: 52px;
+  color: var(--text);
+  line-height: 2.2em;
+  opacity: 0;
+}
+.problem-x {
+  color: var(--red-warm);
+  font-size: 48px;
+  font-weight: 900;
+}
+
+/* ===== Step 2: 品牌登场 ===== */
+#clip-2 { background: var(--shell); }
+.brand-name {
+  font-family: 'Inter', sans-serif;
+  font-weight: 900;
+  font-size: 140px;
+  color: var(--accent);
+  letter-spacing: 4px;
+}
+.brand-tagline {
+  font-size: 28px;
+  color: var(--text-mute);
+  margin-top: 20px;
+  letter-spacing: 6px;
+}
+
+/* ===== Step 3: 根因诊断 ===== */
+#clip-3 { background: var(--shell); }
+.diagnosis-card {
+  max-width: 1100px;
+  background: var(--surface-2);
+  border-radius: 32px;
+  border: 1px solid var(--rule);
+  padding: 56px 64px;
+  font-size: 36px;
+  line-height: 1.8;
+  color: var(--text-2);
+  box-shadow: 0 1px 2px rgba(67,48,43,0.04), 0 24px 60px rgba(67,48,43,0.10);
+}
+.hl-word { color: var(--accent); font-weight: 700; }
+
+/* ===== Step 4: 过渡钩子 ===== */
+#clip-4 { background: var(--shell); }
+.hook-text {
+  font-size: 72px;
+  color: var(--text);
+  font-family: 'Noto Sans SC', sans-serif;
+  font-weight: 700;
+}
+.hook-arrow {
+  font-size: 60px;
+  color: var(--accent);
+  margin-top: 30px;
+  animation: bounce 1s ease-in-out infinite;
+}
+@keyframes bounce {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(16px); }
+}
+
+/* ===== Step 5: 核心机制 ===== */
+#clip-5 { background: var(--shell); }
+.section-label {
+  position: absolute;
+  top: 60px;
+  left: 80px;
+  font-size: 18px;
+  color: var(--text-mute);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+.mech-card {
+  background: var(--surface-2);
+  border-radius: 28px;
+  border-left: 4px solid var(--accent);
+  padding: 48px 56px;
+  max-width: 800px;
+  box-shadow: 0 1px 2px rgba(67,48,43,0.04), 0 24px 60px rgba(67,48,43,0.10);
+}
+.mech-num {
+  font-family: 'Inter', sans-serif;
+  font-weight: 900;
+  font-size: 24px;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+.mech-title {
+  font-size: 44px;
+  color: var(--text);
+  font-weight: 700;
+}
+
+/* ===== Step 6: 步骤隔离图解 ===== */
+#clip-6 { background: var(--shell); }
+.iso-diagram { display: flex; align-items: center; gap: 40px; }
+.iso-box {
+  width: 280px;
+  height: 160px;
+  background: var(--surface-2);
+  border-radius: 20px;
+  border: 1px solid var(--rule);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  color: var(--text-2);
+  box-shadow: 0 1px 2px rgba(67,48,43,0.03), 0 12px 30px rgba(67,48,43,0.06);
+}
+.iso-arrow {
+  font-size: 40px;
+  color: var(--text-mute);
+}
+.iso-gate {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: rgba(196,90,59,0.12);
+  border: 3px solid var(--red-warm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 42px;
+  color: var(--red-warm);
+}
+
+/* ===== Step 7: 信息瓶颈 ===== */
+#clip-7 { background: var(--shell); }
+.bottleneck-container { display: flex; align-items: center; gap: 60px; }
+.bignum-col { text-align: center; }
+.bignum {
+  font-family: 'Inter', sans-serif;
+  font-weight: 900;
+  font-size: 120px;
+  color: var(--accent);
+  line-height: 1;
+}
+.bignum-label {
+  font-size: 20px;
+  color: var(--text-mute);
+  margin-top: 10px;
+  font-family: 'JetBrains Mono', monospace;
+}
+.funnel-shape {
+  width: 0;
+  height: 0;
+  border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+  border-top: 80px solid var(--surface-3);
+  opacity: 0.7;
+}
+.bottleneck-bottom {
+  position: absolute;
+  bottom: 140px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 28px;
+  color: var(--text-2);
+  white-space: nowrap;
+}
+.bottleneck-bottom .hl { color: var(--accent); font-weight: 700; }
+
+/* ===== Step 8: 三 Agent 架构 ===== */
+#clip-8 { background: var(--shell); }
+.agents-title {
+  font-size: 32px;
+  color: var(--text-mute);
+  margin-bottom: 40px;
+  letter-spacing: 2px;
+}
+.agent-grid { display: flex; gap: 32px; }
+.agent-card {
+  flex: 1;
+  background: var(--surface-2);
+  border-radius: 28px;
+  overflow: hidden;
+  min-height: 340px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 1px 2px rgba(67,48,43,0.04), 0 16px 40px rgba(67,48,43,0.08);
+}
+.agent-bar { height: 5px; }
+.agent-bar-red { background: var(--red-warm); }
+.agent-bar-yellow { background: var(--yellow-warm); }
+.agent-bar-green { background: var(--green-warm); }
+.agent-body { padding: 36px 28px; flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.agent-icon { font-size: 48px; margin-bottom: 16px; }
+.agent-name { font-size: 24px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+.agent-role { font-size: 16px; color: var(--text-mute); font-family: 'JetBrains Mono', monospace; }
+
+/* ===== Step 9: 编排器 ===== */
+#clip-9 { background: var(--shell); }
+.orch-card {
+  background: var(--surface-2);
+  border-radius: 32px;
+  border: 2px solid var(--accent);
+  box-shadow: 0 1px 2px rgba(67,48,43,0.04), 0 24px 60px rgba(20,184,166,0.18);
+  padding: 48px 64px;
+  text-align: center;
+}
+.orch-title {
+  font-size: 38px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+.orch-sub { font-size: 20px; color: var(--text-mute); font-family: 'JetBrains Mono', monospace; }
+.gate-row { display: flex; align-items: center; justify-content: center; gap: 80px; margin-top: 40px; }
+.gate-badge {
+  width: 70px;
+  height: 70px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: 700;
+}
+.gate-block { background: rgba(196,90,59,0.12); color: var(--red-warm); border: 2px solid var(--red-warm); }
+.gate-pass { background: rgba(58,154,108,0.12); color: var(--green-warm); border: 2px solid var(--green-warm); }
+.gate-rule {
+  margin-top: 32px;
+  font-size: 22px;
+  color: var(--text-2);
+}
+.gate-rule .hl { color: var(--accent); font-weight: 700; }
+
+/* ===== Step 10: 过渡到数据 ===== */
+#clip-10 { background: var(--shell); }
+.trans-line {
+  font-size: 52px;
+  color: var(--text);
+  opacity: 0;
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* ===== Step 11: 实验背景 ===== */
+#clip-11 { background: var(--shell); }
+.exp-pill {
+  display: inline-block;
+  background: var(--surface-2);
+  color: var(--text-mute);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 18px;
+  padding: 8px 24px;
+  border-radius: 999px;
+  margin-bottom: 24px;
+  border: 1px solid var(--rule);
+}
+.exp-main { font-size: 64px; font-weight: 700; color: var(--text); margin-bottom: 16px; }
+.exp-sub { font-size: 28px; color: var(--text-mute); }
+
+/* ===== Step 12: 正确率 90→100% ===== */
+#clip-12 { background: var(--shell); }
+.data-wave { display: flex; align-items: center; gap: 48px; }
+.data-old {
+  font-family: 'Inter', sans-serif;
+  font-weight: 900;
+  font-size: 80px;
+  color: var(--text-mute);
+}
+.data-arrow {
+  font-size: 72px;
+  color: var(--accent);
+}
+.data-new {
+  font-family: 'Inter', sans-serif;
+  font-weight: 900;
+  font-size: 160px;
+  color: var(--accent);
+  line-height: 1;
+}
+.data-caption {
+  position: absolute;
+  bottom: 140px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 26px;
+  color: var(--text-mute);
+  white-space: nowrap;
+}
+
+/* ===== Step 13: 测试断言 ===== */
+#clip-13 { background: var(--shell); }
+.assert-wave { display: flex; align-items: center; gap: 40px; }
+.assert-old { font-family: 'Inter', sans-serif; font-weight: 900; font-size: 80px; color: var(--text-mute); }
+.assert-arrow { font-size: 60px; color: var(--accent); }
+.assert-new { font-family: 'Inter', sans-serif; font-weight: 900; font-size: 140px; color: var(--accent); line-height: 1; }
+.assert-badge {
+  position: absolute;
+  top: 120px;
+  right: 160px;
+  background: var(--accent);
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-weight: 900;
+  font-size: 32px;
+  padding: 12px 28px;
+  border-radius: 999px;
+}
+.assert-caption {
+  position: absolute;
+  bottom: 140px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 26px;
+  color: var(--text-mute);
+}
+
+/* ===== Step 14: 双指标 ===== */
+#clip-14 { background: var(--shell); }
+.metric-pair { display: flex; gap: 40px; }
+.metric-card {
+  flex: 1;
+  background: var(--surface-2);
+  border-radius: 28px;
+  padding: 48px 40px;
+  text-align: center;
+  box-shadow: 0 1px 2px rgba(67,48,43,0.04), 0 16px 40px rgba(67,48,43,0.08);
+}
+.metric-val { font-family: 'Inter', sans-serif; font-weight: 900; font-size: 52px; color: var(--text); margin-bottom: 12px; }
+.metric-val.green { color: var(--green-warm); }
+.metric-label { font-size: 20px; color: var(--text-mute); }
+
+/* ===== Step 15: 三指标横排 ===== */
+#clip-15 { background: var(--shell); }
+.badge-row { display: flex; gap: 32px; }
+.badge-item {
+  background: var(--surface-2);
+  border-radius: 24px;
+  border: 1px solid var(--accent);
+  padding: 28px 36px;
+  text-align: center;
+  opacity: 0;
+  box-shadow: 0 1px 2px rgba(67,48,43,0.04), 0 12px 30px rgba(67,48,43,0.07);
+}
+.badge-val { font-family: 'Inter', sans-serif; font-weight: 900; font-size: 36px; color: var(--accent); }
+.badge-label { font-size: 16px; color: var(--text-mute); margin-top: 6px; }
+
+/* ===== Step 16: SWE-bench 归零 ===== */
+#clip-16 { background: var(--shell); }
+.zero-wave { display: flex; align-items: center; gap: 48px; }
+.zero-old { font-family: 'Inter', sans-serif; font-weight: 900; font-size: 120px; color: var(--text-mute); }
+.zero-arrow { font-size: 72px; color: var(--accent); }
+.zero-new {
+  font-family: 'Inter', sans-serif;
+  font-weight: 900;
+  font-size: 180px;
+  color: var(--accent);
+  line-height: 1;
+}
+.zero-caption {
+  position: absolute;
+  bottom: 140px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 30px;
+  color: var(--accent);
+  font-weight: 700;
+  letter-spacing: 4px;
+}
+
+/* ===== Step 17: ROI 焦点卡 ===== */
+#clip-17 {
+  background: var(--shell);
+  background-image: radial-gradient(ellipse at center, var(--accent-soft) 0%, transparent 65%);
+}
+.roi-card {
+  background: var(--surface-2);
+  border-radius: 32px;
+  border: 1px solid rgba(20,184,166,0.25);
+  padding: 64px 80px;
+  text-align: center;
+  box-shadow: 0 1px 2px rgba(67,48,43,0.04), 0 32px 80px rgba(20,184,166,0.12);
+}
+.roi-top { font-size: 24px; color: var(--text-2); margin-bottom: 16px; }
+.roi-big {
+  font-family: 'Inter', sans-serif;
+  font-weight: 900;
+  font-size: 220px;
+  color: var(--accent);
+  line-height: 1;
+}
+.roi-bottom { font-size: 24px; color: var(--text-mute); margin-top: 16px; }
+
+/* ===== Step 18: 金句 ===== */
+#clip-18 { background: var(--shell); }
+.gold-quote {
+  font-family: 'Noto Sans SC', sans-serif;
+  font-weight: 700;
+  font-size: 64px;
+  color: var(--text);
+  text-align: center;
+  max-width: 1200px;
+  line-height: 1.5;
+}
+
+/* ===== Step 19: v2.0 特性 ===== */
+#clip-19 { background: var(--shell); }
+.v2-title {
+  font-family: 'Inter', sans-serif;
+  font-weight: 900;
+  font-size: 80px;
+  color: var(--accent);
+  margin-bottom: 48px;
+}
+.feature-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  max-width: 1100px;
+}
+.feature-item {
+  background: var(--surface-2);
+  border-radius: 24px;
+  border: 1px solid var(--rule);
+  padding: 28px 32px;
+  font-size: 24px;
+  color: var(--text-2);
+  opacity: 0;
+  box-shadow: 0 1px 2px rgba(67,48,43,0.03), 0 8px 24px rgba(67,48,43,0.05);
+}
+.feature-item.span-2 {
+  grid-column: span 2;
+  border-color: var(--accent);
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* ===== Step 20: Slogan + GitHub ===== */
+#clip-20 { background: var(--shell); }
+.slogan-line {
+  font-family: 'Noto Sans SC', sans-serif;
+  font-weight: 700;
+  font-size: 44px;
+  color: var(--text);
+  opacity: 0;
+  line-height: 1.7;
+  text-align: center;
+}
+.github-row { display: flex; gap: 24px; margin-top: 48px; }
+.github-card {
+  background: var(--surface-2);
+  border-radius: 20px;
+  border: 1px solid var(--rule);
+  padding: 20px 32px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 18px;
+  color: var(--text-2);
+  opacity: 0;
+  box-shadow: 0 1px 2px rgba(67,48,43,0.03), 0 8px 20px rgba(67,48,43,0.05);
+}
+
+/* ===== Step 21: 终屏 CTA ===== */
+#clip-21 {
+  background: var(--shell);
+  background-image: radial-gradient(ellipse at center, var(--accent-soft) 0%, transparent 60%);
+  animation: breathe 5s ease-in-out infinite;
+}
+@keyframes breathe {
+  0%,100% { opacity: 1; }
+  50% { opacity: 0.88; }
+}
+.cta-brand {
+  font-family: 'Inter', sans-serif;
+  font-weight: 900;
+  font-size: 100px;
+  color: var(--accent);
+  letter-spacing: 4px;
+}
+.cta-btn {
+  display: inline-block;
+  margin-top: 40px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 28px;
+  font-weight: 700;
+  padding: 18px 56px;
+  border-radius: 999px;
+  cursor: pointer;
+  letter-spacing: 1px;
+}
+.cta-end {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 16px;
+  color: var(--text-faint);
+  letter-spacing: 8px;
+  font-family: 'JetBrains Mono', monospace;
+}
+</style>
+</head>
+<body>
+
+<div id="root" data-composition-id="main" data-start="0" data-duration="137" data-width="1920" data-height="1080">
+
+<!-- ============ CLIP 0: Hero ============ -->
+<div class="clip" id="clip-0" data-start="0" data-duration="4" data-track-index="1">
+  <div class="hero-glow"></div>
+  <div class="flex-center flex-col" style="height:100%">
+    <div class="hero-title hero-anim">你把需求丢给 AI</div>
+    <div class="hero-sub hero-anim">它写代码</div>
+  </div>
+</div>
+<audio src="../presentation/public/audio/coldopen/1.wav" data-start="0" data-duration="4" data-track-index="2" data-volume="1"></audio>
+
+<!-- ============ CLIP 1: 三问题 ============ -->
+<div class="clip" id="clip-1" data-start="4" data-duration="5" data-track-index="1">
+  <div class="flex-center flex-col" style="height:100%;gap:0">
+    <div class="problem-row"><span class="problem-x">✗</span> 产生幻觉</div>
+    <div class="problem-row"><span class="problem-x">✗</span> 跳过测试</div>
+    <div class="problem-row"><span class="problem-x">✗</span> 自由发挥</div>
+  </div>
+</div>
+<audio src="../presentation/public/audio/coldopen/2.wav" data-start="4" data-duration="5" data-track-index="2" data-volume="1"></audio>
+
+<!-- ============ CLIP 2: 品牌登场 ============ -->
+<div class="clip" id="clip-2" data-start="9" data-duration="4" data-track-index="1">
+  <div class="flex-center flex-col" style="height:100%">
+    <div class="brand-name brand-anim">trae-harness</div>
+    <div class="brand-tagline brand-anim">多 Agent 协作框架 × 11 轮 A/B 实验</div>
+  </div>
+</div>
+<audio src="../presentation/public/audio/coldopen/3.wav" data-start="9" data-duration="4" data-track-index="2" data-volume="1"></audio>
+
+<!-- ============ CLIP 3: 根因诊断 ============ -->
+<div class="clip" id="clip-3" data-start="13" data-duration="6" data-track-index="1">
+  <div class="flex-center" style="height:100%">
+    <div class="diagnosis-card diag-anim">
+      不确定每个 Agent 的<strong>边界</strong>，就一定有<strong>幻觉空间</strong>。
+    </div>
+  </div>
+</div>
+<audio src="../presentation/public/audio/coldopen/4.wav" data-start="13" data-duration="6" data-track-index="2" data-volume="1"></audio>
+
+<!-- ============ CLIP 4: 过渡钩子 ============ -->
+<div class="clip" id="clip-4" data-start="19" data-duration="4" data-track-index="1">
+  <div class="flex-center flex-col" style="height:100%">
+    <div class="hook-text hook-anim">它怎么解决的？</div>
+    <div class="hook-arrow">↓</div>
+  </div>
+</div>
+<audio src="../presentation/public/audio/coldopen/5.wav" data-start="19" data-duration="4" data-track-index="2" data-volume="1"></audio>
+
+<!-- ============ CLIP 5: 核心机制 ============ -->
+<div class="clip" id="clip-5" data-start="23" data-duration="6" data-track-index="1">
+  <div class="section-label">核心机制</div>
+  <div class="flex-center" style="height:100%">
+    <div class="mech-card mech-anim">
+      <div class="mech-num">01</div>
+      <div class="mech-title">步骤隔离</div>
+    </div>
+  </div>
+</div>
+<audio src="../presentation/public/audio/architecture/6.wav" data-start="23" data-duration="6" data-track-index="2" data-volume="1"></audio>
+
+<!-- ============ CLIP 6: 步骤隔离图解 ============ -->
+<div class="clip" id="clip-6" data-start="29" data-duration="5" data-track-index="1">
+  <div class="flex-center" style="height:100%">
+    <div class="iso-diagram iso-anim">
+      <div class="iso-box">Agent A</div>
+      <div class="iso-arrow">→</div>
+      <div class="iso-gate">⛔</div>
+      <div class="iso-arrow">→</div>
+      <div class="iso-box">结果</div>
+    </div>
+  </div>
+</div>
+<audio src="../presentation/public/audio/architecture/7.wav" data-start="29" data-duration="5" data-track-index="2" data-volume="1"></audio>
+
+<!-- ============ CLIP 7: 信息瓶颈 ============ -->
+<div class="clip" id="clip-7" data-start="34" data-duration="6" data-track-index="1">
+  <div class="flex-center flex-col" style="height:100%">
+    <div class="bottleneck-container bn-anim">
+      <div class="bignum-col">
+        <div class="bignum">200</div>
+        <div class="bignum-label">token / 模块间传递</div>
+      </div>
+      <div class="funnel-shape"></div>
+      <div class="bignum-col">
+        <div class="bignum">&lt;400</div>
+        <div class="bignum-label">token / 单步上下文</div>
+      </div>
+    </div>
+    <div class="bottleneck-bottom">信息瓶颈 · 你想<span class="hl">自由发挥</span>？没门。</div>
+  </div>
+</div>
+<audio src="../presentation/public/audio/architecture/8.wav" data-start="34" data-duration="6" data-track-index="2" data-volume="1"></audio>
+
+<!-- ============ CLIP 8: 三 Agent 架构 ============ -->
+<div class="clip" id="clip-8" data-start="40" data-duration="5" data-track-index="1">
+  <div class="flex-center flex-col" style="height:100%;padding-top:40px">
+    <div class="agents-title">3 子 Agent 并行</div>
+    <div class="agent-grid ag-anim">
+      <div class="agent-card">
+        <div class="agent-bar agent-bar-red"></div>
+        <div class="agent-body">
+          <div class="agent-icon">🔴</div>
+          <div class="agent-name">辩论</div>
+          <div class="agent-role">Agent-Debate</div>
+        </div>
+      </div>
+      <div class="agent-card">
+        <div class="agent-bar agent-bar-yellow"></div>
+        <div class="agent-body">
+          <div class="agent-icon">🟡</div>
+          <div class="agent-name">审核</div>
+          <div class="agent-role">Agent-Review</div>
+        </div>
+      </div>
+      <div class="agent-card">
+        <div class="agent-bar agent-bar-green"></div>
+        <div class="agent-body">
+          <div class="agent-icon">🟢</div>
+          <div class="agent-name">开发</div>
+          <div class="agent-role">Agent-Dev</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<audio src="../presentation/public/audio/architecture/9.wav" data-start="40" data-duration="5" data-track-index="2" data-volume="1"></audio>
+
+<!-- ============ CLIP 9: 编排器 ============ -->
+<div class="clip" id="clip-9" data-start="45" data-duration="7" data-track-index="1">
+  <div class="flex-center flex-col" style="height:100%">
+    <div class="orch-card orch-anim">
+      <div class="orch-title">⚙ 编排器 Orchestrator</div>
+      <div class="orch-sub">铁面 Gate · 零容忍</div>
+      <div class="gate-row">
+        <div class="gate-badge gate-block">阻止</div>
+        <div class="gate-badge gate-pass">放行</div>
+      </div>
+      <div class="gate-rule"><span class="hl">Gate 不通过</span> = 不前进</div>
+    </div>
+  </div>
+</div>
+<audio src="../presentation/public/audio/architecture/10.wav" data-start="45" data-duration="7" data-track-index="2" data-volume="1"></audio>
+
+<!-- ============ CLIP 10: 过渡到数据 ============ -->
+<div class="clip" id="clip-10" data-start="52" data-duration="3" data-track-index="1">
+  <div class="flex-center flex-col" style="height:100%;gap:12px">
+    <div class="trans-line trans-l1">同一个模型。</div>
+    <div class="trans-line trans-l2 accent fw-black">DeepSeek V4 Pro</div>
+    <div class="trans-line trans-l3">差距有多大？</div>
+  </div>
+</div>
+<audio src="../presentation/public/audio/architecture/11.wav" data-start="52" data-duration="3" data-track-index="2" data-volume="1"></audio>
+
+<!-- ============ CLIP 11: 实验背景 ============ -->
+<div class="clip" id="clip-11" data-start="55" data-duration="5" data-track-index="1">
+  <div class="flex-center flex-col" style="height:100%">
+    <div class="exp-pill exp-anim">DeepSeek V4 Pro</div>
+    <div class="exp-main exp-anim">11 轮 A/B 实验</div>
+    <div class="exp-sub exp-anim">有 Harness vs 没有 Harness</div>
+  </div>
+</div>
+<audio src="../presentation/public/audio/results/12.wav" data-start="55" data-duration="5" data-track-index="2" data-volume="1"></audio>
+
+<!-- ============ CLIP 12: 正确率 90→100% ============ -->
+<div class="clip" id="clip-12" data-start="60" data-duration="8" data-track-index="1">
+  <div class="flex-center flex-col" style="height:100%">
+    <div class="data-wave dw-anim">
+      <div class="data-old">90%</div>
+      <div class="data-arrow">→</div>
+      <div class="data-new">100%</div>
+    </div>
+  </div>
+  <div class="data-caption">满分 · 零 bug 遗漏</div>
+</div>
+<audio src="../presentation/public/audio/results/13.wav" data-start="60" data-duration="8" data-track-index="2" data-volume="1"></audio>
+
+<!-- ============ CLIP 13: 测试断言 ============ -->
+<div class="clip" id="clip-13" data-start="68" data-duration="6" data-track-index="1">
+  <div class="assert-badge assert-b-anim">+340%</div>
+  <div class="flex-center flex-col" style="height:100%">
+    <div class="assert-wave as-anim">
+      <div class="assert-old">28 条</div>
+      <div class="assert-arrow">→</div>
+      <div class="assert-new">124 条</div>
+    </div>
+  </div>
+  <div class="assert-caption">四倍密度</div>
+</div>
+<audio src="../presentation/public/audio/results/14.wav" data-start="68" data-duration="6" data-track-index="2" data-volume="1"></audio>
+
+<!-- ============ CLIP 14: 双指标 ============ -->
+<div class="clip" id="clip-14" data-start="74" data-duration="7" data-track-index="1">
+  <div class="flex-center" style="height:100%">
+    <div class="metric-pair mp-anim">
+      <div class="metric-card">
+        <div class="metric-val">62% → 85%</div>
+        <div class="metric-label">覆盖率</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-val green">100% → -60%</div>
+        <div class="metric-label">规范违规</div>
+      </div>
+    </div>
+  </div>
+</div>
+<audio src="../presentation/public/audio/results/15.wav" data-start="74" data-duration="7" data-track-index="2" data-volume="1"></audio>
+
+<!-- ============ CLIP 15: 三指标横排 ============ -->
+<div class="clip" id="clip-15" data-start="81" data-duration="7" data-track-index="1">
+  <div class="flex-center" style="height:100%">
+    <div class="badge-row">
+      <div class="badge-item bd-anim">
+        <div class="badge-val">×3.0</div>
+        <div class="badge-label">安全防御</div>
+      </div>
+      <div class="badge-item bd-anim">
+        <div class="badge-val">-91.7%</div>
+        <div class="badge-label">Bug 复发率</div>
+      </div>
+      <div class="badge-item bd-anim">
+        <div class="badge-val">×4.6</div>
+        <div class="badge-label">性能加速</div>
+      </div>
+    </div>
+  </div>
+</div>
+<audio src="../presentation/public/audio/results/16.wav" data-start="81" data-duration="7" data-track-index="2" data-volume="1"></audio>
+
+<!-- ============ CLIP 16: SWE-bench 归零 ============ -->
+<div class="clip" id="clip-16" data-start="88" data-duration="6" data-track-index="1">
+  <div class="flex-center flex-col" style="height:100%">
+    <div class="zero-wave zw-anim">
+      <div class="zero-old">2 bugs</div>
+      <div class="zero-arrow">→</div>
+      <div class="zero-new">0</div>
+    </div>
+  </div>
+  <div class="zero-caption">SWE-bench 零回归</div>
+</div>
+<audio src="../presentation/public/audio/results/17.wav" data-start="88" data-duration="6" data-track-index="2" data-volume="1"></audio>
+
+<!-- ============ CLIP 17: ROI 焦点卡 ============ -->
+<div class="clip" id="clip-17" data-start="94" data-duration="7" data-track-index="1">
+  <div class="flex-center" style="height:100%">
+    <div class="roi-card roi-anim">
+      <div class="roi-top">花 20K token → 省 100K token</div>
+      <div class="roi-big">529%</div>
+      <div class="roi-bottom">净 ROI · L3 级任务 > 1000%</div>
+    </div>
+  </div>
+</div>
+<audio src="../presentation/public/audio/results/18.wav" data-start="94" data-duration="7" data-track-index="2" data-volume="1"></audio>
+
+<!-- ============ CLIP 18: 金句 ============ -->
+<div class="clip" id="clip-18" data-start="101" data-duration="6" data-track-index="1">
+  <div class="flex-center" style="height:100%">
+    <div class="gold-quote gold-anim">复杂度越高，回报越大。</div>
+  </div>
+</div>
+<audio src="../presentation/public/audio/results/19.wav" data-start="101" data-duration="6" data-track-index="2" data-volume="1"></audio>
+
+<!-- ============ CLIP 19: v2.0 特性 ============ -->
+<div class="clip" id="clip-19" data-start="107" data-duration="10" data-track-index="1">
+  <div class="flex-center flex-col" style="height:100%;padding-top:40px">
+    <div class="v2-title v2-anim">v2.0</div>
+    <div class="feature-grid">
+      <div class="feature-item feat-anim">项目类型自适应</div>
+      <div class="feature-item feat-anim">VISUAL_GATE 视频验收</div>
+      <div class="feature-item feat-anim">8 模板 · 11 角色</div>
+      <div class="feature-item span-2 feat-anim">trae-acceptance 引擎</div>
+    </div>
+  </div>
+</div>
+<audio src="../presentation/public/audio/v2-and-cta/20.wav" data-start="107" data-duration="10" data-track-index="2" data-volume="1"></audio>
+
+<!-- ============ CLIP 20: Slogan + GitHub ============ -->
+<div class="clip" id="clip-20" data-start="117" data-duration="9" data-track-index="1">
+  <div class="flex-center flex-col" style="height:100%">
+    <div class="slogan-line sl-anim">用确定性对抗模糊</div>
+    <div class="slogan-line sl-anim">用规则防幻觉</div>
+    <div class="slogan-line sl-anim">用 11 轮实验数据量化给你看</div>
+    <div class="github-row">
+      <div class="github-card gh-anim">github.com/zzzkeepdd/trae-harness</div>
+      <div class="github-card gh-anim">github.com/zzzkeepdd/trae-harness-experiments</div>
+    </div>
+  </div>
+</div>
+<audio src="../presentation/public/audio/v2-and-cta/21.wav" data-start="117" data-duration="9" data-track-index="2" data-volume="1"></audio>
+
+<!-- ============ CLIP 21: 终屏 CTA ============ -->
+<div class="clip" id="clip-21" data-start="126" data-duration="11" data-track-index="1">
+  <div class="flex-center flex-col" style="height:100%">
+    <div class="cta-brand cta-anim">trae-harness</div>
+    <div class="cta-btn cta-anim">⭐ Star on GitHub</div>
+  </div>
+  <div class="cta-end">END</div>
+</div>
+<audio src="../presentation/public/audio/v2-and-cta/22.wav" data-start="126" data-duration="11" data-track-index="2" data-volume="1"></audio>
+
+<!-- ====== 字幕条 ====== -->
+<div class="subtitle-bar">
+  <span class="subtitle-bar__text"></span>
+</div>
+
+</div>
+
+<script>
+(function() {
+  const tl = gsap.timeline({ paused: true });
+  window.__timelines = window.__timelines || {};
+  window.__timelines["main"] = tl;
+
+  const subtitleEl = document.querySelector(".subtitle-bar__text");
+
+  function setSubtitle(text, at) {
+    tl.call(() => {
+      gsap.to(subtitleEl, { opacity: 0, duration: 0.25, onComplete: function() {
+        subtitleEl.textContent = text;
+        gsap.to(subtitleEl, { opacity: 1, duration: 0.25 });
+      }});
+    }, null, at);
+  }
+
+  function showClip(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.style.display = 'block';
+    tl.set(el, { opacity: 0 }, Math.max(0, parseFloat(el.dataset.start) - 0.05));
+    tl.to(el, { opacity: 1, duration: 0.5, ease: "power4.out" }, el.dataset.start);
+  }
+
+  function hideClip(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const end = parseFloat(el.dataset.start) + parseFloat(el.dataset.duration);
+    tl.to(el, { opacity: 0, duration: 0.35, ease: "power4.inOut" }, Math.max(end - 0.15, parseFloat(el.dataset.start) + parseFloat(el.dataset.duration) * 0.85));
+    tl.set(el, { display: 'none' }, end);
+  }
+
+  for (let i = 0; i <= 21; i++) {
+    showClip('clip-' + i);
+    hideClip('clip-' + i);
+  }
+
+  /* ---- Clip 0: Hero ---- */
+  tl.from('.hero-anim', { y: 40, opacity: 0, duration: 0.7, ease: "power4.out", stagger: 0.15 }, 0.1)
+    .from('.hero-glow', { scale: 0.6, opacity: 0, duration: 1, ease: "power4.out" }, 0);
+  setSubtitle("你把需求丢给 AI，它写代码。", 0.3);
+
+  /* ---- Clip 1: 三问题 ---- */
+  tl.from('.problem-row', { x: -60, opacity: 0, duration: 0.6, ease: "power4.out", stagger: 0.35 }, 4.2);
+  setSubtitle("AI 写代码的三大隐患：幻觉、跳测试、自由发挥。", 4.3);
+
+  /* ---- Clip 2: 品牌登场 ---- */
+  tl.from('.brand-anim', { scale: 0.85, opacity: 0, duration: 0.7, ease: "power4.out" }, 9.2);
+  setSubtitle("trae-harness —— 多 Agent 协作框架，经过 11 轮 A/B 实验。", 9.3);
+
+  /* ---- Clip 3: 根因诊断卡片 ---- */
+  tl.from('.diag-anim', { y: 30, scale: 0.96, opacity: 0, duration: 0.65, ease: "power4.out" }, 13.2);
+  setSubtitle("根因：不确定每个 Agent 的边界，就一定有幻觉空间。", 13.3);
+
+  /* ---- Clip 4: 过渡钩子 ---- */
+  tl.from('.hook-anim', { y: 25, opacity: 0, duration: 0.6, ease: "power4.out", stagger: 0.2 }, 19.2);
+  setSubtitle("它怎么解决的？", 19.3);
+
+  /* ---- Clip 5: 核心机制卡片 ---- */
+  tl.from('.mech-anim', { x: -40, opacity: 0, duration: 0.6, ease: "power4.out" }, 23.2);
+  setSubtitle("第一步：步骤隔离。", 23.3);
+
+  /* ---- Clip 6: 步骤隔离图解 ---- */
+  tl.from('.iso-anim > *', { scale: 0.85, opacity: 0, duration: 0.5, ease: "power4.out", stagger: 0.25 }, 29.2);
+  setSubtitle("每个 Agent 的输出必须通过 Gate 才能进入下一步。", 29.3);
+
+  /* ---- Clip 7: 信息瓶颈数字 ---- */
+  tl.from('.bn-anim', { y: 30, opacity: 0, duration: 0.6, ease: "power4.out" }, 34.2);
+  tl.from('.bignum', { scale: 0.85, opacity: 0, duration: 0.55, ease: "power4.out", stagger: 0.3 }, 34.5);
+  setSubtitle("信息瓶颈：模块间只传 200 token，单步上下文控制在 400 以内。", 34.3);
+
+  /* ---- Clip 8: 三 Agent ---- */
+  tl.from('.ag-anim > *', { y: 45, opacity: 0, duration: 0.55, ease: "power4.out", stagger: 0.3 }, 40.2);
+  setSubtitle("三个子 Agent 并行工作：辩论、审核、开发各司其职。", 40.3);
+
+  /* ---- Clip 9: 编排器 ---- */
+  tl.from('.orch-anim', { scale: 0.92, opacity: 0, duration: 0.65, ease: "power4.out" }, 45.2);
+  tl.from('.gate-badge', { scale: 0, rotation: -180, opacity: 0, duration: 0.5, ease: "power4.out", stagger: 0.3 }, 45.7);
+  setSubtitle("编排器 Orchestrator：铁面 Gate，不通过就不放行。", 45.3);
+
+  /* ---- Clip 10: 过渡三行逐显 ---- */
+  tl.to('.trans-l1', { opacity: 1, duration: 0.5, ease: "power4.out" }, 52.3);
+  tl.to('.trans-l2', { opacity: 1, duration: 0.5, ease: "power4.out" }, 53.0);
+  tl.to('.trans-l3', { opacity: 1, duration: 0.5, ease: "power4.out" }, 53.7);
+  setSubtitle("同一个模型 DeepSeek V4 Pro，差距有多大？", 52.3);
+
+  /* ---- Clip 11: 实验背景 ---- */
+  tl.from('.exp-anim', { y: 25, opacity: 0, duration: 0.5, ease: "power4.out", stagger: 0.3 }, 55.2);
+  setSubtitle("11 轮 A/B 实验：有 Harness vs 没有 Harness 的对比。", 55.3);
+
+  /* ---- Clip 12: 正确率数据冲击波 ---- */
+  tl.from('.dw-anim', { opacity: 0, duration: 0.5, ease: "power4.out" }, 60.2);
+  tl.from('.data-old', { x: -30, opacity: 0, duration: 0.5, ease: "power4.out" }, 60.5);
+  tl.from('.data-arrow', { scale: 0, rotation: -90, opacity: 0, duration: 0.5, ease: "power4.out" }, 61.0);
+  tl.from('.data-new', { scale: 0.3, opacity: 0, duration: 0.75, ease: "power4.out" }, 61.3);
+  setSubtitle("正确率从 90% 提升到 100%，满分、零 bug 遗漏。", 60.3);
+
+  /* ---- Clip 13: 测试断言 ---- */
+  tl.from('.as-anim', { opacity: 0, duration: 0.5, ease: "power4.out" }, 68.2);
+  tl.from('.assert-old', { x: -30, opacity: 0, duration: 0.5, ease: "power4.out" }, 68.5);
+  tl.from('.assert-new', { scale: 0.5, opacity: 0, duration: 0.65, ease: "power4.out" }, 69.0);
+  tl.from('.assert-badge', { y: -20, scale: 0.8, opacity: 0, duration: 0.5, ease: "power4.out" }, 69.3);
+  setSubtitle("测试断言从 28 条暴增到 124 条，提升 340%。", 68.3);
+
+  /* ---- Clip 14: 双指标 ---- */
+  tl.from('.mp-anim > *', { y: 35, opacity: 0, duration: 0.55, ease: "power4.out", stagger: 0.3 }, 74.2);
+  setSubtitle("覆盖率从 62% 提升到 85%，规范违规降低 60%。", 74.3);
+
+  /* ---- Clip 15: 三徽章错开 ---- */
+  tl.to('.bd-anim', { opacity: 1, duration: 0.4, ease: "power4.out", stagger: 0.28 }, 81.3);
+  tl.from('.bd-anim', { y: 28, scale: 0.97, duration: 0.45, ease: "power4.out", stagger: 0.28 }, 81.3);
+  setSubtitle("安全防御提升 3 倍，Bug 复发率降低 91.7%，性能加速 4.6 倍。", 81.3);
+
+  /* ---- Clip 16: 归零弹性效果 ---- */
+  tl.from('.zw-anim', { opacity: 0, duration: 0.5, ease: "power4.out" }, 88.2);
+  tl.from('.zero-old', { x: -40, opacity: 0, duration: 0.5, ease: "power4.out" }, 88.5);
+  tl.from('.zero-new', { scale: 0.2, opacity: 0, duration: 0.65, ease: "power4.out" }, 89.0);
+  tl.to('.zero-new', { scale: 1.15, duration: 0.3, ease: "power4.inOut" }, 89.6);
+  tl.to('.zero-new', { scale: 1.0, duration: 0.4, ease: "power4.out" }, 89.95);
+  setSubtitle("SWE-bench 从 2 个 Bug 直接归零，零回归。", 88.3);
+
+  /* ---- Clip 17: ROI 焦点卡上浮 ---- */
+  tl.from('.roi-anim', { y: 55, scale: 0.92, opacity: 0, duration: 0.75, ease: "power4.out" }, 94.2);
+  tl.from('.roi-big', { scale: 0.3, opacity: 0, duration: 0.8, ease: "power4.out" }, 94.7);
+  tl.to('.roi-card', { y: -8, duration: 2.2, repeat: -1, yoyo: true, ease: "sine.inOut" }, 96.2);
+  setSubtitle("花 20K 省 100K，净 ROI 达到 529%，L3 级任务超过 1000%。", 94.3);
+
+  /* ---- Clip 18: 金句淡入 ---- */
+  tl.from('.gold-anim', { y: 30, opacity: 0, duration: 0.9, ease: "power4.out" }, 101.2);
+  setSubtitle("复杂度越高，回报越大。", 101.3);
+
+  /* ---- Clip 19: v2.0 特性网格 ---- */
+  tl.from('.v2-anim', { x: -30, opacity: 0, duration: 0.6, ease: "power4.out" }, 107.2);
+  tl.to('.feat-anim', { opacity: 1, duration: 0.35, ease: "power4.out", stagger: 0.25 }, 107.8);
+  tl.from('.feat-anim', { y: 25, duration: 0.4, ease: "power4.out", stagger: 0.25 }, 107.8);
+  setSubtitle("v2.0 新特性：项目自适应、视频验收、模板引擎全覆盖。", 107.3);
+
+  /* ---- Clip 20: Slogan + GitHub ---- */
+  tl.to('.sl-anim', { opacity: 1, duration: 0.4, ease: "power4.out", stagger: 0.28 }, 117.3);
+  tl.from('.sl-anim', { y: 20, duration: 0.35, ease: "power4.out", stagger: 0.28 }, 117.3);
+  tl.to('.gh-anim', { opacity: 1, duration: 0.4, ease: "power4.out", stagger: 0.3 }, 119.0);
+  tl.from('.gh-anim', { y: 15, duration: 0.35, ease: "power4.out", stagger: 0.3 }, 119.0);
+  setSubtitle("用确定性对抗模糊，用规则防幻觉，用数据说话。", 117.3);
+
+  /* ---- Clip 21: 终屏 CTA ---- */
+  tl.from('.cta-anim', { y: 40, opacity: 0, duration: 0.7, ease: "power4.out", stagger: 0.35 }, 126.2);
+  setSubtitle("在 GitHub 上 Star trae-harness，开启确定性 AI 编码。", 126.3);
+
+})();
+</script>
+</body>
+</html>

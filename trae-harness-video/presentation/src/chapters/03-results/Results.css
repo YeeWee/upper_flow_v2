@@ -1,0 +1,380 @@
+/* ─── Chapter 3: Results — data dashboard climax ─── */
+
+.re-root {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.re-scene {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding: 0 120px;
+}
+
+/* ══════════════════════════════════════
+   Step 11 — Experiment background card
+   ══════════════════════════════════════ */
+.re-experiment-card {
+  background: var(--surface-2);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-card);
+  padding: 56px 80px;
+  text-align: center;
+  animation: re-rise 0.5s var(--ease-quart) both;
+}
+.re-model-tag {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-mute);
+  display: block;
+  margin-bottom: 20px;
+}
+.re-title {
+  font-family: var(--font-display-cn);
+  font-size: clamp(64px, 5vw, 96px);
+  font-weight: 900;
+  color: var(--text);
+  line-height: 1.15;
+  margin: 0 0 16px;
+}
+.re-subtitle {
+  font-family: var(--font-body);
+  font-size: 20px;
+  color: var(--text-mute);
+  margin: 0;
+  letter-spacing: 0.02em;
+}
+
+/* ══════════════════════════════════════
+   Step 12 — Correctness 90% → 100%
+   ══════════════════════════════════════ */
+.re-data-row {
+  display: flex;
+  align-items: baseline;
+  gap: 28px;
+  animation: re-rise 0.5s var(--ease-quart) both;
+}
+.re-val-old {
+  font-family: var(--hero-num-font);
+  font-weight: var(--hero-num-weight);
+  font-size: clamp(72px, 6vw, 120px);
+  color: var(--text-faint);
+  line-height: 1;
+  letter-spacing: var(--hero-num-track);
+}
+.re-val-new {
+  font-family: var(--hero-num-font);
+  font-weight: var(--hero-num-weight);
+  font-size: clamp(72px, 6vw, 120px);
+  color: var(--accent);
+  line-height: 1;
+  letter-spacing: var(--hero-num-track);
+}
+.re-arrow {
+  font-family: var(--font-display-en);
+  font-style: italic;
+  font-size: clamp(36px, 3vw, 56px);
+  color: var(--accent);
+  opacity: 0.7;
+  animation: re-arrow-pulse 1.8s ease-in-out infinite;
+}
+@keyframes re-arrow-pulse {
+  0%, 100% { transform: translateX(0); opacity: 0.7; }
+  50%      { transform: translateX(10px); opacity: 1; }
+}
+.re-caption {
+  font-family: var(--font-body);
+  font-size: 18px;
+  color: var(--text-mute);
+  margin: 12px 0 0;
+  letter-spacing: 0.04em;
+  animation: re-rise 0.5s var(--ease-quart) 0.15s both;
+}
+
+/* ══════════════════════════════════════
+   Step 13 — Assertions 28 → 124
+   ══════════════════════════════════════ */
+.re-label {
+  font-family: var(--font-body);
+  font-size: 18px;
+  color: var(--text-mute);
+  letter-spacing: 0.04em;
+  align-self: flex-end;
+  margin-bottom: 8px;
+}
+.re-badge-delta {
+  display: inline-block;
+  background: var(--accent);
+  color: var(--shell);
+  font-family: var(--font-mono);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 6px 18px;
+  border-radius: var(--r-xs);
+  animation: re-pop 0.45s var(--ease-overshoot) 0.2s both;
+}
+@keyframes re-pop {
+  0%   { opacity: 0; transform: scale(0.6); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* ══════════════════════════════════════
+   Step 14 — Dual metric cards
+   ══════════════════════════════════════ */
+.re-metric-pair {
+  display: flex;
+  gap: 48px;
+  animation: re-rise 0.5s var(--ease-quart) both;
+}
+.re-metric-card {
+  background: var(--surface-2);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-card);
+  padding: 40px 48px;
+  text-align: center;
+  min-width: 280px;
+  transition: transform 0.3s var(--ease-soft), box-shadow 0.3s var(--ease-soft);
+}
+.re-metric-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(67, 48, 43, 0.12);
+}
+.re-metric-label {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--text-mute);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.re-metric-values {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 16px;
+}
+.re-val-old-sm {
+  font-family: var(--hero-num-font);
+  font-weight: var(--hero-num-weight);
+  font-size: clamp(40px, 3.5vw, 64px);
+  color: var(--text-faint);
+  line-height: 1;
+}
+.re-val-new-sm {
+  font-family: var(--hero-num-font);
+  font-weight: var(--hero-num-weight);
+  font-size: clamp(40px, 3.5vw, 64px);
+  color: var(--accent);
+  line-height: 1;
+}
+.re-val-new-sm.neg {
+  color: #3a9a6c;
+}
+.re-arrow-sm {
+  font-family: var(--font-display-en);
+  font-style: italic;
+  font-size: clamp(20px, 1.8vw, 32px);
+  color: var(--rule);
+}
+
+/* ══════════════════════════════════════
+   Step 15 — Triple badge row
+   ══════════════════════════════════════ */
+.re-triple-row {
+  display: flex;
+  gap: 32px;
+  animation: re-rise 0.5s var(--ease-quart) both;
+}
+.re-badge-card {
+  background: var(--surface-2);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-md);
+  padding: 28px 36px;
+  text-align: center;
+  min-width: 200px;
+  opacity: 0;
+  animation: re-rise 0.45s var(--ease-quart) forwards;
+}
+.re-badge-card:nth-child(1) { animation-delay: 0ms; }
+.re-badge-card:nth-child(2) { animation-delay: 100ms; }
+.re-badge-card:nth-child(3) { animation-delay: 200ms; }
+.re-badge-label {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--text-mute);
+  letter-spacing: 0.06em;
+  margin-bottom: 10px;
+}
+.re-badge-num {
+  display: block;
+  font-family: var(--hero-num-font);
+  font-weight: var(--hero-num-weight);
+  font-size: clamp(32px, 2.8vw, 52px);
+  color: var(--accent);
+  line-height: 1.1;
+}
+.re-badge-num.neg {
+  color: #3a9a6c;
+}
+
+/* ══════════════════════════════════════
+   Step 16 — SWE-bench zero regression
+   ══════════════════════════════════════ */
+.re-zero-block {
+  text-align: center;
+  animation: re-rise 0.55s var(--ease-quart) both;
+}
+.re-zero-line {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 32px;
+}
+.re-zero-from {
+  font-family: var(--hero-num-font);
+  font-weight: var(--hero-num-weight);
+  font-size: clamp(56px, 5vw, 88px);
+  color: var(--text-faint);
+  line-height: 1;
+}
+.re-zero-to {
+  font-family: var(--hero-num-font);
+  font-weight: var(--hero-num-weight);
+  font-size: clamp(80px, 7vw, 140px);
+  color: var(--accent);
+  line-height: 1;
+  animation: re-zero-pop 0.8s var(--ease-expo) 0.3s both;
+}
+@keyframes re-zero-pop {
+  0%   { opacity: 0; transform: scale(1.4); }
+  60%  { opacity: 1; transform: scale(1.05); }
+  100% { opacity: 1; transform: scale(1); }
+}
+.re-arrow-lg {
+  font-family: var(--font-display-en);
+  font-style: italic;
+  font-size: clamp(32px, 2.8vw, 52px);
+  color: var(--accent);
+  opacity: 0.6;
+}
+.re-zero-label {
+  font-family: var(--font-display-cn);
+  font-size: clamp(24px, 2.2vw, 38px);
+  font-weight: 700;
+  color: var(--text);
+  margin: 20px 0 0;
+  letter-spacing: 0.06em;
+}
+
+/* ══════════════════════════════════════
+   Step 17 — ROI card (visual focal point)
+   ══════════════════════════════════════ */
+.re-roi-card {
+  background: linear-gradient(145deg, var(--surface-2) 0%, var(--surface-3) 100%);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-xl);
+  padding: 72px 96px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  animation: re-rise 0.55s var(--ease-quart) both;
+}
+.re-roi-card::before {
+  content: "";
+  position: absolute;
+  top: -40%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+  opacity: 0.15;
+  pointer-events: none;
+}
+.re-roi-context {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 17px;
+  color: var(--text-mute);
+  letter-spacing: 0.04em;
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 1;
+}
+.re-roi-num {
+  display: block;
+  font-family: var(--hero-num-font);
+  font-weight: var(--hero-num-weight);
+  font-size: clamp(120px, 11vw, 200px);
+  color: var(--accent);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  position: relative;
+  z-index: 1;
+  animation: re-scale-in 0.7s var(--ease-overshoot) 0.2s both;
+}
+@keyframes re-scale-in {
+  0%   { opacity: 0; transform: scale(0.85); }
+  100% { opacity: 1; transform: scale(1); }
+}
+.re-roi-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 15px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-mute);
+  margin-top: 12px;
+  position: relative;
+  z-index: 1;
+}
+.re-roi-footer {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 18px;
+  color: var(--text-2);
+  margin-top: 28px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ══════════════════════════════════════
+   Step 18 — Quote transition
+   ══════════════════════════════════════ */
+.re-quote {
+  font-family: var(--font-display-cn);
+  font-size: clamp(42px, 4vw, 72px);
+  font-weight: 900;
+  color: var(--text);
+  text-align: center;
+  max-width: 900px;
+  line-height: 1.35;
+  margin: 0;
+  letter-spacing: 0.04em;
+  animation: re-fade-up 0.8s var(--ease-quart) both;
+}
+@keyframes re-fade-up {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ══════════════════════════════════════
+   Shared utilities
+   ══════════════════════════════════════ */
+@keyframes re-rise {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

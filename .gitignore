@@ -1,0 +1,11 @@
+﻿# HyperFrames rendering cache
+trae-harness-video/work-*/
+# Compiled assets (generated)
+trae-harness-video/output*.mp4
+# Node modules / Python cache
+node_modules/
+__pycache__/
+*.pyc
+# IDE
+.vscode/
+.idea/
