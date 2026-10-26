@@ -136,6 +136,12 @@ describe("avp compose", () => {
     assert.match(html, /data-composition-id="main" data-start="0" data-duration="4\.500"/);
     assert.match(html, new RegExp(`avp:tokens-hash" content="${tokensHash}"`));
     assert.match(html, /beat\.start \+ 0\.3/);
+    // static 拍的字幕从拍点就可见（没有 +0.3s 入场），hook 拍保留入场。
+    assert.match(html, /if \(beat\.captionFromStart\)/);
+    assert.match(html, /tl\.set\(caption, \{ opacity: 1 \}, beat\.start\)/);
+    assert.match(html, /"id":"b1"[^}]*"captionFromStart":false/);
+    assert.match(html, /"id":"b2"[^}]*"captionFromStart":true/);
+    assert.match(html, /"id":"b3"[^}]*"captionFromStart":false/);
     assert.match(html, /window\.__timelines\["main"\]/);
     assert.match(html, /atom-hero__title/);
     assert.ok(existsSync(join(dir, "composition", "gsap.min.js")));

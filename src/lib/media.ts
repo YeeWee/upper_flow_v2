@@ -98,13 +98,76 @@ export function extractFrame(
   ]);
 }
 
+/** 跑命令并把 stdout 原样读成 Buffer（用于 rawvideo 管道）。 */
+function runBuffer(
+  command: string,
+  args: string[],
+  options: { timeout?: number } = {},
+): Buffer {
+  const result = spawnSync(command, args, {
+    timeout: options.timeout ?? 120_000,
+    maxBuffer: 128 * 1024 * 1024,
+  });
+  if (result.error || result.status !== 0) {
+    throw new AvpError(
+      "media-command-failed",
+      `${command} 失败：${(result.stderr?.toString() || result.error?.message || "").trim().split("\n").slice(-4).join("\n")}`,
+      { command, args },
+    );
+  }
+  return result.stdout;
+}
+
+function decodeRgb24(file: string): Buffer {
+  return runBuffer("ffmpeg", [
+    "-hide_banner",
+    "-loglevel",
+    "error",
+    "-i",
+    file,
+    "-f",
+    "rawvideo",
+    "-pix_fmt",
+    "rgb24",
+    "pipe:1",
+  ]);
+}
+
 export interface FrameDiff {
   ssim: number;
   diffPercent: number;
 }
 
-/** 两张同尺寸 PNG 的结构相似度；差异百分比 = (1 - SSIM) × 100。 */
+/**
+ * 两张同尺寸 PNG 的像素差：逐像素比较 RGB24，任一通道不同即算变化。
+ * 差异百分比 = 变化像素数 / 总像素数 × 100（spec #16 的 <0.1% 口径）。
+ * SSIM 仍保留在结果里，方便回执/报告对照。
+ */
 export function compareFrames(a: string, b: string): FrameDiff {
+  const frameA = decodeRgb24(a);
+  const frameB = decodeRgb24(b);
+  if (frameA.length !== frameB.length || frameA.length % 3 !== 0) {
+    throw new AvpError(
+      "frame-compare-failed",
+      `帧尺寸不一致，无法比较：${a}（${frameA.length} 字节）vs ${b}（${frameB.length} 字节）`,
+      { a, b, aBytes: frameA.length, bBytes: frameB.length },
+    );
+  }
+
+  let changedPixels = 0;
+  for (let offset = 0; offset < frameA.length; offset += 3) {
+    if (
+      frameA[offset] !== frameB[offset] ||
+      frameA[offset + 1] !== frameB[offset + 1] ||
+      frameA[offset + 2] !== frameB[offset + 2]
+    ) {
+      changedPixels++;
+    }
+  }
+  const totalPixels = frameA.length / 3;
+  const diffPercent =
+    totalPixels === 0 ? 0 : (changedPixels / totalPixels) * 100;
+
   const { stderr } = run("ffmpeg", [
     "-hide_banner",
     "-loglevel",
@@ -128,7 +191,7 @@ export function compareFrames(a: string, b: string): FrameDiff {
     );
   }
   const ssim = Number.parseFloat(match[1]!);
-  return { ssim, diffPercent: Math.max(0, (1 - ssim) * 100) };
+  return { ssim, diffPercent };
 }
 
 /** 把按顺序命名的帧拼成联系表；列数默认 6。 */
