@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
-  "renderedAt": "2026-10-26T10:50:30.399Z",
+  "renderedAt": "2026-10-26T10:55:45.385Z",
   "skill": {
     "name": "article-video-production",
     "version": "0.1.0",
-    "commit": "9003e7592dbaaa17f88250d728e08568ef48d3c6"
+    "commit": "3d4971329b3f489bfdb6f3a014206deabce5dfc9"
   },
   "hashes": {
     "beats": "c9aef8e83f094624b5b4d282105ca372f4b66915ffb46d35c47c163c8225985a",
     "tts": "54c93ab0f76bb0f558aadb8410a6459f0597476632d91e2e7d856e62df32e3ab",
-    "check": "e1ad7514caa3239bafff2c0ed73e3ec8d6a7c38c7513f9aa5b413ce387b0adcb",
+    "check": "ca999770475e0e4390d42b55a7dfccae1e859a38137fef63ce41eaae27be1f72",
     "composition": "6f3e6b2e1b8449adb6a586f367ece5e690d9f020534a34e3e17bc4eaa0cd14ec",
     "themeTokens": "002ca2bd4f5fa1d21dbdc057f8d9c48e2f6c71282076d55d8dd613b7b4e61114"
   },
@@ -132,7 +132,7 @@
   ],
   "output": {
     "file": "output/output.mp4",
-    "sha256": "528165c59af60aad1b03458bcc12c49e494997bee6d215606bd6e475855dbe0b",
+    "sha256": "f5f222b32b87fdb15c95b24f785a1b3de477a4cc1bc5a80036fabbdba5da0da2",
     "durationMs": 127533,
     "width": 1920,
     "height": 1080,
@@ -142,14 +142,14 @@
   },
   "contactSheet": {
     "file": "output/contact-sheet.png",
-    "sha256": "71f8c03b7687dc95b0af65564eda1e98179a16bd51ba96442dbefe60496311f9",
+    "sha256": "48ca76f90c08bd948d785ca318ded4cdfb27d0ea43e4ee8d1c8d4cdcf7d3dcfa",
     "frames": 44,
     "columns": 6,
     "rows": 8
   },
   "stillReport": {
     "file": "output/still-report.json",
-    "sha256": "3f0d8570bc0c27f13312dbc1ad351f7033a9f7b10f498b21660959f8f2d6c69c",
+    "sha256": "07b34bea6d4eea07b59b254dae80f0a499b794e40487e0915d1c0bd3ba0c8ec5",
     "staticBeats": [
       "architecture-6",
       "results-8",
