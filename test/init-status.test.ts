@@ -123,4 +123,10 @@ describe("avp init / status", () => {
       cleanup(other);
     }
   });
+
+  test("status 也拒绝位置参数，避免静默使用 cwd", () => {
+    const result = runAvp(["status", "some/dir", "--json"], dir);
+    assert.notEqual(result.status, 0);
+    assert.match(result.json.error.message, /status 不接受位置参数/u);
+  });
 });
