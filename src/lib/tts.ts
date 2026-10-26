@@ -19,8 +19,9 @@ export const TTS_TAIL_MS = 300;
 /** 静音拍没有音频，给一个可渲染的固定时长。 */
 export const SILENT_BEAT_MS = 1500;
 
-const SPEED_MIN = 0.95;
-const SPEED_MAX = 1.05;
+/** 语速区间：超出范围是换了个人在念，不是节奏。 */
+export const SPEED_MIN = 0.95;
+export const SPEED_MAX = 1.05;
 
 export interface TtsManifestEntry {
   hash: string | null;

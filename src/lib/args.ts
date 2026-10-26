@@ -9,7 +9,14 @@ export interface ParsedArgs {
 }
 
 /** 这些 flag 后跟一个值（`--theme bold-signal` 与 `--theme=bold-signal` 都行）。 */
-const VALUE_FLAGS = new Set(["theme", "chapter", "dir", "voice", "speed"]);
+const VALUE_FLAGS = new Set([
+  "theme",
+  "chapter",
+  "dir",
+  "voice",
+  "speed",
+  "only",
+]);
 
 export function parseArgs(argv: string[]): ParsedArgs {
   const hasCommand = Boolean(argv[0]) && !argv[0]!.startsWith("-");

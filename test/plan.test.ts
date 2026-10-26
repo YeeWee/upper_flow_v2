@@ -307,7 +307,9 @@ describe("avp plan", () => {
 
       // 批准哈希 = sha256(script.md 原文 + 规范化节拍 JSON)
       const beats = readJson(join(project, "beats.json")).beats;
-      const canonical = canonicalJson(beats);
+      // 批准只覆盖 plan 产出的字段；durationMs / tts 是 avp tts 的派生物。
+      const approvalBeats = beats.map(({ durationMs, tts, ...rest }: any) => rest);
+      const canonical = canonicalJson(approvalBeats);
       assert.equal(approval.beatsHash, sha256(canonical));
       assert.equal(
         approval.hash,
@@ -316,6 +318,22 @@ describe("avp plan", () => {
 
       const accepted = runAvp(["plan", "--after-plan", "--json"], project);
       assert.equal(accepted.status, 0, accepted.stderr);
+
+      // avp tts 会往 beats 回写 durationMs / tts；这不该弄脏批准哈希。
+      const afterTtsDoc = readJson(join(project, "beats.json"));
+      afterTtsDoc.beats[0].durationMs = 1234;
+      afterTtsDoc.beats[0].tts = {
+        backend: "fake",
+        voice: "v",
+        speed: 1,
+        hash: "h",
+      };
+      writeFileSync(
+        join(project, "beats.json"),
+        JSON.stringify(afterTtsDoc, null, 2),
+      );
+      const afterTts = runAvp(["plan", "--after-plan", "--json"], project);
+      assert.equal(afterTts.status, 0, afterTts.stderr);
 
       // 只改 script.md 的空白：say 不变，但批准哈希变了 → 必须重新批准
       writeFileSync(
