@@ -87,11 +87,7 @@ export function ttsCacheKey(input: {
   );
 }
 
-function validateConfig(
-  config: TtsConfig,
-  manifest: BeatsManifest,
-  warnings: string[],
-): { voice: string; speed: number } {
+function validateConfig(config: TtsConfig, manifest: BeatsManifest): void {
   if (config.backend !== "kokoro" && config.backend !== "fake") {
     throw new AvpError(
       "tts-backend-unknown",
@@ -143,8 +139,6 @@ function validateConfig(
       );
     }
   }
-
-  return { voice: config.default.voice, speed: config.default.speed };
 }
 
 function resolveVoiceSpeed(
@@ -275,7 +269,7 @@ export function runTts(
   const manifest = readBeats(root);
   const config = readTtsConfig(root);
   const warnings: string[] = [];
-  validateConfig(config, manifest, warnings);
+  validateConfig(config, manifest);
 
   const chapters = new Set(manifest.beats.map((beat) => beat.chapter));
   if (options.chapter && !chapters.has(options.chapter)) {
