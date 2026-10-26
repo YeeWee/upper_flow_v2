@@ -1,4 +1,5 @@
 import { join } from "node:path";
+import { PLAN_OWNED_BEAT_FIELDS } from "./beats";
 import type { Beat, BeatsManifest } from "./beats";
 import { AvpError } from "./errors";
 import { pathExists, readJson, readText, writeJson } from "./fs";
@@ -24,18 +25,9 @@ export function approvalPath(root: string): string {
  * 不能在批准之后把哈希改脏（否则 tts 一跑 --after-plan 永远对不上）。
  */
 function approvalView(beat: Beat): Record<string, unknown> {
-  return {
-    id: beat.id,
-    chapter: beat.chapter,
-    chapterIndex: beat.chapterIndex,
-    step: beat.step,
-    say: beat.say,
-    caption: beat.caption,
-    captionSource: beat.captionSource,
-    audio: beat.audio,
-    motion: beat.motion,
-    textHash: beat.textHash,
-  };
+  return Object.fromEntries(
+    PLAN_OWNED_BEAT_FIELDS.map((field) => [field, beat[field]]),
+  );
 }
 
 /** 规范化节拍 JSON：键排序、无空白，是 beatsHash / 批准哈希的唯一输入。 */

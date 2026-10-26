@@ -51,6 +51,23 @@ export interface BeatsManifest {
   beats: Beat[];
 }
 
+/**
+ * plan 拥有、批准哈希与漂移检查共同覆盖的节拍字段。
+ * durationMs / tts 是 tts 的派生物，刻意不在此列。
+ */
+export const PLAN_OWNED_BEAT_FIELDS = [
+  "id",
+  "chapter",
+  "chapterIndex",
+  "step",
+  "say",
+  "caption",
+  "captionSource",
+  "audio",
+  "motion",
+  "textHash",
+] as const;
+
 interface ChapterEntry {
   id: string;
   title: string;

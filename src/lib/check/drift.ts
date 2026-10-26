@@ -1,20 +1,11 @@
-import { buildBeats, discoverChapters } from "../beats";
+import {
+  buildBeats,
+  discoverChapters,
+  PLAN_OWNED_BEAT_FIELDS,
+} from "../beats";
 import { AvpError } from "../errors";
 import { CHECK_IDS } from "./types";
 import type { CheckContext } from "./types";
-
-const DRIFT_FIELDS = [
-  "id",
-  "chapter",
-  "chapterIndex",
-  "step",
-  "say",
-  "caption",
-  "captionSource",
-  "audio",
-  "motion",
-  "textHash",
-] as const;
 
 function shorten(value: unknown): string {
   if (typeof value === "string") {
@@ -108,7 +99,7 @@ export async function checkDrift(ctx: CheckContext): Promise<void> {
     }
     if (!next || !current) continue;
 
-    for (const field of DRIFT_FIELDS) {
+    for (const field of PLAN_OWNED_BEAT_FIELDS) {
       if (current[field] === next[field]) continue;
       addDrift(
         ctx,
