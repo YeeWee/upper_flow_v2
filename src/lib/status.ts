@@ -34,7 +34,6 @@ function planInputs(p: ProjectPaths, ledger: ProjectLedger): string[] {
     join(p.root, "script.md"),
     join(p.root, "outline.md"),
     p.registry,
-    join(p.root, "tts.json"),
     themeTokensPath(ledger.theme.id),
     ...listFiles(p.chaptersDir, [".ts"]),
   ];
