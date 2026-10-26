@@ -2,7 +2,7 @@ import { join } from "node:path";
 import type { Beat, BeatsManifest } from "./beats";
 import { AvpError } from "./errors";
 import { pathExists, readJson, readText, writeJson } from "./fs";
-import { hashJson, sha256, stableStringify } from "./hash";
+import { sha256, stableStringify } from "./hash";
 import { assertSchemaVersion, projectPaths } from "./project";
 
 /** `.avp/approval.json`：plan 停点的批准记录。 */
@@ -19,13 +19,32 @@ export function approvalPath(root: string): string {
   return join(root, ".avp", "approval.json");
 }
 
+/**
+ * 批准哈希只覆盖 plan 产出的字段；durationMs / tts 是 avp tts 的派生物，
+ * 不能在批准之后把哈希改脏（否则 tts 一跑 --after-plan 永远对不上）。
+ */
+function approvalView(beat: Beat): Record<string, unknown> {
+  return {
+    id: beat.id,
+    chapter: beat.chapter,
+    chapterIndex: beat.chapterIndex,
+    step: beat.step,
+    say: beat.say,
+    caption: beat.caption,
+    captionSource: beat.captionSource,
+    audio: beat.audio,
+    motion: beat.motion,
+    textHash: beat.textHash,
+  };
+}
+
 /** 规范化节拍 JSON：键排序、无空白，是 beatsHash / 批准哈希的唯一输入。 */
 export function canonicalBeatsJson(beats: Beat[]): string {
-  return stableStringify(beats);
+  return stableStringify(beats.map(approvalView));
 }
 
 export function computeBeatsHash(beats: Beat[]): string {
-  return hashJson(beats);
+  return sha256(canonicalBeatsJson(beats));
 }
 
 export function computeApprovalHash(scriptText: string, beats: Beat[]): string {
