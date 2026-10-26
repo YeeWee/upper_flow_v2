@@ -145,7 +145,5 @@ node packages/cli/dist/cli.js render \
 
 **Phase 2.4「实现单章」节中引用 `references/CHAPTER-CRAFT.md` 时，追加：**
 
-> Phase 5 composition HTML 中的动画与 Phase 2 章节 React 组件的动画是**两套独立的实现**：
-> React 组件的 CSS transition/animation 只用于 dev server 预览；
-> HyperFrames composition 的 GSAP timeline 才是渲染 MP4 的实际动画。
-> 两者视觉上应一致（同一主题色板），但代码互不依赖。
+> 演示项目与合成稿是两套代码、一份契约：共享视觉原子的类名 + DOM 外壳 +
+> 三态，不共享动画实现。契约见 [`COMPOSE.md`](COMPOSE.md)。
