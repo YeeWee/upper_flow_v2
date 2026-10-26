@@ -1,5 +1,6 @@
 import { join } from "node:path";
-import { pathExists } from "./fs";
+import type { BeatsManifest } from "./beats";
+import { pathExists, readJson } from "./fs";
 import { listFiles } from "./fs-list";
 import { hashFiles } from "./hash";
 import type { ProjectPaths, ProjectLedger } from "./project";
@@ -63,8 +64,36 @@ function composeInputs(p: ProjectPaths, ledger: ProjectLedger): string[] {
   ];
 }
 
-function checkInputs(p: ProjectPaths): string[] {
-  return [p.beats, p.ttsConfig, p.ledger, join(p.composition, "index.html")];
+/**
+ * check 读什么就哈希什么：节拍清单、TTS 配置与回执、项目账本、主题 tokens、
+ * 口播源、钩子、合成稿，以及每拍音频内容。任何一项变了，check 都应重跑。
+ */
+function checkInputs(p: ProjectPaths, ledger: ProjectLedger): string[] {
+  const inputs = [
+    p.beats,
+    p.ttsConfig,
+    p.ledger,
+    p.ttsManifest,
+    themeTokensPath(ledger.theme.id),
+    p.registry,
+    ...listFiles(p.chaptersDir, [".ts"]),
+    ...listFiles(p.hooks, [".ts"]),
+    join(p.composition, "index.html"),
+  ];
+
+  try {
+    const manifest = readJson<BeatsManifest>(p.beats);
+    const beats = Array.isArray(manifest.beats) ? manifest.beats : [];
+    for (const beat of beats) {
+      if (typeof beat?.audio === "string" && beat.audio) {
+        inputs.push(join(p.root, beat.audio));
+      }
+    }
+  } catch {
+    // beats.json 本身已在输入里；解析失败留给 plan / check 报错。
+  }
+
+  return inputs;
 }
 
 function renderInputs(p: ProjectPaths): string[] {
@@ -90,8 +119,8 @@ export function inputHashFor(
         ? hashFiles(p.root, composeInputs(p, ledger))
         : null;
     case "check":
-      return pathExists(join(p.composition, "index.html"))
-        ? hashFiles(p.root, checkInputs(p))
+      return pathExists(p.beats)
+        ? hashFiles(p.root, checkInputs(p, ledger))
         : null;
     case "render":
       return pathExists(p.checkReport)

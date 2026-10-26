@@ -2,6 +2,7 @@ import { resolve } from "node:path";
 import { assertKnownFlags, flagBool, flagString, parseArgs } from "./lib/args";
 import { asAvpError } from "./lib/errors";
 import { shortHash } from "./lib/hash";
+import { runCheckCommand, renderCheck } from "./commands/check";
 import { runComposeCommand } from "./commands/compose";
 import { runInit } from "./commands/init";
 import { runPlan } from "./commands/plan";
@@ -19,12 +20,14 @@ const HELP = `avp — article-video-production
   plan --after-plan  校验已有批准与当前稿子 + 节拍一致
   tts             按节拍合成音频，回写实测时长
   compose         生成 composition/index.html 骨架并拼接每拍身体与钩子
+  check           分级检查：error 阻断 / warning 可见 / report 只报
   status          五列状态：步骤 / 输入哈希 / 产物 / 状态
   help            显示本帮助
 
 通用参数:
   --json          机器可读输出
   --dir=<path>    项目目录（默认：当前目录）
+  --only=<ids>    只输出指定检查项（逗号分隔），如 --only=audio-missing
   --help          显示本帮助
 
 退出码: 0 = 成功；非 0 = 失败，并给出可机械修复的原因。
@@ -155,6 +158,28 @@ async function run(argv: string[]): Promise<CommandOutput> {
       return {
         json: { ok: true, command: "compose", ...result },
         lines,
+      };
+    }
+
+    case "check": {
+      assertKnownFlags(parsed, ["only", "dir", "json", "help"]);
+      if (parsed.positionals.length > 0) {
+        throw new Error(
+          `check 不接受位置参数：${parsed.positionals.join(" ")}（用 --dir=）`,
+        );
+      }
+      const root = resolve(cwd, flagString(parsed, "dir") ?? ".");
+      const only = flagString(parsed, "only");
+      const result = await runCheckCommand(root, {
+        only: only
+          ?.split(",")
+          .map((id) => id.trim())
+          .filter(Boolean),
+      });
+      return {
+        json: { ...result },
+        lines: renderCheck(result),
+        exitCode: result.ok ? 0 : 1,
       };
     }
 
