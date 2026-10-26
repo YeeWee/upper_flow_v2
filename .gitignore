@@ -4,6 +4,7 @@ trae-harness-video/work-*/
 trae-harness-video/output*.mp4
 # Node modules / Python cache
 node_modules/
+node_modules
 __pycache__/
 *.pyc
 # IDE
