@@ -148,6 +148,29 @@ describe("avp compose", () => {
     assert.equal(compose.status, "current");
   });
 
+  test("静音拍不生成 audio 元素（空 src 会让混音硬失败）", () => {
+    const file = join(dir, "beats.json");
+    const doc = readJson(file);
+    const backup = doc.beats[2];
+    doc.beats[2] = {
+      ...backup,
+      say: "",
+      caption: "",
+      captionSource: "authored",
+      durationMs: 1500,
+      tts: null,
+      motion: "hook",
+    };
+    writeFileSync(file, JSON.stringify(doc, null, 2));
+    const run = runAvp(["compose", "--json"], dir);
+    assert.equal(run.status, 0, run.stderr);
+    const html = readText(join(dir, "composition", "index.html"));
+    assert.doesNotMatch(html, /id="audio-b3"/);
+    assert.match(html, /id="clip-b3"/);
+    doc.beats[2] = backup;
+    writeFileSync(file, JSON.stringify(doc, null, 2));
+  });
+
   test("缺身体 / 缺钩子 / 身体里带 script 都拒绝", () => {
     renameSync(
       join(dir, "composition", "beats", "b2.body.html"),

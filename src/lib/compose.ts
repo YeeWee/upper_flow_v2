@@ -200,9 +200,12 @@ export function composeProject(
       ].join("\n"),
     );
 
-    audioHtml.push(
-      `  <audio id="audio-${beat.id}" src="${escapeHtml(beat.audio)}" data-start="${startText}" data-duration="${durationText}" data-track-index="2" data-volume="1"></audio>`,
-    );
+    // 静音拍没有音频文件；给空 src 会让 HyperFrames 在混音阶段硬失败。
+    if (beat.say.trim() !== "") {
+      audioHtml.push(
+        `  <audio id="audio-${beat.id}" src="${escapeHtml(beat.audio)}" data-start="${startText}" data-duration="${durationText}" data-track-index="2" data-volume="1"></audio>`,
+      );
+    }
 
     timelineBeats.push({
       id: beat.id,
@@ -326,6 +329,7 @@ ${timelineJs}
   // 合成稿必须自包含：HyperFrames 的音频 src 相对 composition/ 解析，
   // 不允许 ../ 逃出项目目录，否则渲染时静音。
   for (const beat of beats) {
+    if (beat.say.trim() === "") continue;
     const source = join(paths.root, beat.audio);
     if (pathExists(source)) {
       const target = join(paths.composition, beat.audio);

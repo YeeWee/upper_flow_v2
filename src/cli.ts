@@ -6,6 +6,7 @@ import { runCheckCommand, renderCheck } from "./commands/check";
 import { runComposeCommand } from "./commands/compose";
 import { runInit } from "./commands/init";
 import { runPlan } from "./commands/plan";
+import { runRenderCommand } from "./commands/render";
 import { runTtsCommand } from "./commands/tts";
 import { renderStatusTable, runStatus } from "./commands/status";
 
@@ -21,6 +22,8 @@ const HELP = `avp — article-video-production
   tts             按节拍合成音频，回写实测时长
   compose         生成 composition/index.html 骨架并拼接每拍身体与钩子
   check           分级检查：error 阻断 / warning 可见 / report 只报
+  render          渲染成片：check 闸 + mp4 + 回执 + 联系表 + 静帧报告
+  render --brief  只给渲染闸简报：check 结论 / 时长表 / 3 张缩略图（不产片）
   status          五列状态：步骤 / 输入哈希 / 产物 / 状态
   help            显示本帮助
 
@@ -180,6 +183,59 @@ async function run(argv: string[]): Promise<CommandOutput> {
         json: { ...result },
         lines: renderCheck(result),
         exitCode: result.ok ? 0 : 1,
+      };
+    }
+
+    case "render": {
+      assertKnownFlags(parsed, ["brief", "after-plan", "dir", "json", "help"]);
+      if (parsed.positionals.length > 0) {
+        throw new Error(
+          `render 不接受位置参数：${parsed.positionals.join(" ")}（用 --dir=）`,
+        );
+      }
+      const root = resolve(cwd, flagString(parsed, "dir") ?? ".");
+      const result = await runRenderCommand(root, {
+        brief: flagBool(parsed, "brief"),
+        afterPlan: flagBool(parsed, "after-plan"),
+      });
+      const gate =
+        `check：${result.check.errors} 个 error / ` +
+        `${result.check.warnings} 个 warning / ` +
+        `${result.check.reports} 个 report`;
+      const duration = [
+        `时长：${(result.totalMs / 1000).toFixed(2)}s`,
+        ...result.chapters.map(
+          (row) =>
+            `  ${row.chapter}：${row.beats} 拍 / ${(row.durationMs / 1000).toFixed(2)}s`,
+        ),
+      ];
+      if (result.brief) {
+        return {
+          json: { ok: true, command: "render", ...result },
+          lines: [
+            gate,
+            `时长：${(result.totalMs / 1000).toFixed(2)}s（${result.chapters
+              .map(
+                (row) =>
+                  `${row.chapter} ${row.beats} 拍 / ${(row.durationMs / 1000).toFixed(2)}s`,
+              )
+              .join(" · ")}）`,
+            `缩略图：${(result.thumbnails ?? []).join(", ")}`,
+          ],
+        };
+      }
+      return {
+        json: { ok: true, command: "render", ...result },
+        lines: [
+          `✓ 成片：${result.output}（${(result.totalMs / 1000).toFixed(2)}s）`,
+          gate,
+          ...duration,
+          "",
+          `回执：${result.receipt}`,
+          `联系表：${result.contactSheet}`,
+          `静帧报告：${result.stillReport}`,
+          `静帧拍：${(result.staticBeats ?? []).join(", ") || "无"}`,
+        ],
       };
     }
 
