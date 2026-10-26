@@ -9,3 +9,10 @@ __pycache__/
 # IDE
 .vscode/
 .idea/
+
+# avp worktrees / npm cache
+.worktrees/
+.npm-cache/
+
+# stray agent session files
+*.ses

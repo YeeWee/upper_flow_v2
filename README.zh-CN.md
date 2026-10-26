@@ -1,6 +1,6 @@
-# Web Video Presentation Skill
+# Article Video Production
 
-**把文章或口播稿做成点击驱动的 16:9 网页演示，并通过录屏产出有电影感视频的 Agent Skill。**
+**把文章稳定做成中文短视频的可归因流水线。** 旧名 `web-video-presentation` 已退役；录制路径降级为附录。
 
 [English](./README.md) · [返回集合首页](../../README.zh-CN.md)
 

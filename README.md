@@ -1,6 +1,6 @@
-# Web Video Presentation Skill
+# Article Video Production
 
-**A method-driven agent skill for turning scripts and articles into click-driven 16:9 web presentations that can be screen-recorded as cinematic videos.**
+**把文章稳定做成中文短视频的可归因流水线。** 旧名 `web-video-presentation` 已退役；本项目收敛为单一 skill `article-video-production`，录制路径降级为附录。
 
 [中文文档](./README.zh-CN.md) · [Back to collection root](../../README.md)
 

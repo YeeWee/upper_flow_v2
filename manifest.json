@@ -1,9 +1,9 @@
 {
-  "name": "web-video-presentation",
-  "version": "1.2.0",
-  "category": "Web Video / Presentation",
-  "description": "Turn scripts, articles, lessons, product demos, and talks into click-driven 16:9 web presentations that can be screen-recorded as cinematic videos. Ships a Vite + React + TypeScript scaffold, a (chapter, step) cursor model, hard collaboration checkpoints, and a theme-token architecture.",
-  "homepage": "https://github.com/ConardLi/garden-skills/tree/main/skills/web-video-presentation",
+  "name": "article-video-production",
+  "version": "0.1.0",
+  "category": "Web Video / Production Pipeline",
+  "description": "把文章稳定做成中文短视频的可归因流水线：article.md → 口播稿 → 节拍清单 → TTS 音频 → 合成稿 → 成片，每步幂等、可检查、可归因。",
+  "homepage": "https://github.com/YeeWee/upper_flow_v2",
   "compat": [
     "claude-code",
     "claude-ai",

@@ -1,0 +1,26 @@
+{
+  "name": "article-video-production",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "把文章稳定做成中文短视频的可归因流水线：文章 → 口播稿 → 节拍清单 → 音频 → 合成稿 → 成片。",
+  "bin": {
+    "avp": "./bin/avp.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "avp": "tsx src/cli.ts",
+    "test": "node --import tsx --test test/*.test.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "hyperframes": "0.8.33"
+  },
+  "devDependencies": {
+    "@types/node": "26.6.5",
+    "tsx": "4.23.15",
+    "typescript": "7.0.2"
+  }
+}
