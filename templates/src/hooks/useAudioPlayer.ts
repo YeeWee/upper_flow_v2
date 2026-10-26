@@ -9,7 +9,7 @@ interface Options {
    *  `auto` = play and auto-advance when finished. */
   mode: PlaybackMode;
   /** Small breathing pad (ms) after audio finishes before advancing,
-   *  in `auto` mode. Default 200ms. Set to 0 if mp3 already has trailing
+   *  in `auto` mode. Default 200ms. Set to 0 if audio already has trailing
    *  silence. */
   trailMs?: number;
   /** Fallback duration (ms) for `auto` mode when the audio file is missing

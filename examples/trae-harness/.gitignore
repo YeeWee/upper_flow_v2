@@ -1,0 +1,19 @@
+# 运行态状态 / 缓存；tts 回执与 plan 批准是「输入的可复现凭证」，随项目入库。
+.avp/*
+!.avp/tts.json
+!.avp/approval.json
+
+# compose 的生成骨架与音频副本可重建，不入库；身体与钩子才是源。
+composition/index.html
+composition/gsap.min.js
+composition/audio/
+
+# 渲染产物（成片/回执/联系表）由 avp render 生成
+output/
+# 成片与回执随夹具入库：DoD 1–4 的证据必须能在分支里复现、可打开。
+!output/
+output/*
+!output/output.mp4
+!output/receipt.json
+!output/contact-sheet.png
+!output/still-report.json

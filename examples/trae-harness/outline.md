@@ -1,0 +1,127 @@
+# Video Outline
+
+> **主题**：`bold-signal` —— 暗渐变底 + 焦点橙 + Archivo Black 大字，适合技术产品发布与实验数据展示
+> **总时长**：约 2 分 8 秒（22 拍实测累计 127.5s，来自 `avp tts` 回写）
+> **章节数**：4 章 / 22 拍
+
+---
+
+## 1. coldopen — 问题引入（5 steps · ~20s）
+
+**信息池**：
+- 产品名：trae-harness —— 多 Agent 协作框架 × 11 轮 A/B 实验 —— 来源 article L1–L3
+- 痛点三连：幻觉 / 跳过测试 / 自由发挥 —— 来源 article L5–L9
+- 根因：Agent 边界不确定 → 幻觉的模糊空间 —— 来源 article L11
+- 反问：它怎么做到的？—— 来源 article L13
+
+**开发计划**：
+
+- step 1 (~4s) — 全屏 hero：把需求丢给 AI，一条输入框 + 闪烁光标
+- step 2 (~4s) — 三张故障卡并列：幻觉 / 跳测试 / 自由发挥
+- step 3 (~4s) — 品牌字标 trae-harness，橙色焦点卡 + 轨道环
+- step 4 (~5s) — 边界诊断图：两个 Agent 盒子中间的模糊缝隙
+- step 5 (~3s) — 过渡问句：它怎么做到的？四个机制刻度预埋
+
+口播节选：
+> 你把需求丢给 AI，它写代码。也产生幻觉。跳过测试。自由发挥。所以我们做了一个框架，叫 trae-harness。不确定每个 Agent 的边界，就一定有幻觉的模糊空间。它怎么做到的？
+
+---
+
+## 2. architecture — 四个核心机制（6 steps · ~31s）
+
+**信息池**：
+- 步骤隔离：子 Agent 只做当前步，不知道下一步 —— 来源 article L15
+- 信息瓶颈：模块间只传 200 token，上下文 < 400 token —— 来源 article L17
+- 3 子 Agent 并行：辩论 + 审核 + 开发 —— 来源 article L19
+- 铁面编排器：Gate 不通过不前进 —— 来源 article L21
+- 过渡：架构说完，看效果 —— 来源 article L23
+
+**开发计划**：
+
+- step 1 (~6s) — 步骤隔离流程图：三个单步盒子，箭头被截断
+- step 2 (~6s) — 信息瓶颈：200 token 窄管与 400 token 上下文双数字
+- step 3 (~5s) — 三 Agent 并行：辩论 / 审核 / 开发三列轨道同时点亮
+- step 4 (~6s) — 铁面编排器：Gate 闸门 + 状态灯 + 放行条
+- step 5 (~5s) — 四机制流水线：隔离 → 限流 → 并行 → 把关依次点亮
+- step 6 (~3s) — 过渡静帧：架构说完，看效果
+
+口播节选：
+> 先说步骤隔离。每个子 Agent 只做当前步，不知道下一步。还有信息瓶颈。模块之间只传 200 token，上下文不到 400 token。全程 3 个子 Agent 并行。辩论、审核、开发，各管一段。铁面编排器坐镇中间。Gate 不通过，就别想往前走一步。拼成一条流水线：隔离、限流、并行、把关。架构说完，看效果。
+
+---
+
+## 3. results — 11 轮 A/B 实验数据（8 steps · ~50s）
+
+**信息池**：
+- 模型：DeepSeek V4 Pro —— 来源 article L25
+- 实验轮次：11 轮 A/B —— 来源 article L27
+- 代码正确率：90% → **100%** —— 来源 article L29
+- 测试断言密度：28 → **124 条**（4 倍）—— 来源 article L31
+- 覆盖率：62% → **85%** —— 来源 article L33
+- 代码规范违规：砍掉 **60%** —— 来源 article L35
+- 安全防御覆盖：翻 **3 倍** —— 来源 article L37
+- 同类 bug 复发率：降 **91.7%** —— 来源 article L39
+- 性能加速：**4.6 倍** —— 来源 article L41
+- SWE-bench 回归：2 bugs → **0** —— 来源 article L43
+- Token 成本：花 2 万省 10 万，ROI **529%** —— 来源 article L47–L49
+- L3 级任务 ROI 超 **1000%** —— 来源 article L51
+- 来源：article 全段数据
+
+**开发计划**：
+
+- step 1 (~5s) — 实验台：DeepSeek V4 Pro / 11 轮 A、B 对照
+- step 2 (~7s) — 正确率 90% → 100%，满分徽章 + 双柱对比
+- step 3 (~6s) — 断言密度 28 → 124，四倍增长条
+- step 4 (~8s) — 覆盖率 62% → 85% + 规范违规 -60%
+- step 5 (~6s) — 安全 3 倍 + bug 复发 -91.7% 折线
+- step 6 (~5s) — 性能 4.6 倍 + SWE-bench 2 → 0 归零
+- step 7 (~7s) — 成本账本：2 万 token → 10 万，ROI 529%
+- step 8 (~6s) — 单数字金句静帧：L3 任务 ROI 超 1000%
+
+口播节选：
+> 同一个模型，DeepSeek V4 Pro。11 轮 A、B 对照实验。代码正确率，从 90% 拉到 100%。测试断言密度，从 28 条涨到 124 条，翻了 4 倍。覆盖率从 62% 干到 85%。代码规范违规，直接砍掉 60%。安全防御覆盖翻了 3 倍。同类 bug 复发率降了 91.7%。性能加速 4.6 倍。SWE-bench 回归，从 2 个 bug 干到 0。不只质量。花 2 万 token 跑流程，净省 10 万。ROI 529%。复杂度越高，回报越大。L3 级任务，ROI 能超 1000%。
+
+---
+
+## 4. v2-and-cta — v2.0 能力 + 行动召唤（3 steps · ~27s）
+
+**信息池**：
+- v2.0：项目类型自适应 —— 来源 article L55
+- VISUAL_GATE：视频项目自动上视觉验收门 —— 来源 article L57
+- 设计项目：走视觉验收 —— 来源 article L57
+- 8 个模板 / 11 个 Agent 角色 / 按需加载 —— 来源 article L59
+- trae-acceptance：浏览器自动化 + 视觉 + 双轨复盘 —— 来源 article L61
+- Slogan：用确定性对抗模糊 / 用规则防幻觉 —— 来源 article L63–L67
+- GitHub：github.com/zzzkeepdd/trae-harness —— 来源 article L69
+- 实验仓库：github.com/zzzkeepdd/trae-harness-experiments —— 来源 article L70
+
+**开发计划**：
+
+- step 1 (~11s) — 类型路由图：视频 → VISUAL_GATE / 设计 → 视觉验收
+- step 2 (~8s) — trae-acceptance 三层验收环：浏览器 / 视觉 / 双轨复盘
+- step 3 (~8s) — 终屏静帧：品牌 slogan + GitHub 仓库 + QR 占位卡
+
+口播节选：
+> 而且 v2.0 不只做代码。项目类型自适应：视频项目自动上 VISUAL_GATE，设计项目走视觉验收。8 个模板，11 个 Agent 角色，按需加载。还有独立的验收引擎，trae-acceptance。浏览器自动化、视觉检查、双轨复盘，三层保险。trae-harness。用确定性对抗模糊，用规则防幻觉。GitHub 搜 zzzkeepdd 斜杠 trae-harness。
+
+---
+
+## 素材清单
+
+### 1. coldopen
+- ✓ 全部画面由 CSS / 排版绘制（无需外部图片）
+- ⚠️ trae-harness wordmark 图形（当前用字体 + CSS 轨道环代替，如后续有官方 logo 可替换）
+
+### 2. architecture
+- ✓ 所有流程图由 CSS / DOM 绘制
+- ⚠️ Gate / 编排器图标（当前用文字 + 状态灯表达，暂无外部图标）
+
+### 3. results
+- ✓ 所有数字内嵌文本渲染
+- ✓ 对比柱 / 仪表 / 归零环由 CSS 动画绘制
+- ⚠️ 实验原始数据表（本片只上关键指标，完整表格未上屏）
+
+### 4. v2-and-cta
+- ✓ Slogan / GitHub 仓库地址以文本渲染
+- ⚠️ GitHub 二维码 / 官方 logo（未提供，用虚线占位卡，不伪造二维码）
+- ⚠️ 实验仓库 `trae-harness-experiments` 未上屏（终屏只保留主仓库链接，避免字幕超宽）

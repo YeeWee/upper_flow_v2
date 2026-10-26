@@ -1,0 +1,173 @@
+/* ─────────────────────────────────────────────────────────────────────
+ * gallery.css — 只负责画廊页面的排版，不定义任何可视化状态。
+ * 状态外观属于 atoms.css；这里不新增 token。
+ * ───────────────────────────────────────────────────────────────────── */
+
+html,
+body {
+  height: auto;
+  min-height: 100%;
+  overflow: auto;
+}
+
+body {
+  margin: 0;
+  padding: 56px clamp(24px, 4vw, 72px) 96px;
+  background: var(--shell);
+  color: var(--text);
+}
+
+.ag-head {
+  max-width: 1600px;
+  margin: 0 auto 64px;
+}
+
+.ag-eyebrow {
+  margin: 0 0 12px;
+  font-family: var(--font-mono);
+  font-size: var(--t-micro);
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.ag-title {
+  margin: 0;
+  font-family: var(--font-display-cn);
+  font-size: clamp(48px, 6vw, 96px);
+  line-height: 1.05;
+  letter-spacing: var(--track-tight);
+  color: var(--text);
+}
+
+.ag-lede {
+  margin: 20px 0 0;
+  max-width: 78ch;
+  font-family: var(--font-body);
+  font-size: var(--t-body);
+  line-height: 1.7;
+  color: var(--text-2);
+}
+
+.ag-lede code,
+.ag-legend code,
+.ag-atom-title code,
+.ag-cell-head {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  letter-spacing: 0;
+  color: var(--accent);
+}
+
+.ag-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 28px;
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: var(--rule-w) var(--rule-style) var(--rule);
+  font-family: var(--font-mono);
+  font-size: var(--t-micro);
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  color: var(--text-mute);
+}
+
+.ag-list {
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.ag-atom {
+  padding: 40px 0 56px;
+  border-top: var(--rule-w) var(--rule-style) var(--rule);
+}
+
+.ag-atom-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.9fr);
+  gap: 32px;
+  align-items: start;
+  margin-bottom: 28px;
+}
+
+.ag-atom-title {
+  margin: 0;
+  font-family: var(--font-display-cn);
+  font-size: var(--t-h2);
+  line-height: 1.15;
+  color: var(--text);
+}
+
+.ag-atom-title code {
+  font-size: 0.72em;
+}
+
+.ag-atom-blurb {
+  margin: 10px 0 0;
+  font-family: var(--font-body);
+  font-size: var(--t-body);
+  line-height: 1.6;
+  color: var(--text-mute);
+}
+
+.ag-shell {
+  margin: 0;
+  padding: 16px 18px;
+  overflow-x: auto;
+  background: var(--surface-2);
+  border: var(--bw-1) solid var(--rule);
+  border-radius: var(--r-card);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--text-2);
+}
+
+.ag-shell code {
+  font-family: inherit;
+}
+
+.ag-states {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.ag-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+  padding: 18px;
+  background: var(--surface);
+  border: var(--bw-1) solid var(--rule);
+  border-radius: var(--r-card);
+}
+
+.ag-cell-head {
+  color: var(--text-mute);
+  text-transform: none;
+}
+
+.ag-stage {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  min-height: 220px;
+  min-width: 0;
+}
+
+.ag-stage > * {
+  max-width: 100%;
+}
+
+@media (max-width: 1100px) {
+  .ag-atom-head,
+  .ag-states {
+    grid-template-columns: 1fr;
+  }
+  .ag-stage {
+    min-height: 0;
+  }
+}

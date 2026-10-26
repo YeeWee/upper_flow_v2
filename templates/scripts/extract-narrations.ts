@@ -12,14 +12,15 @@
  * and flattens to:
  *
  *   [
- *     { chapter, step, text, audio: "<chapter>/<step>.mp3" },
+ *     { chapter, step, say, audio: "<chapter>/<step>.mp3" },
  *     ...
  *   ]
  *
  * Step indices in the JSON are 1-indexed, matching the audio file naming
  * convention (`public/audio/<chapter>/<N>.mp3`).
  *
- * Empty narration strings are skipped (silent steps don't need a TTS file).
+ * Narration entries are `{ say, caption?, motion? }`. Entries with an empty
+ * `say` are silent beats and are skipped (no TTS file).
  */
 import { readFile, writeFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
@@ -36,7 +37,7 @@ const OUT_PATH = resolve(ROOT, "audio-segments.json");
 interface Segment {
   chapter: string;
   step: number;
-  text: string;
+  say: string;
   audio: string;
 }
 
@@ -99,15 +100,25 @@ async function main() {
     const arr = await loadNarrations(folder);
     arr.forEach((entry, i) => {
       const step = i + 1;
-      if (typeof entry !== "string") {
+      if (typeof entry !== "object" || entry === null || Array.isArray(entry)) {
         throw new Error(
-          `chapter "${id}" step ${step}: narration must be a string ` +
-            `(got ${typeof entry}). The {text, minHoldMs} form was removed; ` +
-            `if your animation is longer than the narration, write longer ` +
-            `narration, split the step, or speed the animation up.`,
+          `chapter "${id}" step ${step}: narration must be an object ` +
+            `{ say, caption?, motion? } (got ${typeof entry}).`,
         );
       }
-      if (entry.trim() === "") {
+      const record = entry as Record<string, unknown>;
+      if (typeof record.say !== "string") {
+        throw new Error(
+          `chapter "${id}" step ${step}: say must be a string ` +
+            `(write "" for a silent beat).`,
+        );
+      }
+      if (record.caption !== undefined && typeof record.caption !== "string") {
+        throw new Error(
+          `chapter "${id}" step ${step}: caption must be a string when present.`,
+        );
+      }
+      if (record.say.trim() === "") {
         // Silent step — no TTS needed; runtime falls back to estimate.
         silentSteps++;
         return;
@@ -115,7 +126,7 @@ async function main() {
       segments.push({
         chapter: id,
         step,
-        text: entry,
+        say: record.say,
         audio: `${id}/${step}.mp3`,
       });
     });

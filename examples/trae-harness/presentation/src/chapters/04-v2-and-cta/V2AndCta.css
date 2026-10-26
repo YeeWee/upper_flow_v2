@@ -1,0 +1,237 @@
+/* ─────────────────────────────────────────────────────────────────────
+ * 第 4 章 · v2.0 能力 + CTA — 只写布局与内容驱动的动效。
+ * 原子的状态外观在 atoms.css；这里不重定义 .atom-*，不新增 token。
+ * ───────────────────────────────────────────────────────────────────── */
+
+.vc-scene {
+  overflow: hidden;
+}
+
+.vc-step {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  position: relative;
+  z-index: 2;
+}
+
+.vc-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-5);
+}
+
+.vc-lede {
+  margin: 0;
+  max-width: 70ch;
+  font-family: var(--font-body);
+  font-size: 23px;
+  line-height: 1.6;
+  color: var(--text-2);
+}
+
+/* ─── step 0: v2.0 类型路由 ─── */
+.vc-router {
+  position: relative;
+  flex: 1;
+  display: grid;
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  align-items: center;
+  gap: 36px;
+  padding-left: 300px;
+}
+
+.vc-router__core {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  display: grid;
+  place-items: center;
+  width: 236px;
+  height: 236px;
+  margin-top: -118px;
+  background: var(--accent);
+  color: var(--surface);
+  border-radius: var(--r-card);
+  font-family: var(--font-display-en);
+  font-weight: 700;
+  font-size: 66px;
+  letter-spacing: var(--track-tight);
+  transform: rotate(-2deg);
+  animation: vc-core-in 760ms var(--ease-overshoot) both;
+}
+
+.vc-router__line {
+  position: absolute;
+  left: 258px;
+  top: 25%;
+  bottom: 25%;
+  width: 2px;
+  background: var(--rule);
+  transform: scaleY(0);
+  transform-origin: top;
+  animation: vc-line-y 720ms var(--ease-expo) 220ms both;
+}
+
+.vc-router__branch {
+  position: relative;
+  opacity: 0;
+  animation: vc-rise 700ms var(--ease-quart) both;
+}
+.vc-router__branch--a { animation-delay: 360ms; }
+.vc-router__branch--b { animation-delay: 520ms; }
+
+.vc-router__branch::before {
+  content: "";
+  position: absolute;
+  left: -42px;
+  top: 50%;
+  width: 42px;
+  height: 2px;
+  background: var(--rule);
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: vc-line-x 420ms var(--ease-expo) both;
+}
+.vc-router__branch--a::before { animation-delay: 300ms; }
+.vc-router__branch--b::before { animation-delay: 460ms; }
+
+.vc-router__branch .atom-card {
+  min-height: 210px;
+  padding: 30px 34px;
+}
+.vc-router__branch .atom-card__title { font-size: 46px; }
+.vc-router__branch .atom-card__body { max-width: 42ch; }
+
+.vc-badges {
+  display: flex;
+  gap: var(--space-3);
+}
+
+/* ─── step 1: trae-acceptance 三层验收 ─── */
+.vc-layers {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 34px;
+  padding-top: 50px;
+}
+
+.vc-layer {
+  position: relative;
+  display: flex;
+  opacity: 0;
+  animation: vc-rise 720ms var(--ease-quart) both;
+}
+.vc-layer--1 { animation-delay: 120ms; }
+.vc-layer--2 { animation-delay: 280ms; }
+.vc-layer--3 { animation-delay: 440ms; }
+
+.vc-layer__ring {
+  position: absolute;
+  left: 50%;
+  top: -46px;
+  width: 270px;
+  height: 270px;
+  margin-left: -135px;
+  border: 2px dashed var(--rule);
+  border-radius: 50%;
+  transform: scale(0.7);
+  opacity: 0;
+  animation: vc-ring-in 820ms var(--ease-quart) 260ms both;
+}
+.vc-layer--3 .vc-layer__ring { border-color: var(--accent); }
+
+.vc-layer .atom-card {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  justify-content: flex-end;
+  min-height: 470px;
+  margin-top: 54px;
+  padding: 36px 32px;
+}
+.vc-layer .atom-card__title { font-size: 44px; }
+
+/* ─── step 2: 收尾静帧（motion: static，不放入场动画） ─── */
+.vc-static {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.vc-quote {
+  margin-top: var(--space-5);
+}
+.vc-quote .atom-quote__text {
+  font-size: clamp(58px, 4.8vw, 82px);
+  line-height: 1.16;
+}
+
+.vc-cta {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 240px;
+  align-items: center;
+  gap: 44px;
+  margin-top: var(--space-5);
+}
+
+.vc-cta__card {
+  padding: 30px 34px;
+}
+.vc-cta__card .atom-card__title {
+  font-size: 40px;
+  font-family: var(--font-mono);
+  letter-spacing: 0;
+}
+
+.vc-qr {
+  display: grid;
+  place-items: center;
+  gap: 16px;
+  width: 240px;
+  height: 240px;
+  background: var(--surface-2);
+  border: 2px dashed var(--rule);
+  border-radius: var(--r-card);
+}
+.vc-qr__mark {
+  width: 64px;
+  height: 64px;
+  border: var(--bw-4) solid var(--accent);
+  opacity: 0.55;
+}
+.vc-qr__text {
+  font-family: var(--font-mono);
+  font-size: var(--t-micro);
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  color: var(--text-mute);
+}
+
+.vc-static .atom-footer { margin-top: auto; }
+
+/* ─── motion ─── */
+@keyframes vc-rise {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes vc-core-in {
+  from { opacity: 0; transform: scale(0.72) rotate(-8deg); }
+  to   { opacity: 1; transform: scale(1) rotate(-2deg); }
+}
+@keyframes vc-line-y {
+  from { transform: scaleY(0); }
+  to   { transform: scaleY(1); }
+}
+@keyframes vc-line-x {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+@keyframes vc-ring-in {
+  from { opacity: 0; transform: scale(0.7); }
+  to   { opacity: 1; transform: scale(1); }
+}

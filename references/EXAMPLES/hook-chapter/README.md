@@ -1,5 +1,10 @@
 # Anchor: hook-chapter（钩子型开场）
 
+
+> ⚠️ **这是迁移前的旧写法**：`hk-*` / `lr-*` 是章节私有 CSS 类，**不是**
+> 视觉原子契约。只看它的「形」——step 切分、字号狠对比、逐项揭示顺序；
+> 不要照抄类名。原子写法（类名 + 必填 DOM 外壳 + `.in/.lit/.dim`）见
+> [`../../COMPOSE.md`](../../COMPOSE.md) 与 `templates/atoms.html`。
 > ⚠️ **这是结构示意，不是抄袭模板**。先走 [`../../CHAPTER-CRAFT.md`](../../CHAPTER-CRAFT.md)
 > Part 0 五问。本 anchor 给的是"钩子型开场的结构骨架"——你要保留它的
 > step 切分逻辑、字号关系、布局原则，**按本项目的主题 + 内容换动作
@@ -41,7 +46,7 @@
 
 ## 为什么 2-N 不能 stagger 同时上
 
-口播会**逐个念出来** —— 必须 1 项 = 1 step（[CHAPTER-CRAFT.md Part 0 原则 8](../../CHAPTER-CRAFT.md#8-多点内容必须逐个揭示绝不同时上)）。
+口播会**逐个念出来** —— 必须 1 项 = 1 step（[CHAPTER-CRAFT.md Part 0 原则 8](../../CHAPTER-CRAFT.md#逐步揭示禁止一次全展示)）。
 同时 stagger 上 = 观众扫一眼看完，讲者还在念第一张 = PPT 直觉。
 
 ## 文件结构

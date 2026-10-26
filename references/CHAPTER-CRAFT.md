@@ -130,6 +130,66 @@ AI 生成的网页有几种共有的"视觉指纹"，**全部不要**：
 
 ---
 
+## 视觉原子：演示与合成稿共享的样式契约
+
+演示（React）与合成稿（静态 HTML）是两份代码，无法 import 彼此的 JSX。
+它们共享的不是组件，而是**类名 + 必填 DOM 外壳 + `.in / .lit / .dim`
+状态类**。样式只有一份：`presentation/src/styles/atoms.css`（由
+`avp init` 从 `templates/src/styles/atoms.css` 拷入）。
+
+### 状态类
+
+| 状态 | 含义 |
+|---|---|
+| `.in` | 已入场，作为基线；不带状态类时等价于 `.in` |
+| `.lit` | 当前焦点（accent） |
+| `.dim` | 退为上下文（mute / faint） |
+
+**动画实现不属于契约。** 原子 CSS 里没有 `@keyframes`、没有
+`transition`：演示用 CSS keyframes 把状态加上去，合成稿用挂载钩子把
+同样的状态加上去。两端共享的是「状态长什么样」，不是「怎么动」。
+
+### 类名与必填 DOM 外壳
+
+| 类名 | 必填 DOM 外壳 | 可选 |
+|---|---|---|
+| `.atom-kicker` | `<div class="atom-kicker in">…</div>` | — |
+| `.atom-hero` | `<div class="atom-hero in"><h1 class="atom-hero__title">…</h1></div>` | 标题内 `<em>` 取 accent |
+| `.atom-stat` | `<div class="atom-stat in"><div class="atom-stat__value">02</div></div>` | `.atom-stat__label` |
+| `.atom-list` | `<ul class="atom-list in"><li class="atom-list__item">…</li></ul>` | `.atom-list__mark` |
+| `.atom-card` | `<div class="atom-card in"><h2 class="atom-card__title">…</h2></div>` | `.atom-card__label` / `.atom-card__body` |
+| `.atom-quote` | `<div class="atom-quote in"><p class="atom-quote__text">…</p></div>` | `.atom-quote__cite`、文本内 `<em>` 取 accent |
+| `.atom-badge` | `<span class="atom-badge in">…</span>` | — |
+| `.atom-rule` | `<hr class="atom-rule in" />` | — |
+| `.atom-footer` | `<div class="atom-footer in"><span class="atom-footer__note">…</span></div>` | `.atom-footer__cue`（自动靠右） |
+
+一个完整例子：
+
+```html
+<div class="atom-hero in">
+  <h1 class="atom-hero__title">这是 <em>first step</em>.</h1>
+</div>
+```
+
+### 使用规则
+
+- **只消费既有 token**：状态色来自 `--text` / `--text-2` / `--text-mute` /
+  `--text-faint` / `--accent` / `--accent-soft` / `--rule` / `--surface*` 等；
+  不新增 token 名，不改 23 套主题。
+- **原子只管状态，不管章节布局**：章节 CSS 只留「哪个原子放在哪里」。
+- **层叠顺序**：`base.css` 的默认值必须先于 `tokens.css` 载入（`App.tsx`
+  与画廊的 import 顺序都是 fonts → base → tokens → atoms → animations），
+  否则主题的 `--rule-w` / `--hero-num-*` / `--dur-*` 会被 base 默认值盖掉。
+- **逐个揭示列表**：整组状态挂 `.atom-list` root；需要单个 item 亮起时，
+  把 `.in/.lit/.dim` 挂到 `.atom-list__item` 上（item 规则后写，会覆盖
+  整组状态）。
+- **改原子必须同步画廊**：`npm run dev` 打开 `/atoms.html`（build 产物里
+  也有 `dist/atoms.html`）。画廊把每个原子 × 三态各排一遍，是唯一的视觉
+  回归面；新增 / 修改原子不同步画廊 = 契约开始腐烂。
+- 设计取舍见 [ADR 0002](../docs/adr/0002-atoms-shared-by-contract.md)。
+
+---
+
 ## 代码层最小约束
 
 不能踩的红线，其它怎么写都行：
@@ -167,14 +227,23 @@ AI 生成的网页有几种共有的"视觉指纹"，**全部不要**：
 - 章节代码物理隔离：每章独立文件夹、独立 CSS 类前缀，不跨章 import
 - **每章必须有 `narrations.ts`**（与 `<Chapter>.tsx` 同目录）：
   - 数组长度 **=** 章节代码里 `if (step === N)` 出现的最大 N + 1
-  - 每个元素 = 一个 string，该 step 要播的口播文本（来自 `script.md`
-    对应段，**语义一致**——可微调标点 / 断句以适配 TTS，但不能漏关键短语）
-  - 完全无音频的过场 step 用空串 `""`，Auto 模式会按字数估时撑过
-  - 这是**音频合成 + Auto 模式自动推进的唯一真相源**，写错或漏写
-    会让录屏对不上嘴
+  - 每个元素 = 一个对象 `{ say, caption?, motion? }`：
+    - `say`：给耳朵的口播文本（来自 `script.md` 对应段，**语义一致** ——
+      可微调标点 / 断句以适配 TTS，但不能漏关键短语）
+    - `caption`：给眼睛的单行字幕，允许与 `say` 不同；**手写优先**。缺失时
+      `avp plan` 按「句末标点 → 逗号 / 顿号 / 冒号」推导并记
+      `captionSource: "derived"`。单行上限 **18 个全角字符**（ASCII 计
+      0.5），超宽直接 error；**永不补省略号**（`…` / `...`）
+    - `motion`：`"hook"` / `"static"`。默认 `say` 非空为 `"hook"`，
+      `say: ""` 为 `"static"`
+  - 完全无音频的过场 step 用 `say: ""`（静音拍）：静音拍不推导字幕，
+    `caption` 可手写或留空
+  - `avp plan` 会校验 `script.md` 的 `---` 块与每一拍 `say` 同数同序；
+    这是**音频合成 + Auto 模式自动推进的唯一真相源**，写错或漏写会让录屏
+    对不上嘴
 - **动画时长必须 ≤ 该 step 的口播时长**——Auto 模式严格按音频结束推进，
   没有"等动画跑完"的兜底。动画太长 → 三选一：**写更长口播 / 拆 step
-  / 调动画速度**。详细机制见 [`AUDIO.md`](AUDIO.md)
+  / 调动画速度**。详细机制见 [`TTS.md`](TTS.md)
 
 ---
 
@@ -215,9 +284,9 @@ AI 生成的网页有几种共有的"视觉指纹"，**全部不要**：
       未跨章 import，未修改 `chapters.ts` 之外的共享文件
 - [ ] **`narrations.ts` 存在**且 `narrations.length` === 章节代码里
       `if (step === N)` 用到的最大 N + 1（不一致 = Auto 模式录屏会错位）
-- [ ] **每条 narration 文本与 `script.md` 对应段落语义一致**（关键短语 /
+- [ ] **每条 narration 的 `say` 与 `script.md` 对应段落语义一致**（关键短语 /
       数字 / 引用全部保留，可为 TTS 微调标点断句）—— 录屏画外音应当能被
-      观众听成同一段稿子
+      观众听成同一段稿子；`caption` 手写优先、单行 ≤ 18 个全角字符
 - [ ] **每个 step 的视觉动画时长 ≤ 口播时长**（口播 `字数 ÷ 4` ≈ 秒数）—— 
       超出会被 Auto 模式当场切断，动画演到一半就跳下一步
 
