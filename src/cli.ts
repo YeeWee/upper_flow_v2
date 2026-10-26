@@ -2,8 +2,10 @@ import { resolve } from "node:path";
 import { assertKnownFlags, flagBool, flagString, parseArgs } from "./lib/args";
 import { asAvpError } from "./lib/errors";
 import { shortHash } from "./lib/hash";
+import { runComposeCommand } from "./commands/compose";
 import { runInit } from "./commands/init";
 import { runPlan } from "./commands/plan";
+import { runTtsCommand } from "./commands/tts";
 import { renderStatusTable, runStatus } from "./commands/status";
 
 const HELP = `avp — article-video-production
@@ -15,7 +17,9 @@ const HELP = `avp — article-video-production
   plan            校验 script.md / outline.md → beats.json
   plan --approve  写入 plan 停点的批准哈希
   plan --after-plan  校验已有批准与当前稿子 + 节拍一致
-  status          四列状态：步骤 / 输入哈希 / 产物 / 状态
+  tts             按节拍合成音频，回写实测时长
+  compose         生成 composition/index.html 骨架并拼接每拍身体与钩子
+  status          五列状态：步骤 / 输入哈希 / 产物 / 状态
   help            显示本帮助
 
 通用参数:
@@ -100,6 +104,57 @@ async function run(argv: string[]): Promise<CommandOutput> {
       return {
         json: { ok: true, command: "plan", ...result },
         lines: [summary],
+      };
+    }
+
+    case "tts": {
+      assertKnownFlags(parsed, [
+        "chapter",
+        "after-plan",
+        "dir",
+        "json",
+        "help",
+      ]);
+      if (parsed.positionals.length > 0) {
+        throw new Error(
+          `tts 不接受位置参数：${parsed.positionals.join(" ")}（用 --chapter=）`,
+        );
+      }
+      const root = resolve(cwd, flagString(parsed, "dir") ?? ".");
+      const result = runTtsCommand(root, {
+        chapter: flagString(parsed, "chapter"),
+        afterPlan: flagBool(parsed, "after-plan"),
+      });
+      const lines = [
+        `✓ TTS：合成 ${result.synthesized} / 缓存 ${result.cached} / 静音 ${result.silent} → .avp/tts.json`,
+        `  总时长 ${(result.totalDurationMs / 1000).toFixed(2)}s` +
+          (result.complete ? "" : "（未完成：还有节拍没有音频）"),
+        ...result.warnings.map((warning) => `  ! ${warning}`),
+      ];
+      return {
+        json: { ok: true, command: "tts", ...result },
+        lines,
+      };
+    }
+
+    case "compose": {
+      assertKnownFlags(parsed, ["after-plan", "dir", "json", "help"]);
+      if (parsed.positionals.length > 0) {
+        throw new Error(
+          `compose 不接受位置参数：${parsed.positionals.join(" ")}（用 --dir=）`,
+        );
+      }
+      const root = resolve(cwd, flagString(parsed, "dir") ?? ".");
+      const result = runComposeCommand(root, {
+        afterPlan: flagBool(parsed, "after-plan"),
+      });
+      const lines = [
+        `✓ 合成稿：${result.clips} 拍 / ${result.hooks} 个钩子 / ${(result.totalMs / 1000).toFixed(2)}s → composition/index.html`,
+        ...result.warnings.map((warning) => `  ! ${warning}`),
+      ];
+      return {
+        json: { ok: true, command: "compose", ...result },
+        lines,
       };
     }
 

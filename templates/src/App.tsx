@@ -34,14 +34,14 @@ export default function App() {
 
   const { mode, cycleMode, autoStarted, setAutoStarted } = useAutoMode();
 
-  // Preview-only path convention: /audio/<chapter-id>/<step+1>.mp3
+  // Preview-only path convention: /audio/<chapter-id>/<step+1>.wav
   // (1-indexed file names match scripts/extract-narrations.ts.)
   // The rendered composition takes audio paths from beats.json instead.
   // Silent beat → no audio src, Auto mode falls back to estimate.
   const audioSrc =
     mode === "manual" || say === ""
       ? null
-      : `${import.meta.env.BASE_URL}audio/${ch.id}/${stepper.cursor.step + 1}.mp3`;
+      : `${import.meta.env.BASE_URL}audio/${ch.id}/${stepper.cursor.step + 1}.wav`;
 
   const onAutoAdvance = useCallback(() => stepper.next(), [stepper]);
 
