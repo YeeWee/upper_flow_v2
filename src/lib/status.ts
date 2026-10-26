@@ -34,7 +34,6 @@ function planInputs(p: ProjectPaths): string[] {
     join(p.root, "script.md"),
     join(p.root, "outline.md"),
     p.registry,
-    join(p.root, "tts.json"),
     ...listFiles(p.chaptersDir, [".ts"]),
   ];
 }
