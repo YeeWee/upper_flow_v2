@@ -288,6 +288,16 @@ describe("avp check", () => {
     });
 
     withClone((dir) => {
+      updateBeat(dir, 0, { caption: "SWE-bench 2 → 0 用 GPT-5" });
+      const run = check(dir, ["--only=say-caption-token-mismatch"]);
+      assert.equal(run.status, 1);
+      const finding = findError(run, "say-caption-token-mismatch");
+      assert.equal(finding.beatId, "example-1");
+      assert.match(finding.message, /GPT-5/u);
+      assert.match(finding.message, /多了/u);
+    });
+
+    withClone((dir) => {
       updateBeat(dir, 0, { say: "ROI 90%。", caption: "90" });
       const run = check(dir, ["--only=say-caption-token-mismatch"]);
       const finding = findError(run, "say-caption-token-mismatch");

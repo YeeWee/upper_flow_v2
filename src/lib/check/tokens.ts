@@ -1,8 +1,8 @@
 /**
  * say / caption 的数字与拉丁专名集合比较。
  *
- * 规则（spec §5）：caption 只能比 say 多内容，不能少；少一个数字或拼错专名
- * 就是 error。全角数字经 NFKC 归一到 ASCII；比较大小写不敏感。
+ * 规则（spec §5）：caption 与 say 的数字/专名集合必须相等；少一个、
+ * 多一个或拼错专名都是 error。全角数字经 NFKC 归一到 ASCII；比较大小写不敏感。
  */
 
 const NUMBER_PATTERN = /\d+(?:[.,]\d+)*%?/gu;
@@ -73,6 +73,14 @@ export function missingTokens(say: string, caption: string): string[] {
   const captionKeys = new Set(extractTokens(caption).map((token) => token.key));
   return extractTokens(say)
     .filter((token) => !captionKeys.has(token.key))
+    .map((token) => token.text);
+}
+
+/** caption 里有、say 里没有的数字/专名（凭空多出来的也不允许）。 */
+export function extraTokens(say: string, caption: string): string[] {
+  const sayKeys = new Set(extractTokens(say).map((token) => token.key));
+  return extractTokens(caption)
+    .filter((token) => !sayKeys.has(token.key))
     .map((token) => token.text);
 }
 
