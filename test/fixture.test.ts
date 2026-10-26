@@ -66,6 +66,11 @@ function copyFixture(dir: string): void {
     recursive: true,
   });
   mkdirSync(join(dir, "presentation", "public", "audio"), { recursive: true });
+  for (const part of ["beats", "hooks"]) {
+    cpSync(join(FIXTURE, "composition", part), join(dir, "composition", part), {
+      recursive: true,
+    });
+  }
 }
 
 function wavCount(dir: string, chapter: string): number {
@@ -211,5 +216,19 @@ describe("examples/trae-harness fixture", () => {
     assert.equal(byStep.compose, "pending");
     assert.equal(byStep.check, "pending");
     assert.equal(byStep.render, "pending");
+  });
+
+  test("compose + check 能在 22 拍夹具上全绿（warning 允许）", () => {
+    const compose = runAvp(["compose", "--json"], dir);
+    assert.equal(compose.status, 0, compose.stdout + compose.stderr);
+    assert.equal(compose.json.clips, 22);
+    assert.equal(compose.json.hooks, 19);
+    assert.deepEqual(compose.json.warnings, []);
+
+    const check = runAvp(["check", "--json"], dir);
+    assert.equal(check.status, 0, check.stdout + check.stderr);
+    assert.equal(check.json.ok, true);
+    assert.deepEqual(check.json.errors, []);
+    assert.ok(existsSync(join(dir, ".avp", "check.json")));
   });
 });
