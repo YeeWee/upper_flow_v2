@@ -129,13 +129,7 @@ export async function runRenderCommand(
     manifest.beats,
     join(root, "output"),
   );
-  const receipt = writeRenderReceipt(
-    paths,
-    ledger,
-    manifest,
-    render,
-    artifacts,
-  );
+  const receipt = writeRenderReceipt(paths, manifest, render, artifacts);
   writeJson(paths.receipt, receipt);
 
   recordStep(root, "render", inputHashFor("render", paths, ledger) ?? "", [

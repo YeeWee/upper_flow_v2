@@ -12,7 +12,7 @@ import {
   probeMedia,
   toolchainVersions,
 } from "./media";
-import type { ProjectLedger, ProjectPaths } from "./project";
+import type { ProjectPaths } from "./project";
 import { SKILL_ROOT, skillCommit, skillMeta } from "./skill";
 
 export const STILL_THRESHOLD_PERCENT = 0.1;
@@ -366,7 +366,6 @@ export interface RenderReceipt {
 
 export function writeRenderReceipt(
   paths: ProjectPaths,
-  ledger: ProjectLedger,
   manifest: BeatsManifest,
   render: RenderVideoResult,
   artifacts: ArtifactsResult,
@@ -433,7 +432,6 @@ export function writeRenderReceipt(
       staticBeats: artifacts.stillReport.staticBeats,
     },
   };
-  void ledger;
   return receipt;
 }
 
