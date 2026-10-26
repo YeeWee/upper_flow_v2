@@ -137,7 +137,7 @@ export async function runPlan(
 
   if (options.approve) {
     const record = writeApproval(root, scriptText, manifest.beats);
-    writes.push(join(".avp", "approval.json"));
+    writes.push(".avp/approval.json");
     approval = { hash: record.hash, approvedAt: record.approvedAt };
   }
 
