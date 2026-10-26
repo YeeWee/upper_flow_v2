@@ -1,9 +1,10 @@
 import { join } from "node:path";
 import { requireApproval } from "../lib/approval";
+import { readBeats } from "../lib/beats";
 import type { BeatsManifest } from "../lib/beats";
 import { runCheckCommand } from "./check";
 import { AvpError } from "../lib/errors";
-import { readJson, writeJson } from "../lib/fs";
+import { writeJson } from "../lib/fs";
 import { projectPaths, readLedger } from "../lib/project";
 import {
   makeThumbnails,
@@ -99,7 +100,7 @@ export async function runRenderCommand(
   runComposeCommand(root);
   const summary = await assertCheckPassed(root);
 
-  const manifest = readJson<BeatsManifest>(paths.beats);
+  const manifest = readBeats(root);
   const totalMs = manifest.beats.reduce(
     (sum, beat) => sum + (beat.durationMs ?? 0),
     0,

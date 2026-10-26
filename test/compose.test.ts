@@ -148,6 +148,24 @@ describe("avp compose", () => {
     assert.equal(compose.status, "current");
   });
 
+  test("schemaVersion 未知大版本时拒绝 compose，且不重写合成稿", () => {
+    const beatsPath = join(dir, "beats.json");
+    const indexPath = join(dir, "composition", "index.html");
+    const originalBeats = readText(beatsPath);
+    const originalHtml = readText(indexPath);
+    const doc = readJson(beatsPath);
+    doc.schemaVersion = 2;
+    writeFileSync(beatsPath, JSON.stringify(doc, null, 2));
+    try {
+      const run = runAvp(["compose", "--json"], dir);
+      assert.notEqual(run.status, 0);
+      assert.equal(run.json.error.code, "schema-unknown");
+      assert.equal(readText(indexPath), originalHtml);
+    } finally {
+      writeFileSync(beatsPath, originalBeats);
+    }
+  });
+
   test("静音拍不生成 audio 元素（空 src 会让混音硬失败）", () => {
     const file = join(dir, "beats.json");
     const doc = readJson(file);

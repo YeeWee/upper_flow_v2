@@ -2,6 +2,7 @@ import { spawnSync } from "node:child_process";
 import { copyFileSync, rmSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fakeDurationMs, probeDurationMs, sha256File, writeSilentWav } from "./audio";
+import { readBeats } from "./beats";
 import type { BeatTts, BeatsManifest } from "./beats";
 import { AvpError } from "./errors";
 import { ensureDir, pathExists, readJson, writeJson } from "./fs";
@@ -271,14 +272,7 @@ export function runTts(
   ledger: ProjectLedger,
   options: TtsOptions = {},
 ): TtsResult {
-  const manifest = readJson<BeatsManifest>(paths.beats);
-  if (manifest.schemaVersion !== 1) {
-    throw new AvpError(
-      "schema-unknown",
-      `beats.json 的 schemaVersion=${String(manifest.schemaVersion)}，本版只认识 1。`,
-      { field: "schemaVersion" },
-    );
-  }
+  const manifest = readBeats(root);
   const config = readTtsConfig(root);
   const warnings: string[] = [];
   validateConfig(config, manifest, warnings);
