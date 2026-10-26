@@ -2,7 +2,7 @@ import { join } from "node:path";
 import type { BeatsManifest } from "./beats";
 import { pathExists, readJson } from "./fs";
 import { listFiles } from "./fs-list";
-import { hashFiles } from "./hash";
+import { hashFiles, hashJson } from "./hash";
 import type { ProjectPaths, ProjectLedger } from "./project";
 import { themeTokensPath } from "./skill";
 import { STEP_IDS, readState } from "./state";
@@ -97,7 +97,32 @@ function checkInputs(p: ProjectPaths, ledger: ProjectLedger): string[] {
 }
 
 function renderInputs(p: ProjectPaths): string[] {
-  return [p.beats, join(p.composition, "index.html"), p.checkReport, p.ledger];
+  return [p.beats, join(p.composition, "index.html"), p.ledger];
+}
+
+/**
+ * check 回执里带当前 skill commit 的 warning 文案，整文件哈希会让每次提交
+ * 都把 render 判过期。render 只关心「检查结论」：ok / 各级 finding 的 id。
+ */
+function checkVerdictHash(path: string): string | null {
+  try {
+    const report = readJson<{
+      ok?: unknown;
+      errors?: { id?: unknown }[];
+      warnings?: { id?: unknown }[];
+      reports?: { id?: unknown }[];
+    }>(path);
+    const ids = (items: { id?: unknown }[] | undefined): unknown[] =>
+      (items ?? []).map((item) => item.id);
+    return hashJson({
+      ok: report.ok === true,
+      errors: ids(report.errors),
+      warnings: ids(report.warnings),
+      reports: ids(report.reports),
+    });
+  } catch {
+    return null;
+  }
 }
 
 /**
@@ -122,10 +147,17 @@ export function inputHashFor(
       return pathExists(p.beats)
         ? hashFiles(p.root, checkInputs(p, ledger))
         : null;
-    case "render":
-      return pathExists(p.checkReport)
-        ? hashFiles(p.root, renderInputs(p))
+    case "render": {
+      const verdict = pathExists(p.checkReport)
+        ? checkVerdictHash(p.checkReport)
         : null;
+      return verdict
+        ? hashJson({
+            files: hashFiles(p.root, renderInputs(p)),
+            verdict,
+          })
+        : null;
+    }
   }
 }
 
