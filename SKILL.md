@@ -59,7 +59,7 @@ my-video/
     ├── src/chapters/<NN>-<id>/
     │   ├── <Chapter>.tsx     # 视觉实现
     │   ├── <Chapter>.css
-    │   └── narrations.ts     # ★ step 数 + 口播文本的唯一真相源
+    │   └── narrations.ts     # ★ step 数 + say/caption 的唯一真相源
     ├── scripts/
     │   ├── extract-narrations.ts   # 扫所有 narrations.ts → audio-segments.json
     │   └── synthesize-audio.sh     # 调 mmx 合成 mp3
@@ -71,6 +71,20 @@ my-video/
 > 章节 `.tsx` 里的 `if (step === N)` 出现的最大 N + 1 必须等于
 > `narrations.length`。这保证 5 处地方（script / outline / 章节代码 /
 > chapters.ts / 音频文件）永远不会漂。
+>
+> 每个元素是对象，不是字符串：
+>
+> ```ts
+> interface Narration {
+>   say: string;                // "" = 静音拍（无 TTS、不推导字幕）
+>   caption?: string;           // 单行 ≤ 18 全角；缺失时由 avp plan 推导
+>   motion?: "hook" | "static"; // 默认 say 非空 hook / say 为空 static
+> }
+> ```
+>
+> `avp plan` 会校验 `script.md` 的 `---` 块与每一拍 `say` 同数同序，
+> 并生成 `beats.json`（`captionSource` / `audio` / `motion` 都在里面）。
+> `caption` 永不补省略号。
 
 ---
 

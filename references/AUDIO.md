@@ -1,13 +1,13 @@
 # 音频合成
 
-把每个章节 `narrations.ts` 里的口播文字按 **step 颗粒度**合成 mp3，
-落到 `presentation/public/audio/<chapter-id>/<step-N>.mp3`。运行时
-Auto 模式会自动按 step 播放并自动推进——录屏可以一镜到底。
+把每个章节 `narrations.ts` 里每条口播的 **`say`** 按 **step 颗粒度**
+合成 mp3，落到 `presentation/public/audio/<chapter-id>/<step-N>.mp3`。
+运行时 Auto 模式会自动按 step 播放并自动推进——录屏可以一镜到底。
 
 > **真相源**：每个章节的 `src/chapters/<NN>-<id>/narrations.ts` 是 step
-> 数 + 口播文本的**唯一来源**。`outline.md` 不再参与音频合成，章节代码
-> 也不再手写 `totalSteps`。这一改根除了"网页 step 和音频文件数对不上"
-> 这个老问题。
+> 数 + 口播文本（`say`）的**唯一来源**。`caption` 只服务画面字幕，不参与
+> TTS；`outline.md` 不再参与音频合成，章节代码也不再手写 `totalSteps`。
+> 这一改根除了"网页 step 和音频文件数对不上"这个老问题。
 
 默认用 **MiniMax CLI（`mmx-cli`）**。本机没装就**询问用户**用什么 TTS，
 不要悄悄假装合成成功。
@@ -47,15 +47,15 @@ npm run extract-narrations
 
 ```json
 [
-  { "chapter": "coldopen", "step": 1, "text": "...", "audio": "coldopen/1.mp3" },
-  { "chapter": "coldopen", "step": 2, "text": "...", "audio": "coldopen/2.mp3" },
+  { "chapter": "coldopen", "step": 1, "say": "...", "audio": "coldopen/1.mp3" },
+  { "chapter": "coldopen", "step": 2, "say": "...", "audio": "coldopen/2.mp3" },
   ...
 ]
 ```
 
 让用户**先扫一眼这个 json**，确认文本和切分都对，再开始烧 token 合成。
 
-> 空字符串的 narration 会被自动跳过（不烧 TTS token）——运行时 Auto 模式
+> `say: ""` 的静音拍会被自动跳过（不烧 TTS token）——运行时 Auto 模式
 > 按字数估时撑过这种"无声过场"step。
 
 ### 2. 合成
@@ -176,7 +176,7 @@ Auto 模式首次需要按一次 `Space` 启动（绕过浏览器自动播放限
 > 解决办法：写更长口播 / 拆 step / 调动画速度（详见
 > [`CHAPTER-CRAFT.md`](CHAPTER-CRAFT.md) 「代码层最小约束」）。
 >
-> 音频文件缺失（还没合成 / 404）或 narration 是空串 → 退化到字数估时
+> 音频文件缺失（还没合成 / 404）或 `say` 是空串 → 退化到字数估时
 > （`max(1500ms, 字数 × 250ms)`），保证预览也能整片跑通。
 
 ---

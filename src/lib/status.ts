@@ -28,14 +28,26 @@ export function stepOutputs(step: StepId): string[] {
   return OUTPUTS[step];
 }
 
-function planInputs(p: ProjectPaths): string[] {
+function planInputs(p: ProjectPaths, ledger: ProjectLedger): string[] {
   return [
     p.ledger,
     join(p.root, "script.md"),
     join(p.root, "outline.md"),
     p.registry,
+    themeTokensPath(ledger.theme.id),
     ...listFiles(p.chaptersDir, [".ts"]),
   ];
+}
+
+/**
+ * plan 的输入哈希。`avp plan` 成功后用它 recordStep，`status` 用同一函数判定
+ * 是否最新 —— 两边共用一份定义，避免「plan 记的哈希和 status 算的不一样」。
+ */
+export function planInputHash(
+  p: ProjectPaths,
+  ledger: ProjectLedger,
+): string {
+  return hashFiles(p.root, planInputs(p, ledger));
 }
 
 function ttsInputs(p: ProjectPaths): string[] {
@@ -70,7 +82,7 @@ export function inputHashFor(
 ): string | null {
   switch (step) {
     case "plan":
-      return hashFiles(p.root, planInputs(p));
+      return planInputHash(p, ledger);
     case "tts":
       return pathExists(p.beats) ? hashFiles(p.root, ttsInputs(p)) : null;
     case "compose":

@@ -15,9 +15,9 @@ import { useStepper } from "./hooks/useStepper";
 import { CHAPTERS } from "./registry/chapters";
 
 /**
- * Estimate spoken duration of a Chinese narration string. Native pace
+ * Estimate spoken duration of Chinese narration text. Native pace
  * ≈ 4 char/s → 250ms per char. Used as Auto-mode fallback ONLY when the
- * audio file is missing / fails / the narration is empty. When audio plays
+ * audio file is missing / fails / the beat is silent. When audio plays
  * normally, this value is unused — auto-advance fires on `audio.ended`.
  */
 function estimateMs(text: string): number {
@@ -29,15 +29,17 @@ export default function App() {
   const stepper = useStepper(CHAPTERS);
   const ch = CHAPTERS[stepper.cursor.chapter]!;
   const Cmp = ch.Component;
-  const stepText = ch.narrations[stepper.cursor.step] ?? "";
+  const entry = ch.narrations[stepper.cursor.step];
+  const say = entry?.say ?? "";
 
   const { mode, cycleMode, autoStarted, setAutoStarted } = useAutoMode();
 
-  // Audio path follows the convention: /audio/<chapter-id>/<step+1>.mp3
-  // (1-indexed file names match what `extract-narrations.ts` outputs.)
-  // Empty narration → no audio src, Auto mode falls back to estimate.
+  // Preview-only path convention: /audio/<chapter-id>/<step+1>.mp3
+  // (1-indexed file names match scripts/extract-narrations.ts.)
+  // The rendered composition takes audio paths from beats.json instead.
+  // Silent beat → no audio src, Auto mode falls back to estimate.
   const audioSrc =
-    mode === "manual" || stepText === ""
+    mode === "manual" || say === ""
       ? null
       : `${import.meta.env.BASE_URL}audio/${ch.id}/${stepper.cursor.step + 1}.mp3`;
 
@@ -47,7 +49,7 @@ export default function App() {
     src: audioSrc,
     mode,
     trailMs: 200,
-    estimateFallbackMs: estimateMs(stepText),
+    estimateFallbackMs: estimateMs(say),
     onAutoAdvance,
     autoStarted,
   });
