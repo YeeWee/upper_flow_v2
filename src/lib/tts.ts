@@ -121,8 +121,7 @@ function validateConfig(config: TtsConfig, manifest: BeatsManifest): void {
   }
 
   for (const beat of manifest.beats) {
-    const override = config.chapters?.[beat.chapter];
-    const speed = override?.speed ?? config.default.speed;
+    const { speed } = resolveVoiceSpeed(config, beat.chapter);
     if (!Number.isFinite(speed) || speed < SPEED_MIN || speed > SPEED_MAX) {
       throw new AvpError(
         "speed-out-of-range",
