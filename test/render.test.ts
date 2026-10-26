@@ -136,6 +136,22 @@ describe("avp render", () => {
     const status = runAvp(["status", "--json"], dir);
     const render = status.json.steps.find((step: any) => step.step === "render");
     assert.equal(render.status, "current");
+
+    // check 回执里的 warning 文案会随 skill commit 变；render 只认结论 id，
+    // 否则每次提交/重跑 check 都会把 render 误判为过期。
+    const checkReport = readJson(join(dir, ".avp", "check.json"));
+    if (checkReport.warnings.length > 0) {
+      checkReport.warnings[0].message = "different commit text";
+      writeFileSync(
+        join(dir, ".avp", "check.json"),
+        `${JSON.stringify(checkReport, null, 2)}\n`,
+      );
+      const again = runAvp(["status", "--json"], dir);
+      const stillCurrent = again.json.steps.find(
+        (step: any) => step.step === "render",
+      );
+      assert.equal(stillCurrent.status, "current");
+    }
   });
 
   test("删掉 check 回执后 render 的输入哈希为 null，status 报 stale", () => {
