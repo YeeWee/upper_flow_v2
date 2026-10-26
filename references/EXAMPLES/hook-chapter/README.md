@@ -46,7 +46,7 @@
 
 ## 为什么 2-N 不能 stagger 同时上
 
-口播会**逐个念出来** —— 必须 1 项 = 1 step（[CHAPTER-CRAFT.md Part 0 原则 8](../../CHAPTER-CRAFT.md#8-多点内容必须逐个揭示绝不同时上)）。
+口播会**逐个念出来** —— 必须 1 项 = 1 step（[CHAPTER-CRAFT.md Part 0 原则 8](../../CHAPTER-CRAFT.md#逐步揭示禁止一次全展示)）。
 同时 stagger 上 = 观众扫一眼看完，讲者还在念第一张 = PPT 直觉。
 
 ## 文件结构

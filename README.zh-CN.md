@@ -33,7 +33,7 @@ article.md
 
 ---
 
-## 六条命令
+## 七条命令
 
 | 命令 | 作用 |
 |---|---|
@@ -43,6 +43,7 @@ article.md
 | `avp compose` | 生成 `composition/index.html` 骨架，拼入身体与钩子 |
 | `avp check` | 三级检查；有 error 退出 1，warning / report 不拦 |
 | `avp render` | 过 check 后渲 mp4；`--brief` 只给渲染闸，不产片 |
+| `avp status` | 四列状态：步骤 / 输入哈希 / 产物 / 状态 |
 
 退出码：**0 = 成功；非 0 = 失败，并给出可机械修复的原因**。
 `--json` 给 agent 读，人话输出给停点用。

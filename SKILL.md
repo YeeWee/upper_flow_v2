@@ -37,16 +37,17 @@ article.md
 
 ---
 
-## 六条命令
+## 七条命令
 
 | 命令 | 输入 | 产出 |
 |---|---|---|
 | `avp init` | 主题 id | `project.json`、`tts.json`、`presentation/` |
 | `avp plan` | `script.md`、`outline.md`、`narrations.ts` | `beats.json`；`--approve` 写 `.avp/approval.json` |
 | `avp tts` | `beats.json`、`tts.json` | `audio/<ch>/<N>.wav`、`.avp/tts.json`、回写时长 |
-| `avp compose` | `beats.json`、`composition/beats|hooks` | `composition/index.html` |
+| `avp compose` | `beats.json`、`composition/beats` / `hooks` | `composition/index.html` |
 | `avp check` | 全部账本 + 源 | 三级 findings；无 error 写 `.avp/check.json` |
 | `avp render` | 以上全部 | `output/output.mp4`、回执、联系表、静帧报告 |
+| `avp status` | 全部账本 | 四列状态：步骤 / 输入哈希 / 产物 / 状态 |
 
 通用：`--json`、`--dir=<path>`、`--help`。退出码 **0 = 成功；非 0 = 失败且
 原因可机械修复**。`--after-plan` 会核对批准哈希；改稿后必须重新批准。
@@ -86,6 +87,10 @@ mp4**。人只需回一个字「渲」或指出要改的拍。有 error 时 rend
 
 派生物（可删可重建）：`presentation/public/audio/`、`composition/index.html`、
 `composition/audio/`、`output/`。**不要手改派生物**——改源，再跑对应命令。
+
+> 夹具例外：`examples/trae-harness/presentation/public/audio/` 与成品
+> `output/` 一并入库，保证 clone 后开箱可演示、可复审；普通项目按上面的
+> 派生物规则忽略即可。
 
 ---
 

@@ -57,7 +57,7 @@ composition/
 - 每个 `<audio>` 的 `id` 唯一：`audio-<beat-id>`。
 - **静音拍不生成 `<audio>`**。空 `src` 会让 HyperFrames 混音阶段硬失败
   （`audio_processing_failed`），不是「静音」。
-- 字幕 `data-start = beat.start + 0.3s`，给眼睛留一口气。
+- 字幕不是 clip，没有 `data-start`：hook 拍在 `beat.start + 0.3s` 淡入，给眼睛留一口气；static 拍从 `beat.start` 就显示，保证「刻意静止」的拍两帧一致。
 
 ---
 

@@ -10,3 +10,10 @@ composition/audio/
 
 # 渲染产物（成片/回执/联系表）由 avp render 生成
 output/
+# 成片与回执随夹具入库：DoD 1–4 的证据必须能在分支里复现、可打开。
+!output/
+output/*
+!output/output.mp4
+!output/receipt.json
+!output/contact-sheet.png
+!output/still-report.json
