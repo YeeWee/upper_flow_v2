@@ -136,6 +136,12 @@ describe("avp compose", () => {
     assert.match(html, /data-composition-id="main" data-start="0" data-duration="4\.500"/);
     assert.match(html, new RegExp(`avp:tokens-hash" content="${tokensHash}"`));
     assert.match(html, /beat\.start \+ 0\.3/);
+    // static 拍的字幕从拍点就可见（没有 +0.3s 入场），hook 拍保留入场。
+    assert.match(html, /if \(beat\.captionFromStart\)/);
+    assert.match(html, /tl\.set\(caption, \{ opacity: 1 \}, beat\.start\)/);
+    assert.match(html, /"id":"b1"[^}]*"captionFromStart":false/);
+    assert.match(html, /"id":"b2"[^}]*"captionFromStart":true/);
+    assert.match(html, /"id":"b3"[^}]*"captionFromStart":false/);
     assert.match(html, /window\.__timelines\["main"\]/);
     assert.match(html, /atom-hero__title/);
     assert.ok(existsSync(join(dir, "composition", "gsap.min.js")));
@@ -146,6 +152,24 @@ describe("avp compose", () => {
     const status = runAvp(["status", "--json"], dir);
     const compose = status.json.steps.find((step: any) => step.step === "compose");
     assert.equal(compose.status, "current");
+  });
+
+  test("schemaVersion 未知大版本时拒绝 compose，且不重写合成稿", () => {
+    const beatsPath = join(dir, "beats.json");
+    const indexPath = join(dir, "composition", "index.html");
+    const originalBeats = readText(beatsPath);
+    const originalHtml = readText(indexPath);
+    const doc = readJson(beatsPath);
+    doc.schemaVersion = 2;
+    writeFileSync(beatsPath, JSON.stringify(doc, null, 2));
+    try {
+      const run = runAvp(["compose", "--json"], dir);
+      assert.notEqual(run.status, 0);
+      assert.equal(run.json.error.code, "schema-unknown");
+      assert.equal(readText(indexPath), originalHtml);
+    } finally {
+      writeFileSync(beatsPath, originalBeats);
+    }
   });
 
   test("静音拍不生成 audio 元素（空 src 会让混音硬失败）", () => {

@@ -145,7 +145,13 @@ export function collectStatus(
     let status: StepStatus;
     if (!record) {
       status = "pending";
-    } else if (missingOutput || (inputHash && record.inputHash !== inputHash)) {
+    } else if (
+      missingOutput ||
+      // 输入已消失（如删掉 .avp/check.json）不能算最新：记录还在就说明
+      // 这一步跑过，而它依赖的输入已经不在了。
+      inputHash === null ||
+      record.inputHash !== inputHash
+    ) {
       status = "stale";
     } else {
       status = "current";

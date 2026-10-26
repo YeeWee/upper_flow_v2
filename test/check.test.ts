@@ -288,6 +288,16 @@ describe("avp check", () => {
     });
 
     withClone((dir) => {
+      updateBeat(dir, 0, { caption: "SWE-bench 2 → 0 用 GPT-5" });
+      const run = check(dir, ["--only=say-caption-token-mismatch"]);
+      assert.equal(run.status, 1);
+      const finding = findError(run, "say-caption-token-mismatch");
+      assert.equal(finding.beatId, "example-1");
+      assert.match(finding.message, /GPT-5/u);
+      assert.match(finding.message, /多了/u);
+    });
+
+    withClone((dir) => {
       updateBeat(dir, 0, { say: "ROI 90%。", caption: "90" });
       const run = check(dir, ["--only=say-caption-token-mismatch"]);
       const finding = findError(run, "say-caption-token-mismatch");
@@ -612,9 +622,9 @@ describe("avp check", () => {
         (item: any) => item.id === "caption-derived",
       );
       assert.ok(derived);
-      assert.match(derived.message, /2\/3/u);
+      assert.match(derived.message, /1\/3/u);
       assert.match(derived.message, /example-2/u);
-      assert.match(derived.message, /example-3/u);
+      assert.doesNotMatch(derived.message, /example-3/u);
 
       const beats = readJson(join(dir, "beats.json")).beats;
       const total = beats.reduce(

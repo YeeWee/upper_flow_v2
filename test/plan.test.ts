@@ -146,9 +146,9 @@ describe("avp plan", () => {
       assert.equal(beats[2].captionSource, "authored");
       assert.equal(beats[2].motion, "static");
 
-      // 显式 motion 覆盖默认值
+      // 显式 motion 覆盖默认值；静音拍的空字幕是 authored 契约，不是推导
       assert.equal(beats[3].caption, "");
-      assert.equal(beats[3].captionSource, "derived");
+      assert.equal(beats[3].captionSource, "authored");
       assert.equal(beats[3].motion, "hook");
 
       // 恰好 18 个全角字符可以通过

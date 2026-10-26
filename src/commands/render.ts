@@ -1,9 +1,10 @@
 import { join } from "node:path";
 import { requireApproval } from "../lib/approval";
+import { readBeats } from "../lib/beats";
 import type { BeatsManifest } from "../lib/beats";
 import { runCheckCommand } from "./check";
 import { AvpError } from "../lib/errors";
-import { readJson, writeJson } from "../lib/fs";
+import { relativeTo, writeJson } from "../lib/fs";
 import { projectPaths, readLedger } from "../lib/project";
 import {
   makeThumbnails,
@@ -54,10 +55,6 @@ function summarizeChapters(manifest: BeatsManifest): DurationRow[] {
   return [...rows.values()];
 }
 
-function relative(root: string, file: string): string {
-  return file.startsWith(`${root}/`) ? file.slice(root.length + 1) : file;
-}
-
 async function assertCheckPassed(root: string): Promise<{
   errors: number;
   warnings: number;
@@ -99,7 +96,7 @@ export async function runRenderCommand(
   runComposeCommand(root);
   const summary = await assertCheckPassed(root);
 
-  const manifest = readJson<BeatsManifest>(paths.beats);
+  const manifest = readBeats(root);
   const totalMs = manifest.beats.reduce(
     (sum, beat) => sum + (beat.durationMs ?? 0),
     0,
@@ -117,7 +114,7 @@ export async function runRenderCommand(
       totalMs,
       chapters,
       check: summary,
-      thumbnails: thumbs.files.map((file) => relative(root, file)),
+      thumbnails: thumbs.files.map((file) => relativeTo(root, file)),
     };
   }
 
@@ -128,13 +125,7 @@ export async function runRenderCommand(
     manifest.beats,
     join(root, "output"),
   );
-  const receipt = writeRenderReceipt(
-    paths,
-    ledger,
-    manifest,
-    render,
-    artifacts,
-  );
+  const receipt = writeRenderReceipt(paths, manifest, render, artifacts);
   writeJson(paths.receipt, receipt);
 
   recordStep(root, "render", inputHashFor("render", paths, ledger) ?? "", [
@@ -147,10 +138,10 @@ export async function runRenderCommand(
     totalMs: render.durationMs,
     chapters,
     check: summary,
-    output: relative(root, output),
-    receipt: relative(root, paths.receipt),
-    contactSheet: relative(root, artifacts.contactSheet.file),
-    stillReport: relative(root, artifacts.stillReport.file),
+    output: relativeTo(root, output),
+    receipt: relativeTo(root, paths.receipt),
+    contactSheet: relativeTo(root, artifacts.contactSheet.file),
+    stillReport: relativeTo(root, artifacts.stillReport.file),
     staticBeats: artifacts.stillReport.staticBeats,
   };
 }

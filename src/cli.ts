@@ -24,7 +24,7 @@ const HELP = `avp — article-video-production
   check           分级检查：error 阻断 / warning 可见 / report 只报
   render          渲染成片：check 闸 + mp4 + 回执 + 联系表 + 静帧报告
   render --brief  只给渲染闸简报：check 结论 / 时长表 / 3 张缩略图（不产片）
-  status          五列状态：步骤 / 输入哈希 / 产物 / 状态
+  status          四列状态：步骤 / 输入哈希 / 产物 / 状态
   help            显示本帮助
 
 通用参数:
@@ -42,6 +42,15 @@ interface CommandOutput {
   exitCode?: number;
 }
 
+/** 所有命令统一拒绝位置参数：目录 / 章节只能用显式 flag，避免静默用 cwd。 */
+function assertNoPositionals(command: string, positionals: string[]): void {
+  if (positionals.length === 0) return;
+  throw new Error(
+    `${command} 不接受位置参数：${positionals.join(" ")}` +
+      `（项目目录用 --dir=，章节用 --chapter=）`,
+  );
+}
+
 async function run(argv: string[]): Promise<CommandOutput> {
   const parsed = parseArgs(argv);
   const cwd = process.cwd();
@@ -56,11 +65,7 @@ async function run(argv: string[]): Promise<CommandOutput> {
   switch (parsed.command) {
     case "init": {
       assertKnownFlags(parsed, ["theme", "dir", "json", "help"]);
-      if (parsed.positionals.length > 0) {
-        throw new Error(
-          `init 不接受位置参数：${parsed.positionals.join(" ")}（用 --dir=）`,
-        );
-      }
+      assertNoPositionals("init", parsed.positionals);
       const root = resolve(cwd, flagString(parsed, "dir") ?? ".");
       const result = runInit(root, flagString(parsed, "theme"));
       const lines = result.alreadyInitialized
@@ -91,11 +96,7 @@ async function run(argv: string[]): Promise<CommandOutput> {
         "json",
         "help",
       ]);
-      if (parsed.positionals.length > 0) {
-        throw new Error(
-          `plan 不接受位置参数：${parsed.positionals.join(" ")}（用 --dir=）`,
-        );
-      }
+      assertNoPositionals("plan", parsed.positionals);
       const root = resolve(cwd, flagString(parsed, "dir") ?? ".");
       const approve = flagBool(parsed, "approve");
       const afterPlan = flagBool(parsed, "after-plan");
@@ -121,11 +122,7 @@ async function run(argv: string[]): Promise<CommandOutput> {
         "json",
         "help",
       ]);
-      if (parsed.positionals.length > 0) {
-        throw new Error(
-          `tts 不接受位置参数：${parsed.positionals.join(" ")}（用 --chapter=）`,
-        );
-      }
+      assertNoPositionals("tts", parsed.positionals);
       const root = resolve(cwd, flagString(parsed, "dir") ?? ".");
       const result = runTtsCommand(root, {
         chapter: flagString(parsed, "chapter"),
@@ -145,11 +142,7 @@ async function run(argv: string[]): Promise<CommandOutput> {
 
     case "compose": {
       assertKnownFlags(parsed, ["after-plan", "dir", "json", "help"]);
-      if (parsed.positionals.length > 0) {
-        throw new Error(
-          `compose 不接受位置参数：${parsed.positionals.join(" ")}（用 --dir=）`,
-        );
-      }
+      assertNoPositionals("compose", parsed.positionals);
       const root = resolve(cwd, flagString(parsed, "dir") ?? ".");
       const result = runComposeCommand(root, {
         afterPlan: flagBool(parsed, "after-plan"),
@@ -166,11 +159,7 @@ async function run(argv: string[]): Promise<CommandOutput> {
 
     case "check": {
       assertKnownFlags(parsed, ["only", "dir", "json", "help"]);
-      if (parsed.positionals.length > 0) {
-        throw new Error(
-          `check 不接受位置参数：${parsed.positionals.join(" ")}（用 --dir=）`,
-        );
-      }
+      assertNoPositionals("check", parsed.positionals);
       const root = resolve(cwd, flagString(parsed, "dir") ?? ".");
       const only = flagString(parsed, "only");
       const result = await runCheckCommand(root, {
@@ -188,11 +177,7 @@ async function run(argv: string[]): Promise<CommandOutput> {
 
     case "render": {
       assertKnownFlags(parsed, ["brief", "after-plan", "dir", "json", "help"]);
-      if (parsed.positionals.length > 0) {
-        throw new Error(
-          `render 不接受位置参数：${parsed.positionals.join(" ")}（用 --dir=）`,
-        );
-      }
+      assertNoPositionals("render", parsed.positionals);
       const root = resolve(cwd, flagString(parsed, "dir") ?? ".");
       const result = await runRenderCommand(root, {
         brief: flagBool(parsed, "brief"),
@@ -241,6 +226,7 @@ async function run(argv: string[]): Promise<CommandOutput> {
 
     case "status": {
       assertKnownFlags(parsed, ["dir", "json", "help"]);
+      assertNoPositionals("status", parsed.positionals);
       const root = resolve(cwd, flagString(parsed, "dir") ?? ".");
       const result = runStatus(root);
       const table = renderStatusTable(result);

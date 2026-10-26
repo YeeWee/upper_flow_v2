@@ -2,6 +2,7 @@ import { join } from "node:path";
 import { AvpError } from "../errors";
 import { pathExists, readText } from "../fs";
 import { probeHook } from "../hook";
+import { durationOf } from "./report";
 import { CHECK_IDS } from "./types";
 import type { CheckContext } from "./types";
 
@@ -22,12 +23,6 @@ const HOOK_FIXES: Record<string, string> = {
   [CHECK_IDS.hookInvalid]:
     "修好钩子语法与 export default (tl, root, ctx) => void 签名。",
 };
-
-function durationOf(beat: { durationMs: number | null }): number {
-  return typeof beat.durationMs === "number" && beat.durationMs > 0
-    ? beat.durationMs
-    : 0;
-}
 
 /** error：motion: hook 必须有钩子，且钩子可编译、seek-safe、不超拍、不为空。 */
 export function checkHooks(ctx: CheckContext): void {

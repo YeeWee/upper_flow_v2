@@ -5,11 +5,16 @@ import {
   renameSync,
   writeFileSync,
 } from "node:fs";
-import { dirname } from "node:path";
+import { dirname, relative as pathRelative, sep } from "node:path";
 import { AvpError } from "./errors";
 
 export function pathExists(path: string): boolean {
   return existsSync(path);
+}
+
+/** 项目内展示用路径：相对 root，并统一成 POSIX 分隔符。 */
+export function relativeTo(root: string, file: string): string {
+  return pathRelative(root, file).split(sep).join("/");
 }
 
 export function ensureDir(path: string): void {

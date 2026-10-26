@@ -1,7 +1,6 @@
 import { requireApproval } from "../lib/approval";
-import type { BeatsManifest } from "../lib/beats";
+import { readBeats } from "../lib/beats";
 import { composeProject } from "../lib/compose";
-import { readJson } from "../lib/fs";
 import { projectPaths, readLedger } from "../lib/project";
 import { inputHashFor } from "../lib/status";
 import { recordStep } from "../lib/state";
@@ -21,7 +20,7 @@ export function runComposeCommand(
   const paths = projectPaths(root);
   if (options.afterPlan) requireApproval(root);
 
-  const manifest = readJson<BeatsManifest>(paths.beats);
+  const manifest = readBeats(root);
   const result = composeProject(paths, manifest);
 
   recordStep(root, "compose", inputHashFor("compose", paths, ledger) ?? "", [

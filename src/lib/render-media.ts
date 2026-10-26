@@ -3,7 +3,7 @@ import { copyFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import type { BeatsManifest } from "./beats";
 import { AvpError } from "./errors";
-import { ensureDir, pathExists } from "./fs";
+import { ensureDir, pathExists, relativeTo } from "./fs";
 import { sha256File } from "./audio";
 import {
   compareFrames,
@@ -12,7 +12,7 @@ import {
   probeMedia,
   toolchainVersions,
 } from "./media";
-import type { ProjectLedger, ProjectPaths } from "./project";
+import type { ProjectPaths } from "./project";
 import { SKILL_ROOT, skillCommit, skillMeta } from "./skill";
 
 export const STILL_THRESHOLD_PERCENT = 0.1;
@@ -366,7 +366,6 @@ export interface RenderReceipt {
 
 export function writeRenderReceipt(
   paths: ProjectPaths,
-  ledger: ProjectLedger,
   manifest: BeatsManifest,
   render: RenderVideoResult,
   artifacts: ArtifactsResult,
@@ -433,10 +432,5 @@ export function writeRenderReceipt(
       staticBeats: artifacts.stillReport.staticBeats,
     },
   };
-  void ledger;
   return receipt;
-}
-
-function relativeTo(root: string, file: string): string {
-  return file.startsWith(`${root}/`) ? file.slice(root.length + 1) : file;
 }

@@ -1,7 +1,8 @@
 import { CHECK_IDS } from "./types";
 import type { CheckContext, Finding } from "./types";
 
-function durationOf(beat: { durationMs: number | null }): number {
+/** 节拍时长（毫秒）：缺失或非有限值记 0，负数夹到 0。 */
+export function durationOf(beat: { durationMs: number | null }): number {
   return typeof beat.durationMs === "number" && Number.isFinite(beat.durationMs)
     ? Math.max(0, beat.durationMs)
     : 0;

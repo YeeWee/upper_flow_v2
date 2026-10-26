@@ -2,6 +2,7 @@ import { spawnSync } from "node:child_process";
 import { copyFileSync, rmSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fakeDurationMs, probeDurationMs, sha256File, writeSilentWav } from "./audio";
+import { readBeats } from "./beats";
 import type { BeatTts, BeatsManifest } from "./beats";
 import { AvpError } from "./errors";
 import { ensureDir, pathExists, readJson, writeJson } from "./fs";
@@ -86,11 +87,7 @@ export function ttsCacheKey(input: {
   );
 }
 
-function validateConfig(
-  config: TtsConfig,
-  manifest: BeatsManifest,
-  warnings: string[],
-): { voice: string; speed: number } {
+function validateConfig(config: TtsConfig, manifest: BeatsManifest): void {
   if (config.backend !== "kokoro" && config.backend !== "fake") {
     throw new AvpError(
       "tts-backend-unknown",
@@ -124,8 +121,7 @@ function validateConfig(
   }
 
   for (const beat of manifest.beats) {
-    const override = config.chapters?.[beat.chapter];
-    const speed = override?.speed ?? config.default.speed;
+    const { speed } = resolveVoiceSpeed(config, beat.chapter);
     if (!Number.isFinite(speed) || speed < SPEED_MIN || speed > SPEED_MAX) {
       throw new AvpError(
         "speed-out-of-range",
@@ -142,8 +138,6 @@ function validateConfig(
       );
     }
   }
-
-  return { voice: config.default.voice, speed: config.default.speed };
 }
 
 function resolveVoiceSpeed(
@@ -271,17 +265,10 @@ export function runTts(
   ledger: ProjectLedger,
   options: TtsOptions = {},
 ): TtsResult {
-  const manifest = readJson<BeatsManifest>(paths.beats);
-  if (manifest.schemaVersion !== 1) {
-    throw new AvpError(
-      "schema-unknown",
-      `beats.json 的 schemaVersion=${String(manifest.schemaVersion)}，本版只认识 1。`,
-      { field: "schemaVersion" },
-    );
-  }
+  const manifest = readBeats(root);
   const config = readTtsConfig(root);
   const warnings: string[] = [];
-  validateConfig(config, manifest, warnings);
+  validateConfig(config, manifest);
 
   const chapters = new Set(manifest.beats.map((beat) => beat.chapter));
   if (options.chapter && !chapters.has(options.chapter)) {

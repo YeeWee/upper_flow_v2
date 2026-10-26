@@ -1,7 +1,7 @@
 import { CAPTION_MAX_CELLS, captionCells, exceedsCaptionWidth } from "../captions";
 import { CHECK_IDS } from "./types";
 import type { CheckContext } from "./types";
-import { missingTokens } from "./tokens";
+import { missingTokens, extraTokens } from "./tokens";
 
 /** error：字幕宽度 + say/caption 的数字/专名集合。authored / derived 都检查。 */
 export function checkCaptions(ctx: CheckContext): void {
@@ -28,7 +28,15 @@ export function checkCaptions(ctx: CheckContext): void {
     }
 
     const missing = missingTokens(say, caption);
-    if (missing.length > 0) {
+    const extra = extraTokens(say, caption);
+    if (missing.length > 0 || extra.length > 0) {
+      const differences: string[] = [];
+      if (missing.length > 0) {
+        differences.push(`少了 say 里的数字/专名：${missing.join("、")}`);
+      }
+      if (extra.length > 0) {
+        differences.push(`多了 say 里没有的数字/专名：${extra.join("、")}`);
+      }
       ctx.findings.push({
         id: CHECK_IDS.sayCaptionTokenMismatch,
         level: "error",
@@ -36,10 +44,10 @@ export function checkCaptions(ctx: CheckContext): void {
         chapter: beat.chapter,
         field: "caption",
         message:
-          `节拍 ${beat.id} 的 caption 少了 say 里的数字/专名：${missing.join("、")}。` +
+          `节拍 ${beat.id} 的 caption 与 say 的数字/专名不一致：${differences.join("；")}。` +
           `\nsay：「${say}」` +
           `\ncaption：「${caption}」`,
-        fix: "把 say 里的数字/专名写进 caption（可改写句式，但不能丢数字或拼错专名）。",
+        fix: "caption 与 say 的数字/专名集合必须一致：补上缺的，删掉凭空多出来的；可改写句式。",
       });
     }
   }

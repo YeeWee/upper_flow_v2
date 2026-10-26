@@ -131,6 +131,7 @@ export function composeProject(
     start: number;
     duration: number;
     caption: string;
+    captionFromStart: boolean;
   }[] = [];
 
   for (const beat of beats) {
@@ -212,6 +213,7 @@ export function composeProject(
       start: start / 1000,
       duration: (beat.durationMs ?? 0) / 1000,
       caption: beat.caption,
+      captionFromStart: beat.motion === "static",
     });
     totalMs = end;
   }
@@ -275,7 +277,11 @@ ${hookModules.join("\n")}
     }
     tl.set(clip, { display: "block" }, beat.start);
     if (caption) {
-      tl.fromTo(caption, { opacity: 0 }, { opacity: 1, duration: 0.2, ease: "power2.out" }, beat.start + 0.3);
+      if (beat.captionFromStart) {
+        tl.set(caption, { opacity: 1 }, beat.start);
+      } else {
+        tl.fromTo(caption, { opacity: 0 }, { opacity: 1, duration: 0.2, ease: "power2.out" }, beat.start + 0.3);
+      }
       tl.to(caption, { opacity: 0, duration: 0.2, ease: "power2.in" }, Math.max(beat.start + 0.5, beat.start + beat.duration - 0.25));
     }
     tl.set(clip, { display: "none" }, beat.start + beat.duration);

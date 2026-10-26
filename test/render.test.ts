@@ -138,6 +138,25 @@ describe("avp render", () => {
     assert.equal(render.status, "current");
   });
 
+  test("删掉 check 回执后 render 的输入哈希为 null，status 报 stale", () => {
+    // 自成一体：先确保 render 已记录，再删掉它的输入。
+    const rendered = runAvp(["render", "--json"], dir);
+    assert.equal(rendered.status, 0, rendered.stderr);
+    const checkReport = join(dir, ".avp", "check.json");
+    const backup = readFileSync(checkReport);
+    rmSync(checkReport);
+    try {
+      const status = runAvp(["status", "--json"], dir);
+      const render = status.json.steps.find(
+        (step: any) => step.step === "render",
+      );
+      assert.equal(render.inputHash, null);
+      assert.equal(render.status, "stale");
+    } finally {
+      writeFileSync(checkReport, backup);
+    }
+  });
+
   test("check 有 error 时拒绝渲染，且不产片", () => {
     const audio = join(dir, "audio", "example", "1.wav");
     const backup = readFileSync(audio);
