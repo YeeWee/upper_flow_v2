@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "backend": "kokoro",
+  "default": {
+    "voice": "zf_xiaoxiao",
+    "speed": 1
+  },
+  "chapters": {}
+}

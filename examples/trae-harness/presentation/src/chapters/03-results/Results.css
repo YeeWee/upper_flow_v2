@@ -1,0 +1,654 @@
+/* ─────────────────────────────────────────────────────────────────────
+ * 第 3 章 · 11 轮 A/B 实验数据 — 只写布局与内容驱动的动效。
+ * 原子的状态外观在 atoms.css；这里不重定义 .atom-*，不新增 token。
+ * ───────────────────────────────────────────────────────────────────── */
+
+.re-scene {
+  overflow: hidden;
+}
+
+.re-step {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  position: relative;
+  z-index: 2;
+}
+
+.re-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-5);
+}
+
+.re-lede {
+  margin: 0;
+  max-width: 36ch;
+  font-family: var(--font-body);
+  font-size: 23px;
+  line-height: 1.6;
+  color: var(--text-2);
+}
+
+/* ─── step 0: 实验设计 ─── */
+.re-setup {
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  align-items: center;
+  gap: 70px;
+}
+.re-setup__copy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-7);
+}
+.re-setup__copy .atom-stat__value { font-size: clamp(180px, 15vw, 240px); }
+.re-setup__copy .atom-list__item { font-size: 23px; }
+
+.re-ab {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 46px;
+  padding: 46px 40px;
+  background: var(--surface-2);
+  border: var(--bw-1) solid var(--rule);
+  border-radius: var(--r-card);
+}
+.re-ab__lane {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  opacity: 0;
+  animation: re-rise 700ms var(--ease-quart) both;
+}
+.re-ab__lane--a { animation-delay: 180ms; }
+.re-ab__lane--b { animation-delay: 360ms; }
+
+.re-ab__label {
+  font-family: var(--font-mono);
+  font-size: var(--t-micro);
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  color: var(--text-mute);
+}
+.re-ab__lane--b .re-ab__label { color: var(--accent); }
+
+.re-ab__pips {
+  display: grid;
+  grid-template-columns: repeat(11, minmax(0, 1fr));
+  gap: 10px;
+}
+.re-ab__pip {
+  height: 54px;
+  border: var(--bw-1) solid var(--rule);
+  border-radius: 3px;
+  background: transparent;
+  animation: re-pip 420ms var(--ease-quart) both;
+}
+.re-ab__lane--a .re-ab__pip { border-color: var(--text-faint); }
+.re-ab__lane--b .re-ab__pip {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+.re-ab__pip:nth-child(1) { animation-delay: 260ms; }
+.re-ab__pip:nth-child(2) { animation-delay: 300ms; }
+.re-ab__pip:nth-child(3) { animation-delay: 340ms; }
+.re-ab__pip:nth-child(4) { animation-delay: 380ms; }
+.re-ab__pip:nth-child(5) { animation-delay: 420ms; }
+.re-ab__pip:nth-child(6) { animation-delay: 460ms; }
+.re-ab__pip:nth-child(7) { animation-delay: 500ms; }
+.re-ab__pip:nth-child(8) { animation-delay: 540ms; }
+.re-ab__pip:nth-child(9) { animation-delay: 580ms; }
+.re-ab__pip:nth-child(10) { animation-delay: 620ms; }
+.re-ab__pip:nth-child(11) { animation-delay: 660ms; }
+
+.re-ab__divider {
+  position: absolute;
+  left: 40px;
+  right: 40px;
+  top: 50%;
+  height: 0;
+  border-top: 2px dashed var(--rule);
+}
+
+/* ─── step 1: 正确率 ─── */
+.re-metric {
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  align-items: end;
+  gap: 70px;
+}
+
+.re-bars {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 96px;
+  height: 600px;
+  padding-top: 40px;
+}
+.re-bar {
+  position: relative;
+  width: 150px;
+  height: 520px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+.re-bar__fill {
+  display: block;
+  width: 100%;
+  background: var(--surface-3);
+  border-top: var(--bw-4) solid var(--text-mute);
+  transform-origin: bottom;
+  animation: re-grow-y 900ms var(--ease-expo) both;
+}
+.re-bar--a .re-bar__fill { animation-delay: 140ms; }
+.re-bar--b .re-bar__fill {
+  background: var(--accent-soft);
+  border-top-color: var(--accent);
+  animation-delay: 300ms;
+}
+.re-bar__value {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--hero-num-font);
+  font-style: var(--hero-num-style);
+  font-weight: var(--hero-num-weight);
+  font-size: 54px;
+  line-height: 1;
+  color: var(--text);
+  animation: re-rise 620ms var(--ease-quart) 500ms both;
+}
+.re-bar--a .re-bar__value { bottom: calc(90% + 16px); color: var(--text-mute); }
+.re-bar--b .re-bar__value { bottom: calc(100% + 16px); color: var(--accent); }
+
+.re-bar__cap {
+  position: absolute;
+  top: calc(100% + 24px);
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-family: var(--font-mono);
+  font-size: var(--t-micro);
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  color: var(--text-mute);
+}
+
+.re-metric__copy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  padding-bottom: 120px;
+}
+.re-metric__copy .atom-stat__value { font-size: clamp(160px, 13vw, 210px); }
+
+/* ─── step 2: 断言密度 ─── */
+.re-assert {
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  align-items: center;
+  gap: 80px;
+}
+.re-assert__rows {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 58px;
+}
+.re-assert__row {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr) 90px;
+  align-items: center;
+  gap: 24px;
+}
+.re-assert__name {
+  font-family: var(--font-mono);
+  font-size: 20px;
+  color: var(--text-mute);
+}
+.re-assert__track {
+  position: relative;
+  display: block;
+  height: 54px;
+  background: var(--surface-2);
+  border: var(--bw-1) solid var(--rule);
+  border-radius: 2px;
+}
+.re-assert__fill {
+  display: block;
+  height: 100%;
+  transform-origin: left;
+  animation: re-grow-x 1000ms var(--ease-expo) both;
+}
+.re-assert__fill--a { background: var(--text-faint); animation-delay: 160ms; }
+.re-assert__fill--b { background: var(--accent); animation-delay: 360ms; }
+
+.re-assert__num {
+  font-family: var(--hero-num-font);
+  font-style: var(--hero-num-style);
+  font-size: 46px;
+  line-height: 1;
+  text-align: right;
+  color: var(--text);
+}
+.re-assert__row:first-child .re-assert__num { color: var(--text-mute); }
+
+.re-assert__bracket {
+  position: absolute;
+  right: 116px;
+  top: -18px;
+  bottom: -18px;
+  width: 2px;
+  background: var(--accent);
+}
+.re-assert__bracket::before,
+.re-assert__bracket::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 16px;
+  height: 2px;
+  background: var(--accent);
+}
+.re-assert__bracket::before { top: 0; }
+.re-assert__bracket::after { bottom: 0; }
+.re-assert__bracket-label {
+  position: absolute;
+  left: 28px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-display-en);
+  font-size: 30px;
+  color: var(--accent);
+}
+
+.re-assert__copy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+.re-assert__copy .atom-stat__value { font-size: clamp(160px, 13vw, 210px); }
+
+/* ─── step 3: 覆盖率 / 违规 ─── */
+.re-coverage {
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  align-items: center;
+  gap: 70px;
+}
+
+.re-rings {
+  display: flex;
+  gap: 64px;
+  justify-content: center;
+}
+.re-ring {
+  position: relative;
+  width: 230px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.re-ring__svg {
+  width: 230px;
+  height: 230px;
+  transform: rotate(-90deg);
+}
+.re-ring__track,
+.re-ring__fill {
+  fill: none;
+  stroke-width: 12;
+  stroke-linecap: round;
+}
+.re-ring__track { stroke: var(--rule); }
+.re-ring__fill--a {
+  stroke: var(--text-mute);
+  stroke-dasharray: 415;
+  stroke-dashoffset: 415;
+  animation: re-ring-a 1200ms var(--ease-expo) 240ms both;
+}
+.re-ring__fill--b {
+  stroke: var(--accent);
+  stroke-dasharray: 415;
+  stroke-dashoffset: 415;
+  animation: re-ring-b 1200ms var(--ease-expo) 420ms both;
+}
+.re-ring__value {
+  position: absolute;
+  top: 92px;
+  font-family: var(--hero-num-font);
+  font-style: var(--hero-num-style);
+  font-size: 56px;
+  line-height: 1;
+  color: var(--text);
+}
+.re-ring--lit .re-ring__value { color: var(--accent); }
+.re-ring__cap {
+  font-family: var(--font-mono);
+  font-size: var(--t-micro);
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  color: var(--text-mute);
+}
+
+.re-coverage__copy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+.re-coverage__copy .atom-stat__value { font-size: clamp(150px, 12vw, 200px); }
+
+.re-cut {
+  position: relative;
+  width: 100%;
+  height: 46px;
+  overflow: hidden;
+}
+.re-cut__block {
+  position: absolute;
+  inset: 0;
+  background: var(--surface-2);
+  border: var(--bw-1) solid var(--rule);
+}
+.re-cut__blade {
+  position: absolute;
+  top: -10px;
+  bottom: -10px;
+  width: 8px;
+  background: var(--accent);
+  box-shadow: 0 0 24px var(--accent-glow);
+  animation: re-blade 900ms var(--ease-expo) 500ms both;
+}
+
+/* ─── step 4: 安全 / 复发 ─── */
+.re-safety {
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  align-items: center;
+  gap: 70px;
+}
+.re-safety__stats {
+  display: flex;
+  flex-direction: column;
+  gap: 44px;
+}
+.re-safety__stats .atom-stat__value { font-size: clamp(130px, 10vw, 176px); }
+
+.re-spark {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.re-spark__label,
+.re-spark__note {
+  font-family: var(--font-mono);
+  font-size: var(--t-micro);
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  color: var(--text-mute);
+}
+.re-spark__note { color: var(--accent); }
+.re-spark__svg { width: 100%; height: 300px; }
+.re-spark__axis {
+  stroke: var(--rule);
+  stroke-width: 1;
+}
+.re-spark__line {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 5;
+  stroke-linejoin: round;
+  stroke-dasharray: 900;
+  stroke-dashoffset: 900;
+  animation: re-draw 1300ms var(--ease-expo) 320ms both;
+}
+.re-spark__dot {
+  fill: var(--accent);
+  opacity: 0;
+  animation: re-fade 400ms var(--ease-quart) 1400ms both;
+}
+
+/* ─── step 5: 性能 / SWE-bench ─── */
+.re-performance {
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  align-items: center;
+  gap: 80px;
+}
+
+.re-speed {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  padding: 60px 0;
+}
+.re-speed__rail {
+  position: relative;
+  display: block;
+  height: 110px;
+  border-top: var(--bw-4) solid var(--accent);
+  border-bottom: var(--bw-1) solid var(--rule);
+  overflow: hidden;
+}
+.re-speed__streak {
+  position: absolute;
+  top: 50%;
+  height: 6px;
+  margin-top: -3px;
+  background: var(--accent);
+  opacity: 0.85;
+  animation: re-streak 1.1s var(--ease-expo) both;
+}
+.re-speed__streak--1 { width: 34%; animation-delay: 220ms; }
+.re-speed__streak--2 { width: 22%; top: 30%; animation-delay: 360ms; }
+.re-speed__streak--3 { width: 16%; top: 70%; animation-delay: 500ms; }
+
+.re-speed__mark {
+  font-family: var(--hero-num-font);
+  font-style: var(--hero-num-style);
+  font-weight: var(--hero-num-weight);
+  font-size: clamp(150px, 12vw, 210px);
+  line-height: 0.9;
+  color: var(--accent);
+}
+.re-speed__cap {
+  font-family: var(--font-mono);
+  font-size: var(--t-micro);
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  color: var(--text-mute);
+}
+
+.re-swe {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
+  padding: 40px;
+  background: var(--surface-2);
+  border: var(--bw-1) solid var(--rule);
+  border-radius: var(--r-card);
+}
+.re-swe__numbers {
+  display: flex;
+  align-items: baseline;
+  gap: 26px;
+  font-family: var(--hero-num-font);
+  font-style: var(--hero-num-style);
+  line-height: 0.9;
+}
+.re-swe__from {
+  font-size: 120px;
+  color: var(--text-mute);
+}
+.re-swe__arrow {
+  font-size: 60px;
+  color: var(--text-faint);
+}
+.re-swe__to {
+  font-size: 190px;
+  color: var(--accent);
+}
+.re-swe__cap {
+  font-family: var(--font-mono);
+  font-size: var(--t-micro);
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  color: var(--text-mute);
+}
+
+/* ─── step 6: ROI 成本账本 ─── */
+.re-roi {
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  align-items: center;
+  gap: 80px;
+}
+.re-tokens {
+  display: flex;
+  flex-direction: column;
+  gap: 46px;
+  padding: 52px 44px;
+  background: var(--surface-2);
+  border: var(--bw-1) solid var(--rule);
+  border-radius: var(--r-card);
+}
+.re-token-row {
+  display: grid;
+  grid-template-columns: 80px minmax(0, 1fr) 90px;
+  align-items: center;
+  gap: 22px;
+}
+.re-token-row__label,
+.re-token-row__num {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  color: var(--text-mute);
+}
+.re-token-row__num { text-align: right; color: var(--text); }
+.re-token-row__track {
+  display: block;
+  height: 46px;
+  background: var(--surface-3);
+  border-radius: 2px;
+}
+.re-token-row__fill {
+  display: block;
+  height: 100%;
+  transform-origin: left;
+  animation: re-grow-x 1000ms var(--ease-expo) both;
+}
+.re-token-row__fill--in { background: var(--text-mute); animation-delay: 180ms; }
+.re-token-row__fill--out {
+  background: var(--accent);
+  animation-delay: 400ms;
+}
+.re-tokens__note {
+  font-family: var(--font-mono);
+  font-size: var(--t-micro);
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.re-roi__copy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+.re-roi__copy .atom-stat__value { font-size: clamp(150px, 12vw, 200px); }
+
+/* ─── step 7: L3 静帧（motion: static，不放入场动画） ─── */
+.re-static {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+.re-stairs {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  height: 260px;
+  margin-top: var(--space-5);
+}
+.re-stair {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  width: 180px;
+  padding-bottom: 18px;
+  background: var(--surface-2);
+  border: var(--bw-1) solid var(--rule);
+  font-family: var(--font-mono);
+  font-size: var(--t-micro);
+  letter-spacing: var(--track-caps);
+  color: var(--text-mute);
+}
+.re-stair--1 { height: 90px; }
+.re-stair--2 { height: 160px; }
+.re-stair--3 { height: 250px; }
+.re-stair--lit {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--surface);
+}
+.re-static__stat { margin-top: var(--space-5); }
+.re-static .atom-footer { margin-top: auto; }
+
+/* ─── motion ─── */
+@keyframes re-rise {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes re-pip {
+  from { opacity: 0; transform: scaleY(0.35); }
+  to   { opacity: 1; transform: scaleY(1); }
+}
+@keyframes re-grow-y {
+  from { transform: scaleY(0); }
+  to   { transform: scaleY(1); }
+}
+@keyframes re-grow-x {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+@keyframes re-ring-a {
+  to { stroke-dashoffset: 158; }
+}
+@keyframes re-ring-b {
+  to { stroke-dashoffset: 62; }
+}
+@keyframes re-draw {
+  to { stroke-dashoffset: 0; }
+}
+@keyframes re-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes re-blade {
+  from { left: -4%; }
+  to   { left: 102%; }
+}
+@keyframes re-streak {
+  from { transform: translateX(-120%); }
+  to   { transform: translateX(320%); }
+}
