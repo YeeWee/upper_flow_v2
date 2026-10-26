@@ -201,7 +201,7 @@ export function composeProject(
     );
 
     audioHtml.push(
-      `  <audio id="audio-${beat.id}" src="../${escapeHtml(beat.audio)}" data-start="${startText}" data-duration="${durationText}" data-track-index="2" data-volume="1"></audio>`,
+      `  <audio id="audio-${beat.id}" src="${escapeHtml(beat.audio)}" data-start="${startText}" data-duration="${durationText}" data-track-index="2" data-volume="1"></audio>`,
     );
 
     timelineBeats.push({
@@ -322,6 +322,19 @@ ${timelineJs}
   ensureDir(paths.composition);
   copyFileSync(gsapSource, join(paths.composition, "gsap.min.js"));
   writeText(join(paths.composition, "index.html"), html);
+
+  // 合成稿必须自包含：HyperFrames 的音频 src 相对 composition/ 解析，
+  // 不允许 ../ 逃出项目目录，否则渲染时静音。
+  for (const beat of beats) {
+    const source = join(paths.root, beat.audio);
+    if (pathExists(source)) {
+      const target = join(paths.composition, beat.audio);
+      ensureDir(join(target, ".."));
+      copyFileSync(source, target);
+    } else {
+      warnings.push(`节拍 ${beat.id} 的音频还不存在：${beat.audio}（先跑 avp tts）`);
+    }
+  }
 
   return { totalMs, clips: beats.length, hooks, warnings };
 }

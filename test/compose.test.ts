@@ -110,6 +110,11 @@ describe("avp compose", () => {
     assert.equal(init.status, 0, init.stderr);
     writeFileSync(join(dir, "beats.json"), JSON.stringify(beatsFixture(), null, 2));
     writeBodies(dir);
+    mkdirSync(join(dir, "audio", "alpha"), { recursive: true });
+    mkdirSync(join(dir, "audio", "beta"), { recursive: true });
+    writeFileSync(join(dir, "audio", "alpha", "1.wav"), "wav");
+    writeFileSync(join(dir, "audio", "alpha", "2.wav"), "wav");
+    writeFileSync(join(dir, "audio", "beta", "1.wav"), "wav");
     goodB3Hook = readText(join(dir, "composition", "hooks", "b3.hook.ts"));
     goodBody = readText(join(dir, "composition", "beats", "b2.body.html"));
   });
@@ -127,13 +132,14 @@ describe("avp compose", () => {
     assert.match(html, /id="clip-b1" data-start="0\.000" data-duration="1\.500"/);
     assert.match(html, /id="clip-b2" data-start="1\.500" data-duration="2\.000"/);
     assert.match(html, /id="clip-b3" data-start="3\.500" data-duration="1\.000"/);
-    assert.match(html, /id="audio-b1" src="\.\.\/audio\/alpha\/1\.wav"/);
+    assert.match(html, /id="audio-b1" src="audio\/alpha\/1.wav"/);
     assert.match(html, /data-composition-id="main" data-start="0" data-duration="4\.500"/);
     assert.match(html, new RegExp(`avp:tokens-hash" content="${tokensHash}"`));
     assert.match(html, /beat\.start \+ 0\.3/);
     assert.match(html, /window\.__timelines\["main"\]/);
     assert.match(html, /atom-hero__title/);
     assert.ok(existsSync(join(dir, "composition", "gsap.min.js")));
+    assert.ok(existsSync(join(dir, "composition", "audio", "alpha", "1.wav")));
     assert.equal(run.json.warnings.length, 1);
     assert.match(run.json.warnings[0], /static/);
 
