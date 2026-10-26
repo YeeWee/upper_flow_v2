@@ -94,6 +94,32 @@ avp render --after-plan  # 额外核对当前稿子仍是被批准的版本
 
 ---
 
+## 环境与平台
+
+| 依赖 | 要求 |
+|---|---|
+| Node.js | ≥ 22（本 skill 在 26.3.0 验证） |
+| FFmpeg / ffprobe | PATH 中可用；本 skill 在 9.0.2 验证。无 `drawtext`/`subtitles` 也能渲——字幕是 HTML，不是 FFmpeg 滤镜 |
+| HyperFrames | skill 固定 `0.8.33`（devDependency），不要 clone 上游源码自己 build |
+| Chromium | 首次 `hyperframes browser path` 会给出缓存路径；之后离线可用 |
+| 字体 | 走主题注入；不依赖 Google Fonts 在线拉取 |
+
+### Windows 中文路径
+
+HyperFrames 旧版的 `fs.cpSync` 在中文路径下可能栈溢出。本 skill 不再要求
+clone 上游，因此不会触发构建期复制；若自行安装 HyperFrames，把它放到
+纯 ASCII 路径（如 `D:\hyperframes\`）。项目路径含中文时，`avp` 内部统一
+用 `path.join`，但交给 Chromium 的 `file://` URL 会做编码，不要在
+`composition/` 里写死含空格的相对路径。
+
+### 首次渲染的下载
+
+Chrome 与字体只在第一次下载，缓存在 `~/.cache/hyperframes/`（Windows 为
+`%LOCALAPPDATA%\hyperframes\`）。断网后只要缓存完整仍可渲染；缺缓存时
+`render` 会报错，不会静默产出无声/无字体的片子。
+
+---
+
 ## 故障排查
 
 | 现象 | 原因 / 修法 |

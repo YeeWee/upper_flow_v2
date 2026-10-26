@@ -1,4 +1,4 @@
-# 音频合成（TTS）
+# TTS（音频合成）
 
 `avp tts` 把 `beats.json` 里每一拍的 `say` 合成成音频，**用实测时长回写
 beats**。音频是时间的真相：分镜、timecode、check、render 都读这份实测值，
@@ -10,7 +10,7 @@ beats**。音频是时间的真相：分镜、timecode、check、render 都读�
 
 ---
 
-## 一条命令
+## 命令面
 
 ```bash
 avp tts                 # 合成所有缺音频的拍

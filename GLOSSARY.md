@@ -70,3 +70,39 @@ _Avoid_: 组件、组件库
 每个节拍注册进基础时间线的一段动效构建函数，只准相对节拍起点计时。
 _Avoid_: 动画回调、enter
 
+
+**口播（say）**：
+送进 TTS 的文本，是给耳朵的；与字幕可以不逐字一致。
+_Avoid_: 旁白、台词、narration、口播稿（口播稿指整份 `script.md`）
+
+**字幕（caption）**：
+烧录在画面上的单行文字，是给眼睛的；≤18 全角格，不补省略号。
+_Avoid_: subtitle、文案、字
+
+**字幕来源（captionSource）**：
+`authored`（人写）或 `derived`（从 say 推导）；派生必须留 warning。
+_Avoid_: 自动字幕、生成的字幕
+
+**TTS 配置（TTS Config）**：
+`tts.json`：后端 + 默认音色/语速 + 逐章覆盖。
+_Avoid_: 声音设置、voice 表
+
+**渲染回执（Render Receipt）**：
+`output/receipt.json`：工具链版本、输入哈希、逐音频 sha256、成片 sha256。
+_Avoid_: 日志、报告、清单
+
+**批准哈希（Approval Hash）**：
+`script.md` + 节拍计划字段的哈希；`--after-plan` 用它做门禁，tts 回写不影响它。
+_Avoid_: 批准记录、签名
+
+**渲染闸（Render Gate）**：
+停点 2：`check` 结论 + 时长表 + 3 张缩略图；人回「渲」才产片。
+_Avoid_: 渲染检查、pre-render
+
+**联系表（Contact Sheet）**：
+每拍 2 帧（入场后 / 驻留末），6 列；22 拍 = 44 帧。
+_Avoid_: 缩略图、预览图、contact sheet
+
+**静帧报告（Still Report）**：
+每拍两帧的 SSIM / 差异百分比；<0.1% 记 static，只报不拦。
+_Avoid_: 空帧检测、冻结检测

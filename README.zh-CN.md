@@ -1,160 +1,133 @@
-# Article Video Production
+# article-video-production
 
-**把文章稳定做成中文短视频的可归因流水线。** 旧名 `web-video-presentation` 已退役；录制路径降级为附录。
+**把一篇文章或口播稿，做成一支可归因、可重渲的 16:9 成片。**
 
-[English](./README.md) · [返回集合首页](../../README.zh-CN.md)
-
-![Web Video Presentation Skill](../../dist/imgs/web-video-presentation-skill.png)
-
----
-
-## 这是什么？
-
-`web-video-presentation` 帮 Agent 构建一种 Vite + React + TypeScript 演示：它看起来不是传统幻灯片，而更像为录屏设计的视频舞台。每次点击推进一个口播节拍，每一步独占 1920×1080 舞台，进度 UI 平时隐藏，只有悬浮时出现，方便录出干净画面。
-
-它适合：
-
-- 把文章改写成 B 站 / YouTube / 视频号风格口播稿
-- 把已有口播稿做成有节奏的网页演示
-- 做产品演示、教程、keynote 式讲解、视觉 talk
-- 做“动态 PPT，但不要像 PPT”的演示体验
-- 在视觉 outline 对齐后，可选合成口播音频
-
-这个 Skill 的核心是**方法论 + 协作流程**。脚手架提供 token、舞台原语、主题和示例，但每个项目仍然应该根据主题重新选择视觉语言。
+旧名 `web-video-presentation` 已退役。默认产物是 MP4（`avp render`）；
+网页演示负责决策与预览，录屏降级为附录。
 
 ---
 
-## 核心理念
-
-- **固定 16:9 舞台**：内容写在稳定的 1920×1080 坐标系里，再按视口缩放。
-- **一个全局 step 游标**：点击或键盘推进 `(chapter, step)`，游标本地持久化。
-- **一步一个想法**：每个节拍独占整屏，不堆叠项目符号。
-- **口播节拍驱动结构**：讲述节奏直接映射为视觉 step。
-- **隐藏 chrome**：进度控制悬浮才出现，录屏画面保持干净。
-- **动效优先**：每一步都需要一个移动的视觉锚点，静态正文是坏味道。
-- **主题 token**：视觉属性通过语义 token 驱动，换主题不只是换颜色。
-- **硬 checkpoint**：稿子/主题、outline、音频合成前都必须停下来与用户确认。
-
----
-
-## 工作流
+## 它做什么
 
 ```text
-Phase 1.1  识别用户输入
-Phase 1.2  文章 -> 口播稿
-   |
-Checkpoint A1  稿子、主题、粗略素材计划
-   |
-Phase 1.3  口播稿 + 原文 -> outline.md
-   |
-Checkpoint A2  outline 确认 + 开发模式选择
-   |
-Phase 2    构建 Vite / React / TS 演示
-   |
-Checkpoint B   询问是否合成音频
-   |
-Phase 3    可选音频合成
-Phase 4    录屏与后期
+article.md
+   │  avp init            项目账本 + TTS 配置 + 演示脚手架
+   │  avp plan            script.md / outline.md / narrations.ts → beats.json
+   ▼
+◆ 停点 1 · Plan          稿子 / 开发计划 / 主题 / 素材 / 模式 一次对齐
+   │  avp plan --approve
+   │  avp tts [--chapter]  合成音频，ffprobe 实测时长回写
+   │  avp compose         生成合成稿骨架；身体 + 钩子手写
+   │  avp check           分级检查（error / warning / report）
+   ▼
+◆ 停点 2 · 渲染闸        check 结论 + 时长表 + 3 张缩略图 → 人回「渲」
+   │  avp render           mp4 + 回执 + 联系表 + 静帧报告
+   ▼
+◆ 停点 3 · 成片复审      联系表 / 抽查帧 / 静帧报告
+   │
+   └─ 附录：RECORDING（录屏路径，非默认）
 ```
 
-这些 checkpoint 是 Skill 契约的一部分：Agent 不应该从原文一路闷头做到成品。主题选择会影响动效气质，outline 确认能避免章节节奏跑偏。
+适用：文章转口播视频、产品演示、技术讲解、发布会 / keynote 风格短片。
+不适用：真人出镜剪辑、纯素材混剪。
 
 ---
 
-## 内含内容
+## 六条命令
+
+| 命令 | 作用 |
+|---|---|
+| `avp init` | 初始化项目（`project.json` / `tts.json` / `presentation/`） |
+| `avp plan` | 校验稿子与章节，生成 `beats.json`；`--approve` 写批准哈希 |
+| `avp tts` | 按拍合成 WAV，回写实测 `durationMs`；`--chapter` 只重做一章 |
+| `avp compose` | 生成 `composition/index.html` 骨架，拼入身体与钩子 |
+| `avp check` | 三级检查；有 error 退出 1，warning / report 不拦 |
+| `avp render` | 过 check 后渲 mp4；`--brief` 只给渲染闸，不产片 |
+
+退出码：**0 = 成功；非 0 = 失败，并给出可机械修复的原因**。
+`--json` 给 agent 读，人话输出给停点用。
+
+---
+
+## 四份账本
+
+| 账本 | 谁是真相源 |
+|---|---|
+| `project.json` | 项目身份、主题、skill 版本 / commit |
+| `beats.json` | 节拍、字幕、音频路径、实测时长、motion |
+| `tts.json` | 后端、默认 / 章节音色与语速 |
+| `output/receipt.json` | 渲染回执：工具链、哈希、音频 / 成片 sha256 |
+
+派生物：`composition/index.html`、`presentation/public/audio/`、`output/`。
+
+---
+
+## 检查分级
+
+- **error**：阻断渲染。音频缺失 / 路径不符 / 回执过期 / 静音拍坏 / 字幕超宽 /
+  say 与 caption 数字专名不一致 / 口播源漂移 / 钩子缺失·超拍·非 seek-safe /
+  tokens 过期 / 语速越界。
+- **warning**：可见不拦。派生字幕 / 音色偏离 / skill commit 漂移。
+- **report**：只报。时长表 / 静帧时段。
+
+`render --brief` 就是停点 2：一行 check 结论、一行时长表、一行缩略图路径。
+
+---
+
+## 仓库结构
 
 ```text
-skills/web-video-presentation/
-├── SKILL.md
-├── README.md / README.zh-CN.md
-├── references/
-│   ├── PRINCIPLES.md
-│   ├── CHAPTER-CRAFT.md
-│   ├── OUTLINE-FORMAT.md
-│   ├── SCRIPT-STYLE.md
-│   ├── THEMES.md
-│   ├── AUDIO.md
-│   └── RECORDING.md
-├── scripts/
-│   └── scaffold.sh
-├── templates/
-│   ├── index.html
-│   ├── vite.config.ts
-│   └── src/
-└── themes/                    # 23 套主题，每套独立设计签名
-    ├── midnight-press/
-    ├── warm-keynote/
-    ├── newsroom/
-    ├── bauhaus-bold/
-    └── ...                     # 完整列表见 references/THEMES.md
+article-video-production/
+├── bin/avp.mjs              # CLI 分发（tsx）
+├── src/                     # init / plan / tts / compose / check / render
+├── templates/               # Vite + React + TS 演示脚手架 + 视觉原子
+├── themes/                  # 23 套 tokens.css
+├── references/              # 8 份契约文档（见下）
+├── examples/trae-harness/   # 22 拍真实夹具：文章 → 音频 → 成片
+├── docs/adr/                # 架构决定
+└── docs/evals/              # 质量基线 rubric
 ```
 
 ---
 
-## 快速上手
-
-把这个 Skill 复制到你的 Agent 会扫描的目录，然后让 Agent 把一篇文章或口播稿做成网页视频演示。
-
-如果要手动脚手架：
+## 快速开始
 
 ```bash
-bash skills/web-video-presentation/scripts/scaffold.sh ./presentation --theme=paper-press
+node bin/avp.mjs init --dir=my-video --theme=bold-signal
+cd my-video
+# 写 script.md / outline.md / presentation/src/chapters/*/narrations.ts
+node ../bin/avp.mjs plan
+node ../bin/avp.mjs plan --approve
+AVP_PYTHON=/path/to/venv/bin/python node ../bin/avp.mjs tts
+node ../bin/avp.mjs compose
+node ../bin/avp.mjs check
+node ../bin/avp.mjs render
 ```
 
-查看可用主题：
-
-```bash
-bash skills/web-video-presentation/scripts/scaffold.sh --list-themes
-```
-
-生成的 `presentation/` 是普通 Vite + React + TypeScript 项目。启动后用录屏工具录制 16:9 舞台即可。
+完整例子见 [examples/trae-harness](./examples/trae-harness)：4 章 / 22 拍 /
+127.5s，含 22 条真实 Kokoro 音频与最终成片。
 
 ---
 
-## 内置主题方向
+## 文档
 
-Skill 内置 **23 套**主题，每套都有独立的设计 DNA —— 不是简单的换色版。下面按底色分两组速览，挑一套接近你目标气质的，或者作为派生新主题的起点。
+| 文档 | 内容 |
+|---|---|
+| [SCRIPT-STYLE.md](./references/SCRIPT-STYLE.md) | 文章 → 口播稿：信息保留、风骨、平台变体 |
+| [OUTLINE-FORMAT.md](./references/OUTLINE-FORMAT.md) | 开发计划字段、信息池、素材清单 |
+| [CHAPTER-CRAFT.md](./references/CHAPTER-CRAFT.md) | 单章实现规则与完工自检 |
+| [THEMES.md](./references/THEMES.md) | 23 套主题、token 契约、派生流程 |
+| [TTS.md](./references/TTS.md) | 后端契约、缓存键、语速边界、静音拍 |
+| [COMPOSE.md](./references/COMPOSE.md) | 合成稿：身体 / 钩子 / 原子 / 字幕 |
+| [RENDER.md](./references/RENDER.md) | 环境、渲染闸、回执、联系表、故障排查 |
+| [RECORDING.md](./references/RECORDING.md) | 附录：录屏与后期 |
 
-### 深色（8 套）
-
-- `midnight-press` 暗色印刷 —— 电影感编辑、暖暗底 + 火热橙
-- `chalk-garden` 粉笔花园 —— 深石板黑板 + 手写体 + 粉笔黄
-- `terminal-green` 终端绿 —— 80 年代磷光终端 + CRT 扫描线
-- `blueprint` 工程蓝图 —— 深海军 + 制图青 + 60px 网格
-- `dark-botanical` 暗夜植物 —— 暖陶 / 玫粉 / 鎏金叠层，时尚刊物封面
-- `neon-cyber` 霓虹赛博 —— 电光青 + 玫红双霓虹，未来派
-- `bold-signal` 焦点信号 —— 大橙色焦点色卡 + Archivo Black，pitch deck
-- `creative-voltage` 电压创意 —— 饱和电光蓝 + 霓黄 + halftone
-
-### 浅色（15 套）
-
-- `paper-press` 亮色印刷 —— 暖奶油纸 + 火热橙
-- `warm-keynote` 暖色 Keynote —— 大圆角 glass slab + 青绿 + 40px 网格
-- `newsroom` 报社 —— NYT 大报、奶油 + 墨黑 + 旗红
-- `bauhaus-bold` 包豪斯 —— 0 圆角 + 4px 厚边 + 偏移实色阴影
-- `sunset-zine` 日落 Zine —— 暖桃 + 玫红 + Fraunces + 虚线剪贴
-- `monochrome-print` 黑白印刷 —— 安静精炼，Monocle / Wallpaper 气质
-- `vintage-editorial` 复古编辑 —— 俏皮 Fraunces + 几何叠层（圆 / 线 / 点）
-- `pastel-dream` 柔光梦 —— 柔粉蓝灰 + 鼠尾草绿 + 右侧 pill 色条
-- `split-canvas` 双拼画布 —— 蜜桃 + 薰衣草 50/50 双底色
-- `electric-studio` 电光企业 —— 净白 + 电光蓝 + 贴底 4px 蓝条
-- `indigo-porcelain` 靛蓝瓷 —— 靛蓝当墨（不是 accent，是字色本身）+ 瓷白
-- `forest-ink` 森林墨 —— 森林绿当墨 + 象牙，旧版国家地理感
-- `kraft-paper` 牛皮纸 —— 深棕当墨 + 牛皮米 + 紫铜 accent
-- `dune` 沙丘 —— 炭褐 + 沙底，几乎无 accent，建筑画廊感
-- `swiss-ikb` 瑞士克莱因蓝 —— 极细 200 weight + IKB + 1px 发丝网格
-
-完整 token 契约、每套的设计签名、以及怎么基于现有主题派生新主题（包括 Swiss 黄 / 绿 / 橙变体），见 [THEMES.md](./references/THEMES.md)。
+其他：[EXAMPLES](./references/EXAMPLES/README.md)、[GLOSSARY](./GLOSSARY.md)、
+[ADR](./docs/adr/)、[质量基线](./docs/evals/)。
 
 ---
 
-## Reference Map
+## 版本
 
-- [PRINCIPLES.md](./references/PRINCIPLES.md)：视频感网页演示的核心原则
-- [CHAPTER-CRAFT.md](./references/CHAPTER-CRAFT.md)：章节实现规则与视觉 checklist
-- [OUTLINE-FORMAT.md](./references/OUTLINE-FORMAT.md)：outline 必须遵循的结构
-- [SCRIPT-STYLE.md](./references/SCRIPT-STYLE.md)：文章转口播稿规则
-- [PATTERNS.md](./references/PATTERNS.md)：可选视觉 primitive 配方
-- [AUDIO.md](./references/AUDIO.md)：可选口播音频合成流程
-- [RECORDING.md](./references/RECORDING.md)：录屏与后期注意事项
-
+`0.1.0`。设计决定见 [docs/adr/0001](./docs/adr/0001-two-artifacts-derive-composition.md) 与
+[docs/adr/0002](./docs/adr/0002-atoms-shared-by-contract.md)。

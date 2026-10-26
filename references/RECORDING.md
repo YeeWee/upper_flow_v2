@@ -1,9 +1,12 @@
-# 录制与后期合成
+# 附录：录制与后期合成
 
-网页做完 + 音频合成完之后，**Auto 模式 + 屏幕录制可以一镜到底**——
-不需要手动点击推进 step、也不需要后期对音频。
+> **这不是默认路径。** 默认产片走 `avp render`（见 [RENDER.md](RENDER.md)）：
+> 合成稿 + GSAP 时间线直接渲 mp4，音画天然同步。只有在需要真人操作画面、
+> 客户要求原始录屏、或只想快速看网页节奏时，才走本附录。
 
-如果你不打音频，仍可走"手动点击 + 后期配"的传统路径（在文档末尾）。
+网页 + 音频都就位后，**Auto 模式 + 屏幕录制可以一镜到底**。
+
+如果你跳过了 `avp tts`，仍可走「手动点击 + 后期配」的传统路径（见末尾）。
 
 ---
 
@@ -12,18 +15,18 @@
 ### 前置
 
 - 章节代码做完，每章都有 `narrations.ts`
-- 已经跑过 `npm run extract-narrations` + `npm run synthesize-audio`，
-  `public/audio/<id>/<step>.mp3` 全部就位
+- 已经跑过 `avp tts`，
+  `presentation/public/audio/<chapter>/<N>.wav` 全部就位
 - `npm run dev` 跑着，浏览器能打开页面
 
 ### 录制步骤
 
 1. **浏览器全屏**（F11 / Ctrl+Cmd+F），URL 改成
-   `http://localhost:5173/?auto=1`
+   `http://localhost:5174/?auto=1`
 2. 看到 "Press SPACE to start" 蒙层 = Auto 模式就绪
 3. **打开屏幕录制**（QuickTime / OBS / Cmd+Shift+5），开始录
-4. **按一次 Space** → 蒙层消失 → step 0 出现，1.mp3 自动播 →
-   播完自动推进到 step 1 → 2.mp3 → … → 最后一个 step 播完 → 停在终态
+4. **按一次 Space** → 蒙层消失 → step 0 出现，1.wav 自动播 →
+   播完自动推进到 step 1 → 2.wav → … → 最后一个 step 播完 → 停在终态
 5. **停止录制** → 后期裁掉头尾（Space 那一下、最后停在终态的尾巴）就是
    成品
 
@@ -56,9 +59,9 @@
 
 ## 备用流程：没合成音频时手动录屏
 
-如果你跳过了音频合成（`Checkpoint Audio` 选了"不合成"），按老方法：
+如果你跳过了 `avp tts`，按老方法：
 
-1. 浏览器全屏 → 打开 `localhost:5173`（默认 Manual 模式）
+1. 浏览器全屏 → 打开 `localhost:5174`（默认 Manual 模式）
 2. **刷新一次**清空历史 step
 3. 开始录屏 → 按口播节奏点击空白推进 step
 4. 后期用任何剪辑软件配音 + 调时间线
@@ -73,5 +76,5 @@
 
 ---
 
-> agent 在 Checkpoint Audio 后**主动告诉用户**上面 Auto 模式录屏的
-> 路径，让用户知道下一步怎么把网页变成 mp4。
+> 录屏是附录。默认路径永远是 `avp render`；不要因为录屏顺手就跳过
+> 停点 2 的渲染闸。

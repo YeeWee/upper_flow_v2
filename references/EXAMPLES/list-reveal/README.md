@@ -1,5 +1,10 @@
 # Anchor: list-reveal（列举型逐个揭示）
 
+
+> ⚠️ **这是迁移前的旧写法**：`hk-*` / `lr-*` 是章节私有 CSS 类，**不是**
+> 视觉原子契约。只看它的「形」——step 切分、字号狠对比、逐项揭示顺序；
+> 不要照抄类名。原子写法（类名 + 必填 DOM 外壳 + `.in/.lit/.dim`）见
+> [`../../COMPOSE.md`](../../COMPOSE.md) 与 `templates/atoms.html`。
 > ⚠️ **这是结构示意，不是抄袭模板**。先走 [`../../CHAPTER-CRAFT.md`](../../CHAPTER-CRAFT.md)
 > Part 0 五问。本 anchor 给的是"列举型章节的结构骨架"（单网格 N 槽位 +
 > 每 step 只填一个槽位 + 位置不重排）——保留这个**结构**，**按本项目的

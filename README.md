@@ -1,160 +1,135 @@
-# Article Video Production
+# article-video-production
 
-**把文章稳定做成中文短视频的可归因流水线。** 旧名 `web-video-presentation` 已退役；本项目收敛为单一 skill `article-video-production`，录制路径降级为附录。
+**把一篇文章或口播稿，做成一支可归因、可重渲的 16:9 成片。**
 
-[中文文档](./README.zh-CN.md) · [Back to collection root](../../README.md)
-
-![Web Video Presentation Skill](../../dist/imgs/web-video-presentation-skill.png)
-
----
-
-## What Is This?
-
-`web-video-presentation` helps an agent build a Vite + React + TypeScript presentation that behaves like a video production surface rather than a slide deck. Each click advances one narration beat, each step owns the whole 1920×1080 stage, and the progress UI stays hidden unless hovered so the output is clean for screen recording.
-
-It is designed for:
-
-- Turning a written article into a Bilibili / YouTube / video-channel narration script
-- Turning an existing voiceover script into a cinematic web presentation
-- Building product demos, tutorials, keynote-style explainers, and visual talks
-- Creating “dynamic PPT, but not PPT” experiences with strong motion and pacing
-- Optionally synthesizing narration audio after the visual outline is approved
-
-The skill is primarily a **methodology and collaboration workflow**. The scaffold supplies reusable tokens, stage primitives, themes, and examples, but each project should still choose a visual language that fits the topic.
+旧名 `web-video-presentation` 已退役。这个 skill 的默认产物是 MP4
+（`avp render`）；网页演示是决策与预览面，录屏是附录，不再是主路径。
 
 ---
 
-## Core Ideas
-
-- **Fixed 16:9 stage** — content is authored in a stable 1920×1080 coordinate system and scaled to the viewport.
-- **One global step cursor** — click or keyboard advances `(chapter, step)`, with the cursor persisted locally.
-- **One step, one idea** — every beat gets a focused full-screen scene instead of accumulating slide bullets.
-- **Script beats drive structure** — narration rhythm maps directly to visual steps.
-- **Hidden chrome** — progress controls are hover-only, keeping recordings clean.
-- **Motion first** — each scene needs a moving visual anchor; static paragraphs are treated as a smell.
-- **Theme tokens** — visual decisions flow through semantic tokens so themes can change the whole feel.
-- **Hard checkpoints** — the agent pauses after script/theme alignment, after outline approval, and before optional audio synthesis.
-
----
-
-## Workflow
+## 它做什么
 
 ```text
-Phase 1.1  Identify input
-Phase 1.2  Article -> narration script
-   |
-Checkpoint A1  Script, theme, and rough asset plan
-   |
-Phase 1.3  Script + article -> outline.md
-   |
-Checkpoint A2  Outline approval + development mode
-   |
-Phase 2    Build the Vite / React / TS presentation
-   |
-Checkpoint B   Ask whether to synthesize audio
-   |
-Phase 3    Optional audio synthesis
-Phase 4    Recording and post-production
+article.md
+   │  avp init            项目账本 + TTS 配置 + 演示脚手架
+   │  avp plan            script.md / outline.md / narrations.ts → beats.json
+   ▼
+◆ 停点 1 · Plan          稿子 / 开发计划 / 主题 / 素材 / 模式 一次对齐
+   │  avp plan --approve
+   │  avp tts [--chapter]  合成音频，ffprobe 实测时长回写
+   │  avp compose         生成合成稿骨架；身体 + 钩子手写
+   │  avp check           分级检查（error / warning / report）
+   ▼
+◆ 停点 2 · 渲染闸        check 结论 + 时长表 + 3 张缩略图 → 人回「渲」
+   │  avp render           mp4 + 回执 + 联系表 + 静帧报告
+   ▼
+◆ 停点 3 · 成片复审      联系表 / 抽查帧 / 静帧报告
+   │
+   └─ 附录：RECORDING（录屏路径，非默认）
 ```
 
-The checkpoints are part of the skill contract: the agent should not silently rush from raw article to finished code. Theme choice influences motion design, and outline approval keeps chapter pacing from drifting.
+适用：文章转口播视频、产品演示、技术讲解、发布会/keynote 风格短片。
+不适用：真人出镜剪辑、纯素材混剪——那些走别的 skill。
 
 ---
 
-## What It Ships
+## 六条命令
+
+| 命令 | 作用 |
+|---|---|
+| `avp init` | 初始化项目（`project.json` / `tts.json` / `presentation/`） |
+| `avp plan` | 校验稿子与章节，生成 `beats.json`；`--approve` 写批准哈希 |
+| `avp tts` | 按拍合成 WAV，回写实测 `durationMs`；`--chapter` 只重做一章 |
+| `avp compose` | 生成 `composition/index.html` 骨架，拼入身体与钩子 |
+| `avp check` | 三级检查；有 error 退出 1，warning/report 不拦 |
+| `avp render` | 过 check 后渲 mp4；`--brief` 只给渲染闸，不产片 |
+
+退出码约定：**0 = 成功；非 0 = 失败，并给出可机械修复的原因**。
+`--json` 给 agent 读，人话输出给停点用。
+
+---
+
+## 四份账本
+
+| 账本 | 谁是真相源 |
+|---|---|
+| `project.json` | 项目身份、主题、skill 版本 / commit |
+| `beats.json` | 节拍、字幕、音频路径、实测时长、motion |
+| `tts.json` | 后端、默认/章节音色与语速 |
+| `output/receipt.json` | 渲染回执：工具链、哈希、音频/成片 sha256 |
+
+派生物：`composition/index.html`、`presentation/public/audio/`、`output/`。
+都能从上述账本重建；不要手改。
+
+---
+
+## 检查分级
+
+- **error**：阻断渲染。音频缺失 / 路径不符 / 回执过期 / 静音拍坏 / 字幕超宽 /
+  say 与 caption 数字专名不一致 / 口播源漂移 / 钩子缺失·超拍·非 seek-safe /
+  tokens 过期 / 语速越界。
+- **warning**：可见不拦。派生字幕 / 音色偏离 / skill commit 漂移。
+- **report**：只报。时长表 / 静帧时段。
+
+`render --brief` 的输出就是停点 2：一行 check 结论、一行时长表、一行
+缩略图路径。
+
+---
+
+## 仓库结构
 
 ```text
-skills/web-video-presentation/
-├── SKILL.md
-├── README.md / README.zh-CN.md
-├── references/
-│   ├── PRINCIPLES.md
-│   ├── CHAPTER-CRAFT.md
-│   ├── OUTLINE-FORMAT.md
-│   ├── SCRIPT-STYLE.md
-│   ├── THEMES.md
-│   ├── AUDIO.md
-│   └── RECORDING.md
-├── scripts/
-│   └── scaffold.sh
-├── templates/
-│   ├── index.html
-│   ├── vite.config.ts
-│   └── src/
-└── themes/                    # 23 themes, each with its own signature
-    ├── midnight-press/
-    ├── warm-keynote/
-    ├── newsroom/
-    ├── bauhaus-bold/
-    └── ...                     # full list in references/THEMES.md
+article-video-production/
+├── bin/avp.mjs              # CLI 分发（tsx）
+├── src/                     # init / plan / tts / compose / check / render
+├── templates/               # Vite + React + TS 演示脚手架 + 视觉原子
+├── themes/                  # 23 套 tokens.css
+├── references/              # 8 份契约文档（见下）
+├── examples/trae-harness/   # 22 拍真实夹具：文章 → 音频 → 成片
+├── docs/adr/                # 架构决定
+└── docs/evals/              # 质量基线 rubric
 ```
 
 ---
 
-## Quick Start
-
-Copy the skill into the directory your agent scans, then ask it to turn a script or article into a web-video presentation.
-
-To scaffold manually from inside a project:
+## 快速开始
 
 ```bash
-bash skills/web-video-presentation/scripts/scaffold.sh ./presentation --theme=paper-press
+node bin/avp.mjs init --dir=my-video --theme=bold-signal
+cd my-video
+# 写 script.md / outline.md / presentation/src/chapters/*/narrations.ts
+node ../bin/avp.mjs plan
+node ../bin/avp.mjs plan --approve
+AVP_PYTHON=/path/to/venv/bin/python node ../bin/avp.mjs tts
+node ../bin/avp.mjs compose
+node ../bin/avp.mjs check
+node ../bin/avp.mjs render
 ```
 
-List available themes:
-
-```bash
-bash skills/web-video-presentation/scripts/scaffold.sh --list-themes
-```
-
-The generated `presentation/` project is a normal Vite + React + TypeScript app. Run it like any other Vite project, then record the 16:9 stage with your screen recorder.
+完整例子见 [examples/trae-harness](./examples/trae-harness)：4 章 / 22 拍 /
+127.5s，含 22 条真实 Kokoro 音频与最终成片。
 
 ---
 
-## Built-In Theme Directions
+## 文档
 
-The skill ships **23 themes**, each with its own design DNA — not a simple color swap. Browse the two groups below by canvas tone, pick one that fits, or use any of them as a starting point for a derived theme.
+| 文档 | 内容 |
+|---|---|
+| [SCRIPT-STYLE.md](./references/SCRIPT-STYLE.md) | 文章 → 口播稿：信息保留、风骨、平台变体 |
+| [OUTLINE-FORMAT.md](./references/OUTLINE-FORMAT.md) | 开发计划字段、信息池、素材清单 |
+| [CHAPTER-CRAFT.md](./references/CHAPTER-CRAFT.md) | 单章实现规则与完工自检 |
+| [THEMES.md](./references/THEMES.md) | 23 套主题、token 契约、派生流程 |
+| [TTS.md](./references/TTS.md) | 后端契约、缓存键、语速边界、静音拍 |
+| [COMPOSE.md](./references/COMPOSE.md) | 合成稿：身体 / 钩子 / 原子 / 字幕 |
+| [RENDER.md](./references/RENDER.md) | 环境、渲染闸、回执、联系表、故障排查 |
+| [RECORDING.md](./references/RECORDING.md) | 附录：录屏与后期 |
 
-### Dark (8 themes)
-
-- `midnight-press` — cinematic editorial dark, warm espresso + hot orange
-- `chalk-garden` — slate chalkboard, handwritten Patrick Hand + chalk-yellow
-- `terminal-green` — 80s phosphor CRT, mono-only + scanlines
-- `blueprint` — drafting board, deep navy + cyan + 60px grid
-- `dark-botanical` — premium editorial dark, terracotta / blush / gold glow
-- `neon-cyber` — cyberpunk future, cyan + magenta double-neon
-- `bold-signal` — hero pitch deck, dark gradient + orange focal card
-- `creative-voltage` — saturated electric blue + neon yellow halftone
-
-### Light (15 themes)
-
-- `paper-press` — editorial paper, warm cream + hot orange
-- `warm-keynote` — modern SaaS keynote, glass slab + teal + warm grid
-- `newsroom` — NYT broadsheet, newsprint cream + banner red
-- `bauhaus-bold` — manifesto modernist, 0 radius + 4px thick frame
-- `sunset-zine` — risograph zine, peach + magenta + dashed cut lines
-- `monochrome-print` — refined Monocle / Wallpaper print restraint
-- `vintage-editorial` — witty Fraunces + geometric overlay (circle / line / dot)
-- `pastel-dream` — soft pastel + sage + right-edge pill ribbon
-- `split-canvas` — dual-tone, peach left + lavender right
-- `electric-studio` — corporate clarity, crisp white + electric-blue base bar
-- `indigo-porcelain` — indigo IS the ink (not just an accent) + porcelain white
-- `forest-ink` — forest green IS the ink + ivory (vintage National Geographic)
-- `kraft-paper` — deep brown IS the ink + kraft beige + copper accent
-- `dune` — charcoal + sand, near-zero accent (architecture brochure)
-- `swiss-ikb` — extra-light 200 weight Helvetica + IKB + 1px hairline grid
-
-See [THEMES.md](./references/THEMES.md) for the full token contract, signature for each theme, and how to derive new themes from existing ones (including Swiss yellow / green / orange variants).
+其他：[EXAMPLES](./references/EXAMPLES/README.md)（完整章节 anchor）、
+[GLOSSARY](./GLOSSARY.md)、[ADR](./docs/adr/)、[质量基线](./docs/evals/)。
 
 ---
 
-## Reference Map
+## 版本
 
-- [PRINCIPLES.md](./references/PRINCIPLES.md) — core rules for video-like web presentations
-- [CHAPTER-CRAFT.md](./references/CHAPTER-CRAFT.md) — chapter implementation rules and visual checklist
-- [OUTLINE-FORMAT.md](./references/OUTLINE-FORMAT.md) — required outline structure
-- [SCRIPT-STYLE.md](./references/SCRIPT-STYLE.md) — article-to-narration rewrite guidance
-- [PATTERNS.md](./references/PATTERNS.md) — optional visual primitive recipes
-- [AUDIO.md](./references/AUDIO.md) — optional narration synthesis workflow
-- [RECORDING.md](./references/RECORDING.md) — screen recording and post-production notes
-
+`0.1.0`。设计决定见 [docs/adr/0001](./docs/adr/0001-two-artifacts-derive-composition.md) 与
+[docs/adr/0002](./docs/adr/0002-atoms-shared-by-contract.md)。
