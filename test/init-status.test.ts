@@ -51,6 +51,33 @@ describe("avp init / status", () => {
     );
     assert.equal(projectTokens, themeTokens);
 
+    // 视觉原子层随脚手架落地：画廊入口、样式契约、演示已接入
+    assert.ok(existsSync(join(dir, "presentation", "atoms.html")));
+    const atomsCss = readText(
+      join(dir, "presentation", "src", "styles", "atoms.css"),
+    );
+    for (const atom of [
+      "kicker",
+      "hero",
+      "stat",
+      "list",
+      "card",
+      "quote",
+      "badge",
+      "rule",
+      "footer",
+    ]) {
+      for (const state of ["in", "lit", "dim"]) {
+        assert.match(atomsCss, new RegExp(`\\.atom-${atom}\\.${state}\\b`));
+      }
+    }
+    const example = readText(
+      join(dir, "presentation", "src", "chapters", "01-example", "Example.tsx"),
+    );
+    assert.match(example, /atom-hero in/);
+    assert.match(example, /atom-hero lit/);
+    assert.match(example, /atom-quote dim/);
+
     // status 四列，新项目全部待办
     const status = runAvp(["status", "--json"], dir);
     assert.equal(status.status, 0, status.stderr);
