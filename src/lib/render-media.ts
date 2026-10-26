@@ -3,7 +3,7 @@ import { copyFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import type { BeatsManifest } from "./beats";
 import { AvpError } from "./errors";
-import { ensureDir, pathExists } from "./fs";
+import { ensureDir, pathExists, relativeTo } from "./fs";
 import { sha256File } from "./audio";
 import {
   compareFrames,
@@ -433,8 +433,4 @@ export function writeRenderReceipt(
     },
   };
   return receipt;
-}
-
-function relativeTo(root: string, file: string): string {
-  return file.startsWith(`${root}/`) ? file.slice(root.length + 1) : file;
 }

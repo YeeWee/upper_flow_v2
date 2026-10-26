@@ -4,7 +4,7 @@ import { readBeats } from "../lib/beats";
 import type { BeatsManifest } from "../lib/beats";
 import { runCheckCommand } from "./check";
 import { AvpError } from "../lib/errors";
-import { writeJson } from "../lib/fs";
+import { relativeTo, writeJson } from "../lib/fs";
 import { projectPaths, readLedger } from "../lib/project";
 import {
   makeThumbnails,
@@ -53,10 +53,6 @@ function summarizeChapters(manifest: BeatsManifest): DurationRow[] {
     rows.set(beat.chapter, row);
   }
   return [...rows.values()];
-}
-
-function relative(root: string, file: string): string {
-  return file.startsWith(`${root}/`) ? file.slice(root.length + 1) : file;
 }
 
 async function assertCheckPassed(root: string): Promise<{
@@ -118,7 +114,7 @@ export async function runRenderCommand(
       totalMs,
       chapters,
       check: summary,
-      thumbnails: thumbs.files.map((file) => relative(root, file)),
+      thumbnails: thumbs.files.map((file) => relativeTo(root, file)),
     };
   }
 
@@ -142,10 +138,10 @@ export async function runRenderCommand(
     totalMs: render.durationMs,
     chapters,
     check: summary,
-    output: relative(root, output),
-    receipt: relative(root, paths.receipt),
-    contactSheet: relative(root, artifacts.contactSheet.file),
-    stillReport: relative(root, artifacts.stillReport.file),
+    output: relativeTo(root, output),
+    receipt: relativeTo(root, paths.receipt),
+    contactSheet: relativeTo(root, artifacts.contactSheet.file),
+    stillReport: relativeTo(root, artifacts.stillReport.file),
     staticBeats: artifacts.stillReport.staticBeats,
   };
 }
