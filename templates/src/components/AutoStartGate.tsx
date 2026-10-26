@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import "./AutoStartGate.css";
 
 interface Props {
@@ -13,12 +14,29 @@ interface Props {
  * After the user starts, the gate is hidden for the rest of the session.
  */
 export function AutoStartGate({ visible, onStart }: Props) {
+  const gateRef = useRef<HTMLDivElement>(null);
+
+  // Focus the gate so its Space handler wins over the global stepper shortcut.
+  // Otherwise pressing Space would start auto playback AND skip the first beat.
+  useEffect(() => {
+    if (visible) gateRef.current?.focus();
+  }, [visible]);
+
   if (!visible) return null;
+
   return (
     <div
+      ref={gateRef}
       className="auto-gate"
       data-no-advance
       onClick={onStart}
+      onKeyDown={(e) => {
+        if (e.key === " ") {
+          e.preventDefault();
+          e.stopPropagation();
+          onStart();
+        }
+      }}
       role="button"
       tabIndex={0}
     >

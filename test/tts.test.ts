@@ -123,6 +123,35 @@ describe("avp tts", () => {
     assert.equal(run.json.cached, 2);
   });
 
+  test("plan 重写 beats 后仍命中缓存，并恢复时长与 tts 元组", () => {
+    // avp plan 每次都会重建 beats.json：durationMs / tts 被重置为 null。
+    // 只要 say / backend / voice / speed 没变，缓存就该命中，不能重跑去模型。
+    const beats = readJson(join(dir, "beats.json"));
+    for (const beat of beats.beats) {
+      beat.durationMs = null;
+      beat.tts = null;
+    }
+    writeFileSync(join(dir, "beats.json"), JSON.stringify(beats, null, 2));
+
+    const run = runAvp(["tts", "--json"], dir);
+    assert.equal(run.status, 0, run.stderr);
+    assert.equal(run.json.synthesized, 0);
+    assert.equal(run.json.cached, 2);
+    assert.equal(run.json.complete, true);
+
+    const restored = readJson(join(dir, "beats.json"));
+    const [first, silent, third] = restored.beats;
+    assert.equal(silent.durationMs, 1500);
+    assert.ok(first.durationMs > 300);
+    assert.equal(first.tts.backend, "fake");
+    assert.equal(first.tts.hash.length, 64);
+    assert.ok(third.durationMs > 300);
+
+    const status = runAvp(["status", "--json"], dir);
+    const tts = status.json.steps.find((step: any) => step.step === "tts");
+    assert.equal(tts.status, "current");
+  });
+
   test("改一章语速只重合成该章", () => {
     const tts = readJson(join(dir, "tts.json"));
     tts.chapters = { beta: { speed: 1.03 } };

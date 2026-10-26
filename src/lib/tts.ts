@@ -339,14 +339,16 @@ export function runTts(
     const allowed =
       options.chapter === undefined || options.chapter === beat.chapter;
 
-    const cachedBeat =
-      entry &&
-      audioOk &&
-      beat.tts?.hash === key &&
-      beat.durationMs !== null &&
-      beat.durationMs > 0;
+    // avp plan 会重建 beats.json，把 durationMs / tts 重置为 null；这并不
+    // 代表音频失效。只要 say / backend / voice / speed 的缓存键没变且音频
+    // sha256 对得上，就恢复元数据并命中缓存，而不是重跑模型。
+    const cachedBeat = Boolean(
+      entry && audioOk && (beat.tts === null || beat.tts.hash === key),
+    );
 
-    if (cachedBeat) {
+    if (cachedBeat && entry) {
+      beat.tts = beat.tts ?? { backend: config.backend, voice, speed, hash: key };
+      beat.durationMs = beat.durationMs ?? entry.durationMs;
       cached++;
     } else if (!allowed) {
       // 只重合成指定章节；其它章保留旧值（没合成过就留空，最后判 incomplete）。

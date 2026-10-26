@@ -1,0 +1,425 @@
+/* ─────────────────────────────────────────────────────────────────────
+ * 第 2 章 · 四个核心机制 — 只写布局与内容驱动的动效。
+ * 原子的状态外观在 atoms.css；这里不重定义 .atom-*，不新增 token。
+ * ───────────────────────────────────────────────────────────────────── */
+
+.ar-scene {
+  overflow: hidden;
+}
+
+.ar-step {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  position: relative;
+  z-index: 2;
+}
+
+.ar-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-5);
+}
+
+/* ─── step 0: 步骤隔离 ─── */
+.ar-isolation {
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 380px;
+  align-items: center;
+  gap: 72px;
+}
+
+.ar-flow {
+  display: flex;
+  align-items: center;
+  gap: 76px;
+}
+
+.ar-node {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 250px;
+  min-height: 190px;
+  justify-content: flex-end;
+  padding: 28px 26px;
+  background: var(--surface-2);
+  border: var(--bw-1) solid var(--rule);
+  border-radius: var(--r-card);
+  opacity: 0;
+  animation: ar-rise 700ms var(--ease-quart) both;
+}
+.ar-node--1 {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  animation-delay: 80ms;
+}
+.ar-node--2 { animation-delay: 220ms; }
+.ar-node--3 { animation-delay: 360ms; }
+
+.ar-node + .ar-node::before {
+  content: "×";
+  position: absolute;
+  left: -52px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-display-en);
+  font-size: 34px;
+  line-height: 1;
+  color: var(--accent);
+}
+
+.ar-node__no {
+  font-family: var(--font-mono);
+  font-size: var(--t-micro);
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  color: var(--text-mute);
+}
+.ar-node--1 .ar-node__no { color: var(--accent); }
+
+.ar-node__label {
+  font-family: var(--font-display-cn);
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 1.2;
+  color: var(--text);
+}
+.ar-node:not(.ar-node--1) .ar-node__label { color: var(--text-mute); }
+
+.ar-node__block {
+  position: absolute;
+  top: -18px;
+  right: -16px;
+  padding: 5px 12px;
+  background: var(--accent);
+  color: var(--surface);
+  border-radius: var(--r-pill);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: var(--track-caps);
+}
+
+.ar-aside .atom-list__item {
+  padding: 18px 0;
+  font-size: 22px;
+}
+
+/* ─── step 1: 信息瓶颈 ─── */
+.ar-pipe {
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 0.9fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 28px;
+}
+
+.ar-pipe .atom-stat__value {
+  font-size: clamp(150px, 12vw, 210px);
+}
+
+.ar-channel {
+  position: relative;
+  height: 240px;
+  border-left: var(--bw-1) solid var(--rule);
+  border-right: var(--bw-1) solid var(--rule);
+}
+.ar-channel__wall {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 74px;
+  background: var(--surface-2);
+  border-top: var(--bw-1) solid var(--rule);
+  border-bottom: var(--bw-1) solid var(--rule);
+}
+.ar-channel__wall--top { top: 0; }
+.ar-channel__wall--bottom { bottom: 0; }
+
+.ar-channel__gate {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 16px;
+  height: 92px;
+  margin: -46px 0 0 -8px;
+  background: var(--accent);
+  border-radius: 8px;
+}
+
+.ar-channel__dot {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  margin-top: -6px;
+  border-radius: 50%;
+  background: var(--text);
+  opacity: 0;
+  animation: ar-token 2.4s linear infinite;
+}
+.ar-channel__dot--1 { animation-delay: 0ms; }
+.ar-channel__dot--2 { animation-delay: 800ms; }
+.ar-channel__dot--3 { animation-delay: 1600ms; }
+
+.ar-rule { margin: 4px 0; }
+
+.ar-notes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 56px;
+}
+.ar-notes .atom-list__item { font-size: 21px; }
+
+/* ─── step 2: 三 Agent 并行 ─── */
+.ar-parallel {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 30px;
+  padding-top: 40px;
+}
+
+.ar-lane {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  animation: ar-rise 720ms var(--ease-quart) both;
+}
+.ar-lane--1 { animation-delay: 100ms; }
+.ar-lane--2 { animation-delay: 240ms; }
+.ar-lane--3 { animation-delay: 380ms; }
+
+.ar-lane__rail {
+  position: relative;
+  display: block;
+  height: 2px;
+  margin-bottom: 26px;
+  background: var(--rule);
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: ar-line-grow 700ms var(--ease-expo) 160ms both;
+}
+.ar-lane__pulse {
+  position: absolute;
+  top: -4px;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 16px var(--accent-glow);
+  animation: ar-pulse 2.6s var(--ease-soft) infinite;
+}
+.ar-lane--2 .ar-lane__pulse { animation-delay: 600ms; }
+.ar-lane--3 .ar-lane__pulse { animation-delay: 1200ms; }
+
+.ar-lane .atom-card {
+  flex: 1;
+  justify-content: flex-end;
+  min-height: 430px;
+  padding: 34px 30px;
+}
+.ar-lane .atom-card__title { font-size: 54px; }
+
+.ar-parallel__foot {
+  display: flex;
+  gap: var(--space-3);
+}
+
+/* ─── step 3: 铁面编排器 / Gate ─── */
+.ar-gate-wrap {
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  align-items: center;
+  gap: 80px;
+}
+
+.ar-gate {
+  position: relative;
+  height: 520px;
+}
+.ar-gate__post {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 46px;
+  background: var(--surface-2);
+  border: var(--bw-1) solid var(--rule);
+}
+.ar-gate__post--left { left: 16%; }
+.ar-gate__post--right { right: 16%; }
+
+.ar-gate__bar {
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  top: 46%;
+  height: 30px;
+  background: var(--accent);
+  box-shadow: 0 0 40px var(--accent-glow);
+  animation: ar-gate-drop 900ms var(--ease-expo) 180ms both;
+}
+.ar-gate__status {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 62%;
+  text-align: center;
+  font-family: var(--font-display-en);
+  font-size: 56px;
+  letter-spacing: 0.16em;
+  color: var(--accent);
+}
+.ar-gate__lamp {
+  position: absolute;
+  left: 50%;
+  top: 14%;
+  width: 18px;
+  height: 18px;
+  margin-left: -9px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 10px var(--accent-soft);
+  animation: ar-lamp 1.8s var(--ease-soft) infinite;
+}
+.ar-gate__status,
+.ar-gate-copy > * {
+  opacity: 0;
+  animation: ar-rise 700ms var(--ease-quart) 320ms both;
+}
+
+.ar-gate-copy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+.ar-gate-copy .atom-list__item { font-size: 23px; }
+.ar-gate-badge { align-self: flex-start; }
+
+/* ─── step 4: 四机制流水线 ─── */
+.ar-pipe-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-5);
+}
+.ar-pipe-head .atom-stat__value { font-size: clamp(120px, 8vw, 168px); }
+
+.ar-pipeline {
+  position: relative;
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: center;
+  gap: 26px;
+  padding: 40px 0;
+}
+.ar-pipeline__line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 2px;
+  background: var(--rule);
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: ar-line-grow 1200ms var(--ease-expo) 160ms both;
+}
+
+.ar-pipe-node {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 28px 24px;
+  background: var(--surface-2);
+  border: var(--bw-1) solid var(--rule);
+  border-radius: var(--r-card);
+  animation: ar-node-lit 620ms var(--ease-quart) both;
+}
+.ar-pipe-node--1 { animation-delay: 260ms; }
+.ar-pipe-node--2 { animation-delay: 460ms; }
+.ar-pipe-node--3 { animation-delay: 660ms; }
+.ar-pipe-node--4 { animation-delay: 860ms; }
+
+.ar-pipe-node__no {
+  font-family: var(--font-mono);
+  font-size: var(--t-micro);
+  letter-spacing: var(--track-caps);
+  color: var(--accent);
+}
+.ar-pipe-node__label {
+  font-family: var(--font-display-cn);
+  font-weight: 700;
+  font-size: 34px;
+  color: var(--text);
+}
+
+.ar-pipeline__note {
+  margin: 0;
+  max-width: 70ch;
+  font-family: var(--font-body);
+  font-size: 22px;
+  line-height: 1.6;
+  color: var(--text-2);
+}
+
+/* ─── step 5: 过渡静帧（motion: static，不放入场动画） ─── */
+.ar-static {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-5);
+}
+.ar-static__rule { margin-top: var(--space-5); }
+.ar-static .atom-footer { margin-top: auto; }
+
+/* ─── motion ─── */
+@keyframes ar-rise {
+  from { opacity: 0; transform: translateY(26px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes ar-token {
+  0%   { left: 0; opacity: 0; }
+  12%  { opacity: 1; }
+  50%  { opacity: 1; }
+  100% { left: calc(100% - 12px); opacity: 0; }
+}
+@keyframes ar-line-grow {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+@keyframes ar-gate-drop {
+  from { transform: translateY(-280px); }
+  to   { transform: translateY(0); }
+}
+@keyframes ar-lamp {
+  0%, 100% { opacity: 0.45; }
+  50%      { opacity: 1; }
+}
+@keyframes ar-pulse {
+  0%   { left: 0; opacity: 0; }
+  15%  { opacity: 1; }
+  85%  { opacity: 1; }
+  100% { left: calc(100% - 10px); opacity: 0; }
+}
+@keyframes ar-node-lit {
+  from {
+    border-color: var(--rule);
+    background: var(--surface-2);
+  }
+  to {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+  }
+}
