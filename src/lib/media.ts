@@ -139,8 +139,9 @@ export interface FrameDiff {
 }
 
 /**
- * 两张同尺寸 PNG 的像素差：逐像素比较 RGB24，任一通道不同即算变化。
- * 差异百分比 = 变化像素数 / 总像素数 × 100（spec #16 的 <0.1% 口径）。
+ * 两张同尺寸 PNG 的像素差：逐像素累加 RGB 通道绝对差，再除以总通道
+ * 动态范围。这样压缩噪声（±1~2）不会把静止拍误判成运动；一次真实
+ * 的整屏切换仍会接近 100%。spec #16 的 <0.1% 口径即此百分比。
  * SSIM 仍保留在结果里，方便回执/报告对照。
  */
 export function compareFrames(a: string, b: string): FrameDiff {
@@ -154,19 +155,13 @@ export function compareFrames(a: string, b: string): FrameDiff {
     );
   }
 
-  let changedPixels = 0;
-  for (let offset = 0; offset < frameA.length; offset += 3) {
-    if (
-      frameA[offset] !== frameB[offset] ||
-      frameA[offset + 1] !== frameB[offset + 1] ||
-      frameA[offset + 2] !== frameB[offset + 2]
-    ) {
-      changedPixels++;
-    }
+  let absoluteDiff = 0;
+  for (let offset = 0; offset < frameA.length; offset++) {
+    absoluteDiff += Math.abs(frameA[offset]! - frameB[offset]!);
   }
-  const totalPixels = frameA.length / 3;
+  const channels = frameA.length;
   const diffPercent =
-    totalPixels === 0 ? 0 : (changedPixels / totalPixels) * 100;
+    channels === 0 ? 0 : (absoluteDiff / (channels * 255)) * 100;
 
   const { stderr } = run("ffmpeg", [
     "-hide_banner",

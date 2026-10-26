@@ -39,7 +39,7 @@ describe("compareFrames", () => {
     identical = join(dir, "identical.png");
     changed = join(dir, "changed.png");
     makePng(identical);
-    // 16×16 里只改左上角一个像素：差异应为 1/256。
+    // 16×16 里只改左上角一个像素（RGB 三通道）：平均差异 = 3×255 / (256×3×255)。
     makePng(changed, "drawbox=x=0:y=0:w=1:h=1:color=white:t=fill");
   });
 
@@ -53,9 +53,9 @@ describe("compareFrames", () => {
     assert.ok(diff.diffPercent < STILL_THRESHOLD_PERCENT);
   });
 
-  test("单个像素变化按像素占比报告，越过静帧阈值", () => {
+  test("单个通道变化按平均像素差报告，越过静帧阈值", () => {
     const diff = compareFrames(identical, changed);
-    assert.equal(diff.diffPercent, (1 / 256) * 100);
+    assert.ok(Math.abs(diff.diffPercent - 100 / 256) < 1e-9);
     assert.ok(diff.diffPercent > STILL_THRESHOLD_PERCENT);
   });
 });
