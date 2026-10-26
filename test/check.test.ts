@@ -622,9 +622,9 @@ describe("avp check", () => {
         (item: any) => item.id === "caption-derived",
       );
       assert.ok(derived);
-      assert.match(derived.message, /2\/3/u);
+      assert.match(derived.message, /1\/3/u);
       assert.match(derived.message, /example-2/u);
-      assert.match(derived.message, /example-3/u);
+      assert.doesNotMatch(derived.message, /example-3/u);
 
       const beats = readJson(join(dir, "beats.json")).beats;
       const total = beats.reduce(

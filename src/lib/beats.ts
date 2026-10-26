@@ -250,9 +250,9 @@ export function buildBeats(
         captionSource = "authored";
         assertAuthoredCaption(id, caption);
       } else if (say === "") {
-        // 静音拍不做字幕推导：留空，不报错、不加省略号。
+        // 静音拍不做字幕推导：空字幕是手写的契约（types.ts 承诺无派生字幕）。
         caption = "";
-        captionSource = "derived";
+        captionSource = "authored";
       } else {
         caption = deriveCaption(id, say);
         captionSource = "derived";
