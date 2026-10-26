@@ -379,11 +379,18 @@ export function writeRenderReceipt(
   );
   const audio = manifest.beats
     .filter((beat) => beat.tts !== null)
-    .map((beat) => ({
-      beat: beat.id,
-      file: beat.audio,
-      sha256: sha256File(join(paths.root, beat.audio)),
-    }));
+    .map((beat) => {
+      const file = join(paths.root, beat.audio);
+      if (!pathExists(file)) {
+        throw new AvpError(
+          "audio-missing",
+          `回执需要的音频不存在：${beat.audio}（节拍 ${beat.id}）。` +
+            `\n先运行 avp tts；检查器本应在渲染前拦住这个问题。`,
+          { beatId: beat.id, file: beat.audio },
+        );
+      }
+      return { beat: beat.id, file: beat.audio, sha256: sha256File(file) };
+    });
 
   const meta = skillMeta();
   const receipt: RenderReceipt = {
