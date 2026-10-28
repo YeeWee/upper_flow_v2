@@ -78,6 +78,11 @@ export const CHECK_IDS = {
   skillCommitDrift: "skill-commit-drift",
   durationTable: "duration-table",
   stillFrames: "still-frames",
+  chapterRehookMissing: "chapter-rehook-missing",
+  recallGap: "recall-gap",
+  interruptSpacing: "interrupt-spacing",
+  numericRun: "numeric-run",
+  rhythmUniformity: "rhythm-uniformity",
 } as const;
 
 export const KNOWN_CHECK_IDS: readonly string[] = Object.values(CHECK_IDS);
