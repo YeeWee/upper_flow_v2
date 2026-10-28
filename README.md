@@ -127,7 +127,7 @@ node ../bin/avp.mjs render
 | [RECORDING.md](./references/RECORDING.md) | 附录：录屏与后期 |
 
 其他：[EXAMPLES](./references/EXAMPLES/README.md)（完整章节 anchor）、
-[GLOSSARY](./GLOSSARY.md)、[ADR](./docs/adr/)、[质量基线](./docs/evals/)。
+[GLOSSARY](./GLOSSARY.md)、[ADR](./docs/adr/)、[质量基线](./docs/evals/)、[2026-10-28 张力基线](./docs/evals/2026-10-28-tension-baseline.md)。
 
 ---
 
