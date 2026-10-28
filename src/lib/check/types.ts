@@ -63,6 +63,7 @@ export const CHECK_IDS = {
   audioDurationMismatch: "audio-duration-mismatch",
   silentBeatInvalid: "silent-beat-invalid",
   captionTooWide: "caption-too-wide",
+  captionEllipsis: "caption-ellipsis",
   sayCaptionTokenMismatch: "say-caption-token-mismatch",
   beatsDrift: "beats-drift",
   hookMissing: "hook-missing",
