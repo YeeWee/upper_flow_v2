@@ -1,0 +1,25 @@
+# Kokoro TTS 合成依赖（scripts/kokoro_tts.py 与 `avp tts --backend kokoro`）。
+#
+# Python：3.10–3.12（本清单在 3.12.14 / macOS arm64 上验证）。
+# 上限由包的 Requires-Python 决定：kokoro-onnx 要求 <3.14，misaki 要求 <3.13。
+# 3.13+ 会装不上或 import 失败，不要用系统自带的 python3 碰运气。
+#
+# 安装：
+#   uv venv .venv --python 3.12
+#   uv pip install --python .venv/bin/python -r scripts/requirements-tts.txt
+#   export AVP_PYTHON="$PWD/.venv/bin/python"
+#
+# 模型文件不在这里，也不在仓库里；见 references/TTS.md「模型文件」一节。
+
+kokoro-onnx==0.6.1
+soundfile==0.14.0
+misaki[zh]==0.9.4
+
+# 显式钉住两个容易装错的运行时依赖：
+# - onnxruntime 决定平台 / 架构支持（必须是本机 arm64 的 wheel），
+#   版本低到没有对应 Python / 架构的 wheel 时会退化成源码编译或直接失败；
+# - numpy 2.x 是与 kokoro-onnx 0.6 一起验证过的大版本。
+# misaki[zh] 会自己带来 cn2an / jieba / pypinyin / pypinyin-dict / ordered-set，
+# 无需在这里重复。
+onnxruntime==1.31.1
+numpy==2.5.4

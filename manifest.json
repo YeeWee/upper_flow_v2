@@ -2,7 +2,7 @@
   "name": "article-video-production",
   "version": "0.1.0",
   "category": "Web Video / Production Pipeline",
-  "description": "把文章稳定做成中文短视频的可归因流水线：article.md → 口播稿 → 节拍清单 → TTS 音频 → 合成稿 → 成片，每步幂等、可检查、可归因。",
+  "description": "把文章稳定做成中文视频的可归因流水线：article.md → 口播稿 → 节拍清单 → TTS 音频 → 合成稿 → 成片，每步幂等、可检查、可归因。",
   "homepage": "https://github.com/YeeWee/upper_flow_v2",
   "compat": [
     "claude-code",

@@ -6,220 +6,220 @@
       "beatId": "coldopen-1",
       "atMs": [
         200,
-        3450
+        5425
       ],
-      "ssim": 0.942321,
-      "diffPercent": 1.5149938473331719,
+      "ssim": 0.939898,
+      "diffPercent": 1.577713351287017,
       "static": false
     },
     {
       "beatId": "coldopen-2",
       "atMs": [
-        3850,
-        7825
+        5825,
+        13400
       ],
-      "ssim": 0.802708,
-      "diffPercent": 5.145251540688292,
+      "ssim": 0.802194,
+      "diffPercent": 5.15859954964496,
       "static": false
     },
     {
       "beatId": "coldopen-3",
       "atMs": [
-        8225,
-        11850
+        13800,
+        18300
       ],
-      "ssim": 0.956128,
-      "diffPercent": 1.5261340197087065,
+      "ssim": 0.954148,
+      "diffPercent": 1.5786562348704913,
       "static": false
     },
     {
       "beatId": "coldopen-4",
       "atMs": [
-        12250,
-        17225
+        18700,
+        23100
       ],
-      "ssim": 0.93489,
-      "diffPercent": 1.6853042670257403,
+      "ssim": 0.93362,
+      "diffPercent": 1.7453113022472364,
       "static": false
     },
     {
       "beatId": "coldopen-5",
       "atMs": [
-        17625,
-        19800
+        23500,
+        26200
       ],
-      "ssim": 0.924446,
-      "diffPercent": 1.2651483574396838,
+      "ssim": 0.923153,
+      "diffPercent": 1.3068505784515452,
       "static": false
     },
     {
       "beatId": "architecture-1",
       "atMs": [
-        20200,
-        25375
+        26600,
+        33250
       ],
-      "ssim": 0.907544,
-      "diffPercent": 2.1215289755305413,
+      "ssim": 0.909178,
+      "diffPercent": 2.0709930126886147,
       "static": false
     },
     {
       "beatId": "architecture-2",
       "atMs": [
-        25775,
-        31725
+        33650,
+        38450
       ],
-      "ssim": 0.939234,
-      "diffPercent": 2.221432714032115,
+      "ssim": 0.938947,
+      "diffPercent": 2.235247909606229,
       "static": false
     },
     {
       "beatId": "architecture-3",
       "atMs": [
-        32125,
-        37175
+        38850,
+        44400
       ],
-      "ssim": 0.859982,
-      "diffPercent": 3.606176369724845,
+      "ssim": 0.861747,
+      "diffPercent": 3.5718325743363186,
       "static": false
     },
     {
       "beatId": "architecture-4",
       "atMs": [
-        37575,
-        43075
+        44800,
+        49950
       ],
-      "ssim": 0.951736,
-      "diffPercent": 1.0495197641813927,
+      "ssim": 0.951237,
+      "diffPercent": 1.0625363108206245,
       "static": false
     },
     {
       "beatId": "architecture-5",
       "atMs": [
-        43475,
-        47750
+        50350,
+        54475
       ],
-      "ssim": 0.9551,
-      "diffPercent": 0.33974950576938595,
+      "ssim": 0.955466,
+      "diffPercent": 0.33444005688695233,
       "static": false
     },
     {
       "beatId": "architecture-6",
       "atMs": [
-        48150,
-        50850
+        54875,
+        60825
       ],
-      "ssim": 0.999991,
-      "diffPercent": 0.005563750706043734,
+      "ssim": 0.999992,
+      "diffPercent": 0.004821774388767853,
       "static": true
     },
     {
       "beatId": "results-1",
       "atMs": [
-        51250,
-        55675
+        61225,
+        65875
       ],
-      "ssim": 0.932876,
-      "diffPercent": 1.6187965862785443,
+      "ssim": 0.932999,
+      "diffPercent": 1.624267290506738,
       "static": false
     },
     {
       "beatId": "results-2",
       "atMs": [
-        56075,
-        62450
+        66275,
+        71750
       ],
-      "ssim": 0.921785,
-      "diffPercent": 1.956443909868474,
+      "ssim": 0.921936,
+      "diffPercent": 1.9557413333131606,
       "static": false
     },
     {
       "beatId": "results-3",
       "atMs": [
-        62850,
-        68300
+        72150,
+        78650
       ],
-      "ssim": 0.941852,
-      "diffPercent": 1.375750171467764,
+      "ssim": 0.940161,
+      "diffPercent": 1.4271081709432745,
       "static": false
     },
     {
       "beatId": "results-4",
       "atMs": [
-        68700,
-        76525
+        79050,
+        85450
       ],
-      "ssim": 0.923049,
-      "diffPercent": 2.334766286916001,
+      "ssim": 0.924225,
+      "diffPercent": 2.267566178992173,
       "static": false
     },
     {
       "beatId": "results-5",
       "atMs": [
-        76925,
-        82875
+        85850,
+        91225
       ],
-      "ssim": 0.940304,
-      "diffPercent": 1.4851162828814652,
+      "ssim": 0.941059,
+      "diffPercent": 1.472074709513435,
       "static": false
     },
     {
       "beatId": "results-6",
       "atMs": [
-        83275,
-        88200
+        91625,
+        95825
       ],
-      "ssim": 0.924309,
-      "diffPercent": 2.2138820806100217,
+      "ssim": 0.924687,
+      "diffPercent": 2.23335558631889,
       "static": false
     },
     {
       "beatId": "results-7",
       "atMs": [
-        88600,
-        94700
+        96225,
+        100775
       ],
-      "ssim": 0.931666,
-      "diffPercent": 2.0762936360243684,
+      "ssim": 0.931601,
+      "diffPercent": 2.079340277777778,
       "static": false
     },
     {
       "beatId": "results-8",
       "atMs": [
-        95100,
-        100575
+        101175,
+        107450
       ],
-      "ssim": 0.999981,
-      "diffPercent": 0.007283219357701928,
+      "ssim": 0.999991,
+      "diffPercent": 0.006167607217784233,
       "static": true
     },
     {
       "beatId": "v2-and-cta-1",
       "atMs": [
-        100975,
-        111925
+        107850,
+        118150
       ],
-      "ssim": 0.917909,
-      "diffPercent": 1.6942747417897202,
+      "ssim": 0.919276,
+      "diffPercent": 1.6452620683046881,
       "static": false
     },
     {
       "beatId": "v2-and-cta-2",
       "atMs": [
-        112325,
-        119825
+        118550,
+        125525
       ],
-      "ssim": 0.907652,
-      "diffPercent": 1.58699284626402,
+      "ssim": 0.907477,
+      "diffPercent": 1.5847862704752684,
       "static": false
     },
     {
       "beatId": "v2-and-cta-3",
       "atMs": [
-        120225,
-        127325
+        125925,
+        133425
       ],
-      "ssim": 0.999986,
-      "diffPercent": 0.004237397119341564,
+      "ssim": 0.999985,
+      "diffPercent": 0.004171331598483014,
       "static": true
     }
   ],

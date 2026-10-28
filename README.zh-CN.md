@@ -106,7 +106,8 @@ node ../bin/avp.mjs render
 ```
 
 完整例子见 [examples/trae-harness](./examples/trae-harness)：4 章 / 22 拍 /
-127.5s，含 22 条真实 Kokoro 音频与最终成片。
+约 133.6s，含 22 条真实 Kokoro 音频与最终成片。拍数与实测时长以该项目
+`output/receipt.json` 为准。
 
 ---
 
@@ -114,7 +115,7 @@ node ../bin/avp.mjs render
 
 | 文档 | 内容 |
 |---|---|
-| [SCRIPT-STYLE.md](./references/SCRIPT-STYLE.md) | 文章 → 口播稿：信息保留、风骨、平台变体 |
+| [SCRIPT-STYLE.md](./references/SCRIPT-STYLE.md) | 文章 → 口播稿：事实项覆盖、风骨、时长分档、留存装置 |
 | [OUTLINE-FORMAT.md](./references/OUTLINE-FORMAT.md) | 开发计划字段、信息池、素材清单 |
 | [CHAPTER-CRAFT.md](./references/CHAPTER-CRAFT.md) | 单章实现规则与完工自检 |
 | [THEMES.md](./references/THEMES.md) | 23 套主题、token 契约、派生流程 |
@@ -124,7 +125,7 @@ node ../bin/avp.mjs render
 | [RECORDING.md](./references/RECORDING.md) | 附录：录屏与后期 |
 
 其他：[EXAMPLES](./references/EXAMPLES/README.md)、[GLOSSARY](./GLOSSARY.md)、
-[ADR](./docs/adr/)、[质量基线](./docs/evals/)。
+[ADR](./docs/adr/)、[质量基线](./docs/evals/)、[2026-10-28 张力基线](./docs/evals/2026-10-28-tension-baseline.md)。
 
 ---
 

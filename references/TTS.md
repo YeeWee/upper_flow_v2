@@ -60,13 +60,90 @@ avp status              # 看 tts 这一步是 待办 / 过期 / 最新
   `~/.cache/hyperframes/tts/`，首次需联网。
 - 单段合成是独立进程，一拍的失败只影响这一拍。
 
-安装（Apple Silicon 示例）：
+#### 依赖安装
+
+清单在 [`scripts/requirements-tts.txt`](../scripts/requirements-tts.txt)：
+`kokoro-onnx` / `soundfile` / `misaki[zh]`，外加显式钉住的 `onnxruntime` 与
+`numpy`。**Python 3.10–3.12 可装，推荐 3.12**（本清单只在 3.12.14 / macOS arm64
+上验证）。`kokoro-onnx` 要求 <3.14、`misaki` 要求 <3.13，所以系统自带的新版
+`python3` 很可能装不上。
 
 ```bash
-uv venv .venv --python python3.11
-uv pip install --python .venv/bin/python kokoro-onnx soundfile 'misaki[zh]'
+uv venv .venv --python 3.12
+uv pip install --python .venv/bin/python -r scripts/requirements-tts.txt
 export AVP_PYTHON="$PWD/.venv/bin/python"
+avp tts
 ```
+
+#### 模型文件（不在仓库里）
+
+两个二进制合计 ≈ 337 MiB，**故意不入仓**：体积太大，而且就是同一份公开权重。
+新机器需要联网下载一次，之后完全离线（`avp tts` 不会在合成时联网）。
+
+| 文件 | 大小 | 默认缓存路径 |
+|---|---|---|
+| `kokoro-v1.0.onnx` | 325,532,387 B（≈310 MiB） | `~/.cache/hyperframes/tts/models/kokoro-v1.0.onnx` |
+| `voices-v1.0.bin` | 28,214,398 B（≈27 MiB） | `~/.cache/hyperframes/tts/voices/voices-v1.0.bin` |
+
+下载地址：<https://github.com/thewh1teagle/kokoro-onnx/releases/tag/model-files-v1.0>
+（取 release 里的同名 asset）。
+
+```bash
+mkdir -p ~/.cache/hyperframes/tts/models ~/.cache/hyperframes/tts/voices
+curl -L -o ~/.cache/hyperframes/tts/models/kokoro-v1.0.onnx \
+  https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/kokoro-v1.0.onnx
+curl -L -o ~/.cache/hyperframes/tts/voices/voices-v1.0.bin \
+  https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/voices-v1.0.bin
+```
+
+#### 覆盖解释器与模型路径
+
+`avp tts` 调脚本时只传文本 / 输出 / 音色 / 语速，**解释器和模型路径只由环境
+变量决定**：
+
+```bash
+export AVP_PYTHON="$PWD/.venv/bin/python"          # 可选；默认找项目 .venv
+export KOKORO_MODEL=/shared/models/kokoro-v1.0.onnx
+export KOKORO_VOICES=/shared/models/voices-v1.0.bin
+avp tts --chapter=coldopen
+```
+
+直接跑脚本时同样认这三个变量（`~` 会被展开）：
+
+```bash
+printf '你把需求丢给 AI，它写代码。\n' > /tmp/t.txt
+"$AVP_PYTHON" scripts/kokoro_tts.py --text-file /tmp/t.txt --out /tmp/t.wav \
+  --voice zf_xiaoxiao --speed 1
+```
+
+#### 我缺什么？
+
+| 症状 | 缺什么 / 怎么修 |
+|---|---|
+| `tts-python-missing`（会列出试过的解释器） | 三个候选里没有一个能 import 那三个包；按清单装，或用 `AVP_PYTHON` 指向装好的解释器 |
+| 脚本 stderr：`missing Python dependency: No module named 'kokoro_onnx'` | 依赖装到了别的解释器；用 `--python "$AVP_PYTHON"` 重装 |
+| 脚本 stderr：`missing model file: …`（并打印下载地址） | 模型文件不在该路径；见上一节，或设 `KOKORO_MODEL` / `KOKORO_VOICES` |
+| 安装报 `no matching distribution`，或 import 时 `onnxruntime` 崩 | Python 版本或 CPU 架构不对：要 3.10–3.12 的 arm64 / x86_64 解释器 |
+| 脚本 stderr：`grapheme-to-phoneme produced no phonemes` | 文本问题（纯符号 / 空白），不是环境问题 |
+| 下载中断 / 存成网页 | 文件明显小于上表的字节数；下面这个脚本会报"只有 N 字节" |
+
+一次查完（只读、不联网，退出码 0 = 就绪）：
+
+```bash
+bash scripts/check-tts-env.sh
+```
+
+#### 验收：重建夹具那 22 条 wav
+
+```bash
+cd examples/trae-harness
+avp tts        # avp = 仓库根目录的 ./avp；环境变量按上一节设置
+```
+
+判据：22 条 wav 全部重新落盘，且与仓库里的同名文件**逐字节相同**。最快的锚点
+是 `audio/coldopen/1.wav`：5.325s / 24kHz / PCM16 / mono，sha256
+`3d7e83f03b38f832244118f914dc66be9376f98ae43ce6c84ce59e54ae3835ad`。语速、音色、
+模型任一不同哈希就会变——这正是"可归因"的用法。
 
 ### fake（快速通道）
 
@@ -74,8 +151,10 @@ export AVP_PYTHON="$PWD/.venv/bin/python"
 speed)`。用于流水线 / 测试 / 没有模型的本机；产出的 `beats.json` 结构与
 kokoro 完全一致，之后把 backend 改回 kokoro 再跑 `avp tts` 即可。
 
-> `fake` 不是"假装成功"：它明确写进 `tts.json` 与 `.avp/tts.json`，`status`
-> 照常显示，渲染不出来是渲染层的事。
+> **`fake` 产出的是静音占位，不能替代真声成片**。它是全零采样，不是低音量
+> 的真声；用它跑通的片子没有口播。`fake` 只验证流水线（时长、字幕、渲染
+> 同步），最终成片必须换回 `kokoro` 重跑 `avp tts`。`tts.json` 与
+> `.avp/tts.json` 会记下 `backend: fake`，事后可追溯。
 
 ---
 
@@ -116,7 +195,12 @@ kokoro 完全一致，之后把 backend 改回 kokoro 再跑 `avp tts` 即可。
    音频是否被替换。
 3. **渲染前不查网**：kokoro 的模型必须已经在缓存里；缺模型时命令报错，
    不会边渲染边下载。
-4. TTS 进程隔离：一次一拍，失败带 beat id 与 stderr 尾部，方便重跑。
+4. **模型缓存不入仓**：`~/.cache/hyperframes/tts/` 下的两个二进制只下载一次，
+   git 里只存合成后的 wav（夹具那 22 条）与 sha256 回执。换机器时按
+   「模型文件」一节重新下载即可。
+5. **依赖钉版本**：`scripts/requirements-tts.txt` 里的 pin 与验证环境一致；
+   依赖漂移会改变输出，等同换了一个后端。
+6. TTS 进程隔离：一次一拍，失败带 beat id 与 stderr 尾部，方便重跑。
 
 ---
 
@@ -124,8 +208,11 @@ kokoro 完全一致，之后把 backend 改回 kokoro 再跑 `avp tts` 即可。
 
 | 现象 | 原因 / 修法 |
 |---|---|
-| `tts-python-missing` | 按提示建 venv 装 `kokoro-onnx soundfile 'misaki[zh]'`，或 `AVP_PYTHON=...` |
-| `tts-synthesis-failed` | 看 stderr 尾部；常见是模型未缓存 / 文本含控制字符 |
+| `tts-python-missing` | 按 `scripts/requirements-tts.txt` 装依赖，或 `AVP_PYTHON=...` 指向装好的解释器 |
+| `tts-synthesis-failed` | 看 stderr 尾部；常见是模型未缓存（`missing model file`）/ 下载不完整 / 文本含控制字符 |
+| 模型报"missing model file" | 按「模型文件」一节下载到默认缓存，或设 `KOKORO_MODEL` / `KOKORO_VOICES` |
+| 装依赖报 `no matching distribution` | Python 不在 3.10–3.12，或不是本机架构的 wheel；换 `uv venv --python 3.12` 的 arm64 / x86_64 解释器 |
+| 分不清缺包还是缺模型 | 跑 `bash scripts/check-tts-env.sh`，它分开报这两项 |
 | `speed-out-of-range` | 把 `tts.json` 的有效语速调回 0.95–1.05 |
 | `tts-backend-unknown` | `backend` 只认 `kokoro` / `fake` |
 | `tts-chapter-unknown` | `chapters` 里写了不存在的章节 id |

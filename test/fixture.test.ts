@@ -1,13 +1,16 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import {
   cpSync,
   existsSync,
   mkdirSync,
   readdirSync,
+  readFileSync,
   writeFileSync,
 } from "node:fs";
 import { join } from "node:path";
 import { after, before, describe, test } from "node:test";
+import { parseOutlineTension } from "../src/lib/script-source";
 import { cleanup, readJson, REPO_ROOT, runAvp, tempProject } from "./helpers";
 
 /**
@@ -218,6 +221,55 @@ describe("examples/trae-harness fixture", () => {
     assert.equal(byStep.render, "pending");
   });
 
+  test("结果章数字拍收口，末拍把 outline 的总还扣说出口也放上屏", () => {
+    const manifest = readJson(join(dir, "beats.json"));
+
+    // 结果章的病是数字并列：8 拍连着报数。重写后至少留 3 个数字拍
+    // （报酬还得落在数字上），但占比 ≤40%、最长连续 ≤2。
+    const results = manifest.beats.filter(
+      (beat: any) => beat.chapter === "results",
+    );
+    assert.equal(results.length, 8, "结果章仍是 8 拍");
+    let run = 0;
+    let longestRun = 0;
+    let numeric = 0;
+    for (const beat of results) {
+      if (/\d/u.test(beat.say)) {
+        numeric += 1;
+        run += 1;
+        longestRun = Math.max(longestRun, run);
+      } else {
+        run = 0;
+      }
+    }
+    assert.ok(numeric >= 3, `结果章至少要保留 3 个数字拍，实际 ${numeric}`);
+    assert.ok(
+      numeric / results.length <= 0.4,
+      `结果章数字拍 ${numeric}/${results.length}，超过 40%`,
+    );
+    assert.ok(longestRun <= 2, `结果章最长连续数字拍 ${longestRun}，超过 2`);
+
+    // 总还扣：outline 声明在末拍，口播与终屏画面都必须真的说出那句。
+    const outline = readFileSync(join(FIXTURE, "outline.md"), "utf8");
+    const plan = parseOutlineTension(outline, Object.keys(CHAPTER_STEPS));
+    assert.ok(plan.finalPayoff, "outline.md 必须声明总还扣");
+    assert.equal(plan.finalPayoff.beat, manifest.beats.length, "总还扣落在末拍");
+
+    const last = manifest.beats[manifest.beats.length - 1];
+    assert.ok(
+      last.say.includes(plan.finalPayoff.text),
+      `末拍口播必须说出总还扣「${plan.finalPayoff.text}」：${last.say}`,
+    );
+    const body = readFileSync(
+      join(dir, "composition", "beats", `${last.id}.body.html`),
+      "utf8",
+    );
+    assert.ok(
+      body.includes(plan.finalPayoff.text),
+      `末拍画面必须显示总还扣「${plan.finalPayoff.text}」`,
+    );
+  });
+
   test("compose + check 能在 22 拍夹具上全绿（warning 允许）", () => {
     const compose = runAvp(["compose", "--json"], dir);
     assert.equal(compose.status, 0, compose.stdout + compose.stderr);
@@ -230,5 +282,65 @@ describe("examples/trae-harness fixture", () => {
     assert.equal(check.json.ok, true);
     assert.deepEqual(check.json.errors, []);
     assert.ok(existsSync(join(dir, ".avp", "check.json")));
+  });
+
+  test("入库的成片 / 回执 / 静帧报告对得上当前夹具", () => {
+    const output = join(FIXTURE, "output");
+    const receipt = readJson(join(output, "receipt.json"));
+    const manifest = readJson(join(FIXTURE, "beats.json"));
+    const ttsReceipt = readJson(join(FIXTURE, ".avp", "tts.json"));
+    const still = readJson(join(output, "still-report.json"));
+    const sha = (file: string) =>
+      createHash("sha256").update(readFileSync(file)).digest("hex");
+
+    // 回执哈希必须与入库产物逐一对上，否则「可归因」只是说法。
+    assert.equal(receipt.schemaVersion, 1);
+    assert.equal(receipt.hashes.beats, sha(join(FIXTURE, "beats.json")));
+    assert.equal(receipt.hashes.tts, sha(join(FIXTURE, ".avp", "tts.json")));
+    assert.equal(receipt.output.sha256, sha(join(output, "output.mp4")));
+    assert.equal(
+      receipt.contactSheet.sha256,
+      sha(join(output, "contact-sheet.png")),
+    );
+    assert.equal(
+      receipt.stillReport.sha256,
+      sha(join(output, "still-report.json")),
+    );
+    assert.match(receipt.skill.commit, /^[0-9a-f]{40}$/);
+
+    // 22 条音频与 beats.json 一一对应，回执记的也是当前文件。
+    assert.equal(receipt.audio.length, 22);
+    assert.equal(receipt.audio.length, manifest.beats.length);
+    for (const [index, entry] of receipt.audio.entries()) {
+      const beat = manifest.beats[index];
+      assert.equal(entry.beat, beat.id);
+      assert.equal(entry.file, beat.audio);
+      assert.equal(entry.sha256, sha(join(FIXTURE, beat.audio)));
+    }
+
+    // 成片时长 = beats 实测累计（允许 2 帧的编码取整）。
+    const totalMs = manifest.beats.reduce(
+      (sum: number, beat: any) => sum + beat.durationMs,
+      0,
+    );
+    assert.equal(ttsReceipt.totalDurationMs, totalMs);
+    assert.ok(
+      Math.abs(receipt.output.durationMs - totalMs) <= 67,
+      `成片 ${receipt.output.durationMs}ms 与音频累计 ${totalMs}ms 差超过 2 帧`,
+    );
+    assert.equal(receipt.output.width, 1920);
+    assert.equal(receipt.output.height, 1080);
+    assert.equal(receipt.output.fps, 30);
+
+    // 静帧报告覆盖全部拍，静态拍与 beats.json 声明一致。
+    const statics = manifest.beats
+      .filter((beat: any) => beat.motion === "static")
+      .map((beat: any) => beat.id);
+    assert.equal(still.beats.length, 22);
+    assert.deepEqual(still.staticBeats, statics);
+    assert.deepEqual(receipt.stillReport.staticBeats, statics);
+    assert.equal(receipt.contactSheet.frames, 44);
+    assert.equal(receipt.contactSheet.columns, 6);
+    assert.equal(receipt.contactSheet.rows, 8);
   });
 });

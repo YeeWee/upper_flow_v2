@@ -1,202 +1,202 @@
 {
   "schemaVersion": 1,
   "backend": "kokoro",
-  "totalDurationMs": 127525,
+  "totalDurationMs": 133625,
   "beats": {
     "coldopen-1": {
-      "hash": "8ce9d2637ec65ed71aef05caf466ad2035fd9398334075e1028420c2d291e7d9",
+      "hash": "bad1db8898b3f086ab68d017d03ee65dd2f43d7c7e947825e34f21f97064a431",
       "path": "audio/coldopen/1.wav",
-      "sha256": "db2d5c29a383a712a295a0588134f7ce33955542ed48d96fa3283be08f1984b4",
-      "durationMs": 3650,
+      "sha256": "3d7e83f03b38f832244118f914dc66be9376f98ae43ce6c84ce59e54ae3835ad",
+      "durationMs": 5625,
       "voice": "zf_xiaoxiao",
       "speed": 1,
       "silent": false
     },
     "coldopen-2": {
-      "hash": "627cf85403d673721ccc883eab824581795c825872858ad29f71ac11010dd37a",
+      "hash": "46a499552b29a63a4767d66b850aaf116532b23c00421c77678507505e3c576a",
       "path": "audio/coldopen/2.wav",
-      "sha256": "91770a93f84ad737857034c9888e83626d3d7c133743e7cf2af5904167dc615c",
-      "durationMs": 4375,
+      "sha256": "f26d0f17daa3c39ee081f05c395d780daf21d5d68f71654e07962f5665f13cfa",
+      "durationMs": 7975,
       "voice": "zf_xiaoxiao",
       "speed": 1,
       "silent": false
     },
     "coldopen-3": {
-      "hash": "666142c764b0254233f89df79902416518b0f2bc705ce354136dec59ae397a55",
+      "hash": "34d2a8cd1efc8eb933166aacd1b7b108fa80505de116a162deb77ae985c87cb0",
       "path": "audio/coldopen/3.wav",
-      "sha256": "595c02e9d434e9941e74c558b806f35af9323314ba7e0bcaacdc2dc41f788c49",
-      "durationMs": 4025,
+      "sha256": "30da90371a39e753bea5a5bcbcadc290be39a764dd2c58d74bb68f380a3625d8",
+      "durationMs": 4900,
       "voice": "zf_xiaoxiao",
       "speed": 1,
       "silent": false
     },
     "coldopen-4": {
-      "hash": "e83cbf540732b9a5cb1736203a6be8bfd2185dca70e94331537c9172e9e9e25b",
+      "hash": "edb4747603fc39329f6af8a2305964586b92eb5ae5befd6a86bb4dea9132e190",
       "path": "audio/coldopen/4.wav",
-      "sha256": "45a26d6b2d79d416798655b4e8d5dcb2d0ca150103ccff67dfdef1d81722a06f",
-      "durationMs": 5375,
+      "sha256": "aa37795c4c15965d6d26da8782a4b884700285e3bf3ebfe97192b5dd9fb3c098",
+      "durationMs": 4800,
       "voice": "zf_xiaoxiao",
       "speed": 1,
       "silent": false
     },
     "coldopen-5": {
-      "hash": "6072bc36368483bd4602e0a92d360ff452f840ed3098d0a2f2dbb7fe714b2c5b",
+      "hash": "594c88fac6152f19308a4f6c91efb24749eff7de578a79101b04a03810e66403",
       "path": "audio/coldopen/5.wav",
-      "sha256": "903a06695184482424aa0c1b4138f18696426d2b3630d0d442ff8109ff673a9c",
-      "durationMs": 2575,
-      "voice": "zf_xiaoxiao",
-      "speed": 1,
-      "silent": false
-    },
-    "architecture-1": {
-      "hash": "f50e01cd9ce00bb3887d517c3f404ed792458efb134bb75c0ff94c9a2602b840",
-      "path": "audio/architecture/1.wav",
-      "sha256": "d4e02109220c6d401984ad8d1162f5f9255502586d5a753264175fec45f5b6a7",
-      "durationMs": 5575,
-      "voice": "zf_xiaoxiao",
-      "speed": 1,
-      "silent": false
-    },
-    "architecture-2": {
-      "hash": "e92c1eae67157b7713e9e19777b97bbbc50c2cb9dc354eb0e97ecc0aa963937e",
-      "path": "audio/architecture/2.wav",
-      "sha256": "c01f0e5da78c368e86d4d184b6bb1b10e3c015af589c83256277bd1a9b2e7d39",
-      "durationMs": 6350,
-      "voice": "zf_xiaoxiao",
-      "speed": 1,
-      "silent": false
-    },
-    "architecture-3": {
-      "hash": "f13447a4fa453d64219cf127a43937a29f78c1dae3c9434b933d2005aebf30dc",
-      "path": "audio/architecture/3.wav",
-      "sha256": "c98db7724bf2552ff567522a3c89a447cd5e7c641168cb9e3868e1371f95f47f",
-      "durationMs": 5450,
-      "voice": "zf_xiaoxiao",
-      "speed": 1,
-      "silent": false
-    },
-    "architecture-4": {
-      "hash": "195ab6ba1aa2b189fb6206f0efc99862851b6617b934ce3b8bb4ac3d0413348a",
-      "path": "audio/architecture/4.wav",
-      "sha256": "831438951239e19735964c6c7223b525cbdd65e1d12cfcbd175c2fbe3f06adb3",
-      "durationMs": 5900,
-      "voice": "zf_xiaoxiao",
-      "speed": 1,
-      "silent": false
-    },
-    "architecture-5": {
-      "hash": "7b077507935fd7afbb3c5a405a2cd83b199bbaceafa5a5303c80662e8e7101da",
-      "path": "audio/architecture/5.wav",
-      "sha256": "5a0e96fe9dfca709d60d54f7216fe282319b4fa75f263d30de913286c663c74d",
-      "durationMs": 4675,
-      "voice": "zf_xiaoxiao",
-      "speed": 1,
-      "silent": false
-    },
-    "architecture-6": {
-      "hash": "3fd5778554687ee38106ecfa7b5e9844f395d93d49e2cfb1c0902a3787b4f272",
-      "path": "audio/architecture/6.wav",
-      "sha256": "afef14d60ca5413ed99ea60b2aeb430fe92e289e459fae55969badab2391a1b2",
+      "sha256": "2018600cf8d239e64b1044f826084779555d887b471bd5d8b47b23f2544f361f",
       "durationMs": 3100,
       "voice": "zf_xiaoxiao",
       "speed": 1,
       "silent": false
     },
-    "results-1": {
-      "hash": "39d007c0d22b7c9c66f47f13b3904283d9a0705fe1ada0652d9ac6262c225ca9",
-      "path": "audio/results/1.wav",
-      "sha256": "f15efe39dd553e1566b4db6f5dd89c3223cec895f9c0fc33a861048a3edd0002",
-      "durationMs": 4825,
+    "architecture-1": {
+      "hash": "23c9c0c4c79dfb06541615dca135145b1a5e7bef7bf91c7c0af897caab2624f8",
+      "path": "audio/architecture/1.wav",
+      "sha256": "650bbf08120952b011eb04a0f4b143b2f35956c63346869423a750df2ad2167b",
+      "durationMs": 7050,
       "voice": "zf_xiaoxiao",
       "speed": 1,
       "silent": false
     },
-    "results-2": {
-      "hash": "c60fe6500646ac6cea78630b6b20a7358e27e6b077bd9b5ce9d9730e2bd38af5",
-      "path": "audio/results/2.wav",
-      "sha256": "04ad88d99304d9ab0195f3f4dd03ac9f846940ab51dfba4102834efd81150f58",
-      "durationMs": 6775,
+    "architecture-2": {
+      "hash": "ba77bfafa46e9aaa6180ab64af6da00566f27c44bc6149200eb9970fbf2b38f0",
+      "path": "audio/architecture/2.wav",
+      "sha256": "90d76eba5d3ece8c933424cb70f1d6ed5901d60a3410d833be7649183b09ea3f",
+      "durationMs": 5200,
       "voice": "zf_xiaoxiao",
       "speed": 1,
       "silent": false
     },
-    "results-3": {
-      "hash": "730f7cdb2f413d1f88c52cc6c5baefa9b2278e4eac36c7e4c11559ed5c721249",
-      "path": "audio/results/3.wav",
-      "sha256": "0abdc1749ffcc332c64d24cc7f547eb0614a8058be26c79c1b84f28b71b6cc5e",
-      "durationMs": 5850,
+    "architecture-3": {
+      "hash": "51f003e370a6d9c264a236082e535cf24a038f61a785cb9d6f3e820f3163fc26",
+      "path": "audio/architecture/3.wav",
+      "sha256": "51adadff25b9b7a5bb51a465c30f7c1c810f7bf6964eac79eae103b6000ea1d9",
+      "durationMs": 5950,
       "voice": "zf_xiaoxiao",
       "speed": 1,
       "silent": false
     },
-    "results-4": {
-      "hash": "fde55bacaac230ff6e57c10dad3d8bbb0ccab93a794ad81da73d35d8b2ae7fc3",
-      "path": "audio/results/4.wav",
-      "sha256": "1d689593e8a120761366bc42f9d4328797c710c99a79633d21d3d12991bd6bf9",
-      "durationMs": 8225,
+    "architecture-4": {
+      "hash": "c98bbbfb2a419e57a3fb348fc210e4d5133b12742c910d177530cc6f3cca3472",
+      "path": "audio/architecture/4.wav",
+      "sha256": "ef495b608435da19397e70cf2cf402a7ec5ae5324454d610b3bf8e48d5594f7e",
+      "durationMs": 5550,
       "voice": "zf_xiaoxiao",
       "speed": 1,
       "silent": false
     },
-    "results-5": {
-      "hash": "501313c51aee9c83cb400d2e71e2a613a3c0f543f2be5178a9569997336fdb06",
-      "path": "audio/results/5.wav",
-      "sha256": "d27e5545ef04ef80ea97b41c2d3e25f92dfd81cf4cdc457a1add7b65cc8faa02",
+    "architecture-5": {
+      "hash": "496533060ad6b39bb4ded4394cc80bdedbbdb23aea4fa1656d3ec1f1d9d54b75",
+      "path": "audio/architecture/5.wav",
+      "sha256": "8815098c92d4831e133c21931dbe8608c4fcdf7738a084ddef81713cccde0fa1",
+      "durationMs": 4525,
+      "voice": "zf_xiaoxiao",
+      "speed": 1,
+      "silent": false
+    },
+    "architecture-6": {
+      "hash": "3c662d2a9e53127a0bd522038c9c8b6cf826e240510931c58105dea3b769fd88",
+      "path": "audio/architecture/6.wav",
+      "sha256": "eddecceeee9c8822baa669021f9e4be038e96432de24ff43bb852d041255661c",
       "durationMs": 6350,
       "voice": "zf_xiaoxiao",
       "speed": 1,
       "silent": false
     },
-    "results-6": {
-      "hash": "d98f4c52d1d8a7570a3810e4526619f4fee3d6559411a7f54b0d3240d2880f89",
-      "path": "audio/results/6.wav",
-      "sha256": "e9957eb025b9ad6dec4330597811fed8e03ec4e049fe28b6e3eba0439c2faad5",
-      "durationMs": 5325,
+    "results-1": {
+      "hash": "0d2e36ee29b30552bbd30ac0e9d9cf80a47a1778a513200b4aed17ba3ae0f9e0",
+      "path": "audio/results/1.wav",
+      "sha256": "558638081a071d1b49bd13836ab768b1ff96dc3232933450677b363d4328df2a",
+      "durationMs": 5050,
       "voice": "zf_xiaoxiao",
       "speed": 1,
       "silent": false
     },
-    "results-7": {
-      "hash": "0f568c75c7dff501a398b3a20a124aa37863ecd9c01e41bd0aab8f8138d530d5",
-      "path": "audio/results/7.wav",
-      "sha256": "f5cd54db8a61d1d48219b17e0615658a215b8e53841df08863e62514f9aff0e2",
-      "durationMs": 6500,
-      "voice": "zf_xiaoxiao",
-      "speed": 1,
-      "silent": false
-    },
-    "results-8": {
-      "hash": "2caf37ecc1163e6f95fa0a4d661e15f727464f7084b9496003b9e5cb0d5d2a86",
-      "path": "audio/results/8.wav",
-      "sha256": "78fd68fe58855a5a7c7e2e26a36474eaea2827c1d88ec565755a364108c34f05",
+    "results-2": {
+      "hash": "7bc8d6606f4902a4add396f0ace91e271e4360ccc411bd0e532c52d244a8e45a",
+      "path": "audio/results/2.wav",
+      "sha256": "321cd0fa9dd9b832e3254d653c99127dd0009bf31c6aeeafc8684b33be887d0a",
       "durationMs": 5875,
       "voice": "zf_xiaoxiao",
       "speed": 1,
       "silent": false
     },
+    "results-3": {
+      "hash": "34ee2eda5e765c8acfa26e6021b5a3d9fd09b18287b47ff99a6f5bb16089aa46",
+      "path": "audio/results/3.wav",
+      "sha256": "f1e1f097998511a9c45c354014db7fafc1fc2c2c35c3100395d778ba78651f87",
+      "durationMs": 6900,
+      "voice": "zf_xiaoxiao",
+      "speed": 1,
+      "silent": false
+    },
+    "results-4": {
+      "hash": "1d1655cd05a8ef991df086c2960020c738d9ef466f3ec4a830cec59da1805465",
+      "path": "audio/results/4.wav",
+      "sha256": "e7982761f2f3184fa54bc354f6233315e019ae9c05f38b22edca694e58b2335f",
+      "durationMs": 6800,
+      "voice": "zf_xiaoxiao",
+      "speed": 1,
+      "silent": false
+    },
+    "results-5": {
+      "hash": "91c514bbf29f3055dae9b4ef618d5650a0d706479c2d91e07cfdc8c16aeffbac",
+      "path": "audio/results/5.wav",
+      "sha256": "2d26e896c4ef484c27dff7b7c313eec748c9295e46b8430b71ebd0496f107a73",
+      "durationMs": 5775,
+      "voice": "zf_xiaoxiao",
+      "speed": 1,
+      "silent": false
+    },
+    "results-6": {
+      "hash": "b352f544cf134002ecf3f4ac1da2eb7e0499eee0620ea3e146995caa681004b0",
+      "path": "audio/results/6.wav",
+      "sha256": "ea26fbd8d18c38dc5c33f2a96584c735c1803a7a36e7f6dec9f60d76f4dd984c",
+      "durationMs": 4600,
+      "voice": "zf_xiaoxiao",
+      "speed": 1,
+      "silent": false
+    },
+    "results-7": {
+      "hash": "5f7700c8774754abbc205ed0de48b10a0e81bbdfa836e1fd92e369de93c524df",
+      "path": "audio/results/7.wav",
+      "sha256": "75eef42c3b998d95817cbb85137ba9bc613ef2fe547c096c774123b0a6ea2b49",
+      "durationMs": 4950,
+      "voice": "zf_xiaoxiao",
+      "speed": 1,
+      "silent": false
+    },
+    "results-8": {
+      "hash": "3f65ba2e598a4a93ee4e0834d0517e7a57a7f1045f53ae637e01247f6e56b061",
+      "path": "audio/results/8.wav",
+      "sha256": "96920899b6f55d1f2f4a4e539828acd23c613901eed8edc81d0f18fcaf50d153",
+      "durationMs": 6675,
+      "voice": "zf_xiaoxiao",
+      "speed": 1,
+      "silent": false
+    },
     "v2-and-cta-1": {
-      "hash": "7c658ab3fc9fb41f74b1a4a4ede473b243d21cb309135d593f8b103abb05c2ef",
+      "hash": "7022026c6d8304eab06645c4a4dadd591a06fb4e7cce6cb442bbe4abac855f96",
       "path": "audio/v2-and-cta/1.wav",
-      "sha256": "e12e8701538586139026d5199cf008a2a13a5298ff35fd67b375ac2557f4519f",
-      "durationMs": 11350,
+      "sha256": "63491b12d4b03450ac692b942413058803746c7308a3a09fbfed7185520acb98",
+      "durationMs": 10700,
       "voice": "zf_xiaoxiao",
       "speed": 1,
       "silent": false
     },
     "v2-and-cta-2": {
-      "hash": "3ab6b27dca21ad97dcc4a566d2310416c579a84bbcd0a5b152b94365f2fd5bc9",
+      "hash": "d60c5b4d9ce24727e5f59ef45f0af2cd578ca4740f1a0ab8815a832a72323c5e",
       "path": "audio/v2-and-cta/2.wav",
-      "sha256": "83719419b53be239fa5783b882f431ef986cfb9909ef6c1e69583a0edd308299",
-      "durationMs": 7900,
+      "sha256": "7b948284d1252990451a6356c16d12f80cf3b31eb4b16f075a6b4f2e1c669fad",
+      "durationMs": 7375,
       "voice": "zf_xiaoxiao",
       "speed": 1,
       "silent": false
     },
     "v2-and-cta-3": {
-      "hash": "9782494ca160ceb6c53d3a5fd3194795864869c5e81013b759b97dd98bb79360",
+      "hash": "f0f2601a3bb60a07464f7e9a0f1c96a42af35a3ba898859096a82c7cd283c97e",
       "path": "audio/v2-and-cta/3.wav",
-      "sha256": "b8bc88efade53d1a291dd5dc1ce2dc999345e15cff7d2223e1d194cbca658bee",
-      "durationMs": 7500,
+      "sha256": "4d58581b4a127a36751e73bf8fde99a1721c2022fe6b84349536a22ca7e92482",
+      "durationMs": 7900,
       "voice": "zf_xiaoxiao",
       "speed": 1,
       "silent": false

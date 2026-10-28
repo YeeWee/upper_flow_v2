@@ -23,6 +23,7 @@ import {
   checkVoiceDivergence,
 } from "./manifest";
 import { checkDurationTable, checkStillFrames } from "./report";
+import { checkTension } from "./tension";
 import { CHECK_IDS, KNOWN_CHECK_IDS, sortFindings, summarize } from "./types";
 import type {
   CheckContext,
@@ -163,6 +164,7 @@ export async function runCheck(
     checkDerivedCaptions(ctx);
     checkDurationTable(ctx);
     checkStillFrames(ctx);
+    checkTension(ctx);
   }
 
   return buildResult(ctx.findings, only);

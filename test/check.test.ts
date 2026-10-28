@@ -502,6 +502,74 @@ describe("avp check", () => {
     });
   });
 
+  test("字幕含省略号是 warning：带 beat id、不拦 check、可按 id 过滤", () => {
+    /** 从口播源改 caption 再 plan，保证 beats.json 不与 narrations.ts 漂移。 */
+    function withCaption(caption: string, fn: (dir: string) => void): void {
+      withClone((dir) => {
+        writeNarrations(dir, [
+          { say: SAYS[0]!, caption },
+          { say: SAYS[1]! },
+          { say: SAYS[2]!, motion: "static" },
+        ]);
+        const plan = runAvp(["plan", "--json"], dir);
+        assert.equal(plan.status, 0, plan.stderr);
+        // plan 会重写 beats.json；tts 把实测时长与 tts 元组写回去。
+        const tts = runAvp(["tts", "--json"], dir);
+        assert.equal(tts.status, 0, tts.stderr);
+        fn(dir);
+      });
+    }
+
+    withCaption("SWE-bench 2 → 0…", (dir) => {
+      const run = check(dir);
+      assert.equal(run.status, 0, JSON.stringify(run.json.errors));
+      assert.equal(run.json.ok, true);
+      const finding = run.json.warnings.find(
+        (item: any) => item.id === "caption-ellipsis",
+      );
+      assert.ok(finding, JSON.stringify(run.json.warnings));
+      assert.equal(finding.beatId, "example-1");
+      assert.equal(finding.chapter, "example");
+      assert.equal(finding.field, "caption");
+      assert.match(finding.message, /SWE-bench 2 → 0…/u);
+      assert.match(finding.message, /截断/u);
+      assert.ok(finding.fix);
+      assert.match(finding.fix, /改写/u);
+    });
+
+    withCaption("SWE-bench 2 → 0...", (dir) => {
+      const run = check(dir, ["--only=caption-ellipsis"]);
+      assert.equal(run.status, 0, JSON.stringify(run.json.errors));
+      assert.equal(run.json.ok, true);
+      assert.deepEqual(run.json.errors, []);
+      assert.equal(run.json.warnings.length, 1);
+      assert.equal(run.json.warnings[0].id, "caption-ellipsis");
+      assert.equal(run.json.warnings[0].beatId, "example-1");
+      assert.match(run.json.warnings[0].message, /\.\.\./u);
+      assert.deepEqual(run.json.reports, []);
+    });
+
+    withCaption("SWE-bench 2 → 0", (dir) => {
+      const run = check(dir, ["--only=caption-ellipsis"]);
+      assert.equal(run.status, 0, JSON.stringify(run.json.errors));
+      assert.deepEqual(run.json.errors, []);
+      assert.deepEqual(run.json.warnings, []);
+      assert.deepEqual(run.json.reports, []);
+      assert.deepEqual(run.json.summary, {
+        errors: 0,
+        warnings: 0,
+        reports: 0,
+      });
+    });
+
+    withClone((dir) => {
+      // say 里的省略号不算：字幕才是给眼睛的那一行。
+      updateBeat(dir, 0, { say: "SWE-bench 从 2 降到 0…" });
+      const run = check(dir, ["--only=caption-ellipsis"]);
+      assert.deepEqual(run.json.warnings, []);
+    });
+  });
+
   test("--only 过滤检查项；未知 id 拒绝；过滤运行不写渲染闸回执", () => {
     withClone((dir) => {
       const run = check(dir, ["--only=caption-derived"]);
@@ -671,6 +739,640 @@ describe("avp check", () => {
         (step: any) => step.step === "check",
       );
       assert.equal(checkStep.status, "current");
+    });
+  });
+});
+
+// ---------------------------------------------------------------------------
+// 张力检查（#18）：全部走 CLI 边界 —— 造临时项目、跑 check --json、读 findings。
+// ---------------------------------------------------------------------------
+
+interface TensionNarration {
+  say: string;
+  caption?: string;
+}
+
+interface TensionChapter {
+  id: string;
+  narrations: TensionNarration[];
+  /** `> **张力线**：` 后面的内容；省略时给一个合法默认（还扣本章末拍 + re-hook）。 */
+  tension?: string;
+}
+
+/**
+ * fake 后端时长 = max(700, 字数 × 220 / speed) + 300ms 尾隙。
+ * 用固定字数的中文长句造出可控的 25s / 40s / 47s / 65s / 70s 拍。
+ */
+const TENSION_FILLER =
+  "这一句只是用来把口播拉长，让相邻还扣之间隔开足够久，观众才可能忘记开头提出的问题。";
+
+function longTensionSay(chars: number, head = "先看这一段。"): string {
+  let text = head;
+  while ([...text].length < chars) text += TENSION_FILLER;
+  return [...text].slice(0, chars).join("");
+}
+
+function narrationAlias(id: string): string {
+  return `${id.replace(/[^a-z0-9]/gu, "_")}Narrations`;
+}
+
+function writeChapterRegistry(dir: string, ids: string[]): void {
+  const imports = ids
+    .map(
+      (id, index) =>
+        `import { narrations as ${narrationAlias(id)} } from "../chapters/0${index + 1}-${id}/narrations";`,
+    )
+    .join("\n");
+  const entries = ids
+    .map(
+      (id) =>
+        `  {\n    id: ${JSON.stringify(id)},\n    title: ${JSON.stringify(id)},\n    narrations: ${narrationAlias(id)},\n  },`,
+    )
+    .join("\n");
+  writeFileSync(
+    join(dir, "presentation", "src", "registry", "chapters.ts"),
+    `import type { ChapterDef } from "./types";\n${imports}\n\nexport const CHAPTERS: ChapterDef[] = [\n${entries}\n];\n`,
+    "utf8",
+  );
+}
+
+function writeChapterNarrations(
+  dir: string,
+  folder: string,
+  narrations: TensionNarration[],
+): void {
+  const body = narrations
+    .map((entry) => {
+      const fields = [`say: ${JSON.stringify(entry.say)}`];
+      if (entry.caption !== undefined) {
+        fields.push(`caption: ${JSON.stringify(entry.caption)}`);
+      }
+      fields.push(`motion: "static"`);
+      return `  { ${fields.join(", ")} },`;
+    })
+    .join("\n");
+  const folderPath = join(dir, "presentation", "src", "chapters", folder);
+  mkdirSync(folderPath, { recursive: true });
+  writeFileSync(
+    join(folderPath, "narrations.ts"),
+    `import type { Narration } from "../../registry/types";\n\nexport const narrations: Narration[] = [\n${body}\n];\n`,
+    "utf8",
+  );
+}
+
+/**
+ * 造一个带张力计划的项目：多章节 registry + narrations + script + outline，
+ * 跑 plan 与 fake tts 拿到实测时长。所有拍都是 static，所以不需要钩子文件。
+ */
+function buildTensionProject(
+  chapters: TensionChapter[],
+  options: { plantBeat?: number; finalBeat?: number } = {},
+): string {
+  const dir = tempProject("avp-check-tension-");
+  const init = runAvp(["init", "--theme=bold-signal", "--json"], dir);
+  assert.equal(init.status, 0, init.stderr);
+
+  writeChapterRegistry(
+    dir,
+    chapters.map((chapter) => chapter.id),
+  );
+
+  const says: string[] = [];
+  const chapterBlocks: string[] = [];
+  let globalBeat = 0;
+  chapters.forEach((chapter, index) => {
+    writeChapterNarrations(
+      dir,
+      `0${index + 1}-${chapter.id}`,
+      chapter.narrations,
+    );
+    says.push(...chapter.narrations.map((narration) => narration.say));
+    globalBeat += chapter.narrations.length;
+    const tension =
+      chapter.tension ??
+      `还扣「本章先给一部分答案」@拍 ${globalBeat}｜re-hook：把本章挂回开头的问题`;
+    chapterBlocks.push(
+      `## ${index + 1}. ${chapter.id} — 测试章节\n\n> **张力线**：${tension}\n`,
+    );
+  });
+
+  writeScript(dir, says);
+  const totalBeats = globalBeat;
+  const plantBeat = options.plantBeat ?? 1;
+  const finalBeat = options.finalBeat ?? totalBeats;
+  writeFileSync(
+    join(dir, "outline.md"),
+    [
+      "# Video Outline",
+      "",
+      `> **埋扣**：全片要回答的那个问题到底是什么？ —— 第 ${plantBeat} 拍抛出，第 ${finalBeat} 拍总还扣`,
+      `> **总还扣**：答案就在每一次兑现里。 —— 第 ${finalBeat} 拍`,
+      "",
+      ...chapterBlocks,
+    ].join("\n"),
+    "utf8",
+  );
+
+  const plan = runAvp(["plan", "--json"], dir);
+  assert.equal(plan.status, 0, plan.stderr);
+
+  const ttsConfig = readJson(join(dir, "tts.json"));
+  ttsConfig.backend = "fake";
+  writeFileSync(
+    join(dir, "tts.json"),
+    `${JSON.stringify(ttsConfig, null, 2)}\n`,
+    "utf8",
+  );
+  const tts = runAvp(["tts", "--json"], dir);
+  assert.equal(tts.status, 0, tts.stderr);
+  return dir;
+}
+
+function withTensionProject(
+  chapters: TensionChapter[],
+  fn: (dir: string) => void,
+  options: { plantBeat?: number; finalBeat?: number } = {},
+): void {
+  const dir = buildTensionProject(chapters, options);
+  try {
+    fn(dir);
+  } finally {
+    cleanup(dir);
+  }
+}
+
+function durationSum(
+  beats: any[],
+  from: number,
+  to: number,
+): number {
+  return beats
+    .slice(from, to)
+    .reduce((sum: number, beat: any) => sum + beat.durationMs, 0);
+}
+
+const TENSION_CHECK_IDS = new Set([
+  "chapter-rehook-missing",
+  "recall-gap",
+  "interrupt-spacing",
+  "numeric-run",
+  "rhythm-uniformity",
+]);
+
+/** 只从 check --json 的公开结论里取张力类 findings。 */
+function tensionIds(run: ReturnType<typeof runAvp>): string[] {
+  return [...run.json.errors, ...run.json.warnings, ...run.json.reports]
+    .map((finding: any) => finding.id)
+    .filter((id: string) => TENSION_CHECK_IDS.has(id));
+}
+
+describe("avp check · 张力检查", () => {
+  function check(
+    dir: string,
+    extra: string[] = [],
+  ): ReturnType<typeof runAvp> {
+    return runAvp(["check", "--json", ...extra], dir);
+  }
+
+  test("chapter-rehook-missing：章张力线缺 re-hook 报 warning，有 re-hook 不报", () => {
+    const chapters: TensionChapter[] = [
+      {
+        id: "alpha",
+        narrations: [
+          { say: "第一句。", caption: "第一句" },
+          { say: "第二句。", caption: "第二句" },
+          { say: "第三句。", caption: "第三句" },
+        ],
+        tension: "还扣「本章的答案」@拍 3｜re-hook：把问题挂回开头",
+      },
+    ];
+
+    withTensionProject(chapters, (dir) => {
+      const run = check(dir, ["--only=chapter-rehook-missing"]);
+      assert.equal(run.status, 0, JSON.stringify(run.json.errors));
+      assert.equal(run.json.ok, true);
+      assert.deepEqual(run.json.warnings, []);
+    });
+
+    withTensionProject(chapters, (dir) => {
+      const outline = readFileSync(join(dir, "outline.md"), "utf8");
+      writeFileSync(
+        join(dir, "outline.md"),
+        outline.replace("｜re-hook：把问题挂回开头", ""),
+        "utf8",
+      );
+      const run = check(dir, ["--only=chapter-rehook-missing"]);
+      assert.equal(run.status, 0, JSON.stringify(run.json.errors));
+      assert.equal(run.json.ok, true);
+      assert.equal(run.json.warnings.length, 1);
+      const finding = run.json.warnings[0];
+      assert.equal(finding.id, "chapter-rehook-missing");
+      assert.equal(finding.level, "warning");
+      assert.equal(finding.beatId, "alpha-1");
+      assert.equal(finding.chapter, "alpha");
+      assert.equal(finding.field, "rehook");
+      assert.match(finding.message, /alpha/u);
+      assert.match(finding.message, /re-hook/u);
+      assert.ok(finding.fix);
+    });
+  });
+
+  test("recall-gap：长片相邻还扣 >5 分钟报 warning，约 280s 不报，--only 只回该 id", () => {
+    // 正例：前 7 拍各 ~47s → 第 1 拍抛出到第 8 拍部分还扣间隔 ~330s；
+    // 第 8 拍到末拍只有 ~280s。总时长 ~675s > 10 分钟。
+    const positive: TensionChapter[] = [
+      {
+        id: "alpha",
+        narrations: [
+          ...Array.from({ length: 7 }, () => ({
+            say: longTensionSay(213),
+            caption: "先看这一段",
+          })),
+          ...Array.from({ length: 4 }, () => ({
+            say: longTensionSay(317),
+            caption: "先看这一段",
+          })),
+          { say: longTensionSay(295), caption: "先看这一段" },
+        ],
+        tension: "还扣「先给一部分答案」@拍 8｜re-hook：把问题挂回开头",
+      },
+    ];
+    withTensionProject(positive, (dir) => {
+      const beats = readJson(join(dir, "beats.json")).beats;
+      const total = durationSum(beats, 0, beats.length);
+      assert.ok(total > 600_000, `正例总时长需 >10 分钟，实际 ${total}ms`);
+      const gapMs = durationSum(beats, 0, 7);
+      assert.ok(gapMs > 300_000, `正例间隔需 >5 分钟，实际 ${gapMs}ms`);
+
+      const run = check(dir, ["--only=recall-gap"]);
+      assert.equal(run.status, 0, JSON.stringify(run.json.errors));
+      assert.equal(run.json.ok, true);
+      assert.deepEqual(run.json.errors, []);
+      assert.deepEqual(run.json.reports, []);
+      assert.equal(run.json.warnings.length, 1);
+      const finding = run.json.warnings[0];
+      assert.equal(finding.id, "recall-gap");
+      assert.equal(finding.level, "warning");
+      assert.equal(finding.beatId, "alpha-8");
+      assert.equal(finding.chapter, "alpha");
+      assert.match(finding.message, /alpha-1/u);
+      assert.match(finding.message, /alpha-8/u);
+      assert.match(
+        finding.message,
+        new RegExp(`${(gapMs / 60_000).toFixed(1)} 分钟`, "u"),
+      );
+      assert.match(finding.message, /5 分钟/u);
+      assert.ok(finding.fix);
+      assert.deepEqual(run.json.summary, {
+        errors: 0,
+        warnings: 1,
+        reports: 0,
+      });
+    });
+
+    // 反例：同样 >10 分钟，但相邻 recall 间隔 ~280s，未超 5 分钟。
+    const negative: TensionChapter[] = [
+      {
+        id: "alpha",
+        narrations: [
+          ...Array.from({ length: 7 }, () => ({
+            say: longTensionSay(181),
+            caption: "先看这一段",
+          })),
+          ...Array.from({ length: 4 }, () => ({
+            say: longTensionSay(317),
+            caption: "先看这一段",
+          })),
+          { say: longTensionSay(295), caption: "先看这一段" },
+        ],
+        tension: "还扣「先给一部分答案」@拍 8｜re-hook：把问题挂回开头",
+      },
+    ];
+    withTensionProject(negative, (dir) => {
+      const beats = readJson(join(dir, "beats.json")).beats;
+      const total = durationSum(beats, 0, beats.length);
+      assert.ok(total > 600_000, `反例仍需 >10 分钟，实际 ${total}ms`);
+      const gapMs = durationSum(beats, 0, 7);
+      assert.ok(gapMs < 300_000, `反例间隔需 <5 分钟，实际 ${gapMs}ms`);
+
+      const run = check(dir, ["--only=recall-gap"]);
+      assert.equal(run.status, 0, JSON.stringify(run.json.errors));
+      assert.deepEqual(run.json.warnings, []);
+      assert.deepEqual(run.json.errors, []);
+      assert.deepEqual(run.json.reports, []);
+    });
+  });
+
+  test("interrupt-spacing：相邻 interrupt >120s 报 warning，<120s 不报", () => {
+    const positive: TensionChapter[] = [
+      {
+        id: "alpha",
+        narrations: Array.from({ length: 4 }, () => ({
+          say: longTensionSay(213),
+          caption: "先看这一段",
+        })),
+        tension:
+          "还扣「先看边界」@拍 4｜re-hook：把问题挂回开头｜interrupt@拍 1",
+      },
+      {
+        id: "beta",
+        narrations: Array.from({ length: 4 }, () => ({
+          say: longTensionSay(213),
+          caption: "先看这一段",
+        })),
+        tension:
+          "还扣「再看结果」@拍 5｜re-hook：把数字落到代价｜interrupt@拍 5",
+      },
+    ];
+    withTensionProject(positive, (dir) => {
+      const beats = readJson(join(dir, "beats.json")).beats;
+      const gapMs = durationSum(beats, 0, 4);
+      assert.ok(gapMs > 120_000, `正例间隔需 >120s，实际 ${gapMs}ms`);
+
+      const run = check(dir, ["--only=interrupt-spacing"]);
+      assert.equal(run.status, 0, JSON.stringify(run.json.errors));
+      assert.equal(run.json.ok, true);
+      assert.equal(run.json.warnings.length, 1);
+      const finding = run.json.warnings[0];
+      assert.equal(finding.id, "interrupt-spacing");
+      assert.equal(finding.level, "warning");
+      assert.equal(finding.beatId, "beta-1");
+      assert.equal(finding.chapter, "beta");
+      assert.match(finding.message, /alpha-1/u);
+      assert.match(finding.message, /beta-1/u);
+      assert.match(finding.message, /120/u);
+      assert.match(
+        finding.message,
+        new RegExp(`${Number((gapMs / 1000).toFixed(1))} 秒`, "u"),
+      );
+      assert.ok(finding.fix);
+    });
+
+    // 反例：每拍 ~25s，相邻 interrupt 只隔 ~100s。
+    const negative: TensionChapter[] = [
+      {
+        id: "alpha",
+        narrations: Array.from({ length: 4 }, () => ({
+          say: longTensionSay(113),
+          caption: "先看这一段",
+        })),
+        tension:
+          "还扣「先看边界」@拍 4｜re-hook：把问题挂回开头｜interrupt@拍 1",
+      },
+      {
+        id: "beta",
+        narrations: Array.from({ length: 4 }, () => ({
+          say: longTensionSay(113),
+          caption: "先看这一段",
+        })),
+        tension:
+          "还扣「再看结果」@拍 5｜re-hook：把数字落到代价｜interrupt@拍 5",
+      },
+    ];
+    withTensionProject(negative, (dir) => {
+      const beats = readJson(join(dir, "beats.json")).beats;
+      const gapMs = durationSum(beats, 0, 4);
+      assert.ok(gapMs < 120_000, `反例间隔需 <120s，实际 ${gapMs}ms`);
+      const run = check(dir, ["--only=interrupt-spacing"]);
+      assert.equal(run.status, 0, JSON.stringify(run.json.errors));
+      assert.deepEqual(run.json.warnings, []);
+    });
+  });
+
+  test("numeric-run：连续 3 拍、章内占比 >40% 分别报 warning；2 连与 40% 不报", () => {
+    const numericSay = "这里出现了 3 个数字。";
+    const numericCaption = "出现 3 个数字";
+    const plainSay = "这一拍不放数字。";
+    const plainCaption = "这一拍不放数字";
+    const chapter = (
+      numericIndices: number[],
+      totalBeats: number,
+      tension: string,
+    ): TensionChapter => ({
+      id: "alpha",
+      narrations: Array.from({ length: totalBeats }, (_, index) =>
+        numericIndices.includes(index)
+          ? { say: numericSay, caption: numericCaption }
+          : { say: plainSay, caption: plainCaption },
+      ),
+      tension,
+    });
+
+    // 3 连：3/8 = 37.5%，只触发连续 run。
+    withTensionProject(
+      [chapter([3, 4, 5], 8, "还扣「本章的答案」@拍 8｜re-hook：把问题挂回开头")],
+      (dir) => {
+        const run = check(dir, ["--only=numeric-run"]);
+        assert.equal(run.status, 0, JSON.stringify(run.json.errors));
+        assert.equal(run.json.ok, true);
+        assert.equal(run.json.warnings.length, 1);
+        const finding = run.json.warnings[0];
+        assert.equal(finding.id, "numeric-run");
+        assert.equal(finding.level, "warning");
+        assert.equal(finding.beatId, "alpha-4");
+        assert.equal(finding.chapter, "alpha");
+        assert.match(finding.message, /连续/u);
+        assert.match(finding.message, /alpha-4/u);
+        assert.match(finding.message, /alpha-6/u);
+        assert.match(finding.message, /3 拍/u);
+      },
+    );
+
+    // 2 连 + 2/5 = 40%：两个阈值都没超。
+    withTensionProject(
+      [chapter([0, 1], 5, "还扣「本章的答案」@拍 5｜re-hook：把问题挂回开头")],
+      (dir) => {
+        const run = check(dir, ["--only=numeric-run"]);
+        assert.equal(run.status, 0, JSON.stringify(run.json.errors));
+        assert.deepEqual(run.json.warnings, []);
+      },
+    );
+
+    // 3/5 = 60% 但数字拍不相邻：只触发占比。
+    withTensionProject(
+      [chapter([0, 2, 4], 5, "还扣「本章的答案」@拍 5｜re-hook：把问题挂回开头")],
+      (dir) => {
+        const run = check(dir, ["--only=numeric-run"]);
+        assert.equal(run.status, 0, JSON.stringify(run.json.errors));
+        assert.equal(run.json.warnings.length, 1);
+        const finding = run.json.warnings[0];
+        assert.equal(finding.id, "numeric-run");
+        assert.equal(finding.beatId, "alpha-1");
+        assert.match(finding.message, /3\/5/u);
+        assert.match(finding.message, /60%/u);
+        assert.doesNotMatch(finding.message, /连续/u);
+      },
+    );
+  });
+
+  test("rhythm-uniformity：4 拍句长完全相同只报 report，句长有差异不报", () => {
+    const equal: TensionChapter[] = [
+      {
+        id: "alpha",
+        narrations: Array.from({ length: 4 }, () => ({
+          say: "同样长度的一句话。",
+          caption: "同样长度",
+        })),
+        tension: "还扣「本章的答案」@拍 4｜re-hook：把问题挂回开头",
+      },
+    ];
+    withTensionProject(equal, (dir) => {
+      const run = check(dir, ["--only=rhythm-uniformity"]);
+      assert.equal(run.status, 0, JSON.stringify(run.json.errors));
+      assert.equal(run.json.ok, true);
+      assert.deepEqual(run.json.warnings, []);
+      assert.deepEqual(run.json.errors, []);
+      assert.equal(run.json.reports.length, 1);
+      const finding = run.json.reports[0];
+      assert.equal(finding.id, "rhythm-uniformity");
+      assert.equal(finding.level, "report");
+      assert.equal(finding.beatId, "alpha-1");
+      assert.equal(finding.chapter, "alpha");
+      assert.match(finding.message, /0\.000/u);
+      assert.match(finding.message, /变异系数/u);
+      assert.match(finding.message, /8/u);
+      assert.ok(finding.message.includes("/"));
+    });
+
+    const varied: TensionChapter[] = [
+      {
+        id: "alpha",
+        narrations: [
+          { say: "短。", caption: "短" },
+          { say: "这一句话稍微长一点。", caption: "稍微长一点" },
+          {
+            say: "这一句比刚才那句还要再长一些。",
+            caption: "还要再长一些",
+          },
+          {
+            say: "最后这一句话写得最长，用来把句长变异系数拉开足够大的差距。",
+            caption: "最长的一句",
+          },
+        ],
+        tension: "还扣「本章的答案」@拍 4｜re-hook：把问题挂回开头",
+      },
+    ];
+    withTensionProject(varied, (dir) => {
+      const run = check(dir, ["--only=rhythm-uniformity"]);
+      assert.equal(run.status, 0, JSON.stringify(run.json.errors));
+      assert.deepEqual(run.json.reports, []);
+    });
+  });
+
+  test("全部张力结论只报不拦：ok 为 true、exit 0，warnings/reports 都在 JSON 里", () => {
+    const alphaSays = Array.from({ length: 8 }, () => ({
+      say: longTensionSay(213),
+      caption: "先看这一段",
+    }));
+    const betaSays = Array.from({ length: 4 }, () => ({
+      say: longTensionSay(317, "这是第 3 段。"),
+      caption: "这是第 3 段",
+    }));
+    const chapters: TensionChapter[] = [
+      {
+        id: "alpha",
+        narrations: alphaSays,
+        tension:
+          "还扣「先看边界」@拍 8｜re-hook：把问题挂回开头｜interrupt@拍 4",
+      },
+      {
+        id: "beta",
+        narrations: betaSays,
+        tension:
+          "还扣「再看结果」@拍 9｜re-hook：把数字落到代价｜interrupt@拍 10",
+      },
+    ];
+
+    withTensionProject(chapters, (dir) => {
+      // 手改 outline 去掉 alpha 的 re-hook：check 必须容忍，并报 warning。
+      const outline = readFileSync(join(dir, "outline.md"), "utf8");
+      writeFileSync(
+        join(dir, "outline.md"),
+        outline.replace("｜re-hook：把问题挂回开头", ""),
+        "utf8",
+      );
+
+      const run = check(dir);
+      assert.equal(run.status, 0, JSON.stringify(run.json.errors));
+      assert.equal(run.json.ok, true);
+      assert.deepEqual(run.json.errors, []);
+
+      const warningIds = new Set(
+        run.json.warnings.map((finding: any) => finding.id),
+      );
+      for (const id of [
+        "chapter-rehook-missing",
+        "recall-gap",
+        "interrupt-spacing",
+        "numeric-run",
+      ]) {
+        assert.ok(warningIds.has(id), `缺少 warning ${id}`);
+      }
+      const rhythm = run.json.reports.filter(
+        (finding: any) => finding.id === "rhythm-uniformity",
+      );
+      assert.ok(rhythm.length >= 1, JSON.stringify(run.json.reports));
+
+      const rehook = run.json.warnings.find(
+        (finding: any) => finding.id === "chapter-rehook-missing",
+      );
+      assert.equal(rehook.beatId, "alpha-1");
+      assert.equal(rehook.chapter, "alpha");
+
+      const recall = run.json.warnings.find(
+        (finding: any) => finding.id === "recall-gap",
+      );
+      assert.equal(recall.beatId, "alpha-8");
+      assert.match(recall.message, /alpha-1/u);
+
+      const interrupt = run.json.warnings.find(
+        (finding: any) => finding.id === "interrupt-spacing",
+      );
+      assert.equal(interrupt.beatId, "beta-2");
+      assert.match(interrupt.message, /alpha-4/u);
+
+      const table = run.json.reports.find(
+        (finding: any) => finding.id === "duration-table",
+      );
+      assert.ok(table);
+      // check 的落盘回执仍然成立，render 闸不会因张力结论被拦。
+      assert.equal(readJson(join(dir, ".avp", "check.json")).ok, true);
+    });
+  });
+
+  test("没有张力计划的项目不崩、也不产生任何张力结论", () => {
+    const chapters: TensionChapter[] = [
+      {
+        id: "alpha",
+        narrations: [
+          { say: "第一句。", caption: "第一句" },
+          { say: "第二句。", caption: "第二句" },
+          { say: "第三句。", caption: "第三句" },
+        ],
+      },
+    ];
+    withTensionProject(chapters, (dir) => {
+      const outlinePath = join(dir, "outline.md");
+      const outline = readFileSync(outlinePath, "utf8");
+      const blanked = outline
+        .split("\n")
+        .filter(
+          (line) =>
+            !/^\s*>\s*\*\*(?:埋扣|总还扣|张力线)\*\*/u.test(line),
+        )
+        .join("\n");
+      writeFileSync(outlinePath, blanked, "utf8");
+
+      const blankRun = check(dir);
+      assert.equal(blankRun.status, 0, JSON.stringify(blankRun.json.errors));
+      assert.equal(blankRun.json.ok, true);
+      assert.deepEqual(tensionIds(blankRun), []);
+
+      rmSync(outlinePath);
+      const missingRun = check(dir);
+      assert.equal(missingRun.status, 0, JSON.stringify(missingRun.json.errors));
+      assert.equal(missingRun.json.ok, true);
+      assert.deepEqual(tensionIds(missingRun), []);
     });
   });
 });
