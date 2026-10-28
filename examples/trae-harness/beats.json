@@ -10,17 +10,17 @@
       "chapter": "coldopen",
       "chapterIndex": 0,
       "step": 0,
-      "say": "你把需求丢给 AI，它写代码。",
-      "caption": "需求丢给 AI",
+      "say": "需求丢给 AI，代码一行一行往外冒。你敢直接上线吗？",
+      "caption": "AI 写的代码，敢上线吗",
       "captionSource": "authored",
       "audio": "audio/coldopen/1.wav",
-      "durationMs": 3650,
-      "textHash": "3032b481ab5651f2f5b2a600eb45fe9d9e2781f4eb3d77d94eb45a183988af77",
+      "durationMs": 5625,
+      "textHash": "6da743363adcabc55f1c2c748b75ed51c169738655078f6cf5be5a0b07c0aa46",
       "tts": {
         "backend": "kokoro",
         "voice": "zf_xiaoxiao",
         "speed": 1,
-        "hash": "8ce9d2637ec65ed71aef05caf466ad2035fd9398334075e1028420c2d291e7d9"
+        "hash": "bad1db8898b3f086ab68d017d03ee65dd2f43d7c7e947825e34f21f97064a431"
       },
       "motion": "hook"
     },
@@ -29,17 +29,17 @@
       "chapter": "coldopen",
       "chapterIndex": 0,
       "step": 1,
-      "say": "也产生幻觉。跳过测试。自由发挥。",
-      "caption": "幻觉 / 跳测试 / 自由发挥",
+      "say": "它编接口、跳过测试、改你没让改的。同一个模型，凭什么加上框架就能把 bug 清零？",
+      "caption": "同一个模型，凭什么 bug 清零",
       "captionSource": "authored",
       "audio": "audio/coldopen/2.wav",
-      "durationMs": 4375,
-      "textHash": "16c647e04b7164c9ce82c4330903a9e387242475d953fdd70e64cc9e74b28762",
+      "durationMs": 7975,
+      "textHash": "8ac3aed3e5cb05250008f6b0730750c01d76c523f3a578f4bf4547cf02724055",
       "tts": {
         "backend": "kokoro",
         "voice": "zf_xiaoxiao",
         "speed": 1,
-        "hash": "627cf85403d673721ccc883eab824581795c825872858ad29f71ac11010dd37a"
+        "hash": "46a499552b29a63a4767d66b850aaf116532b23c00421c77678507505e3c576a"
       },
       "motion": "hook"
     },
@@ -48,17 +48,17 @@
       "chapter": "coldopen",
       "chapterIndex": 0,
       "step": 2,
-      "say": "所以我们做了一个框架，叫 trae-harness。",
-      "caption": "框架：trae-harness",
+      "say": "所以我们做了个多 Agent 协作框架。叫 trae-harness。",
+      "caption": "trae-harness：多 Agent 协作",
       "captionSource": "authored",
       "audio": "audio/coldopen/3.wav",
-      "durationMs": 4025,
-      "textHash": "cacf426c06dffeffca9e0e9b6e1a07bc0a20a86e7d827a369a08c35394050ad6",
+      "durationMs": 4900,
+      "textHash": "06db02dbedf8da2c659302f12d66dd1b0df69b976b2f4f832884210de84b6752",
       "tts": {
         "backend": "kokoro",
         "voice": "zf_xiaoxiao",
         "speed": 1,
-        "hash": "666142c764b0254233f89df79902416518b0f2bc705ce354136dec59ae397a55"
+        "hash": "34d2a8cd1efc8eb933166aacd1b7b108fa80505de116a162deb77ae985c87cb0"
       },
       "motion": "hook"
     },
@@ -67,17 +67,17 @@
       "chapter": "coldopen",
       "chapterIndex": 0,
       "step": 3,
-      "say": "不确定每个 Agent 的边界，就一定有幻觉的模糊空间。",
-      "caption": "Agent 边界 = 幻觉空间",
+      "say": "根子不在模型。边界不清，它就有地方编。",
+      "caption": "边界不清，它就有地方编",
       "captionSource": "authored",
       "audio": "audio/coldopen/4.wav",
-      "durationMs": 5375,
-      "textHash": "76f2055f996298329273fe9969107849d98733d46dd217995ca86b866dd785f7",
+      "durationMs": 4800,
+      "textHash": "f6ab28984b5f457c52d52f27276fcb18ad46701b4251eafe04e1374504a40144",
       "tts": {
         "backend": "kokoro",
         "voice": "zf_xiaoxiao",
         "speed": 1,
-        "hash": "e83cbf540732b9a5cb1736203a6be8bfd2185dca70e94331537c9172e9e9e25b"
+        "hash": "edb4747603fc39329f6af8a2305964586b92eb5ae5befd6a86bb4dea9132e190"
       },
       "motion": "hook"
     },
@@ -86,17 +86,17 @@
       "chapter": "coldopen",
       "chapterIndex": 0,
       "step": 4,
-      "say": "它怎么做到的？",
-      "caption": "它怎么做到的？",
+      "say": "那它到底怎么做到的？",
+      "caption": "它到底怎么做到的？",
       "captionSource": "authored",
       "audio": "audio/coldopen/5.wav",
-      "durationMs": 2575,
-      "textHash": "a3e23c2810be7e33350838a2756731bbbc3a7b16df27cba32f2722e221286ceb",
+      "durationMs": 3100,
+      "textHash": "ed3cbb87cbab2b08a603c9083399ccb031af783eca12d548116b5cb731f09ee8",
       "tts": {
         "backend": "kokoro",
         "voice": "zf_xiaoxiao",
         "speed": 1,
-        "hash": "6072bc36368483bd4602e0a92d360ff452f840ed3098d0a2f2dbb7fe714b2c5b"
+        "hash": "594c88fac6152f19308a4f6c91efb24749eff7de578a79101b04a03810e66403"
       },
       "motion": "hook"
     },
@@ -105,17 +105,17 @@
       "chapter": "architecture",
       "chapterIndex": 1,
       "step": 0,
-      "say": "先说步骤隔离。每个子 Agent 只做当前步，不知道下一步。",
-      "caption": "步骤隔离：Agent 只看当前步",
+      "say": "模型没换，换的是它每一步能看到什么。子 Agent 只做当前步。下一步看不到。",
+      "caption": "子 Agent 只看当前步",
       "captionSource": "authored",
       "audio": "audio/architecture/1.wav",
-      "durationMs": 5575,
-      "textHash": "8242d619693aeca2be74e53964808fd3940587c6bcc18f5bdfd935411b2d7959",
+      "durationMs": 7050,
+      "textHash": "0c0eeca7ebf777c5bc6e6d003f764bb09bdea4502186ccbc1bf21702b2b40dc8",
       "tts": {
         "backend": "kokoro",
         "voice": "zf_xiaoxiao",
         "speed": 1,
-        "hash": "f50e01cd9ce00bb3887d517c3f404ed792458efb134bb75c0ff94c9a2602b840"
+        "hash": "23c9c0c4c79dfb06541615dca135145b1a5e7bef7bf91c7c0af897caab2624f8"
       },
       "motion": "hook"
     },
@@ -124,17 +124,17 @@
       "chapter": "architecture",
       "chapterIndex": 1,
       "step": 1,
-      "say": "还有信息瓶颈。模块之间只传 200 token，上下文不到 400 token。",
+      "say": "模块之间只传 200 token。单步上下文不到 400。",
       "caption": "只传 200 token，上下文 400",
       "captionSource": "authored",
       "audio": "audio/architecture/2.wav",
-      "durationMs": 6350,
-      "textHash": "5007b7e094c10e513d409a938123a15c5be278011379f94d2ee68efe2fdf6c0f",
+      "durationMs": 5200,
+      "textHash": "56a30cc54cb0b05b2e91d4016020410057cfed7524e9a490bb9e83997ea7ff20",
       "tts": {
         "backend": "kokoro",
         "voice": "zf_xiaoxiao",
         "speed": 1,
-        "hash": "e92c1eae67157b7713e9e19777b97bbbc50c2cb9dc354eb0e97ecc0aa963937e"
+        "hash": "ba77bfafa46e9aaa6180ab64af6da00566f27c44bc6149200eb9970fbf2b38f0"
       },
       "motion": "hook"
     },
@@ -143,17 +143,17 @@
       "chapter": "architecture",
       "chapterIndex": 1,
       "step": 2,
-      "say": "全程 3 个子 Agent 并行。辩论、审核、开发，各管一段。",
-      "caption": "3 个 Agent：辩论、审核、开发",
+      "say": "三个 Agent 同时开工，不会打架？辩论、审核、开发，各管一段。",
+      "caption": "三个 Agent，各管一段",
       "captionSource": "authored",
       "audio": "audio/architecture/3.wav",
-      "durationMs": 5450,
-      "textHash": "bb89108833e3c2a5239440d7389d4b9fc50fa0e9f21987e201f7b1dcc74e4199",
+      "durationMs": 5950,
+      "textHash": "9532e96cc05bb036fa2dd89ead44dee8eafc7807fff10ac492c860ed49213ba3",
       "tts": {
         "backend": "kokoro",
         "voice": "zf_xiaoxiao",
         "speed": 1,
-        "hash": "f13447a4fa453d64219cf127a43937a29f78c1dae3c9434b933d2005aebf30dc"
+        "hash": "51f003e370a6d9c264a236082e535cf24a038f61a785cb9d6f3e820f3163fc26"
       },
       "motion": "hook"
     },
@@ -162,17 +162,17 @@
       "chapter": "architecture",
       "chapterIndex": 1,
       "step": 3,
-      "say": "铁面编排器坐镇中间。Gate 不通过，就别想往前走一步。",
+      "say": "铁面编排器坐镇中间。Gate 不通过，就别想往前走。",
       "caption": "Gate 不通过，不许前进",
       "captionSource": "authored",
       "audio": "audio/architecture/4.wav",
-      "durationMs": 5900,
-      "textHash": "097215d40179ecad29842af49e1ccd2dcfca63f684eb7d9486d6940613c690da",
+      "durationMs": 5550,
+      "textHash": "7ae2c008b2b28dc383e3948628e6adfd729f59be511288b4c7985c92adfb50fb",
       "tts": {
         "backend": "kokoro",
         "voice": "zf_xiaoxiao",
         "speed": 1,
-        "hash": "195ab6ba1aa2b189fb6206f0efc99862851b6617b934ce3b8bb4ac3d0413348a"
+        "hash": "c98bbbfb2a419e57a3fb348fc210e4d5133b12742c910d177530cc6f3cca3472"
       },
       "motion": "hook"
     },
@@ -181,17 +181,17 @@
       "chapter": "architecture",
       "chapterIndex": 1,
       "step": 4,
-      "say": "拼成一条流水线：隔离、限流、并行、把关。",
+      "say": "四个机制串起来：隔离、限流、并行、把关。",
       "caption": "隔离 · 限流 · 并行 · 把关",
       "captionSource": "authored",
       "audio": "audio/architecture/5.wav",
-      "durationMs": 4675,
-      "textHash": "248d65cb7941b60fbdb51571380233e43c4cae8b91e78b586d3f178c62e0ae4c",
+      "durationMs": 4525,
+      "textHash": "3da62924cdb206fdbd3c9d21e3f6b63d825e38fcc02ff04723cbc1ee03fa2441",
       "tts": {
         "backend": "kokoro",
         "voice": "zf_xiaoxiao",
         "speed": 1,
-        "hash": "7b077507935fd7afbb3c5a405a2cd83b199bbaceafa5a5303c80662e8e7101da"
+        "hash": "496533060ad6b39bb4ded4394cc80bdedbbdb23aea4fa1656d3ec1f1d9d54b75"
       },
       "motion": "hook"
     },
@@ -200,17 +200,17 @@
       "chapter": "architecture",
       "chapterIndex": 1,
       "step": 5,
-      "say": "架构说完，看效果。",
-      "caption": "架构说完，看效果",
+      "say": "四道锁全上，没有一步能蒙过去。模型没换，看它被逼成什么样。",
+      "caption": "模型没换，看被逼成什么样",
       "captionSource": "authored",
       "audio": "audio/architecture/6.wav",
-      "durationMs": 3100,
-      "textHash": "466ee3d813a69ca8318807eb8539a56fb1c1c136272e13acaf3812807cc1256e",
+      "durationMs": 6350,
+      "textHash": "7a132f46f8b450cab55254bb221ed1f7f8b122a0c4ffd60d884024bd387cc5be",
       "tts": {
         "backend": "kokoro",
         "voice": "zf_xiaoxiao",
         "speed": 1,
-        "hash": "3fd5778554687ee38106ecfa7b5e9844f395d93d49e2cfb1c0902a3787b4f272"
+        "hash": "3c662d2a9e53127a0bd522038c9c8b6cf826e240510931c58105dea3b769fd88"
       },
       "motion": "static"
     },
