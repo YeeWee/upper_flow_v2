@@ -3,7 +3,13 @@ import { CHECK_IDS } from "./types";
 import type { CheckContext } from "./types";
 import { missingTokens, extraTokens } from "./tokens";
 
-/** error：字幕宽度 + say/caption 的数字/专名集合。authored / derived 都检查。 */
+/** caption 不得用省略号截断：`…` 或 ASCII `...`（SKILL.md / CHAPTER-CRAFT.md）。 */
+const CAPTION_ELLIPSIS = /…|\.\.\./u;
+
+/**
+ * error：字幕宽度 + say/caption 的数字/专名集合。authored / derived 都检查。
+ * warning：caption 含省略号——截断是改写，不是省略。
+ */
 export function checkCaptions(ctx: CheckContext): void {
   for (const beat of ctx.manifest.beats) {
     const caption = typeof beat.caption === "string" ? beat.caption : "";
@@ -24,6 +30,22 @@ export function checkCaptions(ctx: CheckContext): void {
           `「${caption}」${captionCells(caption)} 个全角字符（上限 ${CAPTION_MAX_CELLS}）。` +
           `\n改短文案；不要加省略号。`,
         fix: `把 caption 压到 ${CAPTION_MAX_CELLS} 个全角字符以内（ASCII 记 0.5）；不要加省略号。`,
+      });
+    }
+
+    const ellipsis = CAPTION_ELLIPSIS.exec(caption);
+    if (ellipsis) {
+      ctx.findings.push({
+        id: CHECK_IDS.captionEllipsis,
+        level: "warning",
+        beatId: beat.id,
+        chapter: beat.chapter,
+        field: "caption",
+        message:
+          `节拍 ${beat.id} 的 caption 含省略号「${ellipsis[0]}」：` +
+          `「${caption}」。` +
+          `\n省略号是截断的痕迹，不是省略；把话写完，改写而不是截断。`,
+        fix: "改写 caption：删掉省略号（… 或 ...）；句子太长就改短、拆拍或换个说法。",
       });
     }
 
