@@ -120,9 +120,9 @@ export default function V2AndCta({ step }: ChapterStepProps) {
 
         <div className="atom-quote lit vc-quote">
           <p className="atom-quote__text">
-            用确定性对抗模糊，
+            答案不在模型，
             <br />
-            用规则防幻觉。
+            在每条规则替它挡住的那一步。
           </p>
           <div className="atom-quote__cite">trae-harness</div>
         </div>

@@ -4,10 +4,12 @@ import {
   existsSync,
   mkdirSync,
   readdirSync,
+  readFileSync,
   writeFileSync,
 } from "node:fs";
 import { join } from "node:path";
 import { after, before, describe, test } from "node:test";
+import { parseOutlineTension } from "../src/lib/script-source";
 import { cleanup, readJson, REPO_ROOT, runAvp, tempProject } from "./helpers";
 
 /**
@@ -216,6 +218,55 @@ describe("examples/trae-harness fixture", () => {
     assert.equal(byStep.compose, "pending");
     assert.equal(byStep.check, "pending");
     assert.equal(byStep.render, "pending");
+  });
+
+  test("结果章数字拍收口，末拍把 outline 的总还扣说出口也放上屏", () => {
+    const manifest = readJson(join(dir, "beats.json"));
+
+    // 结果章的病是数字并列：8 拍连着报数。重写后至少留 3 个数字拍
+    // （报酬还得落在数字上），但占比 ≤40%、最长连续 ≤2。
+    const results = manifest.beats.filter(
+      (beat: any) => beat.chapter === "results",
+    );
+    assert.equal(results.length, 8, "结果章仍是 8 拍");
+    let run = 0;
+    let longestRun = 0;
+    let numeric = 0;
+    for (const beat of results) {
+      if (/\d/u.test(beat.say)) {
+        numeric += 1;
+        run += 1;
+        longestRun = Math.max(longestRun, run);
+      } else {
+        run = 0;
+      }
+    }
+    assert.ok(numeric >= 3, `结果章至少要保留 3 个数字拍，实际 ${numeric}`);
+    assert.ok(
+      numeric / results.length <= 0.4,
+      `结果章数字拍 ${numeric}/${results.length}，超过 40%`,
+    );
+    assert.ok(longestRun <= 2, `结果章最长连续数字拍 ${longestRun}，超过 2`);
+
+    // 总还扣：outline 声明在末拍，口播与终屏画面都必须真的说出那句。
+    const outline = readFileSync(join(FIXTURE, "outline.md"), "utf8");
+    const plan = parseOutlineTension(outline, Object.keys(CHAPTER_STEPS));
+    assert.ok(plan.finalPayoff, "outline.md 必须声明总还扣");
+    assert.equal(plan.finalPayoff.beat, manifest.beats.length, "总还扣落在末拍");
+
+    const last = manifest.beats[manifest.beats.length - 1];
+    assert.ok(
+      last.say.includes(plan.finalPayoff.text),
+      `末拍口播必须说出总还扣「${plan.finalPayoff.text}」：${last.say}`,
+    );
+    const body = readFileSync(
+      join(dir, "composition", "beats", `${last.id}.body.html`),
+      "utf8",
+    );
+    assert.ok(
+      body.includes(plan.finalPayoff.text),
+      `末拍画面必须显示总还扣「${plan.finalPayoff.text}」`,
+    );
   });
 
   test("compose + check 能在 22 拍夹具上全绿（warning 允许）", () => {
