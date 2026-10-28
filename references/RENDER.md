@@ -32,7 +32,7 @@ avp render --after-plan  # 额外核对当前稿子仍是被批准的版本
 ### 联系表
 
 - 每拍抽两帧：`start + 0.2s`（入场后）与 `start + duration − 0.2s`（驻留末）。
-- 22 拍 = 44 帧，`6` 列，行数 `ceil(44/6)=8`。
+- 帧数 = 拍数 × 2，`6` 列，行数 = `ceil(帧数/6)`（例：22 拍 → 44 帧 → 8 行）。
 - 帧按 `00-<beat>-entry.png`、`01-<beat>-dwell.png` 命名，顺序稳定。
 - 它是烧录字幕的校对面：字幕看不清/被裁，先看这里。
 
@@ -61,13 +61,16 @@ avp render --after-plan  # 额外核对当前稿子仍是被批准的版本
   "audio": [{ "beat": "coldopen-1", "file": "audio/coldopen/1.wav", "sha256": "…" }],
   "output": {
     "file": "output/output.mp4", "sha256": "…",
-    "durationMs": 131100, "width": 1920, "height": 1080,
+    "durationMs": 0, "width": 1920, "height": 1080,
     "fps": 30, "videoCodec": "h264", "audioCodec": "aac"
   },
-  "contactSheet": { "file": "output/contact-sheet.png", "sha256": "…", "frames": 44, "columns": 6, "rows": 8 },
-  "stillReport": { "file": "output/still-report.json", "sha256": "…", "staticBeats": ["coldopen-4"] }
+  "contactSheet": { "file": "output/contact-sheet.png", "sha256": "…", "frames": 0, "columns": 6, "rows": 0 },
+  "stillReport": { "file": "output/still-report.json", "sha256": "…", "staticBeats": [] }
 }
 ```
+
+> 上面的 `0` / `[]` / `…` 是占位符：**具体数值以项目自己的 `output/receipt.json` 为准**。
+> 不要在本文件里写死某个夹具的时长或拍 id —— 它们会随夹具重做而悄悄过期。
 
 「再渲一次为什么不一样」可以逐层定位：先比 `hashes.*`，再比
 `toolchain.*`，最后比 `audio[].sha256` 与 `output.sha256`。
