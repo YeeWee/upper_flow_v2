@@ -99,8 +99,11 @@ mp4**。人只需回一个字「渲」或指出要改的拍。有 error 时 rend
 | 级别 | 行为 | 典型项 |
 |---|---|---|
 | **error** | 阻断 render，退出 1 | 音频缺失 / 路径不符 / tts 回执过期 / 静音拍坏 / 字幕超宽 / say-caption 数字专名不一致 / 口播源漂移 / 钩子缺失·超拍·非 seek-safe / tokens 过期 / 语速越界 |
-| **warning** | 可见，不拦 | 派生字幕 / 音色偏离 / skill commit 漂移 |
-| **report** | 只报 | 时长表 / 静帧时段 |
+| **warning** | 可见，不拦 | 派生字幕 / 音色偏离 / skill commit 漂移 / 张力：`chapter-rehook-missing` · `recall-gap` · `interrupt-spacing` · `numeric-run` |
+| **report** | 只报 | 时长表 / 静帧时段 / 节奏均匀（`rhythm-uniformity`） |
+
+张力类判据只验声明与算术，永不阻断渲染；`outline.md` 没有张力计划时
+`check` 静默跳过（缺失已由 `plan` 拦住）。
 
 `check` 没有"警告即失败"的开关；要放行必须修 error，不能把 warning 调成
 静音。`--only=<ids>` 只是查看视图，不写回执、不能给渲染闸放行。
