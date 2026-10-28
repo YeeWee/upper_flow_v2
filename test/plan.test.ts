@@ -747,7 +747,7 @@ describe("avp plan 张力计划", () => {
     }
   });
 
-  test("总还扣不在末拍时拒绝（用越界错误，不给 tension-plan-invalid）", () => {
+  test("总还扣不在末拍时拒绝（只用越界错误，不自造错误 id）", () => {
     const project = projectWithScript();
     try {
       writeOutline(
