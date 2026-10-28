@@ -502,6 +502,74 @@ describe("avp check", () => {
     });
   });
 
+  test("字幕含省略号是 warning：带 beat id、不拦 check、可按 id 过滤", () => {
+    /** 从口播源改 caption 再 plan，保证 beats.json 不与 narrations.ts 漂移。 */
+    function withCaption(caption: string, fn: (dir: string) => void): void {
+      withClone((dir) => {
+        writeNarrations(dir, [
+          { say: SAYS[0]!, caption },
+          { say: SAYS[1]! },
+          { say: SAYS[2]!, motion: "static" },
+        ]);
+        const plan = runAvp(["plan", "--json"], dir);
+        assert.equal(plan.status, 0, plan.stderr);
+        // plan 会重写 beats.json；tts 把实测时长与 tts 元组写回去。
+        const tts = runAvp(["tts", "--json"], dir);
+        assert.equal(tts.status, 0, tts.stderr);
+        fn(dir);
+      });
+    }
+
+    withCaption("SWE-bench 2 → 0…", (dir) => {
+      const run = check(dir);
+      assert.equal(run.status, 0, JSON.stringify(run.json.errors));
+      assert.equal(run.json.ok, true);
+      const finding = run.json.warnings.find(
+        (item: any) => item.id === "caption-ellipsis",
+      );
+      assert.ok(finding, JSON.stringify(run.json.warnings));
+      assert.equal(finding.beatId, "example-1");
+      assert.equal(finding.chapter, "example");
+      assert.equal(finding.field, "caption");
+      assert.match(finding.message, /SWE-bench 2 → 0…/u);
+      assert.match(finding.message, /截断/u);
+      assert.ok(finding.fix);
+      assert.match(finding.fix, /改写/u);
+    });
+
+    withCaption("SWE-bench 2 → 0...", (dir) => {
+      const run = check(dir, ["--only=caption-ellipsis"]);
+      assert.equal(run.status, 0, JSON.stringify(run.json.errors));
+      assert.equal(run.json.ok, true);
+      assert.deepEqual(run.json.errors, []);
+      assert.equal(run.json.warnings.length, 1);
+      assert.equal(run.json.warnings[0].id, "caption-ellipsis");
+      assert.equal(run.json.warnings[0].beatId, "example-1");
+      assert.match(run.json.warnings[0].message, /\.\.\./u);
+      assert.deepEqual(run.json.reports, []);
+    });
+
+    withCaption("SWE-bench 2 → 0", (dir) => {
+      const run = check(dir, ["--only=caption-ellipsis"]);
+      assert.equal(run.status, 0, JSON.stringify(run.json.errors));
+      assert.deepEqual(run.json.errors, []);
+      assert.deepEqual(run.json.warnings, []);
+      assert.deepEqual(run.json.reports, []);
+      assert.deepEqual(run.json.summary, {
+        errors: 0,
+        warnings: 0,
+        reports: 0,
+      });
+    });
+
+    withClone((dir) => {
+      // say 里的省略号不算：字幕才是给眼睛的那一行。
+      updateBeat(dir, 0, { say: "SWE-bench 从 2 降到 0…" });
+      const run = check(dir, ["--only=caption-ellipsis"]);
+      assert.deepEqual(run.json.warnings, []);
+    });
+  });
+
   test("--only 过滤检查项；未知 id 拒绝；过滤运行不写渲染闸回执", () => {
     withClone((dir) => {
       const run = check(dir, ["--only=caption-derived"]);

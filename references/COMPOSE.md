@@ -141,7 +141,8 @@ export default function (tl, root, ctx) {
   渲染前就拦。
 - 数字 / 专名集合必须与 `say` 一致（`say-caption-token-mismatch`）：
   字幕可以更短，但不能把 `200` 写成 `两百`。
-- 永不补省略号：截断是改写，不是省略。
+- 永不补省略号（`…` / `...` 都算，`caption-ellipsis` warning）：截断是改写，
+  不是省略。
 - 字幕条由生成器统一渲染在底部，**不要**在身体里自己画字幕。
 
 推导规则（`caption` 缺失时）：按 `。！？；` 切句，再按 `，、：` 切分句；
