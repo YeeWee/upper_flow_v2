@@ -104,19 +104,22 @@ function beatOutOfRange(
   expected: { min: number; max: number } | { last: number },
   hint: string,
 ): AvpError {
+  // 「必须等于第 N 拍」也表达成 min=max=N，让修复方只需读范围。
+  const min = "last" in expected ? expected.last : expected.min;
+  const max = "last" in expected ? expected.last : expected.max;
   const range =
-    "last" in expected
-      ? `合法值只有末拍 ${expected.last}`
-      : `合法范围 ${expected.min}..${expected.max}`;
-  const details =
-    "last" in expected
-      ? { field: declared, beat, expected: expected.last }
-      : { field: declared, beat, min: expected.min, max: expected.max };
+    min === max ? `合法值只有第 ${min} 拍` : `合法范围 ${min}..${max}`;
   return new AvpError(
     "tension-beat-out-of-range",
     `张力计划里的「${declared}」声明了第 ${beat} 拍，${range}。` +
       `\n${hint}\n改 outline.md 的拍号（拍号全片 1-based），再运行 avp plan。`,
-    details,
+    {
+      field: declared,
+      beat,
+      min,
+      max,
+      ...("last" in expected ? { expected: expected.last } : {}),
+    },
   );
 }
 
