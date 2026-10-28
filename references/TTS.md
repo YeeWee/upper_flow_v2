@@ -141,8 +141,8 @@ avp tts        # avp = 仓库根目录的 ./avp；环境变量按上一节设置
 ```
 
 判据：22 条 wav 全部重新落盘，且与仓库里的同名文件**逐字节相同**。最快的锚点
-是 `audio/coldopen/1.wav`：3.350s / 24kHz / PCM16 / mono，sha256
-`db2d5c29a383a712a295a0588134f7ce33955542ed48d96fa3283be08f1984b4`。语速、音色、
+是 `audio/coldopen/1.wav`：5.325s / 24kHz / PCM16 / mono，sha256
+`3d7e83f03b38f832244118f914dc66be9376f98ae43ce6c84ce59e54ae3835ad`。语速、音色、
 模型任一不同哈希就会变——这正是"可归因"的用法。
 
 ### fake（快速通道）
