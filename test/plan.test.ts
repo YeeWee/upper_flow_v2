@@ -49,6 +49,51 @@ function writeNarrations(dir: string, body: string): void {
   );
 }
 
+/**
+ * 3 拍单章节项目的张力计划（拍号全片 1-based）。`null` 表示刻意省略某条声明。
+ * 章节能解析时张力计划是必需项，所以凡是「step 数与 narrations 对齐」的
+ * outline 都得带上这三行。
+ */
+const TENSION_HOOK =
+  "> **埋扣**：同一个模型，凭什么加上框架就能把 bug 清零？ —— 第 1 拍抛出，第 3 拍总还扣";
+const TENSION_PAYOFF =
+  "> **总还扣**：答案不在模型，在每条规则替它挡住的那一步。 —— 第 3 拍";
+const TENSION_CHAPTER =
+  "> **张力线**：还扣「边界不清，幻觉才有空间」@拍 2｜re-hook：开场把同一个模型的反差砸在脸上｜interrupt@拍 2";
+
+const STEPS_3 = [
+  "- step 1 (~3s) — 封面",
+  "- step 2 (~3s) — 分栏",
+  "- step 3 (~3s) — 收尾",
+];
+
+function writeOutline(dir: string, lines: string[]): void {
+  writeFileSync(join(dir, "outline.md"), `${lines.join("\n")}\n`, "utf8");
+}
+
+function tensionOutline(
+  parts: {
+    hook?: string | null;
+    payoff?: string | null;
+    chapter?: string | null;
+  } = {},
+): string[] {
+  const hook = parts.hook === undefined ? TENSION_HOOK : parts.hook;
+  const payoff = parts.payoff === undefined ? TENSION_PAYOFF : parts.payoff;
+  const chapter = parts.chapter === undefined ? TENSION_CHAPTER : parts.chapter;
+  return [
+    "# Video Outline",
+    "",
+    ...[hook, payoff].filter((line): line is string => line !== null),
+    "",
+    "## 1. example — 示例（3 steps · ~9s）",
+    "",
+    ...(chapter === null ? [] : [chapter, ""]),
+    ...STEPS_3,
+    "",
+  ];
+}
+
 describe("avp plan", () => {
   let dir: string;
 
@@ -247,30 +292,13 @@ describe("avp plan", () => {
       assert.equal(outlineDrift.json.error.details.chapter, "example");
       assert.equal(outlineDrift.json.error.details.outline, 4);
 
-      // 3 个 step 与 narrations 对齐时通过
-      writeFileSync(
-        join(project, "outline.md"),
-        [
-          "# Video Outline",
-          "",
-          "## 1. example — 示例（3 steps · ~9s）",
-          "",
-          "- step 1 (~3s) — 封面",
-          "- step 2 (~3s) — 分栏",
-          "- step 3 (~3s) — 收尾",
-          "",
-        ].join("\n"),
-        "utf8",
-      );
+      // 3 个 step 与 narrations 对齐时通过（章节能解析 → 张力计划也必需）
+      writeOutline(project, tensionOutline());
       const aligned = runAvp(["plan", "--json"], project);
       assert.equal(aligned.status, 0, aligned.stderr);
 
       // 格式不可解析（没有章节标题 / step bullets）→ 跳过，不报错
-      writeFileSync(
-        join(project, "outline.md"),
-        "# 待写的开发计划\n\n先想清楚再拆 step。\n",
-        "utf8",
-      );
+      writeOutline(project, ["# 待写的开发计划", "", "先想清楚再拆 step。", ""]);
       const unparseable = runAvp(["plan", "--json"], project);
       assert.equal(unparseable.status, 0, unparseable.stderr);
     } finally {
@@ -442,6 +470,416 @@ describe("avp plan", () => {
       );
     } finally {
       cleanup(project);
+    }
+  });
+});
+
+/** 追加第二章（1 拍），返回项目目录；仿既有「多章节」测试的 registry 写法。 */
+function projectWithSecondChapter(): string {
+  const project = tempProject();
+  assert.equal(runAvp(["init", "--json"], project).status, 0);
+  const secondDir = join(
+    project,
+    "presentation",
+    "src",
+    "chapters",
+    "02-second",
+  );
+  mkdirSync(secondDir, { recursive: true });
+  writeFileSync(
+    join(secondDir, "narrations.ts"),
+    `import type { Narration } from "../../registry/types";\n\nexport const narrations: Narration[] = [{ say: "第二章。", caption: "第二章" }];\n`,
+    "utf8",
+  );
+  writeFileSync(
+    join(project, "presentation", "src", "registry", "chapters.ts"),
+    [
+      'import type { ChapterDef } from "./types";',
+      'import ExampleChapter from "../chapters/01-example/Example";',
+      'import SecondChapter from "../chapters/02-second/Second";',
+      'import { narrations as exampleNarrations } from "../chapters/01-example/narrations";',
+      'import { narrations as secondNarrations } from "../chapters/02-second/narrations";',
+      "",
+      "export const CHAPTERS: ChapterDef[] = [",
+      '  { id: "example", title: "示例章节", narrations: exampleNarrations, Component: ExampleChapter },',
+      '  { id: "second", title: "第二章", narrations: secondNarrations, Component: SecondChapter },',
+      "];",
+      "",
+    ].join("\n"),
+    "utf8",
+  );
+  writeScript(project, [...EXAMPLE_SAYS, "第二章。"]);
+  return project;
+}
+
+describe("avp plan 张力计划", () => {
+  /** 建一个 3 拍的单章节项目，并写好 script.md。 */
+  function projectWithScript(): string {
+    const project = tempProject();
+    assert.equal(runAvp(["init", "--json"], project).status, 0);
+    writeScript(project, EXAMPLE_SAYS);
+    return project;
+  }
+
+  test("完整张力计划通过 plan；省略拍号、rehook 与 @ 拍 空格都容忍", () => {
+    const project = projectWithScript();
+    try {
+      writeOutline(project, tensionOutline());
+      const plan = runAvp(["plan", "--json"], project);
+      assert.equal(plan.status, 0, plan.stderr);
+      assert.equal(plan.json.ok, true);
+      assert.equal(plan.json.beats, 3);
+      assert.ok(plan.json.writes.includes("beats.json"));
+
+      // 还扣 / re-hook 拍号省略 → 本章首拍；rehook 是容忍写法
+      writeOutline(
+        project,
+        tensionOutline({
+          chapter:
+            "> **张力线**：还扣「边界不清，幻觉才有空间」｜rehook：开场把同一个模型的反差砸在脸上",
+        }),
+      );
+      const omitted = runAvp(["plan", "--json"], project);
+      assert.equal(omitted.status, 0, omitted.stderr);
+
+      // `@拍` / `@ 拍` 都认；interrupt 可整段省略
+      writeOutline(
+        project,
+        tensionOutline({
+          chapter:
+            "> **张力线**：还扣「边界不清，幻觉才有空间」@ 拍 2｜re-hook：把反差砸在脸上",
+        }),
+      );
+      const spaced = runAvp(["plan", "--json"], project);
+      assert.equal(spaced.status, 0, spaced.stderr);
+    } finally {
+      cleanup(project);
+    }
+  });
+
+  test("多章节按全局 1-based 拍号校验：缺省落在本章首拍", () => {
+    const project = projectWithSecondChapter();
+    try {
+      const globals = [
+        "> **埋扣**：同一个模型，凭什么加上框架就能把 bug 清零？ —— 第 1 拍抛出，第 4 拍总还扣",
+        "> **总还扣**：答案不在模型，在每条规则替它挡住的那一步。 —— 第 4 拍",
+      ];
+      const chapterOne =
+        "> **张力线**：还扣「边界不清，幻觉才有空间」｜re-hook：把反差砸在脸上";
+      const chapterTwo =
+        "> **张力线**：还扣「答案就在流程里」｜rehook：把问题翻成哪一步漏了";
+
+      // 省掉拍号 → 默认本章首拍（example=1、second=4），都在各自范围内
+      writeOutline(project, [
+        "# Video Outline",
+        "",
+        ...globals,
+        "",
+        "## 1. example — 示例（3 steps · ~9s）",
+        "",
+        chapterOne,
+        "",
+        ...STEPS_3,
+        "",
+        "## 2. second — 第二章（1 steps · ~3s）",
+        "",
+        chapterTwo,
+        "",
+        "- step 1 (~3s) — 第二章",
+        "",
+      ]);
+      const valid = runAvp(["plan", "--json"], project);
+      assert.equal(valid.status, 0, valid.stderr);
+
+      // 第二章声明第 3 拍：全局存在，但不属于本章（本章只有第 4 拍）
+      writeOutline(project, [
+        "# Video Outline",
+        "",
+        ...globals,
+        "",
+        "## 1. example — 示例（3 steps · ~9s）",
+        "",
+        chapterOne,
+        "",
+        ...STEPS_3,
+        "",
+        "## 2. second — 第二章（1 steps · ~3s）",
+        "",
+        "> **张力线**：还扣「答案就在流程里」@拍 3｜re-hook：把问题翻成哪一步漏了",
+        "",
+        "- step 1 (~3s) — 第二章",
+        "",
+      ]);
+      const outOfChapter = runAvp(["plan", "--json"], project);
+      assert.notEqual(outOfChapter.status, 0);
+      assert.equal(outOfChapter.json.error.code, "tension-beat-out-of-range");
+      assert.equal(outOfChapter.json.error.details.field, "张力线:second");
+      assert.equal(outOfChapter.json.error.details.beat, 3);
+      assert.equal(outOfChapter.json.error.details.min, 4);
+      assert.equal(outOfChapter.json.error.details.max, 4);
+      assert.match(outOfChapter.json.error.message, /second/u);
+    } finally {
+      cleanup(project);
+    }
+  });
+
+  test("章节能解析但完全没有张力声明时拒绝（张力计划是必需项）", () => {
+    const project = projectWithScript();
+    try {
+      writeOutline(project, [
+        "# Video Outline",
+        "",
+        "## 1. example — 示例（3 steps · ~9s）",
+        "",
+        ...STEPS_3,
+        "",
+      ]);
+      const plan = runAvp(["plan", "--json"], project);
+      assert.notEqual(plan.status, 0);
+      assert.equal(plan.json.ok, false);
+      assert.equal(plan.json.error.code, "tension-plan-missing");
+      assert.equal(plan.json.error.details.field, "埋扣");
+      assert.match(plan.json.error.message, /埋扣/u);
+      // 拒绝时不能落 beats.json
+      assert.equal(existsSync(join(project, "beats.json")), false);
+    } finally {
+      cleanup(project);
+    }
+  });
+
+  test("缺总还扣时拒绝，且错误指向总还扣", () => {
+    const project = projectWithScript();
+    try {
+      writeOutline(project, tensionOutline({ payoff: null }));
+      const plan = runAvp(["plan", "--json"], project);
+      assert.notEqual(plan.status, 0);
+      assert.equal(plan.json.error.code, "tension-plan-missing");
+      assert.equal(plan.json.error.details.field, "总还扣");
+      assert.match(plan.json.error.message, /总还扣/u);
+    } finally {
+      cleanup(project);
+    }
+  });
+
+  test("缺某章张力线时拒绝，details 指向具体章节", () => {
+    const project = projectWithScript();
+    try {
+      writeOutline(project, tensionOutline({ chapter: null }));
+      const plan = runAvp(["plan", "--json"], project);
+      assert.notEqual(plan.status, 0);
+      assert.equal(plan.json.error.code, "tension-plan-missing");
+      assert.equal(plan.json.error.details.field, "张力线:example");
+    } finally {
+      cleanup(project);
+    }
+  });
+
+  test("埋扣 / 总还扣 / 张力线拍号越界都拒绝，错误给出拍号与合法范围", () => {
+    const project = projectWithScript();
+    try {
+      // 埋扣抛出拍越界（全片 3 拍）
+      writeOutline(
+        project,
+        tensionOutline({
+          hook:
+            "> **埋扣**：同一个模型，凭什么加上框架就能把 bug 清零？ —— 第 4 拍抛出，第 3 拍总还扣",
+        }),
+      );
+      const hookOut = runAvp(["plan", "--json"], project);
+      assert.notEqual(hookOut.status, 0);
+      assert.equal(hookOut.json.error.code, "tension-beat-out-of-range");
+      assert.equal(hookOut.json.error.details.field, "埋扣");
+      assert.equal(hookOut.json.error.details.beat, 4);
+      assert.equal(hookOut.json.error.details.min, 1);
+      assert.equal(hookOut.json.error.details.max, 3);
+      assert.match(hookOut.json.error.message, /第 4 拍/u);
+      assert.match(hookOut.json.error.message, /1\.\.3/u);
+
+      // 总还扣拍号越界
+      writeOutline(
+        project,
+        tensionOutline({
+          hook:
+            "> **埋扣**：同一个模型，凭什么加上框架就能把 bug 清零？ —— 第 1 拍抛出，第 9 拍总还扣",
+          payoff:
+            "> **总还扣**：答案不在模型，在每条规则替它挡住的那一步。 —— 第 9 拍",
+        }),
+      );
+      const payoffOut = runAvp(["plan", "--json"], project);
+      assert.notEqual(payoffOut.status, 0);
+      assert.equal(payoffOut.json.error.code, "tension-beat-out-of-range");
+      assert.equal(payoffOut.json.error.details.field, "总还扣");
+      assert.equal(payoffOut.json.error.details.beat, 9);
+      assert.equal(payoffOut.json.error.details.min, 1);
+      assert.equal(payoffOut.json.error.details.max, 3);
+
+      // 0 拍同样越界
+      writeOutline(
+        project,
+        tensionOutline({
+          hook:
+            "> **埋扣**：同一个模型，凭什么加上框架就能把 bug 清零？ —— 第 0 拍抛出，第 3 拍总还扣",
+        }),
+      );
+      const zero = runAvp(["plan", "--json"], project);
+      assert.notEqual(zero.status, 0);
+      assert.equal(zero.json.error.code, "tension-beat-out-of-range");
+      assert.equal(zero.json.error.details.beat, 0);
+
+      // 章节张力线拍号超出该章的全局范围
+      writeOutline(
+        project,
+        tensionOutline({
+          chapter:
+            "> **张力线**：还扣「边界不清，幻觉才有空间」@拍 5｜re-hook：把反差砸在脸上｜interrupt@拍 2",
+        }),
+      );
+      const chapterOut = runAvp(["plan", "--json"], project);
+      assert.notEqual(chapterOut.status, 0);
+      assert.equal(chapterOut.json.error.code, "tension-beat-out-of-range");
+      assert.equal(chapterOut.json.error.details.field, "张力线:example");
+      assert.equal(chapterOut.json.error.details.beat, 5);
+      assert.equal(chapterOut.json.error.details.min, 1);
+      assert.equal(chapterOut.json.error.details.max, 3);
+      assert.match(chapterOut.json.error.message, /example/u);
+    } finally {
+      cleanup(project);
+    }
+  });
+
+  test("总还扣不在末拍时拒绝（只用越界错误，不自造错误 id）", () => {
+    const project = projectWithScript();
+    try {
+      writeOutline(
+        project,
+        tensionOutline({
+          hook:
+            "> **埋扣**：同一个模型，凭什么加上框架就能把 bug 清零？ —— 第 1 拍抛出，第 2 拍总还扣",
+          payoff:
+            "> **总还扣**：答案不在模型，在每条规则替它挡住的那一步。 —— 第 2 拍",
+        }),
+      );
+      const plan = runAvp(["plan", "--json"], project);
+      assert.notEqual(plan.status, 0);
+      assert.equal(plan.json.error.code, "tension-beat-out-of-range");
+      assert.equal(plan.json.error.details.field, "总还扣");
+      assert.equal(plan.json.error.details.beat, 2);
+      assert.equal(plan.json.error.details.expected, 3);
+      assert.match(plan.json.error.message, /末拍/u);
+    } finally {
+      cleanup(project);
+    }
+  });
+
+  test("埋扣声明的总还扣拍与总还扣声明不一致时拒绝", () => {
+    const project = projectWithScript();
+    try {
+      writeOutline(
+        project,
+        tensionOutline({
+          hook:
+            "> **埋扣**：同一个模型，凭什么加上框架就能把 bug 清零？ —— 第 1 拍抛出，第 2 拍总还扣",
+        }),
+      );
+      const plan = runAvp(["plan", "--json"], project);
+      assert.notEqual(plan.status, 0);
+      assert.equal(plan.json.error.code, "tension-beat-out-of-range");
+      assert.equal(plan.json.error.details.field, "埋扣");
+      assert.equal(plan.json.error.details.beat, 2);
+      assert.equal(plan.json.error.details.expected, 3);
+      assert.match(plan.json.error.message, /不一致/u);
+      assert.match(plan.json.error.message, /第 3 拍/u);
+    } finally {
+      cleanup(project);
+    }
+  });
+
+  test("张力行写坏时按缺失处理：不崩、不假通过", () => {
+    const project = projectWithScript();
+    try {
+      // 拍号写坏：`@拍 四` 解析不出数字 → 整行按缺失处理，不能静默变成默认首拍
+      writeOutline(
+        project,
+        tensionOutline({
+          chapter:
+            "> **张力线**：还扣「边界不清，幻觉才有空间」@拍 四｜re-hook：把反差砸在脸上",
+        }),
+      );
+      const brokenBeat = runAvp(["plan", "--json"], project);
+      assert.equal(brokenBeat.status, 1);
+      assert.equal(brokenBeat.json.error.code, "tension-plan-missing");
+      assert.equal(brokenBeat.json.error.details.field, "张力线:example");
+
+      // 整行糊掉：没有「还扣」也没有「」→ 同样按缺失处理
+      writeOutline(
+        project,
+        tensionOutline({ chapter: "> **张力线**：这段彻底写坏了" }),
+      );
+      const garbled = runAvp(["plan", "--json"], project);
+      assert.equal(garbled.status, 1);
+      assert.equal(garbled.json.error.code, "tension-plan-missing");
+      assert.equal(garbled.json.error.details.field, "张力线:example");
+
+      // 埋扣行拍号写坏 → 指向埋扣，不是崩
+      writeOutline(
+        project,
+        tensionOutline({
+          hook:
+            "> **埋扣**：同一个模型，凭什么加上框架就能把 bug 清零？ —— 第 二 拍抛出，第 三 拍总还扣",
+        }),
+      );
+      const brokenHook = runAvp(["plan", "--json"], project);
+      assert.equal(brokenHook.status, 1);
+      assert.equal(brokenHook.json.error.code, "tension-plan-missing");
+      assert.equal(brokenHook.json.error.details.field, "埋扣");
+    } finally {
+      cleanup(project);
+    }
+  });
+
+  test("没有 outline 或格式自由时不制造假失败", () => {
+    // 没有 outline.md：plan 照常成功
+    const noOutline = projectWithScript();
+    try {
+      const plan = runAvp(["plan", "--json"], noOutline);
+      assert.equal(plan.status, 0, plan.stderr);
+      assert.equal(plan.json.ok, true);
+    } finally {
+      cleanup(noOutline);
+    }
+
+    // 自由格式（没有可解析章节标题）：跳过张力校验
+    const freeForm = projectWithScript();
+    try {
+      writeOutline(freeForm, [
+        "# 待写的开发计划",
+        "",
+        "先想清楚再拆 step。张力计划之后再补。",
+        "",
+      ]);
+      const plan = runAvp(["plan", "--json"], freeForm);
+      assert.equal(plan.status, 0, plan.stderr);
+      assert.equal(plan.json.ok, true);
+    } finally {
+      cleanup(freeForm);
+    }
+
+    // 只有不认识的标题（素材清单）也不算「章节可解析」
+    const unknownHeading = projectWithScript();
+    try {
+      writeOutline(unknownHeading, [
+        "# 视频大纲",
+        "",
+        "## 素材清单",
+        "",
+        "- 还没写",
+        "",
+      ]);
+      const plan = runAvp(["plan", "--json"], unknownHeading);
+      assert.equal(plan.status, 0, plan.stderr);
+      assert.equal(plan.json.ok, true);
+    } finally {
+      cleanup(unknownHeading);
     }
   });
 });
