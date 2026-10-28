@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "把文章稳定做成中文短视频的可归因流水线：文章 → 口播稿 → 节拍清单 → 音频 → 合成稿 → 成片。",
+  "description": "把文章稳定做成中文视频的可归因流水线：文章 → 口播稿 → 节拍清单 → 音频 → 合成稿 → 成片。",
   "bin": {
     "avp": "./bin/avp.mjs"
   },
