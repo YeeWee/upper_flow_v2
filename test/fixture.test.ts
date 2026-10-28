@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import {
   cpSync,
   existsSync,
@@ -281,5 +282,65 @@ describe("examples/trae-harness fixture", () => {
     assert.equal(check.json.ok, true);
     assert.deepEqual(check.json.errors, []);
     assert.ok(existsSync(join(dir, ".avp", "check.json")));
+  });
+
+  test("入库的成片 / 回执 / 静帧报告对得上当前夹具", () => {
+    const output = join(FIXTURE, "output");
+    const receipt = readJson(join(output, "receipt.json"));
+    const manifest = readJson(join(FIXTURE, "beats.json"));
+    const ttsReceipt = readJson(join(FIXTURE, ".avp", "tts.json"));
+    const still = readJson(join(output, "still-report.json"));
+    const sha = (file: string) =>
+      createHash("sha256").update(readFileSync(file)).digest("hex");
+
+    // 回执哈希必须与入库产物逐一对上，否则「可归因」只是说法。
+    assert.equal(receipt.schemaVersion, 1);
+    assert.equal(receipt.hashes.beats, sha(join(FIXTURE, "beats.json")));
+    assert.equal(receipt.hashes.tts, sha(join(FIXTURE, ".avp", "tts.json")));
+    assert.equal(receipt.output.sha256, sha(join(output, "output.mp4")));
+    assert.equal(
+      receipt.contactSheet.sha256,
+      sha(join(output, "contact-sheet.png")),
+    );
+    assert.equal(
+      receipt.stillReport.sha256,
+      sha(join(output, "still-report.json")),
+    );
+    assert.match(receipt.skill.commit, /^[0-9a-f]{40}$/);
+
+    // 22 条音频与 beats.json 一一对应，回执记的也是当前文件。
+    assert.equal(receipt.audio.length, 22);
+    assert.equal(receipt.audio.length, manifest.beats.length);
+    for (const [index, entry] of receipt.audio.entries()) {
+      const beat = manifest.beats[index];
+      assert.equal(entry.beat, beat.id);
+      assert.equal(entry.file, beat.audio);
+      assert.equal(entry.sha256, sha(join(FIXTURE, beat.audio)));
+    }
+
+    // 成片时长 = beats 实测累计（允许 2 帧的编码取整）。
+    const totalMs = manifest.beats.reduce(
+      (sum: number, beat: any) => sum + beat.durationMs,
+      0,
+    );
+    assert.equal(ttsReceipt.totalDurationMs, totalMs);
+    assert.ok(
+      Math.abs(receipt.output.durationMs - totalMs) <= 67,
+      `成片 ${receipt.output.durationMs}ms 与音频累计 ${totalMs}ms 差超过 2 帧`,
+    );
+    assert.equal(receipt.output.width, 1920);
+    assert.equal(receipt.output.height, 1080);
+    assert.equal(receipt.output.fps, 30);
+
+    // 静帧报告覆盖全部拍，静态拍与 beats.json 声明一致。
+    const statics = manifest.beats
+      .filter((beat: any) => beat.motion === "static")
+      .map((beat: any) => beat.id);
+    assert.equal(still.beats.length, 22);
+    assert.deepEqual(still.staticBeats, statics);
+    assert.deepEqual(receipt.stillReport.staticBeats, statics);
+    assert.equal(receipt.contactSheet.frames, 44);
+    assert.equal(receipt.contactSheet.columns, 6);
+    assert.equal(receipt.contactSheet.rows, 8);
   });
 });
