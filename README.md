@@ -116,7 +116,7 @@ node ../bin/avp.mjs render
 
 | 文档 | 内容 |
 |---|---|
-| [SCRIPT-STYLE.md](./references/SCRIPT-STYLE.md) | 文章 → 口播稿：信息保留、风骨、平台变体 |
+| [SCRIPT-STYLE.md](./references/SCRIPT-STYLE.md) | 文章 → 口播稿：事实项覆盖、风骨、时长分档、留存装置 |
 | [OUTLINE-FORMAT.md](./references/OUTLINE-FORMAT.md) | 开发计划字段、信息池、素材清单 |
 | [CHAPTER-CRAFT.md](./references/CHAPTER-CRAFT.md) | 单章实现规则与完工自检 |
 | [THEMES.md](./references/THEMES.md) | 23 套主题、token 契约、派生流程 |
