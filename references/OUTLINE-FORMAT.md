@@ -171,6 +171,9 @@ pull-quote 引用 / 数据浮层。
 | `re-hook` 后面不带 `@拍` | re-hook 拍 = 本章首拍 |
 | `interrupt@拍 <i>` 整段省略 | 本章没有声明的 interrupt |
 
+`re-hook` 是**本章首拍**的动作：显式写 `@拍` 时也必须是本章首拍，写在章内
+其它拍会被 `plan` 拒绝（`tension-beat-out-of-range`，details 给出 `expected`）。
+
 容忍的写法变体：`re-hook` 也可以写 `rehook`；`@拍 12` 与 `@ 拍 12` 等价；
 `——` 分隔的说明可省（只认得出两个拍号就够）。全片两行必须都在，缺任一行
 `avp plan` 直接拒绝（`tension-plan-missing`）。
@@ -182,6 +185,7 @@ pull-quote 引用 / 数据浮层。
 | 章节能解析（有已知 `## <id>` 标题），但缺 埋扣 / 总还扣 / 某章张力线 | `tension-plan-missing`（details 指向缺失字段，如 `field: "张力线:results"`） |
 | 声明的拍号不在 `1..总拍数`（含章节张力线超出本章范围、0 / 负数） | `tension-beat-out-of-range`（给出越界拍号与合法范围） |
 | 总还扣不在末拍，或埋扣声明的总还扣拍与总还扣行不一致 | `tension-beat-out-of-range`（措辞说明是「不在末拍」还是「两处不一致」） |
+| 显式声明了 `re-hook` 拍，但不等于本章首拍（省略 = 首拍） | `tension-beat-out-of-range`（details 给出 `beat` 与 `expected`） |
 
 > **容错原则**：`outline.md` 不存在、或没有任何可解析的章节标题（格式自由 /
 > 还没写）时，`plan` **跳过**张力校验——不制造假失败。章节能解析时张力计划

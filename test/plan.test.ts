@@ -623,6 +623,71 @@ describe("avp plan 张力计划", () => {
     }
   });
 
+  test("re-hook 必须落在本章首拍：声明在章内第二拍也拒绝", () => {
+    const project = projectWithSecondChapter();
+    try {
+      const outline = (chapterOne: string): string[] => [
+        "# Video Outline",
+        "",
+        "> **埋扣**：同一个模型，凭什么加上框架就能把 bug 清零？ —— 第 1 拍抛出，第 4 拍总还扣",
+        "> **总还扣**：答案不在模型，在每条规则替它挡住的那一步。 —— 第 4 拍",
+        "",
+        "## 1. example — 示例（3 steps · ~9s）",
+        "",
+        chapterOne,
+        "",
+        ...STEPS_3,
+        "",
+        "## 2. second — 第二章（1 steps · ~3s）",
+        "",
+        "> **张力线**：还扣「答案就在流程里」｜rehook：把问题翻成哪一步漏了",
+        "",
+        "- step 1 (~3s) — 第二章",
+        "",
+      ];
+
+      // 第 2 拍在本章内（example 占第 1..3 拍），但不是首拍 —— 重挂钩是章首动作
+      writeOutline(
+        project,
+        outline(
+          "> **张力线**：还扣「边界不清，幻觉才有空间」｜re-hook：把反差砸在脸上@拍 2",
+        ),
+      );
+      const late = runAvp(["plan", "--json"], project);
+      assert.notEqual(late.status, 0);
+      assert.equal(late.json.error.code, "tension-beat-out-of-range");
+      assert.equal(late.json.error.details.field, "张力线:example");
+      assert.equal(late.json.error.details.beat, 2);
+      assert.equal(late.json.error.details.expected, 1);
+      assert.match(
+        late.json.error.message,
+        /re-hook 声明在第 2 拍，但重挂钩必须落在本章首拍 1 拍/u,
+      );
+
+      // 显式写本章首拍 → 通过
+      writeOutline(
+        project,
+        outline(
+          "> **张力线**：还扣「边界不清，幻觉才有空间」｜re-hook：把反差砸在脸上@拍 1",
+        ),
+      );
+      const first = runAvp(["plan", "--json"], project);
+      assert.equal(first.status, 0, first.stderr);
+
+      // 省略拍号 → 默认本章首拍，通过
+      writeOutline(
+        project,
+        outline(
+          "> **张力线**：还扣「边界不清，幻觉才有空间」｜re-hook：把反差砸在脸上",
+        ),
+      );
+      const omitted = runAvp(["plan", "--json"], project);
+      assert.equal(omitted.status, 0, omitted.stderr);
+    } finally {
+      cleanup(project);
+    }
+  });
+
   test("章节能解析但完全没有张力声明时拒绝（张力计划是必需项）", () => {
     const project = projectWithScript();
     try {
