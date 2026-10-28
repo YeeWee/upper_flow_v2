@@ -219,17 +219,17 @@
       "chapter": "results",
       "chapterIndex": 2,
       "step": 0,
-      "say": "同一个模型，DeepSeek V4 Pro。11 轮 A、B 对照实验。",
-      "caption": "DeepSeek V4 Pro，11 轮 A、B",
+      "say": "同一个 DeepSeek V4 Pro，只换流程。A、B 两组，同题对跑。",
+      "caption": "DeepSeek V4 Pro，A、B 两组",
       "captionSource": "authored",
       "audio": "audio/results/1.wav",
-      "durationMs": 4825,
-      "textHash": "3ec496ecf890405ac2cf092de15010838904423edf6637f1bf74bb563a29c135",
+      "durationMs": 5050,
+      "textHash": "d2593ce60d52bd7e9687ae34857ef588199130de764fe0d9905c612f1a5e5dec",
       "tts": {
         "backend": "kokoro",
         "voice": "zf_xiaoxiao",
         "speed": 1,
-        "hash": "39d007c0d22b7c9c66f47f13b3904283d9a0705fe1ada0652d9ac6262c225ca9"
+        "hash": "0d2e36ee29b30552bbd30ac0e9d9cf80a47a1778a513200b4aed17ba3ae0f9e0"
       },
       "motion": "hook"
     },
@@ -238,17 +238,17 @@
       "chapter": "results",
       "chapterIndex": 2,
       "step": 1,
-      "say": "代码正确率，从 90% 拉到 100%。满分，一个 bug 都没放过。",
+      "say": "代码正确率，90% 到 100%。一个 bug 都没放过。",
       "caption": "90% → 100%，没放过 bug",
       "captionSource": "authored",
       "audio": "audio/results/2.wav",
-      "durationMs": 6775,
-      "textHash": "71f8d01aea7793c65d6aa502ccb8b5c70acacb702ceb0c9c43fb94973b36a00a",
+      "durationMs": 5875,
+      "textHash": "1433179fcf72a3d7497cf66d8c8f95400d232889452e736d3cacec90f8209b8f",
       "tts": {
         "backend": "kokoro",
         "voice": "zf_xiaoxiao",
         "speed": 1,
-        "hash": "c60fe6500646ac6cea78630b6b20a7358e27e6b077bd9b5ce9d9730e2bd38af5"
+        "hash": "7bc8d6606f4902a4add396f0ace91e271e4360ccc411bd0e532c52d244a8e45a"
       },
       "motion": "hook"
     },
@@ -257,17 +257,17 @@
       "chapter": "results",
       "chapterIndex": 2,
       "step": 2,
-      "say": "测试断言密度，从 28 条涨到 124 条，翻了 4 倍。",
-      "caption": "断言 28 → 124，翻了 4 倍",
+      "say": "没框架的时候，测试薄得像张纸。现在它自己写，你半夜能睡整觉。",
+      "caption": "测试薄得像纸，现在它写满",
       "captionSource": "authored",
       "audio": "audio/results/3.wav",
-      "durationMs": 5850,
-      "textHash": "a43e0a968bb2c8fe240294538efa99330115a379247076c4c80dfb440888b987",
+      "durationMs": 6900,
+      "textHash": "0a27823b590149c07a00fbd88be10b16c0c8e2376e07311c53e27856a5a62b2b",
       "tts": {
         "backend": "kokoro",
         "voice": "zf_xiaoxiao",
         "speed": 1,
-        "hash": "730f7cdb2f413d1f88c52cc6c5baefa9b2278e4eac36c7e4c11559ed5c721249"
+        "hash": "34ee2eda5e765c8acfa26e6021b5a3d9fd09b18287b47ff99a6f5bb16089aa46"
       },
       "motion": "hook"
     },
@@ -276,17 +276,17 @@
       "chapter": "results",
       "chapterIndex": 2,
       "step": 3,
-      "say": "覆盖率从 62% 干到 85%。代码规范违规，直接砍掉 60%。",
-      "caption": "覆盖率 62% → 85%，违规 -60%",
+      "say": "以前有些代码，上线前压根没人测。现在它先补测试，再挑规范。",
+      "caption": "没人测过的代码，它先补",
       "captionSource": "authored",
       "audio": "audio/results/4.wav",
-      "durationMs": 8225,
-      "textHash": "c7bc84e6010ea0c9635e1fbe94c8c2fc7f4a8480b1a3a14a79b9b0d760c3dffc",
+      "durationMs": 6800,
+      "textHash": "e6db0eace1d7448b704dd6265d823f21d4627c55b3cde8f91a7475dc451ceb68",
       "tts": {
         "backend": "kokoro",
         "voice": "zf_xiaoxiao",
         "speed": 1,
-        "hash": "fde55bacaac230ff6e57c10dad3d8bbb0ccab93a794ad81da73d35d8b2ae7fc3"
+        "hash": "1d1655cd05a8ef991df086c2960020c738d9ef466f3ec4a830cec59da1805465"
       },
       "motion": "hook"
     },
@@ -295,17 +295,17 @@
       "chapter": "results",
       "chapterIndex": 2,
       "step": 4,
-      "say": "安全防御覆盖翻了 3 倍。同类 bug 复发率降了 91.7%。",
-      "caption": "安全 3 倍，bug 复发 -91.7%",
+      "say": "安全这关，它自己先过一遍。同一个坑，不会再踩第二次。",
+      "caption": "同一个坑，不再踩第二次",
       "captionSource": "authored",
       "audio": "audio/results/5.wav",
-      "durationMs": 6350,
-      "textHash": "ab451b8af879be78e6d89cf4da99a6e99132f4c610a2d38fb4f2da003ede58de",
+      "durationMs": 5775,
+      "textHash": "4bcbd1b06ddf3f9275f64d11f7829401afadf9a5a0ff6d60ebc672e679161475",
       "tts": {
         "backend": "kokoro",
         "voice": "zf_xiaoxiao",
         "speed": 1,
-        "hash": "501313c51aee9c83cb400d2e71e2a613a3c0f543f2be5178a9569997336fdb06"
+        "hash": "91c514bbf29f3055dae9b4ef618d5650a0d706479c2d91e07cfdc8c16aeffbac"
       },
       "motion": "hook"
     },
@@ -314,17 +314,17 @@
       "chapter": "results",
       "chapterIndex": 2,
       "step": 5,
-      "say": "性能加速 4.6 倍。SWE-bench 回归，从 2 个 bug 干到 0。",
-      "caption": "4.6 倍；SWE-bench 2 → 0 bug",
+      "say": "性能快了四倍多。SWE-bench 上，2 个 bug。清零。",
+      "caption": "SWE-bench：2 个 bug 清零",
       "captionSource": "authored",
       "audio": "audio/results/6.wav",
-      "durationMs": 5325,
-      "textHash": "25f07c3634e6af6fcd51e4f75cbe65ce0deac6e7c32c7b9ee8eb9ad059cadb6d",
+      "durationMs": 4600,
+      "textHash": "6ac1084cd90c74b2f060a68f0f060904d85826ee93e26766d43271c660fd16fa",
       "tts": {
         "backend": "kokoro",
         "voice": "zf_xiaoxiao",
         "speed": 1,
-        "hash": "d98f4c52d1d8a7570a3810e4526619f4fee3d6559411a7f54b0d3240d2880f89"
+        "hash": "b352f544cf134002ecf3f4ac1da2eb7e0499eee0620ea3e146995caa681004b0"
       },
       "motion": "hook"
     },
@@ -333,17 +333,17 @@
       "chapter": "results",
       "chapterIndex": 2,
       "step": 6,
-      "say": "不只质量。花 2 万 token 跑流程，净省 10 万。ROI 529%。",
-      "caption": "2 万 token → 省 10 万，ROI 529%",
+      "say": "你多花两万 token 走流程，净省十万。ROI 五倍多。",
+      "caption": "两万 token 省十万，ROI 五倍多",
       "captionSource": "authored",
       "audio": "audio/results/7.wav",
-      "durationMs": 6500,
-      "textHash": "c1787d2dd0765522b6d793867cf4683fa8f763ebfc5bd99d9b6e44a52d7c2315",
+      "durationMs": 4950,
+      "textHash": "1023ed76e2a355fe08772767f24ac836622507f041df03cf7e6cd816324339df",
       "tts": {
         "backend": "kokoro",
         "voice": "zf_xiaoxiao",
         "speed": 1,
-        "hash": "0f568c75c7dff501a398b3a20a124aa37863ecd9c01e41bd0aab8f8138d530d5"
+        "hash": "5f7700c8774754abbc205ed0de48b10a0e81bbdfa836e1fd92e369de93c524df"
       },
       "motion": "hook"
     },
@@ -352,17 +352,17 @@
       "chapter": "results",
       "chapterIndex": 2,
       "step": 7,
-      "say": "复杂度越高，回报越大。L3 级任务，ROI 能超 1000%。",
-      "caption": "L3 任务 ROI 超 1000%",
+      "say": "同一模型，前后只差一套流程。任务越复杂，这套流程越值钱。",
+      "caption": "同一模型，只差一套流程",
       "captionSource": "authored",
       "audio": "audio/results/8.wav",
-      "durationMs": 5875,
-      "textHash": "2642aa1b4a4784b6d5200ee5e1924c4eee0cc9f90a4e4744ee89fbaca101a356",
+      "durationMs": 6675,
+      "textHash": "9e8dde59756718bd88a0096065635847725cfb4bf29a9e37bb55d5baf2b6c9c5",
       "tts": {
         "backend": "kokoro",
         "voice": "zf_xiaoxiao",
         "speed": 1,
-        "hash": "2caf37ecc1163e6f95fa0a4d661e15f727464f7084b9496003b9e5cb0d5d2a86"
+        "hash": "3f65ba2e598a4a93ee4e0834d0517e7a57a7f1045f53ae637e01247f6e56b061"
       },
       "motion": "static"
     },
@@ -371,17 +371,17 @@
       "chapter": "v2-and-cta",
       "chapterIndex": 3,
       "step": 0,
-      "say": "而且 v2.0 不只做代码。项目类型自适应：视频项目自动上 VISUAL_GATE，设计项目走视觉验收。8 个模板，11 个 Agent 角色，按需加载。",
-      "caption": "v2.0：VISUAL_GATE，8 模板 11 Agent",
+      "say": "到了 v2.0，这套规则不只管代码。视频项目，自动上 VISUAL_GATE。设计项目，走视觉验收。八个模板，十一个角色，按需加载。",
+      "caption": "v2.0：视频上 VISUAL_GATE",
       "captionSource": "authored",
       "audio": "audio/v2-and-cta/1.wav",
-      "durationMs": 11350,
-      "textHash": "002dc687128e2cd7e92ede50c0fc0c0caa60c607231aa085cfbc4c2681f5c266",
+      "durationMs": 10700,
+      "textHash": "c7d6ce62876445f585ca34d25fbc99d6d6636fef871170ea6472efeb3dfd2278",
       "tts": {
         "backend": "kokoro",
         "voice": "zf_xiaoxiao",
         "speed": 1,
-        "hash": "7c658ab3fc9fb41f74b1a4a4ede473b243d21cb309135d593f8b103abb05c2ef"
+        "hash": "7022026c6d8304eab06645c4a4dadd591a06fb4e7cce6cb442bbe4abac855f96"
       },
       "motion": "hook"
     },
@@ -390,17 +390,17 @@
       "chapter": "v2-and-cta",
       "chapterIndex": 3,
       "step": 1,
-      "say": "还有独立的验收引擎，trae-acceptance。浏览器自动化、视觉检查、双轨复盘，三层保险。",
+      "say": "还有个验收引擎，trae-acceptance。浏览器自己点，画面自己看。跑完再双轨复盘。",
       "caption": "trae-acceptance：三层保险",
       "captionSource": "authored",
       "audio": "audio/v2-and-cta/2.wav",
-      "durationMs": 7900,
-      "textHash": "021f396cc21d48ce32b99ac322c4d6af4568c4194e5348474a8b1ab80d423b4b",
+      "durationMs": 7375,
+      "textHash": "103fa61bc8d899d1acccfe3039aa14bd72ee8607e3252ee9baa9e57b5f56299f",
       "tts": {
         "backend": "kokoro",
         "voice": "zf_xiaoxiao",
         "speed": 1,
-        "hash": "3ab6b27dca21ad97dcc4a566d2310416c579a84bbcd0a5b152b94365f2fd5bc9"
+        "hash": "d60c5b4d9ce24727e5f59ef45f0af2cd578ca4740f1a0ab8815a832a72323c5e"
       },
       "motion": "hook"
     },
@@ -409,17 +409,17 @@
       "chapter": "v2-and-cta",
       "chapterIndex": 3,
       "step": 2,
-      "say": "trae-harness。用确定性对抗模糊，用规则防幻觉。GitHub 搜 zzzkeepdd 斜杠 trae-harness。",
+      "say": "trae-harness。答案不在模型，在每条规则替它挡住的那一步。GitHub 搜 zzzkeepdd 斜杠 trae-harness。",
       "caption": "GitHub：zzzkeepdd / trae-harness",
       "captionSource": "authored",
       "audio": "audio/v2-and-cta/3.wav",
-      "durationMs": 7500,
-      "textHash": "e421ea32f891bb7448401618c165b3b6ed3706a4eea2001fac088062ad2a76a7",
+      "durationMs": 7900,
+      "textHash": "08d954d3ed9d5eab70eb8eb91a4bab1a8c7e3debe8b92bb336b7b3bf3c0bff4a",
       "tts": {
         "backend": "kokoro",
         "voice": "zf_xiaoxiao",
         "speed": 1,
-        "hash": "9782494ca160ceb6c53d3a5fd3194795864869c5e81013b759b97dd98bb79360"
+        "hash": "f0f2601a3bb60a07464f7e9a0f1c96a42af35a3ba898859096a82c7cd283c97e"
       },
       "motion": "static"
     }
