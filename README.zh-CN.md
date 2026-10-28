@@ -106,7 +106,8 @@ node ../bin/avp.mjs render
 ```
 
 完整例子见 [examples/trae-harness](./examples/trae-harness)：4 章 / 22 拍 /
-127.5s，含 22 条真实 Kokoro 音频与最终成片。
+约 133.6s，含 22 条真实 Kokoro 音频与最终成片。拍数与实测时长以该项目
+`output/receipt.json` 为准。
 
 ---
 
