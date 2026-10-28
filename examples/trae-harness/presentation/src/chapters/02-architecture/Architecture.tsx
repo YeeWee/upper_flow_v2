@@ -254,7 +254,7 @@ export default function Architecture({ step }: ChapterStepProps) {
         <div className="atom-kicker dim">02 / 过渡</div>
         <div className="atom-hero in">
           <h1 className="atom-hero__title">
-            架构说完，<em>看效果</em>
+            模型没换，<em>看它被逼成什么样</em>
           </h1>
         </div>
         <hr className="atom-rule lit ar-static__rule" />
