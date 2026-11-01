@@ -1,0 +1,28 @@
+<style>
+.co11 { position:absolute; inset:0; padding:var(--stage-pad-y) var(--stage-pad-x); display:grid; grid-template-columns: 360px 1fr; gap:96px; align-items:center; }
+.co11__kick { position:absolute; top:calc(var(--stage-pad-y) - 18px); left:var(--stage-pad-x); font-family:var(--font-mono); font-size:15px; letter-spacing:.3em; color:var(--text-mute); text-transform:uppercase; }
+.co11__mark { display:flex; flex-direction:column; gap:18px; }
+.co11__glyph { width:132px; height:132px; display:grid; place-items:center; border:2px solid var(--accent); background:var(--accent-soft); font-family:var(--font-mono); font-size:42px; color:var(--accent); }
+.co11__name { font-family:var(--font-mono); font-size:26px; letter-spacing:.12em; color:var(--text); }
+.co11__role { font-family:var(--font-mono); font-size:15px; letter-spacing:.24em; color:var(--text-mute); text-transform:uppercase; }
+.co11__list { display:flex; flex-direction:column; border-top:2px dashed var(--rule); }
+.co11__item { display:grid; grid-template-columns: 52px 1fr 1fr; align-items:baseline; gap:26px; padding:26px 20px; border-bottom:2px dashed var(--rule); }
+.co11__i { font-family:var(--font-mono); font-size:15px; letter-spacing:.2em; color:var(--accent); }
+.co11__t { font-family:var(--font-display-cn); font-weight:700; font-size:32px; color:var(--text); }
+.co11__d { font-family:var(--font-mono); font-size:17px; letter-spacing:.1em; color:var(--text-mute); text-align:right; }
+</style>
+<div class="co11">
+  <div class="co11__kick">11 / Grok Bot 出的是什么</div>
+  <div class="co11__mark">
+    <div class="co11__glyph">GB</div>
+    <div class="co11__name">Grok Bot</div>
+    <div class="co11__role">持久环境 / 执行侧</div>
+  </div>
+  <div class="co11__list">
+    <div class="co11__item"><span class="co11__i">01</span><span class="co11__t">云端电脑</span><span class="co11__d">一台，长期在线</span></div>
+    <div class="co11__item"><span class="co11__i">02</span><span class="co11__t">浏览器</span><span class="co11__d">保留登录态</span></div>
+    <div class="co11__item"><span class="co11__i">03</span><span class="co11__t">终端</span><span class="co11__d">能跑命令</span></div>
+    <div class="co11__item"><span class="co11__i">04</span><span class="co11__t">长期上下文</span><span class="co11__d">跨会话记住</span></div>
+    <div class="co11__item"><span class="co11__i">05</span><span class="co11__t">定时例程</span><span class="co11__d">你不醒它也跑</span></div>
+  </div>
+</div>

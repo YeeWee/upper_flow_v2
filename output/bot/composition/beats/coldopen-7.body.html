@@ -1,0 +1,27 @@
+<style>
+.co7 { position:absolute; inset:0; padding:var(--stage-pad-y) var(--stage-pad-x); display:grid; grid-template-columns: 1.15fr .85fr; gap:80px; align-items:center; }
+.co7__kick { position:absolute; top:calc(var(--stage-pad-y) - 18px); left:var(--stage-pad-x); font-family:var(--font-mono); font-size:15px; letter-spacing:.3em; color:var(--text-mute); text-transform:uppercase; }
+.co7__code { display:flex; flex-direction:column; gap:0; font-family:var(--font-mono); font-size:19px; line-height:1.9; color:var(--text-faint); filter:blur(.2px); }
+.co7__line { display:flex; gap:22px; }
+.co7__ln { width:34px; text-align:right; color:var(--text-faint); }
+.co7__stamp { position:relative; display:flex; flex-direction:column; align-items:flex-start; gap:18px; padding:44px 46px; border:3px solid var(--accent); background:var(--accent-soft); transform:rotate(-5deg); }
+.co7__stamp::after { content:""; position:absolute; inset:10px; border:1px dashed var(--accent); }
+.co7__big { font-family:var(--font-display-cn); font-weight:700; font-size:70px; line-height:1.1; color:var(--accent); letter-spacing:-.02em; }
+.co7__small { font-family:var(--font-mono); font-size:15px; letter-spacing:.24em; color:var(--accent); text-transform:uppercase; }
+</style>
+<div class="co7">
+  <div class="co7__kick">07 / 一个标签</div>
+  <div class="co7__code">
+    <div class="co7__line"><span class="co7__ln">01</span><span>function buildApp() {</span></div>
+    <div class="co7__line"><span class="co7__ln">02</span><span>&nbsp;&nbsp;const ui = renderShell();</span></div>
+    <div class="co7__line"><span class="co7__ln">03</span><span>&nbsp;&nbsp;const api = wireRoutes(ui);</span></div>
+    <div class="co7__line"><span class="co7__ln">04</span><span>&nbsp;&nbsp;await seed(api);</span></div>
+    <div class="co7__line"><span class="co7__ln">05</span><span>&nbsp;&nbsp;return { ui, api };</span></div>
+    <div class="co7__line"><span class="co7__ln">06</span><span>}</span></div>
+    <div class="co7__line"><span class="co7__ln">07</span><span>export default buildApp;</span></div>
+  </div>
+  <div class="co7__stamp">
+    <div class="co7__small">你给它起的名字</div>
+    <div class="co7__big">自主 AI<br />工程师</div>
+  </div>
+</div>

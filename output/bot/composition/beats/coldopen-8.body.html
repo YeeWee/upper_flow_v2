@@ -1,0 +1,25 @@
+<style>
+.co8 { position:absolute; inset:0; padding:var(--stage-pad-y) var(--stage-pad-x); display:grid; grid-template-columns: .78fr 1.22fr; align-items:center; gap:96px; }
+.co8__kick { position:absolute; top:calc(var(--stage-pad-y) - 18px); left:var(--stage-pad-x); font-family:var(--font-mono); font-size:15px; letter-spacing:.3em; color:var(--text-mute); text-transform:uppercase; }
+.co8__date { display:flex; flex-direction:column; gap:16px; }
+.co8__num { font-family:var(--font-mono); font-weight:500; font-size:232px; line-height:.84; letter-spacing:-.06em; color:var(--text); font-variant-numeric:tabular-nums; }
+.co8__sub { font-family:var(--font-mono); font-size:16px; letter-spacing:.32em; color:var(--accent); text-transform:uppercase; }
+.co8__card { position:relative; padding:52px 56px; background:var(--surface-2); border:2px solid var(--rule); box-shadow:var(--card-shadow); }
+.co8__card::before { content:""; position:absolute; left:-2px; top:-2px; right:-2px; height:6px; background:var(--accent); }
+.co8__lab { font-family:var(--font-mono); font-size:14px; letter-spacing:.26em; color:var(--text-mute); text-transform:uppercase; }
+.co8__quote { margin:28px 0 0; font-family:var(--font-display-cn); font-weight:700; font-size:54px; line-height:1.32; color:var(--text); }
+.co8__quote em { font-style:normal; color:var(--accent); }
+.co8__cite { margin-top:34px; padding-top:22px; border-top:2px dashed var(--rule); font-family:var(--font-mono); font-size:15px; letter-spacing:.18em; color:var(--text-mute); }
+</style>
+<div class="co8">
+  <div class="co8__kick">08 / 一条公告</div>
+  <div class="co8__date">
+    <div class="co8__num">10.07</div>
+    <div class="co8__sub">Announcement</div>
+  </div>
+  <div class="co8__card">
+    <div class="co8__lab">模型路由 / 公开说明</div>
+    <p class="co8__quote">Grok Bot 会按任务<br />挑<em>最合适的后端</em></p>
+    <div class="co8__cite">名单里包括 Claude Opus 5.5</div>
+  </div>
+</div>

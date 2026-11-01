@@ -1,0 +1,2666 @@
+{
+  "ok": true,
+  "command": "check",
+  "errors": [],
+  "warnings": [],
+  "reports": [
+    {
+      "id": "duration-table",
+      "level": "report",
+      "message": "时长表\n  coldopen  15 拍  80980ms\n  routing  15 拍  105540ms\n  computer  15 拍  84260ms\n  mission  25 拍  145900ms\n  roster  23 拍  129380ms\n  states  15 拍  89700ms\n  delegate  14 拍  82040ms\n  review  16 拍  90240ms\n  permissions  18 拍  89160ms\n  skill-night  18 拍  104440ms\n  recovery  19 拍  97220ms\n  ladder  21 拍  113180ms\n  合计  214 拍  1212040ms\n  逐拍：coldopen-1=5980ms, coldopen-2=5020ms, coldopen-3=4700ms, coldopen-4=4860ms, coldopen-5=3340ms, coldopen-6=5420ms, coldopen-7=5260ms, coldopen-8=5820ms, coldopen-9=6220ms, coldopen-10=4860ms, coldopen-11=5660ms, coldopen-12=7580ms, coldopen-13=4780ms, coldopen-14=4940ms, coldopen-15=6540ms, routing-1=5180ms, routing-2=5820ms, routing-3=4380ms, routing-4=4780ms, routing-5=5100ms, routing-6=7980ms, routing-7=5900ms, routing-8=4700ms, routing-9=6140ms, routing-10=5260ms, routing-11=19660ms, routing-12=11500ms, routing-13=9020ms, routing-14=4700ms, routing-15=5420ms, computer-1=3980ms, computer-2=4540ms, computer-3=5580ms, computer-4=5740ms, computer-5=5580ms, computer-6=5180ms, computer-7=5900ms, computer-8=5820ms, computer-9=6220ms, computer-10=6460ms, computer-11=4780ms, computer-12=7820ms, computer-13=5020ms, computer-14=5740ms, computer-15=5900ms, mission-1=8300ms, mission-2=7660ms, mission-3=5100ms, mission-4=5020ms, mission-5=2940ms, mission-6=5660ms, mission-7=5580ms, mission-8=8860ms, mission-9=6140ms, mission-10=3660ms, mission-11=11100ms, mission-12=4540ms, mission-13=5740ms, mission-14=5340ms, mission-15=5820ms, mission-16=4220ms, mission-17=5580ms, mission-18=5580ms, mission-19=5580ms, mission-20=4060ms, mission-21=6540ms, mission-22=5260ms, mission-23=5900ms, mission-24=6940ms, mission-25=4780ms, roster-1=5580ms, roster-2=4540ms, roster-3=5340ms, roster-4=4780ms, roster-5=4140ms, roster-6=3900ms, roster-7=6220ms, roster-8=4300ms, roster-9=5020ms, roster-10=5260ms, roster-11=3740ms, roster-12=6940ms, roster-13=5820ms, roster-14=6300ms, roster-15=5420ms, roster-16=4060ms, roster-17=6220ms, roster-18=6460ms, roster-19=8060ms, roster-20=6540ms, roster-21=11980ms, roster-22=3980ms, roster-23=4780ms, states-1=7420ms, states-2=5980ms, states-3=6140ms, states-4=8300ms, states-5=5180ms, states-6=5900ms, states-7=5100ms, states-8=6940ms, states-9=7020ms, states-10=5900ms, states-11=5340ms, states-12=7340ms, states-13=4460ms, states-14=5020ms, states-15=3660ms, delegate-1=6620ms, delegate-2=3420ms, delegate-3=5020ms, delegate-4=5820ms, delegate-5=4780ms, delegate-6=6620ms, delegate-7=3580ms, delegate-8=5660ms, delegate-9=6460ms, delegate-10=8780ms, delegate-11=6060ms, delegate-12=7740ms, delegate-13=7100ms, delegate-14=4380ms, review-1=6940ms, review-2=13020ms, review-3=4380ms, review-4=5660ms, review-5=6220ms, review-6=7260ms, review-7=7100ms, review-8=4140ms, review-9=3980ms, review-10=3580ms, review-11=3980ms, review-12=4860ms, review-13=4620ms, review-14=4060ms, review-15=5660ms, review-16=4780ms, permissions-1=3980ms, permissions-2=5500ms, permissions-3=4940ms, permissions-4=5180ms, permissions-5=5500ms, permissions-6=3340ms, permissions-7=3500ms, permissions-8=5740ms, permissions-9=6300ms, permissions-10=6460ms, permissions-11=4380ms, permissions-12=4380ms, permissions-13=4700ms, permissions-14=4940ms, permissions-15=5980ms, permissions-16=5500ms, permissions-17=5180ms, permissions-18=3660ms, skill-night-1=4780ms, skill-night-2=7820ms, skill-night-3=4060ms, skill-night-4=6860ms, skill-night-5=4140ms, skill-night-6=7500ms, skill-night-7=6460ms, skill-night-8=3740ms, skill-night-9=4620ms, skill-night-10=4060ms, skill-night-11=4460ms, skill-night-12=5260ms, skill-night-13=9980ms, skill-night-14=7580ms, skill-night-15=6700ms, skill-night-16=7660ms, skill-night-17=4140ms, skill-night-18=4620ms, recovery-1=6060ms, recovery-2=5420ms, recovery-3=5340ms, recovery-4=3340ms, recovery-5=4700ms, recovery-6=3660ms, recovery-7=5180ms, recovery-8=4620ms, recovery-9=4860ms, recovery-10=3980ms, recovery-11=5180ms, recovery-12=4140ms, recovery-13=5740ms, recovery-14=5980ms, recovery-15=11420ms, recovery-16=4780ms, recovery-17=3740ms, recovery-18=5260ms, recovery-19=3820ms, ladder-1=4380ms, ladder-2=5260ms, ladder-3=5500ms, ladder-4=7420ms, ladder-5=5420ms, ladder-6=4780ms, ladder-7=7180ms, ladder-8=5180ms, ladder-9=2380ms, ladder-10=4300ms, ladder-11=3100ms, ladder-12=7020ms, ladder-13=6460ms, ladder-14=4140ms, ladder-15=4940ms, ladder-16=3260ms, ladder-17=6860ms, ladder-18=5580ms, ladder-19=6140ms, ladder-20=6620ms, ladder-21=7260ms"
+    },
+    {
+      "id": "rhythm-uniformity",
+      "level": "report",
+      "beatId": "coldopen-1",
+      "chapter": "coldopen",
+      "field": "say",
+      "message": "节奏均匀：章节「coldopen」15 个非空拍句长变异系数 0.142（< 0.25），平均 24.1 字。\n逐拍句长：33 / 22 / 24 / 19 / 21 / 24 / 23 / 26 / 30 / 22 / 25 / 24 / 23 / 21 / 25\n刻意的均匀是手法；先看见，再决定要不要变。"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "coldopen-1",
+      "chapter": "coldopen",
+      "message": "静帧：coldopen-1 在 200–5780ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        200,
+        5780
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "coldopen-2",
+      "chapter": "coldopen",
+      "message": "静帧：coldopen-2 在 6180–10800ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        6180,
+        10800
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "coldopen-3",
+      "chapter": "coldopen",
+      "message": "静帧：coldopen-3 在 11200–15500ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        11200,
+        15500
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "coldopen-4",
+      "chapter": "coldopen",
+      "message": "静帧：coldopen-4 在 15900–20360ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        15900,
+        20360
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "coldopen-5",
+      "chapter": "coldopen",
+      "message": "静帧：coldopen-5 在 20760–23700ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        20760,
+        23700
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "coldopen-6",
+      "chapter": "coldopen",
+      "message": "静帧：coldopen-6 在 24100–29120ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        24100,
+        29120
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "coldopen-7",
+      "chapter": "coldopen",
+      "message": "静帧：coldopen-7 在 29520–34380ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        29520,
+        34380
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "coldopen-8",
+      "chapter": "coldopen",
+      "message": "静帧：coldopen-8 在 34780–40200ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        34780,
+        40200
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "coldopen-9",
+      "chapter": "coldopen",
+      "message": "静帧：coldopen-9 在 40600–46420ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        40600,
+        46420
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "coldopen-10",
+      "chapter": "coldopen",
+      "message": "静帧：coldopen-10 在 46820–51280ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        46820,
+        51280
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "coldopen-11",
+      "chapter": "coldopen",
+      "message": "静帧：coldopen-11 在 51680–56940ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        51680,
+        56940
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "coldopen-12",
+      "chapter": "coldopen",
+      "message": "静帧：coldopen-12 在 57340–64520ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        57340,
+        64520
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "coldopen-13",
+      "chapter": "coldopen",
+      "message": "静帧：coldopen-13 在 64920–69300ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        64920,
+        69300
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "coldopen-14",
+      "chapter": "coldopen",
+      "message": "静帧：coldopen-14 在 69700–74240ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        69700,
+        74240
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "coldopen-15",
+      "chapter": "coldopen",
+      "message": "静帧：coldopen-15 在 74640–80780ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        74640,
+        80780
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "rhythm-uniformity",
+      "level": "report",
+      "beatId": "computer-1",
+      "chapter": "computer",
+      "field": "say",
+      "message": "节奏均匀：章节「computer」15 个非空拍句长变异系数 0.172（< 0.25），平均 25.1 字。\n逐拍句长：19 / 22 / 20 / 23 / 26 / 31 / 24 / 23 / 23 / 29 / 24 / 36 / 28 / 27 / 22\n刻意的均匀是手法；先看见，再决定要不要变。"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "computer-1",
+      "chapter": "computer",
+      "message": "静帧：computer-1 在 186720–190300ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        186720,
+        190300
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "computer-2",
+      "chapter": "computer",
+      "message": "静帧：computer-2 在 190700–194840ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        190700,
+        194840
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "computer-3",
+      "chapter": "computer",
+      "message": "静帧：computer-3 在 195240–200420ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        195240,
+        200420
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "computer-4",
+      "chapter": "computer",
+      "message": "静帧：computer-4 在 200820–206160ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        200820,
+        206160
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "computer-5",
+      "chapter": "computer",
+      "message": "静帧：computer-5 在 206560–211740ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        206560,
+        211740
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "computer-6",
+      "chapter": "computer",
+      "message": "静帧：computer-6 在 212140–216920ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        212140,
+        216920
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "computer-7",
+      "chapter": "computer",
+      "message": "静帧：computer-7 在 217320–222820ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        217320,
+        222820
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "computer-8",
+      "chapter": "computer",
+      "message": "静帧：computer-8 在 223220–228640ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        223220,
+        228640
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "computer-9",
+      "chapter": "computer",
+      "message": "静帧：computer-9 在 229040–234860ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        229040,
+        234860
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "computer-10",
+      "chapter": "computer",
+      "message": "静帧：computer-10 在 235260–241320ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        235260,
+        241320
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "computer-11",
+      "chapter": "computer",
+      "message": "静帧：computer-11 在 241720–246100ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        241720,
+        246100
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "computer-12",
+      "chapter": "computer",
+      "message": "静帧：computer-12 在 246500–253920ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        246500,
+        253920
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "computer-13",
+      "chapter": "computer",
+      "message": "静帧：computer-13 在 254320–258940ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        254320,
+        258940
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "computer-14",
+      "chapter": "computer",
+      "message": "静帧：computer-14 在 259340–264680ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        259340,
+        264680
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "computer-15",
+      "chapter": "computer",
+      "message": "静帧：computer-15 在 265080–270580ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        265080,
+        270580
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "rhythm-uniformity",
+      "level": "report",
+      "beatId": "delegate-1",
+      "chapter": "delegate",
+      "field": "say",
+      "message": "节奏均匀：章节「delegate」14 个非空拍句长变异系数 0.134（< 0.25），平均 23.6 字。\n逐拍句长：22 / 19 / 29 / 23 / 24 / 27 / 20 / 22 / 26 / 27 / 24 / 23 / 27 / 18\n刻意的均匀是手法；先看见，再决定要不要变。"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "delegate-1",
+      "chapter": "delegate",
+      "message": "静帧：delegate-1 在 635960–642180ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        635960,
+        642180
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "delegate-2",
+      "chapter": "delegate",
+      "message": "静帧：delegate-2 在 642580–645600ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        642580,
+        645600
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "delegate-3",
+      "chapter": "delegate",
+      "message": "静帧：delegate-3 在 646000–650620ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        646000,
+        650620
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "delegate-4",
+      "chapter": "delegate",
+      "message": "静帧：delegate-4 在 651020–656440ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        651020,
+        656440
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "delegate-5",
+      "chapter": "delegate",
+      "message": "静帧：delegate-5 在 656840–661220ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        656840,
+        661220
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "delegate-6",
+      "chapter": "delegate",
+      "message": "静帧：delegate-6 在 661620–667840ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        661620,
+        667840
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "delegate-7",
+      "chapter": "delegate",
+      "message": "静帧：delegate-7 在 668240–671420ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        668240,
+        671420
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "delegate-8",
+      "chapter": "delegate",
+      "message": "静帧：delegate-8 在 671820–677080ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        671820,
+        677080
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "delegate-9",
+      "chapter": "delegate",
+      "message": "静帧：delegate-9 在 677480–683540ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        677480,
+        683540
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "delegate-10",
+      "chapter": "delegate",
+      "message": "静帧：delegate-10 在 683940–692320ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        683940,
+        692320
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "delegate-11",
+      "chapter": "delegate",
+      "message": "静帧：delegate-11 在 692720–698380ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        692720,
+        698380
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "delegate-12",
+      "chapter": "delegate",
+      "message": "静帧：delegate-12 在 698780–706120ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        698780,
+        706120
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "delegate-13",
+      "chapter": "delegate",
+      "message": "静帧：delegate-13 在 706520–713220ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        706520,
+        713220
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "delegate-14",
+      "chapter": "delegate",
+      "message": "静帧：delegate-14 在 713620–717600ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        713620,
+        717600
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "ladder-1",
+      "chapter": "ladder",
+      "message": "静帧：ladder-1 在 1099060–1103040ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        1099060,
+        1103040
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "ladder-2",
+      "chapter": "ladder",
+      "message": "静帧：ladder-2 在 1103440–1108300ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        1103440,
+        1108300
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "ladder-3",
+      "chapter": "ladder",
+      "message": "静帧：ladder-3 在 1108700–1113800ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        1108700,
+        1113800
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "ladder-4",
+      "chapter": "ladder",
+      "message": "静帧：ladder-4 在 1114200–1121220ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        1114200,
+        1121220
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "ladder-5",
+      "chapter": "ladder",
+      "message": "静帧：ladder-5 在 1121620–1126640ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        1121620,
+        1126640
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "ladder-6",
+      "chapter": "ladder",
+      "message": "静帧：ladder-6 在 1127040–1131420ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        1127040,
+        1131420
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "ladder-7",
+      "chapter": "ladder",
+      "message": "静帧：ladder-7 在 1131820–1138600ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        1131820,
+        1138600
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "ladder-8",
+      "chapter": "ladder",
+      "message": "静帧：ladder-8 在 1139000–1143780ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        1139000,
+        1143780
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "ladder-9",
+      "chapter": "ladder",
+      "message": "静帧：ladder-9 在 1144180–1146160ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        1144180,
+        1146160
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "ladder-10",
+      "chapter": "ladder",
+      "message": "静帧：ladder-10 在 1146560–1150460ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        1146560,
+        1150460
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "ladder-11",
+      "chapter": "ladder",
+      "message": "静帧：ladder-11 在 1150860–1153560ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        1150860,
+        1153560
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "ladder-12",
+      "chapter": "ladder",
+      "message": "静帧：ladder-12 在 1153960–1160580ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        1153960,
+        1160580
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "ladder-13",
+      "chapter": "ladder",
+      "message": "静帧：ladder-13 在 1160980–1167040ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        1160980,
+        1167040
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "ladder-14",
+      "chapter": "ladder",
+      "message": "静帧：ladder-14 在 1167440–1171180ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        1167440,
+        1171180
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "ladder-15",
+      "chapter": "ladder",
+      "message": "静帧：ladder-15 在 1171580–1176120ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        1171580,
+        1176120
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "ladder-16",
+      "chapter": "ladder",
+      "message": "静帧：ladder-16 在 1176520–1179380ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        1176520,
+        1179380
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "ladder-17",
+      "chapter": "ladder",
+      "message": "静帧：ladder-17 在 1179780–1186240ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        1179780,
+        1186240
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "ladder-18",
+      "chapter": "ladder",
+      "message": "静帧：ladder-18 在 1186640–1191820ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        1186640,
+        1191820
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "ladder-19",
+      "chapter": "ladder",
+      "message": "静帧：ladder-19 在 1192220–1197960ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        1192220,
+        1197960
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "ladder-20",
+      "chapter": "ladder",
+      "message": "静帧：ladder-20 在 1198360–1204580ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        1198360,
+        1204580
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "ladder-21",
+      "chapter": "ladder",
+      "message": "静帧：ladder-21 在 1204980–1211840ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        1204980,
+        1211840
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "rhythm-uniformity",
+      "level": "report",
+      "beatId": "mission-1",
+      "chapter": "mission",
+      "field": "say",
+      "message": "节奏均匀：章节「mission」25 个非空拍句长变异系数 0.173（< 0.25），平均 22.7 字。\n逐拍句长：34 / 26 / 22 / 20 / 16 / 26 / 23 / 27 / 22 / 16 / 27 / 21 / 24 / 21 / 18 / 21 / 18 / 24 / 23 / 18 / 25 / 26 / 25 / 22 / 23\n刻意的均匀是手法；先看见，再决定要不要变。"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "mission-1",
+      "chapter": "mission",
+      "message": "静帧：mission-1 在 270980–278880ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        270980,
+        278880
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "mission-2",
+      "chapter": "mission",
+      "message": "静帧：mission-2 在 279280–286540ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        279280,
+        286540
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "mission-3",
+      "chapter": "mission",
+      "message": "静帧：mission-3 在 286940–291640ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        286940,
+        291640
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "mission-4",
+      "chapter": "mission",
+      "message": "静帧：mission-4 在 292040–296660ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        292040,
+        296660
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "mission-5",
+      "chapter": "mission",
+      "message": "静帧：mission-5 在 297060–299600ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        297060,
+        299600
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "mission-6",
+      "chapter": "mission",
+      "message": "静帧：mission-6 在 300000–305260ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        300000,
+        305260
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "mission-7",
+      "chapter": "mission",
+      "message": "静帧：mission-7 在 305660–310840ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        305660,
+        310840
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "mission-8",
+      "chapter": "mission",
+      "message": "静帧：mission-8 在 311240–319700ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        311240,
+        319700
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "mission-9",
+      "chapter": "mission",
+      "message": "静帧：mission-9 在 320100–325840ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        320100,
+        325840
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "mission-10",
+      "chapter": "mission",
+      "message": "静帧：mission-10 在 326240–329500ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        326240,
+        329500
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "mission-11",
+      "chapter": "mission",
+      "message": "静帧：mission-11 在 329900–340600ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        329900,
+        340600
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "mission-12",
+      "chapter": "mission",
+      "message": "静帧：mission-12 在 341000–345140ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        341000,
+        345140
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "mission-13",
+      "chapter": "mission",
+      "message": "静帧：mission-13 在 345540–350880ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        345540,
+        350880
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "mission-14",
+      "chapter": "mission",
+      "message": "静帧：mission-14 在 351280–356220ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        351280,
+        356220
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "mission-15",
+      "chapter": "mission",
+      "message": "静帧：mission-15 在 356620–362040ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        356620,
+        362040
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "mission-16",
+      "chapter": "mission",
+      "message": "静帧：mission-16 在 362440–366260ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        362440,
+        366260
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "mission-17",
+      "chapter": "mission",
+      "message": "静帧：mission-17 在 366660–371840ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        366660,
+        371840
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "mission-18",
+      "chapter": "mission",
+      "message": "静帧：mission-18 在 372240–377420ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        372240,
+        377420
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "mission-19",
+      "chapter": "mission",
+      "message": "静帧：mission-19 在 377820–383000ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        377820,
+        383000
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "mission-20",
+      "chapter": "mission",
+      "message": "静帧：mission-20 在 383400–387060ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        383400,
+        387060
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "mission-21",
+      "chapter": "mission",
+      "message": "静帧：mission-21 在 387460–393600ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        387460,
+        393600
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "mission-22",
+      "chapter": "mission",
+      "message": "静帧：mission-22 在 394000–398860ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        394000,
+        398860
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "mission-23",
+      "chapter": "mission",
+      "message": "静帧：mission-23 在 399260–404760ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        399260,
+        404760
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "mission-24",
+      "chapter": "mission",
+      "message": "静帧：mission-24 在 405160–411700ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        405160,
+        411700
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "mission-25",
+      "chapter": "mission",
+      "message": "静帧：mission-25 在 412100–416480ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        412100,
+        416480
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "rhythm-uniformity",
+      "level": "report",
+      "beatId": "permissions-1",
+      "chapter": "permissions",
+      "field": "say",
+      "message": "节奏均匀：章节「permissions」18 个非空拍句长变异系数 0.134（< 0.25），平均 20.6 字。\n逐拍句长：17 / 24 / 21 / 22 / 22 / 18 / 14 / 22 / 23 / 23 / 23 / 20 / 21 / 23 / 22 / 20 / 21 / 15\n刻意的均匀是手法；先看见，再决定要不要变。"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "permissions-1",
+      "chapter": "permissions",
+      "message": "静帧：permissions-1 在 808240–811820ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        808240,
+        811820
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "permissions-2",
+      "chapter": "permissions",
+      "message": "静帧：permissions-2 在 812220–817320ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        812220,
+        817320
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "permissions-3",
+      "chapter": "permissions",
+      "message": "静帧：permissions-3 在 817720–822260ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        817720,
+        822260
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "permissions-4",
+      "chapter": "permissions",
+      "message": "静帧：permissions-4 在 822660–827440ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        822660,
+        827440
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "permissions-5",
+      "chapter": "permissions",
+      "message": "静帧：permissions-5 在 827840–832940ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        827840,
+        832940
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "permissions-6",
+      "chapter": "permissions",
+      "message": "静帧：permissions-6 在 833340–836280ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        833340,
+        836280
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "permissions-7",
+      "chapter": "permissions",
+      "message": "静帧：permissions-7 在 836680–839780ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        836680,
+        839780
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "permissions-8",
+      "chapter": "permissions",
+      "message": "静帧：permissions-8 在 840180–845520ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        840180,
+        845520
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "permissions-9",
+      "chapter": "permissions",
+      "message": "静帧：permissions-9 在 845920–851820ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        845920,
+        851820
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "permissions-10",
+      "chapter": "permissions",
+      "message": "静帧：permissions-10 在 852220–858280ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        852220,
+        858280
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "permissions-11",
+      "chapter": "permissions",
+      "message": "静帧：permissions-11 在 858680–862660ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        858680,
+        862660
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "permissions-12",
+      "chapter": "permissions",
+      "message": "静帧：permissions-12 在 863060–867040ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        863060,
+        867040
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "permissions-13",
+      "chapter": "permissions",
+      "message": "静帧：permissions-13 在 867440–871740ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        867440,
+        871740
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "permissions-14",
+      "chapter": "permissions",
+      "message": "静帧：permissions-14 在 872140–876680ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        872140,
+        876680
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "permissions-15",
+      "chapter": "permissions",
+      "message": "静帧：permissions-15 在 877080–882660ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        877080,
+        882660
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "permissions-16",
+      "chapter": "permissions",
+      "message": "静帧：permissions-16 在 883060–888160ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        883060,
+        888160
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "permissions-17",
+      "chapter": "permissions",
+      "message": "静帧：permissions-17 在 888560–893340ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        888560,
+        893340
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "permissions-18",
+      "chapter": "permissions",
+      "message": "静帧：permissions-18 在 893740–897000ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        893740,
+        897000
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "recovery-1",
+      "chapter": "recovery",
+      "message": "静帧：recovery-1 在 1001840–1007500ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        1001840,
+        1007500
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "recovery-2",
+      "chapter": "recovery",
+      "message": "静帧：recovery-2 在 1007900–1012920ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        1007900,
+        1012920
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "recovery-3",
+      "chapter": "recovery",
+      "message": "静帧：recovery-3 在 1013320–1018260ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        1013320,
+        1018260
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "recovery-4",
+      "chapter": "recovery",
+      "message": "静帧：recovery-4 在 1018660–1021600ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        1018660,
+        1021600
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "recovery-5",
+      "chapter": "recovery",
+      "message": "静帧：recovery-5 在 1022000–1026300ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        1022000,
+        1026300
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "recovery-6",
+      "chapter": "recovery",
+      "message": "静帧：recovery-6 在 1026700–1029960ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        1026700,
+        1029960
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "recovery-7",
+      "chapter": "recovery",
+      "message": "静帧：recovery-7 在 1030360–1035140ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        1030360,
+        1035140
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "recovery-8",
+      "chapter": "recovery",
+      "message": "静帧：recovery-8 在 1035540–1039760ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        1035540,
+        1039760
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "recovery-9",
+      "chapter": "recovery",
+      "message": "静帧：recovery-9 在 1040160–1044620ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        1040160,
+        1044620
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "recovery-10",
+      "chapter": "recovery",
+      "message": "静帧：recovery-10 在 1045020–1048600ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        1045020,
+        1048600
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "recovery-11",
+      "chapter": "recovery",
+      "message": "静帧：recovery-11 在 1049000–1053780ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        1049000,
+        1053780
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "recovery-12",
+      "chapter": "recovery",
+      "message": "静帧：recovery-12 在 1054180–1057920ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        1054180,
+        1057920
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "recovery-13",
+      "chapter": "recovery",
+      "message": "静帧：recovery-13 在 1058320–1063660ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        1058320,
+        1063660
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "recovery-14",
+      "chapter": "recovery",
+      "message": "静帧：recovery-14 在 1064060–1069640ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        1064060,
+        1069640
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "recovery-15",
+      "chapter": "recovery",
+      "message": "静帧：recovery-15 在 1070040–1081060ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        1070040,
+        1081060
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "recovery-16",
+      "chapter": "recovery",
+      "message": "静帧：recovery-16 在 1081460–1085840ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        1081460,
+        1085840
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "recovery-17",
+      "chapter": "recovery",
+      "message": "静帧：recovery-17 在 1086240–1089580ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        1086240,
+        1089580
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "recovery-18",
+      "chapter": "recovery",
+      "message": "静帧：recovery-18 在 1089980–1094840ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        1089980,
+        1094840
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "recovery-19",
+      "chapter": "recovery",
+      "message": "静帧：recovery-19 在 1095240–1098660ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        1095240,
+        1098660
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "rhythm-uniformity",
+      "level": "report",
+      "beatId": "review-1",
+      "chapter": "review",
+      "field": "say",
+      "message": "节奏均匀：章节「review」16 个非空拍句长变异系数 0.173（< 0.25），平均 22.2 字。\n逐拍句长：19 / 26 / 22 / 21 / 28 / 26 / 29 / 19 / 20 / 17 / 15 / 24 / 23 / 19 / 25 / 22\n刻意的均匀是手法；先看见，再决定要不要变。"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "review-1",
+      "chapter": "review",
+      "message": "静帧：review-1 在 718000–724540ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        718000,
+        724540
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "review-2",
+      "chapter": "review",
+      "message": "静帧：review-2 在 724940–737560ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        724940,
+        737560
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "review-3",
+      "chapter": "review",
+      "message": "静帧：review-3 在 737960–741940ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        737960,
+        741940
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "review-4",
+      "chapter": "review",
+      "message": "静帧：review-4 在 742340–747600ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        742340,
+        747600
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "review-5",
+      "chapter": "review",
+      "message": "静帧：review-5 在 748000–753820ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        748000,
+        753820
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "review-6",
+      "chapter": "review",
+      "message": "静帧：review-6 在 754220–761080ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        754220,
+        761080
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "review-7",
+      "chapter": "review",
+      "message": "静帧：review-7 在 761480–768180ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        761480,
+        768180
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "review-8",
+      "chapter": "review",
+      "message": "静帧：review-8 在 768580–772320ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        768580,
+        772320
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "review-9",
+      "chapter": "review",
+      "message": "静帧：review-9 在 772720–776300ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        772720,
+        776300
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "review-10",
+      "chapter": "review",
+      "message": "静帧：review-10 在 776700–779880ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        776700,
+        779880
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "review-11",
+      "chapter": "review",
+      "message": "静帧：review-11 在 780280–783860ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        780280,
+        783860
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "review-12",
+      "chapter": "review",
+      "message": "静帧：review-12 在 784260–788720ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        784260,
+        788720
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "review-13",
+      "chapter": "review",
+      "message": "静帧：review-13 在 789120–793340ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        789120,
+        793340
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "review-14",
+      "chapter": "review",
+      "message": "静帧：review-14 在 793740–797400ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        793740,
+        797400
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "review-15",
+      "chapter": "review",
+      "message": "静帧：review-15 在 797800–803060ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        797800,
+        803060
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "review-16",
+      "chapter": "review",
+      "message": "静帧：review-16 在 803460–807840ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        803460,
+        807840
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "rhythm-uniformity",
+      "level": "report",
+      "beatId": "roster-1",
+      "chapter": "roster",
+      "field": "say",
+      "message": "节奏均匀：章节「roster」23 个非空拍句长变异系数 0.192（< 0.25），平均 24.3 字。\n逐拍句长：21 / 23 / 24 / 30 / 20 / 20 / 22 / 21 / 18 / 28 / 24 / 26 / 21 / 27 / 22 / 24 / 33 / 29 / 32 / 30 / 29 / 18 / 16\n刻意的均匀是手法；先看见，再决定要不要变。"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "roster-1",
+      "chapter": "roster",
+      "message": "静帧：roster-1 在 416880–422060ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        416880,
+        422060
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "roster-2",
+      "chapter": "roster",
+      "message": "静帧：roster-2 在 422460–426600ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        422460,
+        426600
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "roster-3",
+      "chapter": "roster",
+      "message": "静帧：roster-3 在 427000–431940ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        427000,
+        431940
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "roster-4",
+      "chapter": "roster",
+      "message": "静帧：roster-4 在 432340–436720ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        432340,
+        436720
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "roster-5",
+      "chapter": "roster",
+      "message": "静帧：roster-5 在 437120–440860ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        437120,
+        440860
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "roster-6",
+      "chapter": "roster",
+      "message": "静帧：roster-6 在 441260–444760ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        441260,
+        444760
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "roster-7",
+      "chapter": "roster",
+      "message": "静帧：roster-7 在 445160–450980ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        445160,
+        450980
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "roster-8",
+      "chapter": "roster",
+      "message": "静帧：roster-8 在 451380–455280ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        451380,
+        455280
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "roster-9",
+      "chapter": "roster",
+      "message": "静帧：roster-9 在 455680–460300ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        455680,
+        460300
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "roster-10",
+      "chapter": "roster",
+      "message": "静帧：roster-10 在 460700–465560ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        460700,
+        465560
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "roster-11",
+      "chapter": "roster",
+      "message": "静帧：roster-11 在 465960–469300ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        465960,
+        469300
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "roster-12",
+      "chapter": "roster",
+      "message": "静帧：roster-12 在 469700–476240ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        469700,
+        476240
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "roster-13",
+      "chapter": "roster",
+      "message": "静帧：roster-13 在 476640–482060ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        476640,
+        482060
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "roster-14",
+      "chapter": "roster",
+      "message": "静帧：roster-14 在 482460–488360ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        482460,
+        488360
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "roster-15",
+      "chapter": "roster",
+      "message": "静帧：roster-15 在 488760–493780ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        488760,
+        493780
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "roster-16",
+      "chapter": "roster",
+      "message": "静帧：roster-16 在 494180–497840ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        494180,
+        497840
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "roster-17",
+      "chapter": "roster",
+      "message": "静帧：roster-17 在 498240–504060ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        498240,
+        504060
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "roster-18",
+      "chapter": "roster",
+      "message": "静帧：roster-18 在 504460–510520ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        504460,
+        510520
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "roster-19",
+      "chapter": "roster",
+      "message": "静帧：roster-19 在 510920–518580ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        510920,
+        518580
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "roster-20",
+      "chapter": "roster",
+      "message": "静帧：roster-20 在 518980–525120ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        518980,
+        525120
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "roster-21",
+      "chapter": "roster",
+      "message": "静帧：roster-21 在 525520–537100ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        525520,
+        537100
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "roster-22",
+      "chapter": "roster",
+      "message": "静帧：roster-22 在 537500–541080ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        537500,
+        541080
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "roster-23",
+      "chapter": "roster",
+      "message": "静帧：roster-23 在 541480–545860ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        541480,
+        545860
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "rhythm-uniformity",
+      "level": "report",
+      "beatId": "routing-1",
+      "chapter": "routing",
+      "field": "say",
+      "message": "节奏均匀：章节「routing」15 个非空拍句长变异系数 0.180（< 0.25），平均 24.3 字。\n逐拍句长：21 / 29 / 23 / 23 / 22 / 24 / 20 / 22 / 22 / 20 / 26 / 35 / 33 / 23 / 22\n刻意的均匀是手法；先看见，再决定要不要变。"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "routing-1",
+      "chapter": "routing",
+      "message": "静帧：routing-1 在 81180–85960ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        81180,
+        85960
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "routing-2",
+      "chapter": "routing",
+      "message": "静帧：routing-2 在 86360–91780ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        86360,
+        91780
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "routing-3",
+      "chapter": "routing",
+      "message": "静帧：routing-3 在 92180–96160ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        92180,
+        96160
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "routing-4",
+      "chapter": "routing",
+      "message": "静帧：routing-4 在 96560–100940ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        96560,
+        100940
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "routing-5",
+      "chapter": "routing",
+      "message": "静帧：routing-5 在 101340–106040ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        101340,
+        106040
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "routing-6",
+      "chapter": "routing",
+      "message": "静帧：routing-6 在 106440–114020ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        106440,
+        114020
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "routing-7",
+      "chapter": "routing",
+      "message": "静帧：routing-7 在 114420–119920ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        114420,
+        119920
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "routing-8",
+      "chapter": "routing",
+      "message": "静帧：routing-8 在 120320–124620ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        120320,
+        124620
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "routing-9",
+      "chapter": "routing",
+      "message": "静帧：routing-9 在 125020–130760ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        125020,
+        130760
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "routing-10",
+      "chapter": "routing",
+      "message": "静帧：routing-10 在 131160–136020ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        131160,
+        136020
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "routing-11",
+      "chapter": "routing",
+      "message": "静帧：routing-11 在 136420–155680ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        136420,
+        155680
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "routing-12",
+      "chapter": "routing",
+      "message": "静帧：routing-12 在 156080–167180ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        156080,
+        167180
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "routing-13",
+      "chapter": "routing",
+      "message": "静帧：routing-13 在 167580–176200ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        167580,
+        176200
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "routing-14",
+      "chapter": "routing",
+      "message": "静帧：routing-14 在 176600–180900ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        176600,
+        180900
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "routing-15",
+      "chapter": "routing",
+      "message": "静帧：routing-15 在 181300–186320ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        181300,
+        186320
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "rhythm-uniformity",
+      "level": "report",
+      "beatId": "skill-night-1",
+      "chapter": "skill-night",
+      "field": "say",
+      "message": "节奏均匀：章节「skill-night」18 个非空拍句长变异系数 0.212（< 0.25），平均 23.1 字。\n逐拍句长：20 / 23 / 15 / 28 / 17 / 23 / 24 / 21 / 24 / 19 / 20 / 27 / 34 / 34 / 22 / 23 / 21 / 21\n刻意的均匀是手法；先看见，再决定要不要变。"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "skill-night-1",
+      "chapter": "skill-night",
+      "message": "静帧：skill-night-1 在 897400–901780ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        897400,
+        901780
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "skill-night-2",
+      "chapter": "skill-night",
+      "message": "静帧：skill-night-2 在 902180–909600ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        902180,
+        909600
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "skill-night-3",
+      "chapter": "skill-night",
+      "message": "静帧：skill-night-3 在 910000–913660ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        910000,
+        913660
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "skill-night-4",
+      "chapter": "skill-night",
+      "message": "静帧：skill-night-4 在 914060–920520ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        914060,
+        920520
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "skill-night-5",
+      "chapter": "skill-night",
+      "message": "静帧：skill-night-5 在 920920–924660ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        920920,
+        924660
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "skill-night-6",
+      "chapter": "skill-night",
+      "message": "静帧：skill-night-6 在 925060–932160ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        925060,
+        932160
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "skill-night-7",
+      "chapter": "skill-night",
+      "message": "静帧：skill-night-7 在 932560–938620ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        932560,
+        938620
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "skill-night-8",
+      "chapter": "skill-night",
+      "message": "静帧：skill-night-8 在 939020–942360ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        939020,
+        942360
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "skill-night-9",
+      "chapter": "skill-night",
+      "message": "静帧：skill-night-9 在 942760–946980ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        942760,
+        946980
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "skill-night-10",
+      "chapter": "skill-night",
+      "message": "静帧：skill-night-10 在 947380–951040ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        947380,
+        951040
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "skill-night-11",
+      "chapter": "skill-night",
+      "message": "静帧：skill-night-11 在 951440–955500ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        951440,
+        955500
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "skill-night-12",
+      "chapter": "skill-night",
+      "message": "静帧：skill-night-12 在 955900–960760ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        955900,
+        960760
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "skill-night-13",
+      "chapter": "skill-night",
+      "message": "静帧：skill-night-13 在 961160–970740ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        961160,
+        970740
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "skill-night-14",
+      "chapter": "skill-night",
+      "message": "静帧：skill-night-14 在 971140–978320ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        971140,
+        978320
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "skill-night-15",
+      "chapter": "skill-night",
+      "message": "静帧：skill-night-15 在 978720–985020ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        978720,
+        985020
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "skill-night-16",
+      "chapter": "skill-night",
+      "message": "静帧：skill-night-16 在 985420–992680ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        985420,
+        992680
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "skill-night-17",
+      "chapter": "skill-night",
+      "message": "静帧：skill-night-17 在 993080–996820ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        993080,
+        996820
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "skill-night-18",
+      "chapter": "skill-night",
+      "message": "静帧：skill-night-18 在 997220–1001440ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        997220,
+        1001440
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "rhythm-uniformity",
+      "level": "report",
+      "beatId": "states-1",
+      "chapter": "states",
+      "field": "say",
+      "message": "节奏均匀：章节「states」15 个非空拍句长变异系数 0.203（< 0.25），平均 22.7 字。\n逐拍句长：22 / 24 / 26 / 18 / 20 / 22 / 21 / 30 / 30 / 28 / 23 / 27 / 18 / 18 / 14\n刻意的均匀是手法；先看见，再决定要不要变。"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "states-1",
+      "chapter": "states",
+      "message": "静帧：states-1 在 546260–553280ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        546260,
+        553280
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "states-2",
+      "chapter": "states",
+      "message": "静帧：states-2 在 553680–559260ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        553680,
+        559260
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "states-3",
+      "chapter": "states",
+      "message": "静帧：states-3 在 559660–565400ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        559660,
+        565400
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "states-4",
+      "chapter": "states",
+      "message": "静帧：states-4 在 565800–573700ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        565800,
+        573700
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "states-5",
+      "chapter": "states",
+      "message": "静帧：states-5 在 574100–578880ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        574100,
+        578880
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "states-6",
+      "chapter": "states",
+      "message": "静帧：states-6 在 579280–584780ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        579280,
+        584780
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "states-7",
+      "chapter": "states",
+      "message": "静帧：states-7 在 585180–589880ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        585180,
+        589880
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "states-8",
+      "chapter": "states",
+      "message": "静帧：states-8 在 590280–596820ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        590280,
+        596820
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "states-9",
+      "chapter": "states",
+      "message": "静帧：states-9 在 597220–603840ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        597220,
+        603840
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "states-10",
+      "chapter": "states",
+      "message": "静帧：states-10 在 604240–609740ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        604240,
+        609740
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "states-11",
+      "chapter": "states",
+      "message": "静帧：states-11 在 610140–615080ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        610140,
+        615080
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "states-12",
+      "chapter": "states",
+      "message": "静帧：states-12 在 615480–622420ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        615480,
+        622420
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "states-13",
+      "chapter": "states",
+      "message": "静帧：states-13 在 622820–626880ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        622820,
+        626880
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "states-14",
+      "chapter": "states",
+      "message": "静帧：states-14 在 627280–631900ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        627280,
+        631900
+      ],
+      "kind": "still"
+    },
+    {
+      "id": "still-frames",
+      "level": "report",
+      "beatId": "states-15",
+      "chapter": "states",
+      "message": "静帧：states-15 在 632300–635560ms 各抓一帧（渲染链比对像素差，只报不拦）。",
+      "atMs": [
+        632300,
+        635560
+      ],
+      "kind": "still"
+    }
+  ],
+  "summary": {
+    "errors": 0,
+    "warnings": 0,
+    "reports": 225
+  }
+}

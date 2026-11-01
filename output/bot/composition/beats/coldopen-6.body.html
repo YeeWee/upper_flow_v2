@@ -1,0 +1,34 @@
+<style>
+.co6 { position:absolute; inset:0; padding:var(--stage-pad-y) var(--stage-pad-x); display:grid; grid-template-columns: 1.15fr .85fr; gap:80px; align-items:center; }
+.co6__kick { position:absolute; top:calc(var(--stage-pad-y) - 18px); left:var(--stage-pad-x); font-family:var(--font-mono); font-size:15px; letter-spacing:.3em; color:var(--text-mute); text-transform:uppercase; }
+.co6__code { display:flex; flex-direction:column; gap:0; font-family:var(--font-mono); font-size:19px; line-height:1.9; color:var(--text-mute); }
+.co6__line { display:flex; gap:22px; opacity:.9; }
+.co6__ln { width:34px; text-align:right; color:var(--text-faint); }
+.co6__k { color:var(--accent); }
+.co6__s { color:var(--text-2); }
+.co6__timer { display:flex; flex-direction:column; gap:24px; }
+.co6__tl { font-family:var(--font-mono); font-size:14px; letter-spacing:.26em; color:var(--text-mute); text-transform:uppercase; }
+.co6__num { font-family:var(--font-mono); font-weight:500; font-size:196px; line-height:.86; letter-spacing:-.04em; color:var(--text); font-variant-numeric:tabular-nums; }
+.co6__bar { position:relative; height:14px; background:var(--surface-2); border:1px solid var(--rule); }
+.co6__fill { position:absolute; inset:0; background:var(--accent); transform-origin:left center; }
+.co6__note { font-family:var(--font-mono); font-size:16px; letter-spacing:.14em; color:var(--text-mute); }
+</style>
+<div class="co6">
+  <div class="co6__kick">06 / 看它写代码</div>
+  <div class="co6__code">
+    <div class="co6__line"><span class="co6__ln">01</span><span><span class="co6__k">function</span> <span class="co6__s">buildApp</span>() {</span></div>
+    <div class="co6__line"><span class="co6__ln">02</span><span>&nbsp;&nbsp;<span class="co6__k">const</span> ui = renderShell();</span></div>
+    <div class="co6__line"><span class="co6__ln">03</span><span>&nbsp;&nbsp;<span class="co6__k">const</span> api = wireRoutes(ui);</span></div>
+    <div class="co6__line"><span class="co6__ln">04</span><span>&nbsp;&nbsp;<span class="co6__k">await</span> seed(api);</span></div>
+    <div class="co6__line"><span class="co6__ln">05</span><span>&nbsp;&nbsp;<span class="co6__k">return</span> { ui, api };</span></div>
+    <div class="co6__line"><span class="co6__ln">06</span><span>}</span></div>
+    <div class="co6__line"><span class="co6__ln">07</span><span><span class="co6__k">export</span> <span class="co6__k">default</span> buildApp;</span></div>
+    <div class="co6__line"><span class="co6__ln">08</span><span>// 还有 41 个文件在排队</span></div>
+  </div>
+  <div class="co6__timer">
+    <div class="co6__tl">Elapsed</div>
+    <div class="co6__num">20:00</div>
+    <div class="co6__bar"><span class="co6__fill"></span></div>
+    <div class="co6__note">二十分钟，你只是在看</div>
+  </div>
+</div>

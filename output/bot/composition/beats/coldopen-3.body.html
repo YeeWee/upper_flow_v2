@@ -1,0 +1,41 @@
+<style>
+.co3 { position:absolute; inset:0; padding:var(--stage-pad-y) var(--stage-pad-x); display:grid; grid-template-columns:1fr 150px 1fr; align-items:center; gap:0; }
+.co3__kick { position:absolute; top:calc(var(--stage-pad-y) - 18px); left:var(--stage-pad-x); font-family:var(--font-mono); font-size:15px; letter-spacing:.3em; color:var(--text-mute); text-transform:uppercase; }
+.co3__side { display:flex; flex-direction:column; gap:26px; }
+.co3__label { font-family:var(--font-mono); font-size:15px; letter-spacing:.24em; color:var(--text-mute); text-transform:uppercase; }
+.co3__chat { padding:26px; background:var(--surface-2); border:2px solid var(--rule); display:flex; flex-direction:column; gap:14px; }
+.co3__bubble { align-self:flex-end; max-width:80%; padding:16px 20px; background:var(--surface-3); border:1px solid var(--rule); font-family:var(--font-body); font-size:24px; color:var(--text-2); }
+.co3__input { display:flex; justify-content:space-between; align-items:center; padding:18px 20px; border:2px dashed var(--rule); font-family:var(--font-mono); font-size:20px; color:var(--text-mute); }
+.co3__caret { width:2px; height:26px; background:var(--accent); }
+.co3__pipe { display:flex; flex-direction:column; gap:0; border:2px solid var(--rule); background:var(--surface-2); }
+.co3__step { display:flex; align-items:center; gap:20px; padding:24px 26px; border-top:1px dashed var(--rule); font-family:var(--font-mono); font-size:21px; color:var(--text-2); }
+.co3__step:first-child { border-top:0; }
+.co3__idx { font-size:14px; letter-spacing:.18em; color:var(--accent); }
+.co3__mid { display:flex; flex-direction:column; align-items:center; gap:16px; }
+.co3__neq { display:grid; place-items:center; width:84px; height:84px; border:2px solid var(--accent); background:var(--accent-soft); font-family:var(--font-mono); font-size:26px; letter-spacing:.06em; color:var(--accent); line-height:1; }
+.co3__vline { width:0; height:180px; border-left:2px dashed var(--rule); }
+</style>
+<div class="co3">
+  <div class="co3__kick">03 / 不是又一个聊天框</div>
+  <div class="co3__side">
+    <div class="co3__label">聊天框 / 一次问答</div>
+    <div class="co3__chat">
+      <div class="co3__bubble">帮我写个功能</div>
+      <div class="co3__input"><span>输入提示词</span><span class="co3__caret"></span></div>
+    </div>
+  </div>
+  <div class="co3__mid">
+    <div class="co3__vline"></div>
+    <div class="co3__neq">VS</div>
+    <div class="co3__vline"></div>
+  </div>
+  <div class="co3__side">
+    <div class="co3__label">流水线 / 一条 issue 的一生</div>
+    <div class="co3__pipe">
+      <div class="co3__step"><span class="co3__idx">01</span>复现并留下证据</div>
+      <div class="co3__step"><span class="co3__idx">02</span>独立分支上修复</div>
+      <div class="co3__step"><span class="co3__idx">03</span>评审通过才交给人</div>
+      <div class="co3__step"><span class="co3__idx">04</span>草稿 PR 等你点合并</div>
+    </div>
+  </div>
+</div>

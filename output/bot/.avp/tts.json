@@ -1,0 +1,1933 @@
+{
+  "schemaVersion": 1,
+  "backend": "qwen",
+  "totalDurationMs": 1212040,
+  "beats": {
+    "coldopen-1": {
+      "hash": "068c36925b826cd0cbe1626da60d7d7940807b4e393707522b371a9314766e7a",
+      "path": "audio/coldopen/1.wav",
+      "sha256": "d17d05c62c4339ee2706b520f20f1f392b60e754935c8ebd7ccea9ea3f0c7ce2",
+      "durationMs": 5980,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "coldopen-2": {
+      "hash": "01136cf4061366a61de9bdca62161c3f7f838fdf0bd364a687d78fac36d01eb0",
+      "path": "audio/coldopen/2.wav",
+      "sha256": "7cae6a74f9bec08fc4f761b5240d28c71c9e9ef15c10523bff99348e182d5743",
+      "durationMs": 5020,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "coldopen-3": {
+      "hash": "ecfd7b6eb59cd0e3302de4228ffc0164dc0889f43a53a9a386d8f502de8546dc",
+      "path": "audio/coldopen/3.wav",
+      "sha256": "14e3322040b2b7329931e58ea422b30f63ef77ed645a25d8c56a714fbec3d35d",
+      "durationMs": 4700,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "coldopen-4": {
+      "hash": "ec55bdd5ff674361ac5c52b9d661988b15dc4903d637bdec80bc62aebaac86a2",
+      "path": "audio/coldopen/4.wav",
+      "sha256": "fe06ae847bf67240964416d5ae71f617b362694d6f9c81e55cedc201a4986fff",
+      "durationMs": 4860,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "coldopen-5": {
+      "hash": "333be554964b65cfba125ad8cec01f31e33d3f577c22988f56fe64f21507a4c5",
+      "path": "audio/coldopen/5.wav",
+      "sha256": "e359774c1e1c71651572a6425e1b19dd80db06fe091d55eb7d5ad586f9e8eeea",
+      "durationMs": 3340,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "coldopen-6": {
+      "hash": "bbed59c5bc1a03c8764a7f93325fa25228c64f22635c9a6e7fe6a6a0386c4b46",
+      "path": "audio/coldopen/6.wav",
+      "sha256": "539b8720036e8fa38f9612e8ec6eca9e4acb1bc24ab319e9037b23c1026698f0",
+      "durationMs": 5420,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "coldopen-7": {
+      "hash": "476df788856570bab55ba9e24040f72107237cde35c84494d2eacadddd33c7c9",
+      "path": "audio/coldopen/7.wav",
+      "sha256": "419e7bb85952c4840d9a85e77933d0605e32438c67cac8211281855fdfcd6149",
+      "durationMs": 5260,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "coldopen-8": {
+      "hash": "9f86f8a963a7296e0c57ea41e736d3bcdf24fe50dccfeb16b0a7dbc70f706378",
+      "path": "audio/coldopen/8.wav",
+      "sha256": "15b85bcc0c9ec1a671dce754f545ed0fafc7ff7650d11735335b3633c2468eb9",
+      "durationMs": 5820,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "coldopen-9": {
+      "hash": "7ffefe02fb02c133417809c20e4cdb0328376ccdc7914a02c63945eab7e3634b",
+      "path": "audio/coldopen/9.wav",
+      "sha256": "39d86bae513c27e894f3e74ea429df263893bd38f81e7078f515d7a4e60f173c",
+      "durationMs": 6220,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "coldopen-10": {
+      "hash": "3fcc2a3e321a1c6ba4e475acc4a670c64214139286febc1de0e28a23fe4042ac",
+      "path": "audio/coldopen/10.wav",
+      "sha256": "31e34943f47cf4fae08c470df0fe0ca8fb588179477d6a3326fdd51527e0614e",
+      "durationMs": 4860,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "coldopen-11": {
+      "hash": "281437578f16aa7cf117a8e395725ce5171a50b5186ddcba34c6f73c399a721b",
+      "path": "audio/coldopen/11.wav",
+      "sha256": "731feeb1b4e73b3e0fd6ab6ca4223ffcdc02021579b9471bc2b972fb6df7c2cd",
+      "durationMs": 5660,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "coldopen-12": {
+      "hash": "a598e2dca92f7814156aca77fc2d0f484f2a69bedceea1a5b95ebe4f0a36e8b3",
+      "path": "audio/coldopen/12.wav",
+      "sha256": "5e0090dd7bbd48c7598baaf96d7cbb76bd7406ef52caa0844d3b1d3660a96de2",
+      "durationMs": 7580,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "coldopen-13": {
+      "hash": "462d79c0ac4dd2f4d8465f24d5f6c987b105d823b47205b25bc79531ac6484ca",
+      "path": "audio/coldopen/13.wav",
+      "sha256": "90758e5a8f6d86cc27a1589440b1b0c2a28134c1a0f0df1556c657a5fe2c25d7",
+      "durationMs": 4780,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "coldopen-14": {
+      "hash": "5e890da7e1cf86fe0c00f5dc3291e2f4e6a0b7914d102183a61bb76bd7662d82",
+      "path": "audio/coldopen/14.wav",
+      "sha256": "53f2eef5f11b7d0caa2156fe2b758339acbc435bd93b2bc9c8e792fd6464bbf1",
+      "durationMs": 4940,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "coldopen-15": {
+      "hash": "006bb636263fd77d1a462f139b6baccb32367eefa31efe51353b8428580f457d",
+      "path": "audio/coldopen/15.wav",
+      "sha256": "8c91d3f0a9192cf1fb06cc8cb3024b75e3cff0383becfeebc19291d12bd5376f",
+      "durationMs": 6540,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "routing-1": {
+      "hash": "b673c5c0e001cf7077b79c72a7aafa94e8662bd01661700e278a936261395917",
+      "path": "audio/routing/1.wav",
+      "sha256": "542a17acce9b54860980e54a7b4c96451b051256a623236530270615c48b3689",
+      "durationMs": 5180,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "routing-2": {
+      "hash": "845866deb3c31ddded455b0d1880685d4d9b81a28feb22aabd992f217cae8363",
+      "path": "audio/routing/2.wav",
+      "sha256": "66ac7382fc8740d440b60abaddb7e53763ab0c3d269c7766db2a6d25fdfbd2aa",
+      "durationMs": 5820,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "routing-3": {
+      "hash": "1926e8c8871878ff530bb43105a0b95883b88169f7d35964c2f89b13e8aefd9e",
+      "path": "audio/routing/3.wav",
+      "sha256": "539f3584a27e3649f1fadf163ad71659780252fc41039a113b53acd69ca81265",
+      "durationMs": 4380,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "routing-4": {
+      "hash": "c475b69b580be3cbd3da06eb62fa7fb15182f1de42e6cfb2763f0265717cb3cb",
+      "path": "audio/routing/4.wav",
+      "sha256": "0559a5472836d5070475ccd0e1105c8815a4d89b78f342a2e412a2c1ddc371f0",
+      "durationMs": 4780,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "routing-5": {
+      "hash": "11a89906e71e8880f32635d2099689a5282f18d5c3f4bdb541188c18f6c0bdc5",
+      "path": "audio/routing/5.wav",
+      "sha256": "e1a5f09b36b40932894cc1875f5551f9440402c2416c801f3cf94c97f952de66",
+      "durationMs": 5100,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "routing-6": {
+      "hash": "51833e7a47348461def7272509b5ba7ec40d34fb9e49884bf53222637b999200",
+      "path": "audio/routing/6.wav",
+      "sha256": "7ef3e17588fb2833662780d6e0c40a76d9e9af6de7a5c61273e9a5948cdc0f3d",
+      "durationMs": 7980,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "routing-7": {
+      "hash": "53a0abf7e698de2a3ab19912f4706f4d6cc8ea31213835a0530c9fe1e3945348",
+      "path": "audio/routing/7.wav",
+      "sha256": "8e83819f939120095b17fb18e746d7e40d0dd65da82e5d045e0e1393a8287d5e",
+      "durationMs": 5900,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "routing-8": {
+      "hash": "7d8504cb2425a5e81e5eebd7083b897439160201df108a7979b4f6e650383530",
+      "path": "audio/routing/8.wav",
+      "sha256": "ec7da0207ec90fb18a8978d9c08a73bb30004a32cf0d4cac1321208d14ed8bf9",
+      "durationMs": 4700,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "routing-9": {
+      "hash": "8cbe22c5dd8d5a83ad2bf5753f00e86ebe52b827014f922d8c3917816c3e903d",
+      "path": "audio/routing/9.wav",
+      "sha256": "7d8b2e6340bb61a129ee8c53f0c6b00754198d6aa96c28539d770df2defa6097",
+      "durationMs": 6140,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "routing-10": {
+      "hash": "694df2ac443f54b6284e8ca0dc1e0f2950c3d733b47f5f38bf8deafbbf288848",
+      "path": "audio/routing/10.wav",
+      "sha256": "3312d030792ff6a5c52c974efc1091ed94cac586db4e671d979620f15f746918",
+      "durationMs": 5260,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "routing-11": {
+      "hash": "d699f513503945b244f8e5463b6a063988968b584cc156ff89958bad2fe4d37e",
+      "path": "audio/routing/11.wav",
+      "sha256": "f3adfd759b6159cdf6afe481c3769436fc983909077c51fd0249d1c56384857d",
+      "durationMs": 19660,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "routing-12": {
+      "hash": "a3144454c29d83437eca6f69b50ff79f2419a15d63cac12cf37e9f58bbc99561",
+      "path": "audio/routing/12.wav",
+      "sha256": "a817068429e05028dcf031173d0151bfa5c6e6ebabdc5c7cd2237c6c94362064",
+      "durationMs": 11500,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "routing-13": {
+      "hash": "2b12225da9e51a43bb6f27a9c083e7857bcb1cebea7cf306401da19139509751",
+      "path": "audio/routing/13.wav",
+      "sha256": "9e6191f5e06ca4c748078fd472b7035e3f46f597c1ad998ff547005521820edf",
+      "durationMs": 9020,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "routing-14": {
+      "hash": "ac2234058677efe66fbad70098bed4377bbd310f438f5c577cef4ed73ad28404",
+      "path": "audio/routing/14.wav",
+      "sha256": "1cc347b0577288006a372d70ce48f581fcac5e7bbaa23b2ec1e4f4628eae9483",
+      "durationMs": 4700,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "routing-15": {
+      "hash": "73251fa31a1918470717ac3890b97c639ae7e4e76fdb252779cb439c008acf01",
+      "path": "audio/routing/15.wav",
+      "sha256": "e29a11abd088bad2cbaaaa0a723f5df95dad5bd7e4c835e6a2af0e81b277d0a9",
+      "durationMs": 5420,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "computer-1": {
+      "hash": "81bca7bf0171e5bc9d5b948d57389bd1a5f42aee88672020bf597c538c429c2c",
+      "path": "audio/computer/1.wav",
+      "sha256": "25e53f9cde98c13e69ff61f874e06b99b3e7d644ad086ff3aab09baba56fe5cd",
+      "durationMs": 3980,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "computer-2": {
+      "hash": "b5d0d1bbf0931ed846f1112fc1a3d71ab3cfa285c2f77e1e786424873e576987",
+      "path": "audio/computer/2.wav",
+      "sha256": "ce39956d4cc0fc773115c999ad491c2dde34742a988905a909b263e688c6c254",
+      "durationMs": 4540,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "computer-3": {
+      "hash": "b8e0a4eeeb4529e2965187e082e0761d066c3f5e6a061ab4026fa0aa14767ab7",
+      "path": "audio/computer/3.wav",
+      "sha256": "c9d72ee424b898951966f330c0429d9f86bcbf46f5a452593228b9f82de7bdbf",
+      "durationMs": 5580,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "computer-4": {
+      "hash": "2a67f4ca37d0cff89778c1a8ea7b41b8a14b7a3db1ce8626fae2b1a8fdafe237",
+      "path": "audio/computer/4.wav",
+      "sha256": "e4d81c1172376e61bf53462a8f0bd42222ffc313a8bda0a3ba6bbc7a81c3b50f",
+      "durationMs": 5740,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "computer-5": {
+      "hash": "772868749e878dfb1e76bd6647273bd78a729c5a523fa93018eef7e77ba699df",
+      "path": "audio/computer/5.wav",
+      "sha256": "92bca15f07599d0d45bdb5854ff4ed9774af560327e6d357fca82721ac850cff",
+      "durationMs": 5580,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "computer-6": {
+      "hash": "b3d9cbb1d72cc0447b55feaf8694f49c41232029285392984ebf31cfbab9fa7f",
+      "path": "audio/computer/6.wav",
+      "sha256": "24aa3dc2c73ba85181cf57526ebfeb72253328fa4ef75f65f4d028d28dca63de",
+      "durationMs": 5180,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "computer-7": {
+      "hash": "78d64be102fba69d1e1914604b4ecc4fbf27755d9e4963e2b20f9adc30c2b22f",
+      "path": "audio/computer/7.wav",
+      "sha256": "ca6c9dcf6c635cc8d9ba97780c2546c0f906bf3e1ef091798c969acb0cd920ef",
+      "durationMs": 5900,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "computer-8": {
+      "hash": "806242a0d5cbbd3f60b8c4d0008074d177a7249d5764502ed3f5a34d00361373",
+      "path": "audio/computer/8.wav",
+      "sha256": "284054a40f923ce47cee272112d59a280c361087567a21c11ce6bdcf1a9dcea5",
+      "durationMs": 5820,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "computer-9": {
+      "hash": "22cdcceeaee0e4324187204b4ea2faa7b81b7742b4696eeeb7217ca22e31cf4c",
+      "path": "audio/computer/9.wav",
+      "sha256": "0e38be36235b47a8f4893aac74f0d130f9498bb4d74b632f231abe85ad1d83cb",
+      "durationMs": 6220,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "computer-10": {
+      "hash": "d3c43e196c47351f3d9d2c5324d043c1480dd78bb7763cee99e86f521fe8932e",
+      "path": "audio/computer/10.wav",
+      "sha256": "85b6423178e72dfd994a09143abee4484dce178f534a1ba218bc1bd6e10aae40",
+      "durationMs": 6460,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "computer-11": {
+      "hash": "b54de50ff5cc2042f6a988c2c1e946d8f7fea3300516b1c80d0997908ac2bd57",
+      "path": "audio/computer/11.wav",
+      "sha256": "dc0ed628658d4d7e7c09eaa1eabaff574a934776064d71efc37eea7d3cf7e3bb",
+      "durationMs": 4780,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "computer-12": {
+      "hash": "320b7b9c8ba9b2d2f725e2383dd90da0883fb6aabde82068cd53d9e3c28a5cb4",
+      "path": "audio/computer/12.wav",
+      "sha256": "44e93b24c5090fbceaaa0eb9ef051fc23df9aac9bc93c8ea0a99b36f8bb36e94",
+      "durationMs": 7820,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "computer-13": {
+      "hash": "35cac794e0ef36e96f61866597bce6b5638840f7a83ce595da0b563b488c3dce",
+      "path": "audio/computer/13.wav",
+      "sha256": "fce38bd93495e3d8915b7a6f3d2d5c5d6ed57e148e4a5bf78af444682015a124",
+      "durationMs": 5020,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "computer-14": {
+      "hash": "b9c08d3c03a5bd352808ad70369452d458b3b7e395050d2daa2483907eb05329",
+      "path": "audio/computer/14.wav",
+      "sha256": "e35b862971ef100a20fce6f7400c50965f42e56739f16da51823bd1d63e865c5",
+      "durationMs": 5740,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "computer-15": {
+      "hash": "cb6dae443d520dec3c68a4f727c6a1cc708b940dc55a93f9dde3c8307bb29b88",
+      "path": "audio/computer/15.wav",
+      "sha256": "b25945daabd5a8d95d94b5c7b8aea9cfc0ecc9d55540bc14cc6473a91c32cf32",
+      "durationMs": 5900,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "mission-1": {
+      "hash": "ed7b41dfe3ed14bfb235e73a7083ca7d077ef48b11a3cd32cf83dee6e5ea7739",
+      "path": "audio/mission/1.wav",
+      "sha256": "1f88986065591b3171c35b7e504cf98389b8d770b2630b1db105f838caf50839",
+      "durationMs": 8300,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "mission-2": {
+      "hash": "04ec28763d75bf6bf76eab0900118c39f284241d6fd77f931d65c52a8f03ba3b",
+      "path": "audio/mission/2.wav",
+      "sha256": "c77d1b098569b92f114a77dbb5f6565dc5ae15980ab274858e1b10012ff5ca3b",
+      "durationMs": 7660,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "mission-3": {
+      "hash": "1ba2ab3be936ad32ea12e216cf1144e06c2c2e58beab45c5e783e40cfc3c8878",
+      "path": "audio/mission/3.wav",
+      "sha256": "fc5466f5cbaef0c56057c5f091719448eb13fcdd6d0c9e3c58105550aaa2e83b",
+      "durationMs": 5100,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "mission-4": {
+      "hash": "3c444c1914b1939df0547598bd59d475ce18cb6dd1cc6e2a660ed626b26f9eae",
+      "path": "audio/mission/4.wav",
+      "sha256": "701cbaf0e175d1ca6f2bd6dabe2e2726a70cb5714235ccd530572eb95c653e11",
+      "durationMs": 5020,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "mission-5": {
+      "hash": "de24c135ca1f3d252faa479c9765ce2fcc8bce9d21ca692364b41f2f794956a8",
+      "path": "audio/mission/5.wav",
+      "sha256": "c105e54923c6065902b1464a0114265c1109fe72ba03c6c560e8901df92aeb44",
+      "durationMs": 2940,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "mission-6": {
+      "hash": "a8dd621ad729cf4fbbba8cfcd00f2a7fd4fb35dc0664679e80a90d403781a4d6",
+      "path": "audio/mission/6.wav",
+      "sha256": "ad1a9571b651f2ddb06ca4edf0f1928699832bce0287d72a6fadaba00c81221b",
+      "durationMs": 5660,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "mission-7": {
+      "hash": "90f0238d5fddd65a88f8d2e5d2ab3661aae32ef093dd9d91f298459a56b23dd1",
+      "path": "audio/mission/7.wav",
+      "sha256": "0a8cd18a030cdad63f9c7b640431d718217a3805fe940a8233deff05717037a7",
+      "durationMs": 5580,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "mission-8": {
+      "hash": "fec7ffc1a22b74d597c2e42108732e262cc6c5fac4ed5adc131da0db06fe69e1",
+      "path": "audio/mission/8.wav",
+      "sha256": "016b425cc84accd72e1b2b0d262dd42fbbac7f2bcac1dfde554a8ead62076ec7",
+      "durationMs": 8860,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "mission-9": {
+      "hash": "7e35a52f4cc62b297efbd81f669c4c629b9f22a652ce03f8a5e636cfcd63922c",
+      "path": "audio/mission/9.wav",
+      "sha256": "9af218d33268698863a83925e8d8aaaf092511849936099cb14dfad3e17d04ec",
+      "durationMs": 6140,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "mission-10": {
+      "hash": "14ed91cd3d657929481f3d4d81b4b6c5bcf73014bb9692c80a8da3ee3343ca77",
+      "path": "audio/mission/10.wav",
+      "sha256": "2f4aa1863878e0530e7a894d277f3ea2a4cf54401185bbd486d9320741246c15",
+      "durationMs": 3660,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "mission-11": {
+      "hash": "0641e91278a003e44208d6b4446c9240cefd10d2b6be379e574f0dd2b67de1d2",
+      "path": "audio/mission/11.wav",
+      "sha256": "2c6a488c094ddbd404da2ee89a6113f9852ae936b9eb396d9a2e4ca5ff31625f",
+      "durationMs": 11100,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "mission-12": {
+      "hash": "a28cf7be18fb34e0b1adc39d3c350cf3808b52ae5c32536459ae75a8aef368d6",
+      "path": "audio/mission/12.wav",
+      "sha256": "500458faddc60e9435053c77bbffbcbc768352b02b1e779c14709aee866358e8",
+      "durationMs": 4540,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "mission-13": {
+      "hash": "c919ff721b76612fb6296534aa4693eabdd8e7477ad877506bac2ca5b271dc69",
+      "path": "audio/mission/13.wav",
+      "sha256": "3786119af4d5182086f54cd1fdf2a8267ecf33b8281c5b2c1a8eef3bfb5debb9",
+      "durationMs": 5740,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "mission-14": {
+      "hash": "84512bc687a5afbaae7c2f60ac8ee494d423ddd41f8c43d4d71de313ff1fcbae",
+      "path": "audio/mission/14.wav",
+      "sha256": "a0c38b4187d1c7189ffac955cb8e0152b728443182b629a62f9be9d6e06a3076",
+      "durationMs": 5340,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "mission-15": {
+      "hash": "245a67ecf98d8f0ca0d1b07dd039f295838b48ab580573f89c31288c362317ca",
+      "path": "audio/mission/15.wav",
+      "sha256": "a3f9b4cb33d38c02ffdf6b9a8b88d2946673a15b2c4bd20361328a2892629a93",
+      "durationMs": 5820,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "mission-16": {
+      "hash": "fee64ed1421d1929904e4aa0b73c86539d2c92b8a65377dd502f8dec069571ac",
+      "path": "audio/mission/16.wav",
+      "sha256": "fe8c7258999b84b5d56eb467fb8e348d07829ea09274c1d5d69edc32fc42894b",
+      "durationMs": 4220,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "mission-17": {
+      "hash": "227cdb1e9605f88d938edf9f32828343fb3d1d3dabc9cbb21f3543ab4c57d5b8",
+      "path": "audio/mission/17.wav",
+      "sha256": "11b9b1002b6778fb3e9a30bf7939503177a4653ec2e76d7658a9cdfe3540bb99",
+      "durationMs": 5580,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "mission-18": {
+      "hash": "9d48b093a3d8aec70a262e3a93e495b44e06d2b8726ce95bc35d2e139f163cfb",
+      "path": "audio/mission/18.wav",
+      "sha256": "fcf1a731975043fa3c22a0e015661a0e825a437f83669304bcb4e9ff1b73ae84",
+      "durationMs": 5580,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "mission-19": {
+      "hash": "0d7a796a7cee67f4d2992dd4958debcc47204febb07f5637fcca6dbd82dfe517",
+      "path": "audio/mission/19.wav",
+      "sha256": "39ba061b4d4e7e3d8eb91624d7e3b9c956972abe7109941cb94b80908bf495c5",
+      "durationMs": 5580,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "mission-20": {
+      "hash": "ee0bb02d36461eeba0c7c7aa924133ceeebb54c78ec40834569d26c564fe14ea",
+      "path": "audio/mission/20.wav",
+      "sha256": "a0ce74be17cd94424b04ceb2c85a531e1f170497fa80cbe98fbb0bd20c2d380f",
+      "durationMs": 4060,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "mission-21": {
+      "hash": "4242d57d30562a364bd952824d6721f891c926453122574817012d182f24cf97",
+      "path": "audio/mission/21.wav",
+      "sha256": "171656999f175d4e8769a97de83413fff030c1c981bd2ff2ef92c0297fe78f01",
+      "durationMs": 6540,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "mission-22": {
+      "hash": "a0984ec97343dfd4285aea4759b12c693165c6f953b4be692a82e2612b6ebcb0",
+      "path": "audio/mission/22.wav",
+      "sha256": "ccd0e130313c796db0020fc189f9b04926774a691a5ce4ce8fad785e8c35a0be",
+      "durationMs": 5260,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "mission-23": {
+      "hash": "5317b1eb40a68fc4324b3bcb31218ed383597d6dbe06a9c43a6e5a2a5079d0a2",
+      "path": "audio/mission/23.wav",
+      "sha256": "3c568f0f1a524a196ca2ed24f9101e99053c40c03556155cf84feaa81e462776",
+      "durationMs": 5900,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "mission-24": {
+      "hash": "8594bb81eaf89f946afb537d4ea2d6c9fc21cc26acf0bb972bee1ef3cf52f9e2",
+      "path": "audio/mission/24.wav",
+      "sha256": "eb41ff16a339a09a870ab0b6a77fcb03022369c66af897fa265a858038cb96c7",
+      "durationMs": 6940,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "mission-25": {
+      "hash": "1231098e739122dfefbe134d365c8b777ead624887172a312eb4c4cff196f813",
+      "path": "audio/mission/25.wav",
+      "sha256": "7f0a338d48a2630106425f185b85675f5832c1860f2a3d5528b6249a2add3e21",
+      "durationMs": 4780,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "roster-1": {
+      "hash": "e5273ba73ef9a89b6c07989f46e4db70e89f45563d921e6072a53ced7a5d0738",
+      "path": "audio/roster/1.wav",
+      "sha256": "ebb0b582689ed57af749d2cae5d810737e08615b8cc174f63957d2470b0464b1",
+      "durationMs": 5580,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "roster-2": {
+      "hash": "0f6674e596265eaddb02a476d601b1ca6c9564b0ed643dceeaba9500a4717bc2",
+      "path": "audio/roster/2.wav",
+      "sha256": "d045994469c32e914fe3288b8c11e3cae2e260056f5bc36d9462743ad119bc22",
+      "durationMs": 4540,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "roster-3": {
+      "hash": "58ab150ebbb1fa8024f01ec9f3f59d66ae8aed0384b67200c1a41d072c457d33",
+      "path": "audio/roster/3.wav",
+      "sha256": "025d273625dc9941e50fd8bd837b058ebe18dde5ab89229f72d1987a88f54948",
+      "durationMs": 5340,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "roster-4": {
+      "hash": "edaa3011dd0bfc6e65fea977287d4279b7c88aca521e4f267c7d7e10cc725e34",
+      "path": "audio/roster/4.wav",
+      "sha256": "1e0fefb27b2d65b7561795f0317751d4bb4f8f8a040eb6a50751fd482b070225",
+      "durationMs": 4780,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "roster-5": {
+      "hash": "f902855047f7fe2fae64a7f55f7ad51fd9a6f1d8aeb6019fe62efe17168d51bc",
+      "path": "audio/roster/5.wav",
+      "sha256": "ae5f11e153498ebaa713aea12f63486d817965815a2a0810425676581bb45f51",
+      "durationMs": 4140,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "roster-6": {
+      "hash": "39dba19a4bbd90e705bafb21902029a77106fe68ae01e058b6d4ec93ef76e7fd",
+      "path": "audio/roster/6.wav",
+      "sha256": "4ab9a5fcfbfb2a9d78bc03070b5f5b9d9597c02f298a424d8baa851418429cf4",
+      "durationMs": 3900,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "roster-7": {
+      "hash": "b146830b3befeca273c54587af985916fe433b764da8217864d49d7eea5a7b85",
+      "path": "audio/roster/7.wav",
+      "sha256": "66549a9703f51201cf0fac3efc229670a3dc6d4bc6ef2cdfed7e4348fceed27b",
+      "durationMs": 6220,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "roster-8": {
+      "hash": "75b1cfcbc0ebbcc1e8a2f0bc9e6a113ce4063d4ca4f1d8243009825911d3a05c",
+      "path": "audio/roster/8.wav",
+      "sha256": "c0ab5cfbcea9a1692059d03b110369103a74443efa521080f5bb4b964730f0f5",
+      "durationMs": 4300,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "roster-9": {
+      "hash": "e6ff763bd44f50828f97ebb88f84496f2b9a809ea951a5ce4f374819d2f2f052",
+      "path": "audio/roster/9.wav",
+      "sha256": "12c5605b770cc4ff25cfdfe0e8eaa267a4d2905c4e002e04b4d11266bb5d5759",
+      "durationMs": 5020,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "roster-10": {
+      "hash": "1e2eb5b70fff634dde3a118760910d4a501c8a6a50efda033898e04572456e48",
+      "path": "audio/roster/10.wav",
+      "sha256": "d18ad6e2ac86604cd7ddd610eb5c17bd2df78e1f465d936f9350d445364bf288",
+      "durationMs": 5260,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "roster-11": {
+      "hash": "5d2c49112704e5ebb11401a8531c0a52db841935db42ae8387b7434f5524ee96",
+      "path": "audio/roster/11.wav",
+      "sha256": "56cc14acb64e6865039ba33950158984c651e5b83928217295470bc4f2cae7d8",
+      "durationMs": 3740,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "roster-12": {
+      "hash": "b01d325fe2e4fba9b236a75be34854a0b4881084243483f81953081c4dd05626",
+      "path": "audio/roster/12.wav",
+      "sha256": "ca0ca5a43bdf6e28305cc477a3695292db1dc0e6f32a2ebaa70d5b0025ab9551",
+      "durationMs": 6940,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "roster-13": {
+      "hash": "d94d817b1760d5516e7fe1b6ab11f2a0c5139a4c97479fa5315866091cd89055",
+      "path": "audio/roster/13.wav",
+      "sha256": "2d1702bef9305380b738b61c30bb7e67224bb8f95008caa0f7f6fc6a7a57ba55",
+      "durationMs": 5820,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "roster-14": {
+      "hash": "e270b5a70e80a123b84fe3541fa3e5963c14755883ce831d7bf7e444e9b806c1",
+      "path": "audio/roster/14.wav",
+      "sha256": "db2c033816697af68a9c6085c414c8ece91792b54ac4d5db4ec882e30cce7be8",
+      "durationMs": 6300,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "roster-15": {
+      "hash": "f3390c5280f685c4487d68fd50acf7c464ab9c7da80262ceedf4d4446c4b2ed4",
+      "path": "audio/roster/15.wav",
+      "sha256": "04619d1c9868df462fa9d4eb29927c1755d75411b19365d53e7b7d08a1df07bd",
+      "durationMs": 5420,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "roster-16": {
+      "hash": "f65264b3354c9eb9f7b0e4584c8c7fdf10f3961d748d2ad8e3288ed4ed47e4c6",
+      "path": "audio/roster/16.wav",
+      "sha256": "75dbdc1c3ff972585301dead32fd5b4e83d738fcb4206b72da816dac804be50d",
+      "durationMs": 4060,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "roster-17": {
+      "hash": "c3e0febcfb9b82e90b16b5bc3af3e3e9982f248034810760598a828430f7967e",
+      "path": "audio/roster/17.wav",
+      "sha256": "ed9725ea87e36c553339c8e674c748fdcaaa46f7377594b8da6a2694dfe21430",
+      "durationMs": 6220,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "roster-18": {
+      "hash": "7dc644d8051f0bee142883288d8fde7f58ff3a4d8c71eb69ca3d19edddfe18e9",
+      "path": "audio/roster/18.wav",
+      "sha256": "ea8631d74665f54dd0dcd53e1accd32b287fbc8c1d67279b83c6dd5034464a25",
+      "durationMs": 6460,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "roster-19": {
+      "hash": "311a591f0a31a067ce678054ea12a641978863446f5e1862f3df1e7f83a70207",
+      "path": "audio/roster/19.wav",
+      "sha256": "4123df69b4ce8a34542a53f72b3cfe1f82abfc02c1e035f1d50f26253c167fed",
+      "durationMs": 8060,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "roster-20": {
+      "hash": "f5da9d1c0ea8dde7445f99df759074c7b2758b1fdc77a09d3a4643fcb8ee0cc8",
+      "path": "audio/roster/20.wav",
+      "sha256": "627b8c75a69ced479443d8e4df1c2b32e6e3b9343aeec8eb1133bf53e681c8e5",
+      "durationMs": 6540,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "roster-21": {
+      "hash": "b33a0fabf04c5b62479a579e3852907f2eb1423b41b9285b4b88dae943cc8afd",
+      "path": "audio/roster/21.wav",
+      "sha256": "312def3c15ead270641da71a35ad0cb1a67a7915fab7e994894fbfc7e023606e",
+      "durationMs": 11980,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "roster-22": {
+      "hash": "dc328cd18f64737b961305592f363722ccab342631c27fc8cba760d0a3eedc2c",
+      "path": "audio/roster/22.wav",
+      "sha256": "897f1890c38382ea9f9400ee0b753f0db90d0f644a20c1fd030db4a7b62a0471",
+      "durationMs": 3980,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "roster-23": {
+      "hash": "558e959e8730f1192281edfb5337fe244d30102d39009896e7ddd74bed269211",
+      "path": "audio/roster/23.wav",
+      "sha256": "310f3af1e9320b4a931809acb614e1399d427b36f81238a4464d6992305d53b8",
+      "durationMs": 4780,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "states-1": {
+      "hash": "91fe94d1b20cb54a5b2ef787fe6072c69822a5b42482d97663df42ed180dbd97",
+      "path": "audio/states/1.wav",
+      "sha256": "68f6a6ed96eab519b8b796ab57e5a089a76e116b95d6990e7c012cfa13756b76",
+      "durationMs": 7420,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "states-2": {
+      "hash": "c7805c7e005a850512df233e26f31f934d0d06c78c4ac836633475e9263dbd47",
+      "path": "audio/states/2.wav",
+      "sha256": "4f187c42b507a97eb8fd1f1cec24876d84c1b7634743dbf9d137d2b0e6475d19",
+      "durationMs": 5980,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "states-3": {
+      "hash": "393db9bbe6c34f07996ddca3dd355db0967dadea28155e2bddbe09e72132a866",
+      "path": "audio/states/3.wav",
+      "sha256": "1dbba864d6ee29b47232091b7976cf81906becca809071bc9769cd58bcae3330",
+      "durationMs": 6140,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "states-4": {
+      "hash": "c32a4366ef5e3379c7dbb3aec6f0e598b72f1642366bad1be4f73ab6e77aa5ec",
+      "path": "audio/states/4.wav",
+      "sha256": "054110197163c88ef84131fdffa78e801ec2079ed5d95d32c297fef33317c515",
+      "durationMs": 8300,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "states-5": {
+      "hash": "0b379e69d9278da1f4d20d34fdb7a548e36d7fcef8f8a5e577d10812efe79fa4",
+      "path": "audio/states/5.wav",
+      "sha256": "eb2b70e8eeb1cea8dec754d6b1d9406018ec37f549aa10d0427aa92083b0cda0",
+      "durationMs": 5180,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "states-6": {
+      "hash": "59a2a3a883f37f21fb51164f22059c4d8f2f51accd57f1437bf7abc7d5624b0d",
+      "path": "audio/states/6.wav",
+      "sha256": "070cd9998dfe409aa662a762752fc3a8a0f73dfade6277e98d0a7d09a0b64fc5",
+      "durationMs": 5900,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "states-7": {
+      "hash": "6b72e73253cd175c7e6147bfa23fea4ed74a3dbbe80fdeacaeb274a2d32934f2",
+      "path": "audio/states/7.wav",
+      "sha256": "7753e61c311c519b0a71692d529e16d73d3d607858b3f85f71ceb212fe8cc029",
+      "durationMs": 5100,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "states-8": {
+      "hash": "ca0ac75ac01a4d75d9f2a119d6dc1a09012f4961a5f2a5881641ae4c8e2a66af",
+      "path": "audio/states/8.wav",
+      "sha256": "cea42e3fc04f98463d9b5a5ebe78f512abc4efd585c6df0f29707c6fc9c18e15",
+      "durationMs": 6940,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "states-9": {
+      "hash": "a1a7d2ca3de5b2149b884eb9d7d9632c68b3afb8279edbcf3a0c3fce4a9bbf0b",
+      "path": "audio/states/9.wav",
+      "sha256": "eafc6f210b693c3eda030f46a556c2c4287c02e85ae01a10bae3ead8e5af63e0",
+      "durationMs": 7020,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "states-10": {
+      "hash": "f528f3b58ea32d8da398014169ef17fe46e2a0d1e61277b9d830089710ce9152",
+      "path": "audio/states/10.wav",
+      "sha256": "fcdad69b261e7cdef0b818e62c431f9aeaf3142f31e5d2e23b399f1797ee05f5",
+      "durationMs": 5900,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "states-11": {
+      "hash": "f14fbf73cbe29a7cb1ac2a20b52394912786b0312d4422ddc0952326157e0d75",
+      "path": "audio/states/11.wav",
+      "sha256": "8249bbd5fcf379bdc0f82ef845060805b5e8ea1343a996dfaf3922bfbcc1e714",
+      "durationMs": 5340,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "states-12": {
+      "hash": "fd1d86800d14556de729b03062c89d92e751f683e339f96c638860e1dd0b0886",
+      "path": "audio/states/12.wav",
+      "sha256": "fd1b03df09252d471118a4684d22614a36fb2f3bfeaf870270b43e5b12f07055",
+      "durationMs": 7340,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "states-13": {
+      "hash": "737c681517338d5ed3eddfb766c79b36f4d18a0f9aafb18240f88e6c2d619796",
+      "path": "audio/states/13.wav",
+      "sha256": "c2e0ef2d3b0ea47a50f3e1896025972684fcbcc4f18feffb8b5b550d9df3557c",
+      "durationMs": 4460,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "states-14": {
+      "hash": "e5ea8e5439469f9cfa1a0b7e7667bd8ccb1232c72254da00f70d064615053e7e",
+      "path": "audio/states/14.wav",
+      "sha256": "27cd7b25e3d380c475e45d9f1ada850527bb598b39d3d759d3dd4bc833de3d59",
+      "durationMs": 5020,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "states-15": {
+      "hash": "354edf08e8362a5f46b337976ee92b378a2d8f958425a7adf3e372b1968f1f98",
+      "path": "audio/states/15.wav",
+      "sha256": "b7e72b82c8f35859c181ce32688faab4ce9aa5d3620fbe91eb83c3d51c0d80bc",
+      "durationMs": 3660,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "delegate-1": {
+      "hash": "884fe6c5ca1cac8b4f13da12b7f5d91a9220661db81cebbd0272378c943612b3",
+      "path": "audio/delegate/1.wav",
+      "sha256": "1f6626479b5caf198af85f9581f379c400f7b796245dd0ab59cdc064736c0d22",
+      "durationMs": 6620,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "delegate-2": {
+      "hash": "c9a2c0b86fe32233bebde3ad70f5c4baab146d26606c4b37809ac699894917af",
+      "path": "audio/delegate/2.wav",
+      "sha256": "c6b4ed3b6bc9e738391e237b71e759bb4267d52984783c190876903c1eadd4ba",
+      "durationMs": 3420,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "delegate-3": {
+      "hash": "cb39183e3380fc07f5ed9dd889538af5cc4a825df66ad95230f1dbfdc0093936",
+      "path": "audio/delegate/3.wav",
+      "sha256": "b7cdcad73c4625a86add517109f3ffc0058f97ab16c7e77e1258455ee89efffd",
+      "durationMs": 5020,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "delegate-4": {
+      "hash": "9c7db9c8631bc06de8402ffaac910780f23d21bf43a28bb6b7b18cc81b838f0b",
+      "path": "audio/delegate/4.wav",
+      "sha256": "528ebae271b612cfb3b80716804226a1c72aa327a40e62bf1055307a11d5a4c7",
+      "durationMs": 5820,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "delegate-5": {
+      "hash": "3924fe27b12f09794f14d8a213274bae25f75be19b6da352570c61a6715550d2",
+      "path": "audio/delegate/5.wav",
+      "sha256": "5400c16c645a174740e71a6bac39c4969e192ecf4c8b33b8ae8f124e223f57a6",
+      "durationMs": 4780,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "delegate-6": {
+      "hash": "6b5b744b15477dd80a6ce4f14641eb8f89d11b1cc8817829ccb85449b4e8aa7d",
+      "path": "audio/delegate/6.wav",
+      "sha256": "d745914c3278e2be1ea9a603fe9d3204708a46f01f0cd17ff91782a417c048ab",
+      "durationMs": 6620,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "delegate-7": {
+      "hash": "c3ea9ebd197764bedefff75d6036f32284b8676be14e638ecdedd44f31fd1caa",
+      "path": "audio/delegate/7.wav",
+      "sha256": "8ec0e4b3ef2cbaa5c48ef8e69e00b0e4f030a8c9a3896d6646fb8bc9efdb8613",
+      "durationMs": 3580,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "delegate-8": {
+      "hash": "7735b194e52de1f2a0357433a339a2764d5b6e9c5d2a1992060944980cbbb85e",
+      "path": "audio/delegate/8.wav",
+      "sha256": "555e12132f0b61d1cecaf4e6197995f333d347962c066ffffaf9affbc7952967",
+      "durationMs": 5660,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "delegate-9": {
+      "hash": "4ecaf52f7f8e342700b848290f384c71d2beeaec40e08f43dea11ae9a430b892",
+      "path": "audio/delegate/9.wav",
+      "sha256": "762683e0e53eac0659e06ec060d317807bb4fe59e8d2f7ea556a9f7ca1f05468",
+      "durationMs": 6460,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "delegate-10": {
+      "hash": "ca6a2166d13d12560fc7f6c5d4a6078d4d03861943b9140249210a6437e59619",
+      "path": "audio/delegate/10.wav",
+      "sha256": "a1a3f00d8c3bf0f286a804c015f8c06ff8f34d4e38092d430787a1126c88a4bc",
+      "durationMs": 8780,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "delegate-11": {
+      "hash": "e02572ca847b4d45e66152c42950233d895499dccfb0de4701f06b230a097005",
+      "path": "audio/delegate/11.wav",
+      "sha256": "54652ba09c6ae0f32e2151d844d9468147a70d737ce68763f32d20ac55cb5b83",
+      "durationMs": 6060,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "delegate-12": {
+      "hash": "9e8397803bf47ec778eb44e14c34dcbd153e10b54c18dd2b2c34c0a5b2619d03",
+      "path": "audio/delegate/12.wav",
+      "sha256": "04d1cfea3aa3779f90b0cd12c748c99247d879babf44fcbe4398bd47270e645d",
+      "durationMs": 7740,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "delegate-13": {
+      "hash": "fd0a5e95bb68d8e4c8f7f4e851dbab786715c5f148df607d46402947d091a524",
+      "path": "audio/delegate/13.wav",
+      "sha256": "45d8ea7848a546c76938487e9ac71c0bbae0bc8dc6d0b13e5a932920dcc7d846",
+      "durationMs": 7100,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "delegate-14": {
+      "hash": "f82feb5acb19f4b71c01a03dfb5344447a7d1ea10a6e4d27b3c1dbe144ee8463",
+      "path": "audio/delegate/14.wav",
+      "sha256": "b14ebea7e1644f6279df2dfbe57756870ae05860c6dba7ca94ab6aa47e5cb042",
+      "durationMs": 4380,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "review-1": {
+      "hash": "42c00210125bc4c67480609bd9ef85350807a93f68ca663c5bc933447a8fe637",
+      "path": "audio/review/1.wav",
+      "sha256": "cf62df11754a5786fc7bae9b779256e89d7ce9d7befc42423a11bcaee38000fe",
+      "durationMs": 6940,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "review-2": {
+      "hash": "8dcbfea198e7fb76365af080c957114331907a77fcfbc31744a21ba8908e9029",
+      "path": "audio/review/2.wav",
+      "sha256": "733b351cd1b793958f79a20353e2cf16656d2c2b236c093b946e5d4f114a4fe5",
+      "durationMs": 13020,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "review-3": {
+      "hash": "b14b4bc5fd9fdc4152bba36fb13c2e46d2d6ff4604cae33a2fa1701e9c7a2fe6",
+      "path": "audio/review/3.wav",
+      "sha256": "120370fc97281dec8c345baeaf19baee26ab57d896ade3a4b83d8b00125da304",
+      "durationMs": 4380,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "review-4": {
+      "hash": "5ac10541b6c49c0f79a2e0301d026f4a9a584621fa0a2400e578d6019ae0059a",
+      "path": "audio/review/4.wav",
+      "sha256": "c34789ac122d12bcd4cc5e56ac02b2368917700fd05344d66ea9583794fab73c",
+      "durationMs": 5660,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "review-5": {
+      "hash": "e74f990d4a9d805ef7dc5f7c119895837d6f8921878ec91aa69e8b1316fd0163",
+      "path": "audio/review/5.wav",
+      "sha256": "33ec6c39a01801e8966c56a5f380989be03e5ad10efcf17c6a7dfee990725980",
+      "durationMs": 6220,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "review-6": {
+      "hash": "1d4197d3be2bd1a185c513829aea62663fa92f71cc220f74b0540990d2c46d39",
+      "path": "audio/review/6.wav",
+      "sha256": "99c439711eaba53580af7b53376d38526e5d7d4d21484ff58f6c9b889487d6be",
+      "durationMs": 7260,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "review-7": {
+      "hash": "f18b13c73d2aa9e4a2c36b5c39d3d59397cc8fc415b585b72e739d8199d7057c",
+      "path": "audio/review/7.wav",
+      "sha256": "9144e81c6879807c095b3c68142e8931231be1d7324b867c529d270eb2532f3c",
+      "durationMs": 7100,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "review-8": {
+      "hash": "a20350e835b970827661be9e45466bcac1a95f5f95d72809580fb00d3d6d4e74",
+      "path": "audio/review/8.wav",
+      "sha256": "30f3dc02b6fbc32a2b59d5e33caeb0f0ef107c87ccf7062a7869a557b6e44f36",
+      "durationMs": 4140,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "review-9": {
+      "hash": "49e5991c70f1e9681d3ea608e410efbac7bd848684e578db6244629305bab23a",
+      "path": "audio/review/9.wav",
+      "sha256": "4bb92ed0c8fea291fa99a9b54868e123b6b2f9858ca945686885e7c92d4c9c9c",
+      "durationMs": 3980,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "review-10": {
+      "hash": "bf12fbe38ec78d6cfc0942aaade8109d7bda2210c4d1ad2857c13e81af51ade1",
+      "path": "audio/review/10.wav",
+      "sha256": "35e33cc86e15d6216779eab863dfd34711a57637d62d4dbc1fe962c32fb70e9c",
+      "durationMs": 3580,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "review-11": {
+      "hash": "ded1dc4fe45c1af151d8170e0b89fd1fc43cae220d829eaa7534c96790e2ad3f",
+      "path": "audio/review/11.wav",
+      "sha256": "35b5d980a8b9dfbc5c6e61bc230b656fec60ca3143f9a6a799f7dc15c2ebd81a",
+      "durationMs": 3980,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "review-12": {
+      "hash": "ce426ad2a0e634addd11b3fe3b3a93c9d2b92946efb9e28bc9a6f8cb49970db6",
+      "path": "audio/review/12.wav",
+      "sha256": "3b74d2aa58d70cc2647bc525e8bc13aa4f91f732fa893729ea82e589fd066e2f",
+      "durationMs": 4860,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "review-13": {
+      "hash": "0ff8491a71be7aa65e1b0dc6bbce7ca6fdefb1a46017ca2e2784e0d155ad134b",
+      "path": "audio/review/13.wav",
+      "sha256": "ccfd80648aa85557ded5e1079ae1664f720b3af0a408a9c37538c834d58c7c70",
+      "durationMs": 4620,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "review-14": {
+      "hash": "cc8336f4c072aa1cdb3d493e1ef9dac6edb36fdcf018e41dcb5598dc0e19dad6",
+      "path": "audio/review/14.wav",
+      "sha256": "fe6ebf0f783ce9c81fab52a0895901b672055e91c8ebe2ff17325a6774264a42",
+      "durationMs": 4060,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "review-15": {
+      "hash": "ce06735adce15c96e2e035a8d6c234dc5317751db9189b33fd6d28a056da0b7f",
+      "path": "audio/review/15.wav",
+      "sha256": "c21c2bbfa91d11583e19c955502ba22b1bfeeee45c4b3024290601572a0197b7",
+      "durationMs": 5660,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "review-16": {
+      "hash": "3c0127e83594a8d1ecb3bf28b3e8f7739b8d5714fc917c3d8bdff44fee30383b",
+      "path": "audio/review/16.wav",
+      "sha256": "0ff1c212f0ce00b2d0975f8133d86383f432f7078214a2b996c08f1d3ab4b49e",
+      "durationMs": 4780,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "permissions-1": {
+      "hash": "8ea5f8d6ba50203a001e3ce9bcee3c8016af12a78f3b7460ac75521c7f0fba7c",
+      "path": "audio/permissions/1.wav",
+      "sha256": "ba65bc29d46b218097ff3ef54852eec6e1ab2b87e376d23f29c90ee7f0f19400",
+      "durationMs": 3980,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "permissions-2": {
+      "hash": "36951aad8c38da74f13b3b8ff0f7fbe466c504f1d5d219d648f7b54bfeb10eec",
+      "path": "audio/permissions/2.wav",
+      "sha256": "171306194751dbde765d412953db086728cec4e7db4486f0034e0f2b960812cd",
+      "durationMs": 5500,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "permissions-3": {
+      "hash": "c4fcb6cc319f6363fd7479d45233d0d6b33e4fd7d3799db0630edc75fb588f48",
+      "path": "audio/permissions/3.wav",
+      "sha256": "1c5d43eec4265ae8c975eb6b1154c0808e7172f15bfcb01d0a7a793334869a71",
+      "durationMs": 4940,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "permissions-4": {
+      "hash": "5cfea650c013da614e1deacbfa7edf52a2363cbbaa6b497be513c0a59f761ad4",
+      "path": "audio/permissions/4.wav",
+      "sha256": "e3d45e052973a7da30fd9c58d71459b035ab166ae0056694f5c7312cc0df68b3",
+      "durationMs": 5180,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "permissions-5": {
+      "hash": "f4d73e1043eb5b7a7deb35e8ca19e3c2bd1a1b3c2de5a5242cee9bb6499482a8",
+      "path": "audio/permissions/5.wav",
+      "sha256": "6a8644c5285335f861d4e71542ac4aebd14a5100d99ab632ffd4853e9c75ce0f",
+      "durationMs": 5500,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "permissions-6": {
+      "hash": "8dc8fba31f5a2388d2ab6bca04d379105579d9e372f99c3a171f034856d763c0",
+      "path": "audio/permissions/6.wav",
+      "sha256": "2d5083bd62a57c766beaa57ee2e5f6517e30014ca6f7941af4351c6dd5eb19ef",
+      "durationMs": 3340,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "permissions-7": {
+      "hash": "e83d6c6e693fa5058714a278b6e7f4852874b4cd8044d72ed6429756ce046832",
+      "path": "audio/permissions/7.wav",
+      "sha256": "396744ee78e0d95808df50762a2ff9aa34b4b79ae151573a72dfb6a20095bd4a",
+      "durationMs": 3500,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "permissions-8": {
+      "hash": "512a16e700a5e45f7d15f969e3eee5a998935c14f8b44a46259fd75024fa41c4",
+      "path": "audio/permissions/8.wav",
+      "sha256": "0cf9ab0b01306fbae1c1ba5a653cb7ea77778052e48d23d48eb2f6895dc8624c",
+      "durationMs": 5740,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "permissions-9": {
+      "hash": "c7c2de33f5c6331a77d5d59e91ab2aaf354957baf854a422973ebf955588f487",
+      "path": "audio/permissions/9.wav",
+      "sha256": "d4f02c09ff9353942ce18f4d5509380b28c9a9d7a92e63a9521b718a4d9f3753",
+      "durationMs": 6300,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "permissions-10": {
+      "hash": "c5450d40b8cbf514f4ff5ffaabc77c196cfc46d65eefe2ece7745219bb2bad37",
+      "path": "audio/permissions/10.wav",
+      "sha256": "70c4cc807a6695ae8888e56e1abab36797a9645579d2e32fa66ad78cc4e6a310",
+      "durationMs": 6460,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "permissions-11": {
+      "hash": "87672e7504f8a01ffe05dff8df85fcc3895e3e16cbe9c359bc7506df77166c2a",
+      "path": "audio/permissions/11.wav",
+      "sha256": "3d51d6d15bf005823965bb0a05a4c1a64bf6d6d086903262be52e97429b659db",
+      "durationMs": 4380,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "permissions-12": {
+      "hash": "9c6131960f644d4171d2f1ee178454da7f28efa94b726ec56b9de5dff2d062aa",
+      "path": "audio/permissions/12.wav",
+      "sha256": "b0667f56c8264273fdcc8ef8b77965e0735e4f564f159ea65566a6aa47c75591",
+      "durationMs": 4380,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "permissions-13": {
+      "hash": "3c19ff590ef37bdddbf6ce48cd5062fdd9417052022f423e1e1c45dce8118a73",
+      "path": "audio/permissions/13.wav",
+      "sha256": "63e7edb6965f6ea16c1deb49de383818943e248c37f5f43bd2fc5a8ed225d615",
+      "durationMs": 4700,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "permissions-14": {
+      "hash": "eaa1ff12b9d8218c967767f11fd19e7cb76e04afffadf0400ebc4393cf007b21",
+      "path": "audio/permissions/14.wav",
+      "sha256": "c3ecc73e026983acf6a5600c367a375ece680a57fbac4b63d6f4af1e3f7076d0",
+      "durationMs": 4940,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "permissions-15": {
+      "hash": "099203fe589a7371a10dc22d3045b7135391c1be710f5d4f6d5f3759875c70f3",
+      "path": "audio/permissions/15.wav",
+      "sha256": "67cb39f0d92c0926bc3373d71b9e38ecca43bbc931421a6475b4d311a152062d",
+      "durationMs": 5980,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "permissions-16": {
+      "hash": "579e11840b50a8f3c220bb2e21125696143a2fa40fd103428ab94221a57a2a69",
+      "path": "audio/permissions/16.wav",
+      "sha256": "7808105cfea404ca9001bedc0c47d6ce9feb1a205390bc791c770806d23c91ed",
+      "durationMs": 5500,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "permissions-17": {
+      "hash": "34f9a5f8dc8c9d39cc74cdf03a061e1028b7558ecd1046d40eff8c6a6017d953",
+      "path": "audio/permissions/17.wav",
+      "sha256": "6aaf387fffbf325486fa20bcf9b017628f2e93701ef80751a4745eb9b5aafbfa",
+      "durationMs": 5180,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "permissions-18": {
+      "hash": "68a85ee211e2d7519ca16cf721baa1621fe13688eb9c3064d4f1c2edffe9b63b",
+      "path": "audio/permissions/18.wav",
+      "sha256": "e27eb5f8d76a1dcf869a42ff605ff58b10e158cd3f0e3ee37816e5ee1cf34fb8",
+      "durationMs": 3660,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "skill-night-1": {
+      "hash": "6fe814d5c71204aafa784a85697a31e4f21385e9cc2769df7a79a5a6de32a694",
+      "path": "audio/skill-night/1.wav",
+      "sha256": "49c5f7e3e3093a27ca2662ff09f4370588a6c4d273bdaab346418582c3aa8448",
+      "durationMs": 4780,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "skill-night-2": {
+      "hash": "e6620f5985e7a54d0c5a11a0cd32dfe648ffd3a327ea45d78cc858307e5cc79d",
+      "path": "audio/skill-night/2.wav",
+      "sha256": "4dfd817e5d0942b005c5893023da33342dfc130135139c0529ecde6ae0f4e97e",
+      "durationMs": 7820,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "skill-night-3": {
+      "hash": "d0ccad0a1cbdd5a59782b4b4a3e1b73841e7a245db158857af5782f48e42ef96",
+      "path": "audio/skill-night/3.wav",
+      "sha256": "6743ef4f5ded657c294aa52724c2d622640c9d089030bd64aaa64f98be6b34e8",
+      "durationMs": 4060,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "skill-night-4": {
+      "hash": "398f189900cb150496f21f8c33f3828645a6037b0dca7ca452fb8f49d2ef7c7d",
+      "path": "audio/skill-night/4.wav",
+      "sha256": "3a4968e10bbc245f33ae18e0ecac34744cfa5cd080451e3e82a123a110c147da",
+      "durationMs": 6860,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "skill-night-5": {
+      "hash": "0aac8ca253b13857540cbc023a8912a9c52976f7efcc6105d677f08e0f08d1e4",
+      "path": "audio/skill-night/5.wav",
+      "sha256": "f823d96a66b6c206a271ecf756eeab59248a59c68068db30ba3da259ddc0f226",
+      "durationMs": 4140,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "skill-night-6": {
+      "hash": "aaff6510d55a2ef902a66dd1f52f380b8d6ee9cfde0edca00cd79ef846c12472",
+      "path": "audio/skill-night/6.wav",
+      "sha256": "a31f7177b4297f5351c0ea5662b245f7563ee96147a8e6d9740c218547389275",
+      "durationMs": 7500,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "skill-night-7": {
+      "hash": "7df3e7d882e671b935fa5f7f16005b33433be2ecfa7732160c8323da2e640b15",
+      "path": "audio/skill-night/7.wav",
+      "sha256": "962d742f2080a25442a475ac0bfe78bc8f640f90eb7ed16c15df2236f3536c0c",
+      "durationMs": 6460,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "skill-night-8": {
+      "hash": "2656502be63b5cff573d5a44ca1c6a0d1b0dfb5acbc9f56fe83a37a39f4e3b0c",
+      "path": "audio/skill-night/8.wav",
+      "sha256": "3960b191b24ead0b092c99007a49ab3dd39724f6c81443887e5d1645f107f060",
+      "durationMs": 3740,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "skill-night-9": {
+      "hash": "6057579765e6c95a690905134f0f89f06b57253361fd952e076f560de750675d",
+      "path": "audio/skill-night/9.wav",
+      "sha256": "334bd261258e4d591cf972cf48aa4092b75320e398b64c326f4748dcec892c60",
+      "durationMs": 4620,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "skill-night-10": {
+      "hash": "7bc47111c230298e9a1b68758ca9b07eb42919e3a496462fc3330fd640f222a6",
+      "path": "audio/skill-night/10.wav",
+      "sha256": "01b9cea1360ce363f6e4b2cfcb0c83e0b91f998163f1f5e6b717cc07200f07c0",
+      "durationMs": 4060,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "skill-night-11": {
+      "hash": "4d153cca00aedefa72921f615f4b40a5346e07a76f16bcebe8024d04ed2bd2a7",
+      "path": "audio/skill-night/11.wav",
+      "sha256": "b6eb197708ec4b172c51d88fe46c97b52ae5e2a8b71f7e93c398496fd26db78e",
+      "durationMs": 4460,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "skill-night-12": {
+      "hash": "bb54cb7d8314dea43acf0af89bd6d461fa3785049f103854796c96b1f2b84f97",
+      "path": "audio/skill-night/12.wav",
+      "sha256": "d3868d4dcd21ed969a2ca8007942b162e88b7e687c03a1a7b9c3bca30eeafd13",
+      "durationMs": 5260,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "skill-night-13": {
+      "hash": "54799eb3a20636cbec59060113904dd72c6a40b7f3003f2b847b5301730fbb9a",
+      "path": "audio/skill-night/13.wav",
+      "sha256": "f4f3e69c8ab6c159333a2bf3bbb467d8ba3d1488830d6aa204102b203d840245",
+      "durationMs": 9980,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "skill-night-14": {
+      "hash": "a38687a3f44b6084e69fb8c1b1d0122e44ef36b2c06873178fd9c1c89e9cc156",
+      "path": "audio/skill-night/14.wav",
+      "sha256": "206d8ae229e0d5cf46032bf93990f98371044c38e9900ffc04116edce6dacd53",
+      "durationMs": 7580,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "skill-night-15": {
+      "hash": "24cdfd4e5c9abfdc98bbf2d31e53e031dd858b1f5e16b34247aa26ec176435de",
+      "path": "audio/skill-night/15.wav",
+      "sha256": "b2d0db2e5a46057b1388408ff954e1705835b8773817603014601d2e23d3e3b1",
+      "durationMs": 6700,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "skill-night-16": {
+      "hash": "18cf29f72014d8519f031d64cc7595a600be56f29cebab3c41457b88d53d4607",
+      "path": "audio/skill-night/16.wav",
+      "sha256": "231d02b3e277ad34890fa6fb958910d243f274dfd2ac47afa51b982c36489e65",
+      "durationMs": 7660,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "skill-night-17": {
+      "hash": "15e14f439d6dfb1ec07e1ebfb8e44601dddb9ea4d11c60cbb8c61102ad74aae0",
+      "path": "audio/skill-night/17.wav",
+      "sha256": "625ea21531d1ac1cd7332578870a59d1f741fa8119f334edbe649f25a0158592",
+      "durationMs": 4140,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "skill-night-18": {
+      "hash": "81ee7857b93e3f5a8c3447dfa7d44698556ecbaae69541fba4f011228abb6a2d",
+      "path": "audio/skill-night/18.wav",
+      "sha256": "3b2801bc9991e15a80ae32c7b18fba18cef739f72734c2905f22ab97a1e468e4",
+      "durationMs": 4620,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "recovery-1": {
+      "hash": "dcf3d5f230fa5b717f6f1b0e25bd7f7d8802c915471f28d09da7301626c07bcd",
+      "path": "audio/recovery/1.wav",
+      "sha256": "fb52c34e05bd5fa370a13435215063df56dfeb6c6ee5c718f4d13cf7be2819f5",
+      "durationMs": 6060,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "recovery-2": {
+      "hash": "485c3053d8d30303f8de7c830efc7316dc6adf90f481e561eeb680ccee392ea2",
+      "path": "audio/recovery/2.wav",
+      "sha256": "fed6aaa9c6cd821f15bfe4d06edfc3c7aebc633cf1ee46b26062064bd772c013",
+      "durationMs": 5420,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "recovery-3": {
+      "hash": "a48f5b28c1d1b607529522310cba0b3d39ef9360e5fc60e9b5ae448f587dba21",
+      "path": "audio/recovery/3.wav",
+      "sha256": "d074af0c3caeb3fd4c88ff8135a262168ba087417fe4b7ca4df064f1d0f3b9a4",
+      "durationMs": 5340,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "recovery-4": {
+      "hash": "32ab0cc24a70c89b60fd934d6b4883ab1bb57b4cdfbcbea476a863a5fbb095d3",
+      "path": "audio/recovery/4.wav",
+      "sha256": "7feadec1bb69d179c432a66b9630bb51842e1e265c6577b2af4d55d97a88b893",
+      "durationMs": 3340,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "recovery-5": {
+      "hash": "19840c41e5db780ca6a9a911655120a8903be6157d8f0157907e3dff01158233",
+      "path": "audio/recovery/5.wav",
+      "sha256": "37a2e8513d1c89b92b69b17214184029b9b0d0f9fa11a19a741d7160bbd9ae84",
+      "durationMs": 4700,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "recovery-6": {
+      "hash": "5befa74f87abe3f360b42a79bf96347f8937faa8fc742305ce9a04a28162b9d7",
+      "path": "audio/recovery/6.wav",
+      "sha256": "8ed9404ffb173c2c4cef8526d7b78ce9e47b32fd846aef1db87a7a31bdcfafdf",
+      "durationMs": 3660,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "recovery-7": {
+      "hash": "4365f597379de9e88ce636ecb51e4443ec7c5331416eeccd1aaa9c1811ee057f",
+      "path": "audio/recovery/7.wav",
+      "sha256": "05418715653363ded2e9c21e5cd281ead269c1ee0fd6da0f5ebfbd9452238d58",
+      "durationMs": 5180,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "recovery-8": {
+      "hash": "1757eecf4f2260b4d9004c230d01ddb4ab10ca6fa5894805c710309c3ca7af43",
+      "path": "audio/recovery/8.wav",
+      "sha256": "12a124b286a327f30e22e9a9046f5da0db237442e049fcfc732341a0622bbaa9",
+      "durationMs": 4620,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "recovery-9": {
+      "hash": "0e07503fc4af5b62eaca01fca7ded8047a8e590558cbb730eea4d022e2a7b524",
+      "path": "audio/recovery/9.wav",
+      "sha256": "8fd79b88205e0f2efae24beb8252962de7809dc68a2602d63f59b8b61aca6754",
+      "durationMs": 4860,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "recovery-10": {
+      "hash": "95f03ad8397a03af326f7c98dd658562fd9f9a2a141681548de3a1d66eda315f",
+      "path": "audio/recovery/10.wav",
+      "sha256": "d18da8505a7bca567bd15f45c6cc39d60eea4ab824ad2ecfef8c6efb99bf3aca",
+      "durationMs": 3980,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "recovery-11": {
+      "hash": "b6f9b191933b9dcfe6ac88842a4b84fb3f70af892bca8c52866a1c15687fcacb",
+      "path": "audio/recovery/11.wav",
+      "sha256": "637ce3da6d2974b9ec03e25bd3956b70d0cca69ae8081d421771aabac3f2e0f5",
+      "durationMs": 5180,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "recovery-12": {
+      "hash": "e9f2f12fe8fdfb1a58ba2a54a2044a940ad39f4ce59bc64cafffc17b552d0668",
+      "path": "audio/recovery/12.wav",
+      "sha256": "b297b869d0ade77ae74e3e0332a3dd2e5d6e51421697f47dc237e3a3cc2911da",
+      "durationMs": 4140,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "recovery-13": {
+      "hash": "22c7fb66f022fa29f0e1da0d4f62ac0c5888bde8643f6eca2e5b8422a90feba2",
+      "path": "audio/recovery/13.wav",
+      "sha256": "afbac35a2585adce16e25efe1f3395b93edca101c61cdbf27a689a7509c21447",
+      "durationMs": 5740,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "recovery-14": {
+      "hash": "d32f3f2ee0d997bcbe14f48eb234aa6bf075daf3f1980b618e70b7db279ac36a",
+      "path": "audio/recovery/14.wav",
+      "sha256": "09827c6fded1089707aae224c893bcd8c7daef2be2058e4b73126fcc4472208d",
+      "durationMs": 5980,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "recovery-15": {
+      "hash": "4ab7a104c498510c5c1fd66c7ea821958ce6c00571737e33c7298043a8123775",
+      "path": "audio/recovery/15.wav",
+      "sha256": "836bef589d9393e19f4397aeb715ed4e51d6a859dacda6a4146f3a74ff234315",
+      "durationMs": 11420,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "recovery-16": {
+      "hash": "475e80cfd9243a0ca7fdcc213eeda22322046bdcc60845bdc7fff1229dc164a7",
+      "path": "audio/recovery/16.wav",
+      "sha256": "c40da241fdbe62243a613daeb4875fc0056d18f3c864e7c8c9fad419e11c1100",
+      "durationMs": 4780,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "recovery-17": {
+      "hash": "a2d1e1d4a85c42d9ab6ae25bbd18618c3c58b425f65d1c50935d90b8f32672ce",
+      "path": "audio/recovery/17.wav",
+      "sha256": "ef145f66aee49cf2b1dfca72701605d8ae505002286af0ec3065db0f556c3749",
+      "durationMs": 3740,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "recovery-18": {
+      "hash": "2f483ab318c5378996f3767977962b01a030d58153946731f9d1a6d54ba94046",
+      "path": "audio/recovery/18.wav",
+      "sha256": "52e43db6cecbcae20132b597572a5e1f2814d63413315768516ebaa87d056033",
+      "durationMs": 5260,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "recovery-19": {
+      "hash": "6c04418c87101cb3ef6ed7d1f98bc262edd6b6fd6de3decad07de17bad45e60f",
+      "path": "audio/recovery/19.wav",
+      "sha256": "edcc6749bbf4cf77a2219af2c9e900d9af41eb07d62de3389ebbac103d6d843b",
+      "durationMs": 3820,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "ladder-1": {
+      "hash": "f43d24a9fb6ef8ea7d5c44fb737eff42beecb7e4e5ecc0d7ee541711801152dc",
+      "path": "audio/ladder/1.wav",
+      "sha256": "7308f4bbec85c7113a8678c8d9770c96e168fcd37a93883e244535b518675e0c",
+      "durationMs": 4380,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "ladder-2": {
+      "hash": "01bb3edabdb6f1e1fc86f72dcfa73c3493ee3ccdde93bd477f82ca687962c24f",
+      "path": "audio/ladder/2.wav",
+      "sha256": "024057e60dccb5fd758295e4c626f6307b3303032b33470d74cbcc4f84753ff9",
+      "durationMs": 5260,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "ladder-3": {
+      "hash": "42a5b5c6082df4cb34d80886e3bb4511ceac4d0ddab7a396073ad84ad9e85358",
+      "path": "audio/ladder/3.wav",
+      "sha256": "e757444f30017debc79c1df64e10882546463f82719e8113b79774ad51b70456",
+      "durationMs": 5500,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "ladder-4": {
+      "hash": "f66676a41c0272310130c025fc9df2887553ad860b5d0e4a1a08941489e884f0",
+      "path": "audio/ladder/4.wav",
+      "sha256": "1b962a456f6b7b95ad04b96b08ecafeb3c2edb6bd3d53e383556f667bc8f1bc2",
+      "durationMs": 7420,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "ladder-5": {
+      "hash": "13c65f395479512e24a8535a0b2693a8a697977441a8626d71e025beeec7982a",
+      "path": "audio/ladder/5.wav",
+      "sha256": "5b608f9094814214b2236b0461236867f605ec7677f14f8f60f3a143b987baa5",
+      "durationMs": 5420,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "ladder-6": {
+      "hash": "a64fccd92fc9e229074db3314c630a2d9d5c928d522dfcf485b184367d297e39",
+      "path": "audio/ladder/6.wav",
+      "sha256": "aced07f4cf6d489fd700a4361996235203ecc4096ccae532cd957105e32e85c2",
+      "durationMs": 4780,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "ladder-7": {
+      "hash": "80e3d50b1530654fd133b755b7846afbd124936035d6ce791da8c8888996e85d",
+      "path": "audio/ladder/7.wav",
+      "sha256": "4ec2baca1f3808b894f2e02adcdcb1824ff15ca318546e04c8713b65116ebbfe",
+      "durationMs": 7180,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "ladder-8": {
+      "hash": "5eb44d95ac2eb448753b2368e1875bc70cce8dc99bc1e5790aadd95c948e232c",
+      "path": "audio/ladder/8.wav",
+      "sha256": "12a12cdfa907513b12b8ef9804a9195127f49fabd54581cf7493f7f9eaf79656",
+      "durationMs": 5180,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "ladder-9": {
+      "hash": "383762bfb865cceb60d637a2e453c7848a936896534a8fcd7e08940cfd6362ef",
+      "path": "audio/ladder/9.wav",
+      "sha256": "4d885d651e7cc05449c76229503459bbb556b7f8c4c493b47b3cfb51d4bf5c0b",
+      "durationMs": 2380,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "ladder-10": {
+      "hash": "0b42388671ef311a776030d21df759e78f3e68e30fcb259f9fa3463ed7a76dc8",
+      "path": "audio/ladder/10.wav",
+      "sha256": "677422eb29bca9b53b1cb170533b5be962d895420a89576c649f7815c48499e1",
+      "durationMs": 4300,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "ladder-11": {
+      "hash": "e518a482df1f5bf8d131e267123a5973d46e06a62d509e360445c2e9ec8b21fb",
+      "path": "audio/ladder/11.wav",
+      "sha256": "fb748a59fd38d826493d262c63ec6d273c1195940854b256d6e1ebbe8f2668b1",
+      "durationMs": 3100,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "ladder-12": {
+      "hash": "629c01b2b98593ebb0606efe789a0df1a5bd658ad109b773d412610a0cb6f539",
+      "path": "audio/ladder/12.wav",
+      "sha256": "dd7a3669c7e149752a20be8cf00a0bf486090a8752f84266d22fbc5f454ba3bc",
+      "durationMs": 7020,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "ladder-13": {
+      "hash": "93e1567f2a454803a4a409b9bddcc539be05374c92f9b715b644a7743f26d298",
+      "path": "audio/ladder/13.wav",
+      "sha256": "f5b7033b1eefec324b71b690139ecf246380b7f343bacc709d2201508ed9e0dc",
+      "durationMs": 6460,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "ladder-14": {
+      "hash": "6bb8b04e081cca65ae054f9b80539744c89c0022e7cf9ebd0193fefb7244f547",
+      "path": "audio/ladder/14.wav",
+      "sha256": "c5981bae3f316e19e8dff9e85801c9ddb53e9faed68f808468c6903badab223f",
+      "durationMs": 4140,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "ladder-15": {
+      "hash": "f86b95ce925ebd7d260dc5f67cff1bec616eeaf6ab9534e03182c9b1f3194e86",
+      "path": "audio/ladder/15.wav",
+      "sha256": "3420c5c3a7118bd7c5f3b8afe0543f9ce0930ef00ac757b7a021895ffbbb09c3",
+      "durationMs": 4940,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "ladder-16": {
+      "hash": "b8bd47d12a64b1cf1d8099ba204051a582cc5ee421f605662da3e153cc7e930d",
+      "path": "audio/ladder/16.wav",
+      "sha256": "83749ca72d65bf850987a62bb21936a5d49aa4c3a1ba76c04dd38377e6d628ff",
+      "durationMs": 3260,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "ladder-17": {
+      "hash": "847a67b8ecfc40588c3de7531568f84fe4da1f4f04a4d0298d9f12d5568429ec",
+      "path": "audio/ladder/17.wav",
+      "sha256": "ad6222d254ead7478e61c6f9a9983d06de3b6020dfe5789d2c6d8f551d3876a6",
+      "durationMs": 6860,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "ladder-18": {
+      "hash": "20d64d5bd645414cf9dff830d32d6add533fad047e11a54c736e35aeb568d8a0",
+      "path": "audio/ladder/18.wav",
+      "sha256": "66b7ef933fd5559607156089962b01646cf8eaaf7f95ff97064815e56ea789fa",
+      "durationMs": 5580,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "ladder-19": {
+      "hash": "9d042acf0dd1ee5e9e0da9d5fc3c9209ad459bd78563fb029f8f4839b1d0cb73",
+      "path": "audio/ladder/19.wav",
+      "sha256": "80b71ab7d17a25e5d160cc93b5335739b62482ffca1d6b35ce0c1ae1d93f79e0",
+      "durationMs": 6140,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "ladder-20": {
+      "hash": "4e8d1e9884970a5ef69f76d405e16ee08ea57edde5db4783fc5b2d109a184d19",
+      "path": "audio/ladder/20.wav",
+      "sha256": "0d75eac55636b328002bc2e85eb6bdc8a1d824473bdbeed4cf174c7cd4d04ed6",
+      "durationMs": 6620,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    },
+    "ladder-21": {
+      "hash": "1dc7a9e28f7d86b1446d6561fa4cd74853972fca3d7ab076b4c595c3c058f4c5",
+      "path": "audio/ladder/21.wav",
+      "sha256": "17cf5393fd19e6831801c592a2cdbe9760cd4b4e8126f1e2e3f95a4a6e135303",
+      "durationMs": 7260,
+      "voice": "serena",
+      "speed": 1,
+      "silent": false
+    }
+  }
+}

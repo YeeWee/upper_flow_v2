@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "skill": {
+    "name": "article-video-production",
+    "version": "0.1.0",
+    "commit": "8f6a601aa76364821c8e7ad80dda4f3e2d1fc5f2"
+  },
+  "theme": {
+    "id": "blueprint"
+  },
+  "createdAt": "2026-10-28T15:21:15.244Z"
+}

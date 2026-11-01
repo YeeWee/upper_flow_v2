@@ -1,0 +1,32 @@
+<style>
+.co15 { position:absolute; inset:0; padding:var(--stage-pad-y) var(--stage-pad-x); display:grid; grid-template-columns: 1fr 520px; gap:96px; align-items:center; }
+.co15__kick { position:absolute; top:calc(var(--stage-pad-y) - 18px); left:var(--stage-pad-x); font-family:var(--font-mono); font-size:15px; letter-spacing:.3em; color:var(--text-mute); text-transform:uppercase; }
+.co15__avatars { display:flex; align-items:flex-end; gap:22px; }
+.co15__a { display:flex; flex-direction:column; align-items:center; gap:14px; }
+.co15__circle { width:112px; height:112px; display:grid; place-items:center; border:2px solid var(--rule); background:var(--surface-2); border-radius:50%; font-family:var(--font-mono); font-size:17px; letter-spacing:.14em; color:var(--text-2); }
+.co15__a.lead .co15__circle { border-color:var(--accent); background:var(--accent-soft); color:var(--accent); width:136px; height:136px; font-size:20px; }
+.co15__role { font-family:var(--font-mono); font-size:14px; letter-spacing:.16em; color:var(--text-mute); text-transform:uppercase; }
+.co15__sheet { position:relative; padding:44px 42px; background:var(--surface-2); border:2px solid var(--rule); box-shadow:var(--card-shadow); }
+.co15__sheet::before { content:"README / 规矩"; position:absolute; top:-14px; left:28px; padding:0 12px; background:var(--shell); font-family:var(--font-mono); font-size:13px; letter-spacing:.2em; color:var(--text-mute); }
+.co15__h { font-family:var(--font-display-cn); font-weight:700; font-size:44px; line-height:1.2; color:var(--text); margin:0 0 28px; }
+.co15__r { display:flex; gap:18px; padding:16px 0; border-top:1px dashed var(--rule); font-family:var(--font-body); font-size:23px; color:var(--text-2); }
+.co15__r span:first-child { font-family:var(--font-mono); font-size:14px; color:var(--accent); letter-spacing:.16em; }
+.co15__note { margin-top:24px; font-family:var(--font-mono); font-size:15px; letter-spacing:.12em; color:var(--text-mute); }
+</style>
+<div class="co15">
+  <div class="co15__kick">15 / 一个人加五个 Bot</div>
+  <div class="co15__avatars">
+    <div class="co15__a lead"><div class="co15__circle">CHIEF</div><div class="co15__role">Chief</div></div>
+    <div class="co15__a"><div class="co15__circle">01</div><div class="co15__role">Triage</div></div>
+    <div class="co15__a"><div class="co15__circle">02</div><div class="co15__role">Builder</div></div>
+    <div class="co15__a"><div class="co15__circle">03</div><div class="co15__role">Reviewer</div></div>
+    <div class="co15__a"><div class="co15__circle">04</div><div class="co15__role">Release</div></div>
+  </div>
+  <div class="co15__sheet">
+    <p class="co15__h">开工之前</p>
+    <div class="co15__r"><span>01</span><span>一条 issue 只能有一个主人</span></div>
+    <div class="co15__r"><span>02</span><span>修复走独立分支，不碰主干</span></div>
+    <div class="co15__r"><span>03</span><span>证据落进文件，不靠记忆</span></div>
+    <div class="co15__note">先定规矩，再放机器人进来</div>
+  </div>
+</div>

@@ -1,4 +1,4 @@
-﻿# HyperFrames rendering cache
+# HyperFrames rendering cache
 trae-harness-video/work-*/
 # Compiled assets (generated)
 trae-harness-video/output*.mp4
@@ -17,3 +17,25 @@ __pycache__/
 
 # stray agent session files
 *.ses
+
+# project-scope skill installs (local symlinks back to this skill root)
+.agents/skills/article-video-production
+.claude/skills/article-video-production
+
+# local secrets (TTS gateway key)
+.env
+
+# local toolchain caches (large, machine-specific)
+.cache/
+.venv/
+.uv-cache/
+**/.venv/
+**/.uv-cache/
+
+# generated audio + renders (regenerable: avp tts / avp render)
+audio/
+**/composition/audio/
+**/presentation/public/audio/
+output/*/output/
+**/composition/index.html
+**/composition/gsap.min.js

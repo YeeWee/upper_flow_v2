@@ -1,0 +1,336 @@
+/* ─────────────────────────────────────────────────────────────────────
+ * atoms.css — 视觉原子（visual atoms）的样式契约。
+ *
+ * 契约 = 类名 + 必填 DOM 外壳 + `.in / .lit / .dim` 三种状态类。
+ * 本文件【不含】任何动画实现：没有 @keyframes、没有 transition。
+ * 演示用 CSS keyframes 把状态类挂上去；合成稿用挂载钩子把同样的
+ * 状态类挂上去。两端共享的是“状态长什么样”，不是“怎么动”。
+ *
+ * 状态语义：
+ *   .in   已入场，作为基线（默认状态与 .in 等价）
+ *   .lit  当前焦点（accent）
+ *   .dim  退为上下文（mute / faint）
+ *
+ * 颜色与字体只消费既有 token（23 套主题原样生效）；本文件不定义
+ * 任何新的自定义属性（--token）。
+ * ───────────────────────────────────────────────────────────────────── */
+
+/* ─── atom-kicker ─────────────────────────────────────────────────────
+ * DOM: <div class="atom-kicker in">Chapter 01 — Example</div>
+ * 必填：root；文本直接放在 root 内。
+ */
+.atom-kicker {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-mute);
+}
+.atom-kicker.in { color: var(--text-mute); }
+.atom-kicker.lit { color: var(--accent); }
+.atom-kicker.dim { color: var(--text-faint); }
+
+/* ─── atom-hero ───────────────────────────────────────────────────────
+ * DOM: <div class="atom-hero in"><h1 class="atom-hero__title">…</h1></div>
+ * 必填：.atom-hero > .atom-hero__title；标题内可放 <em> 取 accent。
+ */
+.atom-hero {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  color: var(--text);
+}
+.atom-hero__title {
+  margin: 0;
+  max-width: 24ch;
+  font-family: var(--font-display-cn);
+  font-weight: 700;
+  font-size: var(--t-display-2);
+  line-height: 1.05;
+  letter-spacing: var(--track-tight);
+  color: inherit;
+}
+.atom-hero__title em {
+  font-family: var(--font-display-en);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent);
+}
+.atom-hero.in { color: var(--text); }
+.atom-hero.lit { color: var(--accent); }
+.atom-hero.lit .atom-hero__title em { color: var(--text); }
+.atom-hero.dim { color: var(--text-mute); }
+.atom-hero.dim .atom-hero__title em { color: var(--text-faint); }
+
+/* ─── atom-stat ───────────────────────────────────────────────────────
+ * DOM: <div class="atom-stat in">
+ *        <div class="atom-stat__value">02</div>
+ *        <div class="atom-stat__label">Step</div>
+ *      </div>
+ * 必填：.atom-stat > .atom-stat__value；label 可选。
+ */
+.atom-stat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.atom-stat__value {
+  font-family: var(--hero-num-font);
+  font-style: var(--hero-num-style);
+  font-weight: var(--hero-num-weight);
+  letter-spacing: var(--hero-num-track);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--t-display-1);
+  line-height: 0.9;
+  color: var(--text);
+}
+.atom-stat__label {
+  font-family: var(--font-mono);
+  font-size: var(--t-micro);
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  color: var(--text-mute);
+}
+.atom-stat.in .atom-stat__value { color: var(--text); }
+.atom-stat.lit .atom-stat__value { color: var(--accent); }
+.atom-stat.lit .atom-stat__label { color: var(--text-2); }
+.atom-stat.dim .atom-stat__value { color: var(--text-mute); }
+.atom-stat.dim .atom-stat__label { color: var(--text-faint); }
+
+/* ─── atom-list ───────────────────────────────────────────────────────
+ * DOM: <ul class="atom-list in">
+ *        <li class="atom-list__item">
+ *          <span class="atom-list__mark">01</span><span>…</span>
+ *        </li>
+ *      </ul>
+ * 必填：.atom-list > .atom-list__item（≥1）；mark 可选。
+ * 整组状态挂 root；需要逐个揭示时把状态挂到 .atom-list__item 上，
+ * item 规则写在 root 规则之后，因此会覆盖整组状态。
+ */
+.atom-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.atom-list__item {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
+  border-top: var(--rule-w) var(--rule-style) var(--rule);
+  font-family: var(--font-body);
+  font-size: var(--t-body);
+  line-height: 1.5;
+  color: var(--text-2);
+}
+.atom-list__mark {
+  min-width: 2ch;
+  font-family: var(--font-mono);
+  font-size: var(--t-micro);
+  letter-spacing: var(--track-caps);
+  color: var(--text-mute);
+}
+.atom-list.in .atom-list__item { color: var(--text-2); }
+.atom-list.in .atom-list__mark { color: var(--text-mute); }
+.atom-list.lit .atom-list__item { color: var(--text); }
+.atom-list.lit .atom-list__mark { color: var(--accent); }
+.atom-list.dim .atom-list__item { color: var(--text-faint); }
+.atom-list.dim .atom-list__mark { color: var(--text-faint); }
+
+/* 逐个揭示（可选，挂 item 而不是 root；后写，覆盖整组状态） */
+.atom-list .atom-list__item.in { color: var(--text-2); }
+.atom-list .atom-list__item.lit { color: var(--text); }
+.atom-list .atom-list__item.lit .atom-list__mark { color: var(--accent); }
+.atom-list .atom-list__item.dim { color: var(--text-faint); }
+.atom-list .atom-list__item.dim .atom-list__mark { color: var(--text-faint); }
+
+/* ─── atom-card ───────────────────────────────────────────────────────
+ * DOM: <div class="atom-card in">
+ *        <div class="atom-card__label">Label</div>
+ *        <h2 class="atom-card__title">…</h2>
+ *        <p class="atom-card__body">…</p>
+ *      </div>
+ * 必填：.atom-card > .atom-card__title；label / body 可选。
+ */
+.atom-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-5);
+  background: var(--surface-2);
+  border: var(--bw-1) solid var(--rule);
+  border-radius: var(--r-card);
+  box-shadow: var(--card-shadow, none);
+}
+.atom-card__label {
+  font-family: var(--font-mono);
+  font-size: var(--t-micro);
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  color: var(--text-mute);
+}
+.atom-card__title {
+  margin: 0;
+  font-family: var(--font-display-cn);
+  font-weight: 700;
+  font-size: var(--t-h2);
+  line-height: 1.15;
+  color: var(--text);
+}
+.atom-card__body {
+  margin: 0;
+  max-width: 56ch;
+  font-family: var(--font-body);
+  font-size: var(--t-body);
+  line-height: 1.6;
+  color: var(--text-2);
+}
+.atom-card.in {
+  background: var(--surface-2);
+  border-color: var(--rule);
+}
+.atom-card.in .atom-card__title { color: var(--text); }
+.atom-card.in .atom-card__body { color: var(--text-2); }
+.atom-card.lit {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+}
+.atom-card.lit .atom-card__label { color: var(--accent); }
+.atom-card.lit .atom-card__title { color: var(--accent); }
+.atom-card.lit .atom-card__body { color: var(--text); }
+.atom-card.dim {
+  background: var(--surface);
+  border-color: var(--rule);
+}
+.atom-card.dim .atom-card__label { color: var(--text-faint); }
+.atom-card.dim .atom-card__title { color: var(--text-mute); }
+.atom-card.dim .atom-card__body { color: var(--text-faint); }
+
+/* ─── atom-quote ──────────────────────────────────────────────────────
+ * DOM: <div class="atom-quote in">
+ *        <p class="atom-quote__text">…</p>
+ *        <div class="atom-quote__cite">…</div>
+ *      </div>
+ * 必填：.atom-quote > .atom-quote__text；cite 可选。
+ */
+.atom-quote {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-3) 0 var(--space-3) var(--space-5);
+  border-left: var(--bw-4) solid var(--rule);
+}
+.atom-quote__text {
+  margin: 0;
+  max-width: 22ch;
+  font-family: var(--font-display-cn);
+  font-weight: 700;
+  font-size: var(--t-h2);
+  line-height: 1.3;
+  color: var(--text-2);
+}
+.atom-quote__text em {
+  font-family: var(--font-display-en);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent);
+}
+.atom-quote__cite {
+  font-family: var(--font-mono);
+  font-size: var(--t-micro);
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  color: var(--text-mute);
+}
+.atom-quote.in { border-left-color: var(--rule); }
+.atom-quote.in .atom-quote__text { color: var(--text-2); }
+.atom-quote.lit {
+  border-left-color: var(--accent);
+  background: var(--accent-soft);
+}
+.atom-quote.lit .atom-quote__text { color: var(--text); }
+.atom-quote.lit .atom-quote__cite { color: var(--accent); }
+.atom-quote.dim { border-left-color: var(--text-faint); }
+.atom-quote.dim .atom-quote__text { color: var(--text-mute); }
+.atom-quote.dim .atom-quote__text em { color: var(--text-faint); }
+.atom-quote.dim .atom-quote__cite { color: var(--text-faint); }
+
+/* ─── atom-badge ──────────────────────────────────────────────────────
+ * DOM: <span class="atom-badge in">Theme-agnostic</span>
+ * 必填：root；文本直接放在 root 内。
+ */
+.atom-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 4px 10px;
+  border: var(--bw-1) solid var(--rule);
+  border-radius: var(--r-pill);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  color: var(--text-mute);
+}
+.atom-badge.in { color: var(--text-mute); border-color: var(--rule); }
+.atom-badge.lit {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+.atom-badge.dim { color: var(--text-faint); border-color: var(--text-faint); }
+
+/* ─── atom-rule ───────────────────────────────────────────────────────
+ * DOM: <hr class="atom-rule in" />
+ * 必填：root（建议用 hr）。
+ */
+.atom-rule {
+  display: block;
+  width: 100%;
+  height: 0;
+  margin: 0;
+  border: 0;
+  border-top: var(--rule-w) var(--rule-style) var(--rule);
+}
+.atom-rule.in { border-top-color: var(--rule); }
+.atom-rule.lit { border-top-color: var(--accent); }
+.atom-rule.dim { border-top-color: var(--text-faint); }
+
+/* ─── atom-footer ─────────────────────────────────────────────────────
+ * DOM: <div class="atom-footer in">
+ *        <span class="atom-footer__note">See CHAPTER-CRAFT.md</span>
+ *        <span class="atom-footer__cue">Tap to advance</span>
+ *      </div>
+ * 必填：root；note / cue 可选（cue 自动靠右）。
+ */
+.atom-footer {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+  font-family: var(--font-mono);
+  font-size: var(--t-micro);
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  color: var(--text-mute);
+}
+.atom-footer__note { color: inherit; }
+.atom-footer__cue {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: inherit;
+}
+.atom-footer__cue::after {
+  content: "→";
+  font-family: var(--font-display-en);
+  font-style: italic;
+  letter-spacing: 0;
+}
+.atom-footer.in { color: var(--text-mute); }
+.atom-footer.lit { color: var(--accent); }
+.atom-footer.dim { color: var(--text-faint); }

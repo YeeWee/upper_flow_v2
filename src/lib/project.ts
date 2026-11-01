@@ -24,6 +24,20 @@ export interface TtsConfig {
   backend: string;
   default: { voice: string; speed: number };
   chapters: Record<string, { voice?: string; speed?: number }>;
+  /**
+   * HTTP 类后端（qwen）的连接信息。密钥不进仓库：只写环境变量名，
+   * 运行时从 process.env 取。
+   */
+  http?: {
+    baseUrl: string;
+    model?: string;
+    apiKeyEnv?: string;
+    /**
+     * 有些网关不守音色：同一个 voice 每次返回的人声基频能从 120Hz 跳到
+     * 260Hz。给一个目标基频区间，合成时挑最接近的一条，避免"每拍换个人"。
+     */
+    voiceMatch?: { targetHz: number; toleranceHz?: number; maxAttempts?: number };
+  };
 }
 
 export interface ProjectPaths {

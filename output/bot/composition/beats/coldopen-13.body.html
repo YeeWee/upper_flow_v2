@@ -1,0 +1,20 @@
+<style>
+.co13 { position:absolute; inset:0; padding:var(--stage-pad-y) var(--stage-pad-x); display:flex; flex-direction:column; justify-content:center; gap:56px; }
+.co13__kick { font-family:var(--font-mono); font-size:15px; letter-spacing:.3em; color:var(--text-mute); text-transform:uppercase; }
+.co13__line { display:flex; align-items:baseline; gap:34px; padding:22px 0; border-top:2px dashed var(--rule); }
+.co13__line:first-of-type { border-top:0; }
+.co13__tag { min-width:130px; font-family:var(--font-mono); font-size:15px; letter-spacing:.22em; color:var(--text-faint); text-transform:uppercase; }
+.co13__txt { position:relative; font-family:var(--font-display-cn); font-weight:700; font-size:64px; line-height:1.1; color:var(--text-mute); letter-spacing:-.02em; }
+.co13__line.no .co13__txt::after { content:""; position:absolute; left:-2%; right:-2%; top:54%; height:4px; background:var(--text-faint); transform-origin:left center; }
+.co13__line.yes { border-top:2px solid var(--accent); }
+.co13__line.yes .co13__txt { color:var(--accent); font-size:76px; }
+.co13__line.yes .co13__tag { color:var(--accent); }
+.co13__note { font-family:var(--font-mono); font-size:16px; letter-spacing:.15em; color:var(--text-mute); }
+</style>
+<div class="co13">
+  <div class="co13__kick">13 / 交付物是什么</div>
+  <div class="co13__line no"><span class="co13__tag">不是</span><span class="co13__txt">合并掉的代码</span></div>
+  <div class="co13__line no"><span class="co13__tag">不是</span><span class="co13__txt">已经上线</span></div>
+  <div class="co13__line yes"><span class="co13__tag">是</span><span class="co13__txt">带证据、能评审的活</span></div>
+  <div class="co13__note">证据齐了，评审才有判据；没有证据，只能信你</div>
+</div>

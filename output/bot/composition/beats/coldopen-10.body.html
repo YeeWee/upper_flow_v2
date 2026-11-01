@@ -1,0 +1,38 @@
+<style>
+.co10 { position:absolute; inset:0; padding:var(--stage-pad-y) var(--stage-pad-x); display:flex; flex-direction:column; justify-content:center; gap:52px; }
+.co10__kick { font-family:var(--font-mono); font-size:15px; letter-spacing:.3em; color:var(--text-mute); text-transform:uppercase; }
+.co10__map { position:relative; display:grid; grid-template-columns: 420px 1fr 420px; align-items:center; gap:0; }
+.co10__card { padding:38px 34px; background:var(--surface-2); border:2px solid var(--rule); }
+.co10__card.dim { background:var(--surface); }
+.co10__card.lit { border-color:var(--accent); background:var(--accent-soft); }
+.co10__lab { font-family:var(--font-mono); font-size:14px; letter-spacing:.24em; color:var(--text-mute); text-transform:uppercase; }
+.co10__name { margin-top:16px; font-family:var(--font-display-cn); font-weight:700; font-size:44px; line-height:1.2; color:var(--text); }
+.co10__card.lit .co10__name { color:var(--accent); }
+.co10__card.dim .co10__name { color:var(--text-mute); }
+.co10__path { position:relative; height:220px; }
+.co10__svg { position:absolute; inset:0; width:100%; height:100%; overflow:visible; }
+.co10__line { fill:none; stroke:var(--accent); stroke-width:3; stroke-dasharray:8 8; }
+.co10__arrow { fill:var(--accent); }
+.co10__hint { margin-top:8px; font-family:var(--font-mono); font-size:16px; letter-spacing:.14em; color:var(--text-mute); }
+.co10__hint b { color:var(--accent); font-weight:500; }
+</style>
+<div class="co10">
+  <div class="co10__kick">10 / 这条消息改的是什么</div>
+  <div class="co10__map">
+    <div class="co10__card dim">
+      <div class="co10__lab">表面</div>
+      <div class="co10__name">模型升级</div>
+    </div>
+    <div class="co10__path">
+      <svg class="co10__svg" viewBox="0 0 600 220" preserveAspectRatio="none">
+        <path class="co10__line" d="M 10 110 L 300 110 L 300 40 L 560 40" />
+        <polygon class="co10__arrow" points="560,28 588,40 560,52" />
+      </svg>
+    </div>
+    <div class="co10__card lit">
+      <div class="co10__lab">实际</div>
+      <div class="co10__name">整条流水线<br />该怎么搭</div>
+    </div>
+  </div>
+  <div class="co10__hint">改的不是模型版本，是 <b>谁在什么时候做什么</b></div>
+</div>

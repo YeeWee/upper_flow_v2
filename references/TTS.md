@@ -144,6 +144,41 @@ avp tts        # avp = 仓库根目录的 ./avp；环境变量按上一节设置
 是 `audio/coldopen/1.wav`：5.325s / 24kHz / PCM16 / mono，sha256
 `3d7e83f03b38f832244118f914dc66be9376f98ae43ce6c84ce59e54ae3835ad`。语速、音色、
 模型任一不同哈希就会变——这正是"可归因"的用法。
+### qwen（HTTP，OpenAI 兼容）
+
+任何暴露 `/v1/audio/speech` 的网关都能用（Qwen3-TTS、OpenAI 兼容自建服务）。
+`tts.json` 里要写连接信息，**密钥只写环境变量名，不写进配置**：
+
+```json
+{
+  "schemaVersion": 1,
+  "backend": "qwen",
+  "default": { "voice": "Cherry", "speed": 1 },
+  "chapters": {},
+  "http": {
+    "baseUrl": "http://192.168.2.10:3000",
+    "model": "Qwen3-TTS",
+    "apiKeyEnv": "AVP_TTS_API_KEY"
+  }
+}
+```
+
+```bash
+export AVP_TTS_API_KEY=sk-...     # 只在这个 shell 里存在
+avp tts --chapter=coldopen        # 先小范围试，再全量
+```
+
+- 请求：`POST {baseUrl}/v1/audio/speech`，body 是
+  `{model, input, voice, response_format:"wav"}`；走 `curl`，超时 180s。
+- 缺 `http.baseUrl` 报 `tts-config-invalid`，缺密钥报 `tts-key-missing`，
+  **都在第一拍之前就失败**，不会跑到第两百拍才断。
+- 返回的音频统一转成 **24kHz PCM16 mono**，并过
+  `loudnorm=I=-16:TP=-1.5:LRA=11`：同一个后端不同拍的返回电平能差 13dB，
+  不统一就会出现"这句忽然很小声"。
+- 语音 id 是后端作用域的：Kokoro 的 `zf_xiaoxiao` 在 qwen 上不成立，切后端
+  必须同时改 `default.voice`（缓存键含 backend，切换后全量重合成）。
+- 时长不可复现：同一个 `say` 两次请求的实测时长可能差 1–2 秒。`beats.json`
+  永远以最近一次实测为准；改完 tts 要重跑 `avp compose` 让钩子对齐新时长。
 
 ### fake（快速通道）
 
@@ -214,8 +249,28 @@ kokoro 完全一致，之后把 backend 改回 kokoro 再跑 `avp tts` 即可。
 | 装依赖报 `no matching distribution` | Python 不在 3.10–3.12，或不是本机架构的 wheel；换 `uv venv --python 3.12` 的 arm64 / x86_64 解释器 |
 | 分不清缺包还是缺模型 | 跑 `bash scripts/check-tts-env.sh`，它分开报这两项 |
 | `speed-out-of-range` | 把 `tts.json` 的有效语速调回 0.95–1.05 |
-| `tts-backend-unknown` | `backend` 只认 `kokoro` / `fake` |
+| `tts-backend-unknown` | `backend` 只认 `kokoro` / `qwen` / `fake` |
 | `tts-chapter-unknown` | `chapters` 里写了不存在的章节 id |
 | `tts.json` 改了但 status 仍"最新" | status 读的是输入哈希；改配置后应先重跑 `avp tts` |
 | 演示里没声音 | 确认 `presentation/public/audio/<chapter>/<N>.wav` 存在；`?auto=1` 需先按一次空格 |
 | 想跳过批准停点 | 不行：`--after-plan` 会核对批准哈希；改稿后要重新 `avp plan --approve` |
+
+### 实测：网关不守音色时怎么办
+
+Qwen3-TTS 的若干转售网关会在多个上游之间轮询，同一个 `voice` 每次回来的
+人声基频能差到一个八度（实测 200–289Hz）。`http.voiceMatch` 是给这种情况
+准备的：每次合成后用自相关量一遍基频，落在目标区间内就收，否则重试，最后
+取最接近的一条。
+
+```json
+"voiceMatch": { "targetHz": 236, "toleranceHz": 10, "maxAttempts": 8 }
+```
+
+- 实测（247 拍，serena，±10Hz/8 次）：**96% 落在 214–258Hz**，严格 ±10Hz
+  命中 55%。再收紧容差或加次数收益很小——少数拍会被网关固定路由到另一个
+  上游，重试 20 次仍不命中（`coldopen-6` 实测 279Hz）。
+- 客户端注意事项：测量用 24k PCM16 单声道、40ms 帧 / 30ms 跳、归一化自相关
+  阈值 0.5、取中位数；参数要与离线复核脚本一致，否则会出现“客户端判合格、
+  人耳听是另一个人”。
+- 目标区间是**全局**的：同一片子里换性别（serena→uncle_fu）必须同步改
+  `targetHz`，否则每拍都会判不合格、白跑满次数。

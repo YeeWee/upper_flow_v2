@@ -1,5 +1,6 @@
 import { resolve } from "node:path";
 import { assertKnownFlags, flagBool, flagString, parseArgs } from "./lib/args";
+import { loadDotEnv } from "./lib/env";
 import { asAvpError } from "./lib/errors";
 import { shortHash } from "./lib/hash";
 import { runCheckCommand, renderCheck } from "./commands/check";
@@ -9,6 +10,8 @@ import { runPlan } from "./commands/plan";
 import { runRenderCommand } from "./commands/render";
 import { runTtsCommand } from "./commands/tts";
 import { renderStatusTable, runStatus } from "./commands/status";
+
+loadDotEnv();
 
 const HELP = `avp — article-video-production
 

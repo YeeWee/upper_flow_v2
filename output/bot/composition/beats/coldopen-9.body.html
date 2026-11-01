@@ -1,0 +1,30 @@
+<style>
+.co9 { position:absolute; inset:0; padding:var(--stage-pad-y) var(--stage-pad-x); display:flex; flex-direction:column; justify-content:center; gap:44px; }
+.co9__kick { font-family:var(--font-mono); font-size:15px; letter-spacing:.3em; color:var(--text-mute); text-transform:uppercase; }
+.co9__head { display:flex; align-items:baseline; gap:26px; }
+.co9__title { font-family:var(--font-display-cn); font-weight:700; font-size:58px; color:var(--text); letter-spacing:-.02em; }
+.co9__sub { font-family:var(--font-mono); font-size:16px; letter-spacing:.2em; color:var(--text-mute); text-transform:uppercase; }
+.co9__list { border-top:2px dashed var(--rule); }
+.co9__row { display:grid; grid-template-columns: 46px 1fr 300px; align-items:baseline; gap:28px; padding:30px 26px; border-bottom:2px dashed var(--rule); }
+.co9__idx { font-family:var(--font-mono); font-size:15px; letter-spacing:.2em; color:var(--text-mute); }
+.co9__name { font-family:var(--font-mono); font-size:38px; letter-spacing:.01em; color:var(--text-2); }
+.co9__why { font-family:var(--font-body); font-size:22px; color:var(--text-mute); text-align:right; }
+.co9__row.lit { background:var(--accent-soft); }
+.co9__row.lit .co9__name { color:var(--accent); }
+.co9__row.lit .co9__why { color:var(--text-2); }
+.co9__row.lit .co9__idx { color:var(--accent); }
+.co9__note { font-family:var(--font-mono); font-size:16px; letter-spacing:.16em; color:var(--text-mute); }
+</style>
+<div class="co9">
+  <div class="co9__kick">09 / 名单</div>
+  <div class="co9__head">
+    <div class="co9__title">推理这一侧</div>
+    <div class="co9__sub">Backends / 按任务挑</div>
+  </div>
+  <div class="co9__list">
+    <div class="co9__row lit"><span class="co9__idx">01</span><span class="co9__name">Claude Opus 5.5</span><span class="co9__why">更擅长长链条推理</span></div>
+    <div class="co9__row"><span class="co9__idx">02</span><span class="co9__name">其他后端</span><span class="co9__why">由路由层分配</span></div>
+    <div class="co9__row"><span class="co9__idx">03</span><span class="co9__name">你不能手挑</span><span class="co9__why">平台没有请求级开关</span></div>
+  </div>
+  <div class="co9__note">这条片子讲的不是模型排行榜，是流水线怎么搭</div>
+</div>

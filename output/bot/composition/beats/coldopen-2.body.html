@@ -1,0 +1,32 @@
+<style>
+.co2 { position:absolute; inset:0; padding:var(--stage-pad-y) var(--stage-pad-x); display:flex; flex-direction:column; justify-content:center; align-items:center; gap:40px; }
+.co2__kick { position:absolute; top:calc(var(--stage-pad-y) - 18px); left:var(--stage-pad-x); font-family:var(--font-mono); font-size:15px; letter-spacing:.3em; color:var(--text-mute); text-transform:uppercase; }
+.co2__panel { width:1240px; background:var(--surface-2); border:2px solid var(--rule); box-shadow:var(--card-shadow); }
+.co2__head { display:flex; justify-content:space-between; align-items:center; padding:26px 34px; border-bottom:2px dashed var(--rule); }
+.co2__repo { font-family:var(--font-mono); font-size:20px; letter-spacing:.08em; color:var(--text); }
+.co2__repo span { color:var(--text-mute); }
+.co2__pr { display:flex; align-items:center; gap:12px; padding:7px 16px; border:2px solid var(--accent); background:var(--accent-soft); font-family:var(--font-mono); font-size:14px; letter-spacing:.18em; color:var(--accent); text-transform:uppercase; }
+.co2__row { display:grid; grid-template-columns: 34px 1fr auto; align-items:center; gap:22px; padding:22px 34px; border-top:1px solid var(--rule); font-family:var(--font-mono); font-size:22px; color:var(--text-2); }
+.co2__row:first-of-type { border-top:0; }
+.co2__row b { font-weight:500; color:var(--text); }
+.co2__row.lit { background:var(--accent-soft); }
+.co2__row.lit b { color:var(--accent); }
+.co2__dot { width:10px; height:10px; border-radius:50%; background:var(--text-faint); }
+.co2__row.lit .co2__dot { background:var(--accent); }
+.co2__diff { font-family:var(--font-mono); font-size:17px; letter-spacing:.06em; color:var(--text-mute); }
+.co2__diff i { color:var(--accent); font-style:normal; }
+.co2__note { font-family:var(--font-mono); font-size:16px; letter-spacing:.14em; color:var(--text-mute); }
+</style>
+<div class="co2">
+  <div class="co2__kick">02 / 天亮之前</div>
+  <div class="co2__panel">
+    <div class="co2__head">
+      <div class="co2__repo">devdesk <span>/ issues</span></div>
+      <div class="co2__pr">Draft PR</div>
+    </div>
+    <div class="co2__row"><span class="co2__dot"></span><b>main</b><span class="co2__diff">受保护</span></div>
+    <div class="co2__row lit"><span class="co2__dot"></span><b>fix / agent-ready</b><span class="co2__diff"><i>+42</i> −7</span></div>
+    <div class="co2__row"><span class="co2__dot"></span><b>review / pending</b><span class="co2__diff">等独立评审</span></div>
+  </div>
+  <div class="co2__note">一份装着修复的草稿 PR，已经挂在那里</div>
+</div>

@@ -1,0 +1,18 @@
+<style>
+.co4 { position:absolute; inset:0; padding:var(--stage-pad-y) var(--stage-pad-x); display:flex; flex-direction:column; justify-content:center; align-items:center; gap:56px; text-align:center; }
+.co4__kick { font-family:var(--font-mono); font-size:15px; letter-spacing:.3em; color:var(--text-mute); text-transform:uppercase; }
+.co4__q { font-family:var(--font-display-cn); font-weight:700; font-size:126px; line-height:1.08; letter-spacing:-.03em; color:var(--text); }
+.co4__q em { font-family:var(--font-display-en); font-style:normal; color:var(--accent); }
+.co4__btn { position:relative; display:flex; align-items:center; gap:20px; padding:26px 60px; border:2px solid var(--text-faint); background:var(--surface); font-family:var(--font-mono); font-size:24px; letter-spacing:.24em; color:var(--text-faint); text-transform:uppercase; }
+.co4__cursor { position:absolute; right:-26px; bottom:-30px; width:0; height:0; border-left:20px solid var(--text-2); border-top:12px solid transparent; border-bottom:12px solid transparent; transform:rotate(-24deg); }
+.co4__hint { font-family:var(--font-mono); font-size:16px; letter-spacing:.22em; color:var(--text-mute); }
+.co4__hint b { color:var(--accent); font-weight:500; }
+</style>
+<div class="co4">
+  <div class="co4__kick">04 / 唯一的问题</div>
+  <div class="co4__q">你凭什么<br />敢点<em>合并</em>？</div>
+  <div class="co4__btn">Merge pull request
+    <span class="co4__cursor"></span>
+  </div>
+  <div class="co4__hint">这一步之前，你手里必须握着 <b>证据</b></div>
+</div>

@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "backend": "qwen",
+  "default": {
+    "voice": "serena",
+    "speed": 1
+  },
+  "chapters": {},
+  "http": {
+    "baseUrl": "http://192.168.2.10:3000",
+    "model": "Qwen3-TTS-CustomVoice",
+    "apiKeyEnv": "AVP_TTS_API_KEY",
+    "voiceMatch": {
+      "targetHz": 236,
+      "toleranceHz": 10,
+      "maxAttempts": 8
+    }
+  }
+}

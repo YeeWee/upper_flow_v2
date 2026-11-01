@@ -1,0 +1,27 @@
+<style>
+.co1 { position:absolute; inset:0; padding:var(--stage-pad-y) var(--stage-pad-x); display:grid; grid-template-columns: 1.02fr .98fr; align-items:center; gap:96px; }
+.co1__kick { position:absolute; top:calc(var(--stage-pad-y) - 18px); left:var(--stage-pad-x); font-family:var(--font-mono); font-size:15px; letter-spacing:.3em; color:var(--text-mute); text-transform:uppercase; }
+.co1__time { font-family:var(--font-mono); font-weight:500; font-size:296px; line-height:.84; letter-spacing:-.05em; color:var(--text); font-variant-numeric:tabular-nums; }
+.co1__label { margin-top:30px; display:flex; align-items:center; gap:18px; font-family:var(--font-mono); font-size:16px; letter-spacing:.32em; color:var(--accent); text-transform:uppercase; }
+.co1__label i { width:64px; height:0; border-top:2px dashed var(--accent); }
+.co1__card { position:relative; padding:46px 48px; background:var(--surface-2); border:2px solid var(--rule); box-shadow:var(--card-shadow); }
+.co1__card::before { content:""; position:absolute; left:-1px; top:-1px; width:26px; height:26px; border-left:2px solid var(--accent); border-top:2px solid var(--accent); }
+.co1__lab { font-family:var(--font-mono); font-size:14px; letter-spacing:.28em; color:var(--text-mute); text-transform:uppercase; }
+.co1__title { margin-top:26px; font-family:var(--font-display-cn); font-weight:700; font-size:64px; line-height:1.08; letter-spacing:-.02em; color:var(--text); }
+.co1__meta { margin-top:30px; padding-top:22px; border-top:2px dashed var(--rule); display:flex; justify-content:space-between; font-family:var(--font-mono); font-size:16px; letter-spacing:.12em; color:var(--text-2); }
+.co1__meta b { color:var(--accent); font-weight:500; }
+.co1__tag { position:absolute; right:-2px; top:-2px; padding:8px 16px; background:var(--accent-soft); border:2px solid var(--accent); font-family:var(--font-mono); font-size:13px; letter-spacing:.2em; color:var(--accent); text-transform:uppercase; }
+</style>
+<div class="co1">
+  <div class="co1__kick">Cold open / 03:00</div>
+  <div>
+    <div class="co1__time">03:00</div>
+    <div class="co1__label"><i></i>办公室没人醒着</div>
+  </div>
+  <div class="co1__card">
+    <div class="co1__tag">agent-ready</div>
+    <div class="co1__lab">GitHub / issue</div>
+    <div class="co1__title">一条打标的<br />issue 自己进来</div>
+    <div class="co1__meta"><span>状态 · <b>待复现</b></span><span>队列 · agent</span></div>
+  </div>
+</div>

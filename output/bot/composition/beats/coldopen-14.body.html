@@ -1,0 +1,35 @@
+<style>
+.co14 { position:absolute; inset:0; padding:var(--stage-pad-y) var(--stage-pad-x); display:flex; flex-direction:column; justify-content:center; gap:48px; }
+.co14__kick { font-family:var(--font-mono); font-size:15px; letter-spacing:.3em; color:var(--text-mute); text-transform:uppercase; }
+.co14__frame { position:relative; padding:64px 52px 56px; border:2px dashed var(--rule); }
+.co14__frame::before { content:"WORKFLOW / 一条 issue 的一生"; position:absolute; top:-14px; left:32px; padding:0 14px; background:var(--shell); font-family:var(--font-mono); font-size:13px; letter-spacing:.2em; color:var(--text-mute); }
+.co14__flow { display:flex; align-items:center; gap:0; }
+.co14__node { flex:1; display:flex; flex-direction:column; gap:12px; padding:22px 16px; }
+.co14__n { font-family:var(--font-mono); font-size:14px; letter-spacing:.2em; color:var(--text-mute); }
+.co14__t { font-family:var(--font-display-cn); font-weight:700; font-size:29px; color:var(--text-2); line-height:1.25; }
+.co14__node.lit .co14__t { color:var(--accent); }
+.co14__node.lit .co14__n { color:var(--accent); }
+.co14__arrow { width:34px; height:0; border-top:2px dashed var(--rule); position:relative; }
+.co14__arrow::after { content:""; position:absolute; right:-1px; top:-5px; width:9px; height:9px; border-top:2px solid var(--rule); border-right:2px solid var(--rule); transform:rotate(45deg); }
+.co14__stamp { position:absolute; right:56px; bottom:-46px; padding:18px 30px; border:3px solid var(--accent); background:var(--surface); font-family:var(--font-display-cn); font-weight:700; font-size:42px; letter-spacing:.08em; color:var(--accent); transform:rotate(-6deg); }
+.co14__foot { font-family:var(--font-mono); font-size:16px; letter-spacing:.14em; color:var(--text-mute); }
+.co14__foot b { color:var(--accent); font-weight:500; }
+</style>
+<div class="co14">
+  <div class="co14__kick">14 / 终点不是全自动</div>
+  <div class="co14__frame">
+    <div class="co14__flow">
+      <div class="co14__node"><span class="co14__n">01</span><span class="co14__t">issue<br />打标</span></div>
+      <div class="co14__arrow"></div>
+      <div class="co14__node"><span class="co14__n">02</span><span class="co14__t">复现<br />留证据</span></div>
+      <div class="co14__arrow"></div>
+      <div class="co14__node"><span class="co14__n">03</span><span class="co14__t">修复<br />独立分支</span></div>
+      <div class="co14__arrow"></div>
+      <div class="co14__node"><span class="co14__n">04</span><span class="co14__t">独立<br />评审</span></div>
+      <div class="co14__arrow"></div>
+      <div class="co14__node lit"><span class="co14__n">05</span><span class="co14__t">草稿 PR<br />交给人</span></div>
+      <div class="co14__stamp">可检查</div>
+    </div>
+  </div>
+  <div class="co14__foot">每一步都能被查，才有 <b>敢点合并</b> 的那一刻</div>
+</div>
